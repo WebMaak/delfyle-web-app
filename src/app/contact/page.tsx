@@ -66,9 +66,11 @@ export default function ContactPage() {
           </ModernMobileNav>
         </ModernNavbar>
       </div>
-      <div className="pt-32 pb-12 bg-gradient-to-b from-[#f9fafb] to-white min-h-[60vh] flex flex-col items-center justify-center text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#b056ba] via-[#f57cb8] to-[#3e3e6b] bg-clip-text text-transparent">Contact Delfyle</h1>
-        <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">We'd love to hear from you! Fill out the form below and our team will get back to you as soon as possible.</p>
+      <div className="pt-32 pb-12 min-h-[60vh] flex flex-col items-center justify-center text-center" style={{
+        background: 'linear-gradient(165deg, #ffc8c8, #fda3b8, #f57cb8, #db5fbf, #b056ba, #8451a8, #5d498c, #3e3e6b)'
+      }}>
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-[#b056ba] via-[#f57cb8] to-[#3e3e6b] bg-clip-text text-transparent">Contact Delfyle</h1>
+        <p className="text-2xl md:text-3xl text-gray-100 max-w-3xl mx-auto mb-10 font-medium drop-shadow-lg">We'd love to hear from you! Fill out the form below and our team will get back to you as soon as possible.</p>
       </div>
       <div className="flex flex-col items-center justify-center px-2 pb-12">
         <div className="w-full ">
