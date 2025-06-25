@@ -1,0 +1,202 @@
+.container {
+  padding: 5rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #f6f8fa;
+  color: #1a202c;
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem; /* Adjust padding to make space for buttons */
+}
+
+.mainHeading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.navigationButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.navButton {
+  background: linear-gradient(
+    135deg,
+    rgba(107, 0, 62, 1) 0%,
+    rgba(180, 0, 104, 1) 50%,
+    rgba(255, 0, 128, 1) 100%
+  ); /* SocialLinks main gradient */
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navButton:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(107, 0, 62, 0.9) 0%,
+    rgba(180, 0, 104, 0.9) 50%,
+    rgba(255, 0, 128, 0.9) 100%
+  );
+}
+
+.carouselContainer {
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: transparent;
+}
+
+.cardsWrapper {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.5s ease-in-out;
+  align-items: stretch;
+  padding-bottom: 1rem;
+}
+
+.card {
+  flex-shrink: 0;
+  width: calc((100% / 3) - (4rem / 3));
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: left;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.cardHeader {
+  height: 0.25rem;
+  background: linear-gradient(
+    135deg,
+    rgba(107, 0, 62, 1) 0%,
+    rgba(180, 0, 104, 1) 50%,
+    rgba(255, 0, 128, 1) 100%
+  ); /* SocialLinks main gradient */
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.learnMore {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(107, 0, 62, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease;
+  margin-top: auto;
+}
+
+.learnMore:hover {
+  color: rgba(107, 0, 62, 0.9); /* Darker version on hover */
+}
+
+/* Tablet view (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .card {
+    width: calc((100% / 2) - 1rem);
+    /* Removed height: 100%; */
+  }
+  .cardsWrapper {
+    gap: 1.5rem;
+    /* Removed height: 100%; */
+  }
+  .container {
+    padding: 4rem 1.5rem;
+  }
+  .mainHeading {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile view (below 768px) */
+@media (max-width: 768px) {
+  .mainHeading {
+    font-size: 2rem;
+  }
+  .cardTitle {
+    font-size: 1.35rem;
+  }
+  .cardDescription {
+    font-size: 1rem;
+  }
+  .cardsWrapper {
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    /* Removed height: 100%; */
+  }
+  .card {
+    width: 100%;
+    /* Removed height: 100%; */
+  }
+  .carouselContainer {
+    overflow: hidden;
+    width: 100%;
+  }
+  .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+  .navigationButtons {
+    margin-top: 2rem;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .navButton {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+} 
