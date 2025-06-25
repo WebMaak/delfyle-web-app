@@ -67,7 +67,7 @@ const WhoWeWorkWith = () => {
       transition: {
         duration: 0.6,
         delay: index < 2 ? index * 0.1 : index * 0.1,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "easeInOut",
       },
     }),
   };
@@ -85,7 +85,7 @@ const WhoWeWorkWith = () => {
       transition: {
         duration: 0.6,
         delay: 0.3,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "easeInOut",
       },
     },
   };
