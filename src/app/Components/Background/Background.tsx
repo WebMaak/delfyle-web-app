@@ -6,7 +6,7 @@ const Background = () => {
   return (
     <div className={`${styles.canvas} spline-background`}>
       <video
-        src="/Backgrounds/Compress1.mp4"
+        src="/Backgrounds/hero-bg.mp4"
         autoPlay
         loop
         muted
