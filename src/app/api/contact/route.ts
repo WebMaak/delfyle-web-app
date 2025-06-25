@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     await transporter.sendMail({
       from: `"Delfyle Main" <${process.env.GMAIL_USER}>`, // sender
-      to: 'delfyletech@gmail.com', // recipient
+      to: 'delfylesales@gmail.com', // recipient
       subject: `New Contact: ${fullName} (${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()})`,
       html: `
         <h2>Delfyle Contact Form Submission</h2>
