@@ -8,7 +8,7 @@ export const initializeSmoothScroll = () => {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
-      const targetId = this.getAttribute("href");
+      const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute("href");
       if (targetId) {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
