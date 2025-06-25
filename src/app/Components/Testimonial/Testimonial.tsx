@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -101,9 +101,12 @@ const Testimonial: React.FC = () => {
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
+  // Store random rotations for each testimonial
+  const [rotations, setRotations] = useState<number[]>([]);
+
+  useEffect(() => {
+    setRotations(testimonials.map(() => Math.floor(Math.random() * 21) - 10));
+  }, [testimonials.length]);
 
   return (
     <section className={styles.testimonialSection}>
@@ -111,7 +114,7 @@ const Testimonial: React.FC = () => {
         <div className={styles.headerSection} ref={headerRef}>
           <div className={styles.headingWrapper}>
             <h2 className={styles.mainHeading}>What Our Clients Say</h2>
-        <motion.div
+            <motion.div
               className={styles.progressLine}
               style={{ width: lineWidth }}
             />
@@ -130,13 +133,13 @@ const Testimonial: React.FC = () => {
                         opacity: 0,
                         scale: 0.9,
                         z: -100,
-                        rotate: randomRotateY(),
+                        rotate: rotations[index] || 0,
                       }}
                       animate={{
                         opacity: index === active ? 1 : 0.7,
                         scale: index === active ? 1 : 0.95,
                         z: index === active ? 0 : -100,
-                        rotate: index === active ? 0 : randomRotateY(),
+                        rotate: index === active ? 0 : (rotations[index] || 0),
                         zIndex:
                           index === active
                             ? 40
@@ -147,7 +150,7 @@ const Testimonial: React.FC = () => {
                         opacity: 0,
                         scale: 0.9,
                         z: 100,
-                        rotate: randomRotateY(),
+                        rotate: rotations[index] || 0,
                       }}
                       transition={{
                         duration: 0.4,
