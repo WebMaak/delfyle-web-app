@@ -71,7 +71,7 @@ export default function ContactPage() {
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">We'd love to hear from you! Fill out the form below and our team will get back to you as soon as possible.</p>
       </div>
       <div className="flex flex-col items-center justify-center px-2 pb-12">
-        <div className="w-full max-w-2xl">
+        <div className="w-full ">
           <ModernContactForm />
         </div>
       </div>
