@@ -1,0 +1,175 @@
+.container {
+  padding: 5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #f6f8fa;
+  color: #1a202c;
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-right: 2rem;
+}
+
+.mainHeading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.navigationButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.navButton {
+  background: #f0f0f0;
+  color: #333333;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navButton:hover {
+  background: #e0e0e0;
+  color: #1a1a1a;
+}
+
+.carouselContainer {
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+.cardsWrapper {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.5s ease-in-out;
+  align-items: stretch;
+}
+
+.card {
+  flex-shrink: 0;
+  width: calc((100% / 3) - (4rem / 3));
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  min-height: 200px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1.5rem;
+}
+
+.cardImage {
+  object-fit: contain;
+}
+
+.textContainer {
+  height: auto;
+  position: relative;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Tablet view (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .card {
+    width: calc((100% / 2) - 1rem);
+  }
+  
+  .cardsWrapper {
+    gap: 1.5rem;
+  }
+  
+  .container {
+    padding: 4rem 1.5rem;
+  }
+  
+  .mainHeading {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile view (below 768px) */
+@media (max-width: 768px) {
+  .mainHeading {
+    font-size: 2rem;
+  }
+  .cardTitle {
+    font-size: 1.35rem;
+  }
+  .cardDescription {
+    font-size: 1rem;
+  }
+  .cardsWrapper {
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+  }
+  .card {
+    width: 100%;
+    max-width: 100%;
+    flex-shrink: 0;
+  }
+  .carouselContainer {
+    overflow: hidden;
+    width: 100%;
+  }
+  .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+  .navigationButtons {
+    margin-top: 2rem;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .navButton {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+  .imageContainer {
+    height: 150px;
+  }
+} 

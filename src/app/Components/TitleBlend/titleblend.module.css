@@ -1,0 +1,113 @@
+.title {
+  position: absolute;
+  z-index: 10;
+  top: 8rem;
+  left: 15vw;
+  width: calc(100vw - 15vw);
+  color: #1a1a1a;
+}
+
+.titleBlend {
+  position: absolute;
+  z-index: 10;
+}
+
+.welcomeTo {
+  font-size: 3.8rem;
+  margin-left: 1rem;
+  color: #1a1a1a;
+}
+
+.titleDelfyle {
+  font-size: 13.7rem;
+  margin-top: 1.2rem;
+  margin-bottom: 2.5rem;
+  color: #ffffff;
+}
+
+.subTitle {
+  margin-top: 1rem;
+  line-height: 1.1;
+  font-size: 3.8rem;
+  margin-left: 0.8rem;
+  color: #1a1a1a;
+}
+
+/* Laptop */
+@media (max-width: 1280px) {
+  .title {
+    left: 5vw;
+    width: calc(100vw - 5vw);
+  }
+  
+  .welcomeTo {
+    font-size: 3.2rem;
+  }
+  
+  .titleDelfyle {
+    font-size: 11rem;
+  }
+  
+  .subTitle {
+    font-size: 3.2rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .title {
+    left: 3vw;
+    width: calc(100vw - 3vw);
+    top: 6rem;
+  }
+  
+  .welcomeTo {
+    font-size: 2.8rem;
+    margin-left: 0.5rem;
+  }
+  
+  .titleDelfyle {
+    font-size: 9rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .subTitle {
+    font-size: 2.8rem;
+    margin-left: 0.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .title {
+    left: 2vw;
+    width: calc(100vw - 2vw);
+    top: 4rem;
+  }
+  
+  .titleBlend {
+  margin-top: 2rem;
+  }
+
+  .welcomeTo {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    letter-spacing: 0.01rem;
+  }
+  
+  .titleDelfyle {
+    margin-left: 1rem;
+    font-size: 5rem;
+    margin: 0;
+    margin-left: 0.5rem;
+    letter-spacing: 0.01rem;
+  }
+  
+  .subTitle {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.01rem;
+  }
+}
