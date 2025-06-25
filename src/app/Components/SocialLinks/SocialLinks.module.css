@@ -1,0 +1,357 @@
+/* Social Links Component Styles */
+.section {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.section.hovered {
+  background-color: var(--hover-color);
+}
+
+.mainContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.headerSection {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.headingContainer {
+  width: fit-content;
+  padding: 1.4rem 4rem 0;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+
+.mainHeading {
+  font-size: 4rem;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  background: linear-gradient(
+    135deg,
+    rgba(107, 0, 62, 1) 0%,
+    rgba(180, 0, 104, 1) 50%,
+    rgba(255, 0, 128, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+  z-index: 2;
+  transition: color 0.4s, background 0.4s, -webkit-background-clip 0.4s;
+}
+
+.mainHeading::first-letter {
+  font-size: 5.5rem;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Cards Main Container */
+.cardsMainContainer {
+  width: 100%;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Cards Container */
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Individual Card Container */
+.cardContainer {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.socialCard {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #1a1a1a;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(107, 0, 62, 0.1);
+  z-index: 2;
+}
+
+.socialCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    rgba(107, 0, 62, 0.8) 0%,
+    rgba(180, 0, 104, 0.8) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.socialCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.socialCard:hover::before {
+  opacity: 1;
+}
+
+/* Icon Card Container */
+.iconCardContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(107, 0, 62, 0.1);
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.socialCard:hover .iconWrapper {
+  background: rgba(107, 0, 62, 0.2);
+  transform: scale(1.1);
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: rgba(107, 0, 62, 1);
+  transition: all 0.3s ease;
+}
+
+.socialCard:hover .icon {
+  color: var(--hover-color);
+}
+
+.linkName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: color 0.3s ease;
+}
+
+.socialCard:hover .linkName {
+  color: var(--hover-color);
+}
+
+@media (max-width: 1024px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .mainHeading {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .socialCard {
+    padding: 1.5rem;
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .linkName {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainHeading {
+    font-size: 2.5rem;
+  }
+
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .socialCard {
+    padding: 1.25rem;
+  }
+}
+
+.mainHeadingWhite {
+  color: #fff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  transition: color 0.4s, background 0.4s, -webkit-background-clip 0.4s;
+} 
+
+/* Mobile devices (phones) */
+@media (max-width: 767px) {
+.headerSection {
+  margin-bottom: 0;
+}
+
+  .headingContainer {
+    width: 100%;
+    padding: 1.4rem 0 0;
+  }
+  .mainHeading {
+    overflow: visible;
+    font-size: 2rem;
+    letter-spacing: auto;
+    margin-bottom: 0;
+  }
+  .mainHeading::first-letter {
+    font-size: 3rem;
+  }
+  .iconWrapper {
+    margin-bottom: 0;
+  }
+  .cardsContainer {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+
+  .linkName {
+    display: none;
+  }
+
+  /* .cardsContainer > :last-child {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    height: 160px;
+  } */
+  .socialCard::before {
+    display: none !important;
+  }
+
+  .socialCard {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .iconWrapper {
+    width: 20px;
+    height: 20px;
+  }
+  .icon {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mainHeading {
+    font-size: 2rem;
+  }
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .socialCard {
+    padding: 1.25rem;
+  }
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .icon {
+    font-size: 1.8rem;
+  }
+}
+
+/* Laptop and larger devices */
+@media (min-width: 1025px) {
+  .mainHeading {
+    font-size: 4rem;
+  }
+  .cardsContainer {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+  .socialCard {
+    padding: 2rem;
+  }
+  .iconWrapper {
+    width: 80px;
+    height: 80px;
+  }
+  .icon {
+    font-size: 2.5rem;
+  }
+} 
