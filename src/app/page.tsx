@@ -2,9 +2,7 @@
 
 import Hero from "./Components/Hero";
 import NewWhatWeDo from "./Components/WhatWeDo/NewWhatWeDo";
-import ContactUs from "./Components/ContactUs/ContactUs";
 import CompanyLogos from "./Components/CompanyLogos/CompanyLogos";
-import TrustDelfyle from "./Components/TrustDelfyle/TrustDelfyle";
 import WhoWeWorkWith from "./Components/WhoWeWorkWith/WhoWeWorkWith";
 import Testimonial from "./Components/Testimonial/Testimonial";
 import ModernFooter from "./Components/Footer/ModernFooter";
