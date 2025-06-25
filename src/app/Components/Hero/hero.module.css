@@ -1,0 +1,49 @@
+.heroSection {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 5;
+}
+
+.contentContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  padding-top: 8rem;
+}
+
+/* Laptop */
+@media (max-width: 1280px) {
+  .contentContainer {
+    max-width: 1280px;
+    padding: 0 2rem;
+    padding-top: 6rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .contentContainer {
+    max-width: 100%;
+    padding: 0 1.5rem;
+    padding-top: 5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .contentContainer {
+    max-width: 100%;
+    padding: 0 1rem;
+    padding-top: 4rem;
+  }
+  .heroSection {
+    max-height: fit-content;
+    margin-bottom: -7rem;
+  }
+} 

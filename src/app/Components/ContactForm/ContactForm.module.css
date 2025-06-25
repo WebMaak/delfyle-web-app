@@ -1,0 +1,127 @@
+.formCard {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 12px 48px rgba(58,79,255,0.18), 0 2px 8px rgba(0,0,0,0.10);
+  padding: 3.5rem 2rem 2.5rem 2rem;
+  width: 440px;
+  min-width: 440px;
+  max-width: 440px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.formTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 100%;
+}
+
+.label {
+  font-size: 0.95rem;
+  color: #888;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.input {
+  font-size: 1.1rem;
+  border: none;
+  border-bottom: 1.5px solid #e0e0e0;
+  padding: 0.5rem 0;
+  background: transparent;
+  outline: none;
+  color: #222;
+  font-family: inherit;
+  transition: border 0.2s;
+}
+
+.input:focus {
+  border-bottom: 1.5px solid #3a4fff;
+}
+
+textarea.input {
+  border-bottom: none;
+  resize: none;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+textarea.input::-webkit-scrollbar {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .formCard {
+    width: 100%;
+    max-width: 400px;
+    min-width: unset;
+    padding: 2.5rem 1.5rem 2rem 1.5rem;
+  }
+}
+
+.sendBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #3a4fff;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.sendCircle {
+  background: #3a4fff;
+  color: #fff;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.3rem;
+  box-shadow: 0 4px 16px rgba(58,79,255,0.15);
+}
+.sendCircle svg {
+  font-size: 1.35rem;
+}
+
+.thankYouOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(58, 79, 255, 0.92);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  border-radius: 24px;
+  z-index: 10;
+  text-align: center;
+  flex-direction: column;
+  padding: 2rem;
+  transition: opacity 0.3s;
+} 
