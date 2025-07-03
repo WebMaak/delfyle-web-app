@@ -563,6 +563,7 @@ const subOptionUrls: { [key: string]: string } = {
 interface NavbarProps {
   children: React.ReactNode;
   className?: string;
+  navLinkColor?: string;
 }
 
 interface NavBodyProps {
@@ -608,7 +609,7 @@ interface MobileNavMenuProps {
   onClose: () => void;
 }
 
-export const ModernNavbar = ({ children, className }: NavbarProps) => {
+export const ModernNavbar = ({ children, className, navLinkColor }: NavbarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({
     target: ref,
@@ -628,6 +629,7 @@ export const ModernNavbar = ({ children, className }: NavbarProps) => {
     <motion.div
       ref={ref}
       className={cn(styles.modernNavbar, className)}
+      style={navLinkColor ? { '--nav-link-color': navLinkColor } as React.CSSProperties : {}}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -701,6 +703,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 0 || hovered === 0) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 0 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -718,55 +721,55 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/private-limited-company" className={styles.dropdownLink}>
+                  <a href="/services/startup/private-limited-company" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Private Limited Company")}</span>
                     <span className={styles.dropdownLabel}>Private Limited Company</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/limited-liability-partnership-(llp)" className={styles.dropdownLink}>
+                  <a href="/services/startup/limited-liability-partnership-(llp)" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Limited Liability Partnership (LLP)")}</span>
                     <span className={styles.dropdownLabel}>Limited Liability Partnership (LLP)</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/one-person-company-(opc)" className={styles.dropdownLink}>
+                  <a href="/services/startup/one-person-company-(opc)" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("One Person Company (OPC)")}</span>
                     <span className={styles.dropdownLabel}>One Person Company (OPC)</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/section-8-company" className={styles.dropdownLink}>
+                  <a href="/services/startup/section-8-company" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Section 8 Company")}</span>
                     <span className={styles.dropdownLabel}>Section 8 Company</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/partnership-firm" className={styles.dropdownLink}>
+                  <a href="/services/startup/partnership-firm" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Partnership Firm")}</span>
                     <span className={styles.dropdownLabel}>Partnership Firm</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/trust-registration" className={styles.dropdownLink}>
+                  <a href="/services/startup/trust-registration" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Trust Registration")}</span>
                     <span className={styles.dropdownLabel}>Trust Registration</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/public-company" className={styles.dropdownLink}>
+                  <a href="/services/startup/public-company" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Public Company")}</span>
                     <span className={styles.dropdownLabel}>Public Company</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/producer-company" className={styles.dropdownLink}>
+                  <a href="/services/startup/producer-company" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Producer Company")}</span>
                     <span className={styles.dropdownLabel}>Producer Company</span>
                   </a>
                 </motion.div>
                 <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}>
-                  <a href="/services/startup/nidhi-company" className={styles.dropdownLink}>
+                  <a href="/services/startup/nidhi-company" className={styles.dropdownLink} style={{ color: '#111827' }}>
                     <span className={styles.dropdownIcon}>{getCompanyIcon("Nidhi Company")}</span>
                     <span className={styles.dropdownLabel}>Nidhi Company</span>
                   </a>
@@ -790,6 +793,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 1 || hovered === 1) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 1 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -806,22 +810,22 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               exit="exit"
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Registration")}</span><span className={styles.dropdownLabel}>Trademark Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-objection" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Objection")}</span><span className={styles.dropdownLabel}>Trademark Objection</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-certificate" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Certificate")}</span><span className={styles.dropdownLabel}>Trademark Certificate</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-opposition" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Opposition")}</span><span className={styles.dropdownLabel}>Trademark Opposition</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-hearing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Hearing")}</span><span className={styles.dropdownLabel}>Trademark Hearing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-rectification" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Rectification")}</span><span className={styles.dropdownLabel}>Trademark Rectification</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-infringement-notice" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Infringement Notice")}</span><span className={styles.dropdownLabel}>Trademark Infringement Notice</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-renewal" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Renewal")}</span><span className={styles.dropdownLabel}>Trademark Renewal</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-restoration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Restoration")}</span><span className={styles.dropdownLabel}>Trademark Restoration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-transfer" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Transfer")}</span><span className={styles.dropdownLabel}>Trademark Transfer</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/expedited-trademark-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Expedited Trademark Registration")}</span><span className={styles.dropdownLabel}>Expedited Trademark Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/logo-design-+-trademark-protection" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Logo Design + Trademark Protection")}</span><span className={styles.dropdownLabel}>Logo Design + Trademark Protection</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/design-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Design Registration")}</span><span className={styles.dropdownLabel}>Design Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/design-objection" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Design Objection")}</span><span className={styles.dropdownLabel}>Design Objection</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/copyright-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Copyright Registration")}</span><span className={styles.dropdownLabel}>Copyright Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/copyright-objections" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getTrademarkIcon("Copyright Objections")}</span><span className={styles.dropdownLabel}>Copyright Objections</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Registration")}</span><span className={styles.dropdownLabel}>Trademark Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-objection" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Objection")}</span><span className={styles.dropdownLabel}>Trademark Objection</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-certificate" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Certificate")}</span><span className={styles.dropdownLabel}>Trademark Certificate</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-opposition" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Opposition")}</span><span className={styles.dropdownLabel}>Trademark Opposition</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-hearing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Hearing")}</span><span className={styles.dropdownLabel}>Trademark Hearing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-rectification" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Rectification")}</span><span className={styles.dropdownLabel}>Trademark Rectification</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-infringement-notice" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Infringement Notice")}</span><span className={styles.dropdownLabel}>Trademark Infringement Notice</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-renewal" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Renewal")}</span><span className={styles.dropdownLabel}>Trademark Renewal</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-restoration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Restoration")}</span><span className={styles.dropdownLabel}>Trademark Restoration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/trademark-transfer" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Trademark Transfer")}</span><span className={styles.dropdownLabel}>Trademark Transfer</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/expedited-trademark-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Expedited Trademark Registration")}</span><span className={styles.dropdownLabel}>Expedited Trademark Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/logo-design-+-trademark-protection" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Logo Design + Trademark Protection")}</span><span className={styles.dropdownLabel}>Logo Design + Trademark Protection</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/design-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Design Registration")}</span><span className={styles.dropdownLabel}>Design Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/design-objection" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Design Objection")}</span><span className={styles.dropdownLabel}>Design Objection</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/copyright-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Copyright Registration")}</span><span className={styles.dropdownLabel}>Copyright Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/trademark/copyright-objections" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getTrademarkIcon("Copyright Objections")}</span><span className={styles.dropdownLabel}>Copyright Objections</span></a></motion.div>
             </div>
             </motion.div>
           </AnimatePresence>
@@ -841,6 +845,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 2 || hovered === 2) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 2 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -857,28 +862,28 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               exit="exit"
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/startup-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("StartUp Registration")}</span><span className={styles.dropdownLabel}>StartUp Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/trade-license" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Trade License")}</span><span className={styles.dropdownLabel}>Trade License</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fssai-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("FSSAI Registration")}</span><span className={styles.dropdownLabel}>FSSAI Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fssai-license" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("FSSAI License")}</span><span className={styles.dropdownLabel}>FSSAI License</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/halal-certification" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Halal Certification")}</span><span className={styles.dropdownLabel}>Halal Certification</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/icegate-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("ICEGATE Registration")}</span><span className={styles.dropdownLabel}>ICEGATE Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/iso-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("ISO Registration")}</span><span className={styles.dropdownLabel}>ISO Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/pf-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("PF Registration")}</span><span className={styles.dropdownLabel}>PF Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/esi-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("ESI Registration")}</span><span className={styles.dropdownLabel}>ESI Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/professional-tax-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Professional Tax Registration")}</span><span className={styles.dropdownLabel}>Professional Tax Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/rcmc-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("RCMC Registration")}</span><span className={styles.dropdownLabel}>RCMC Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/wb-rera-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("WB RERA Registration")}</span><span className={styles.dropdownLabel}>WB RERA Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/12a-and-80g-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("12A and 80G Registration")}</span><span className={styles.dropdownLabel}>12A and 80G Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/12a-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("12A Registration")}</span><span className={styles.dropdownLabel}>12A Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/80g-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("80G Registration")}</span><span className={styles.dropdownLabel}>80G Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/darpan-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Darpan Registration")}</span><span className={styles.dropdownLabel}>Darpan Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/udyam-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Udyam Registration")}</span><span className={styles.dropdownLabel}>Udyam Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/digital-signature" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Digital Signature")}</span><span className={styles.dropdownLabel}>Digital Signature</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/shop-and-establishment-act-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Shop and Establishment Act Registration")}</span><span className={styles.dropdownLabel}>Shop and Establishment Act Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/drug-license" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Drug License")}</span><span className={styles.dropdownLabel}>Drug License</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fcra-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("FCRA Registration")}</span><span className={styles.dropdownLabel}>FCRA Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fire-license" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getRegistrationIcon("Fire License")}</span><span className={styles.dropdownLabel}>Fire License</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/startup-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("StartUp Registration")}</span><span className={styles.dropdownLabel}>StartUp Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/trade-license" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Trade License")}</span><span className={styles.dropdownLabel}>Trade License</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fssai-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("FSSAI Registration")}</span><span className={styles.dropdownLabel}>FSSAI Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fssai-license" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("FSSAI License")}</span><span className={styles.dropdownLabel}>FSSAI License</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/halal-certification" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Halal Certification")}</span><span className={styles.dropdownLabel}>Halal Certification</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/icegate-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("ICEGATE Registration")}</span><span className={styles.dropdownLabel}>ICEGATE Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/iso-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("ISO Registration")}</span><span className={styles.dropdownLabel}>ISO Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/pf-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("PF Registration")}</span><span className={styles.dropdownLabel}>PF Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/esi-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("ESI Registration")}</span><span className={styles.dropdownLabel}>ESI Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/professional-tax-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Professional Tax Registration")}</span><span className={styles.dropdownLabel}>Professional Tax Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/rcmc-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("RCMC Registration")}</span><span className={styles.dropdownLabel}>RCMC Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/wb-rera-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("WB RERA Registration")}</span><span className={styles.dropdownLabel}>WB RERA Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/12a-and-80g-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("12A and 80G Registration")}</span><span className={styles.dropdownLabel}>12A and 80G Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/12a-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("12A Registration")}</span><span className={styles.dropdownLabel}>12A Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/80g-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("80G Registration")}</span><span className={styles.dropdownLabel}>80G Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/darpan-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Darpan Registration")}</span><span className={styles.dropdownLabel}>Darpan Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/udyam-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Udyam Registration")}</span><span className={styles.dropdownLabel}>Udyam Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/digital-signature" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Digital Signature")}</span><span className={styles.dropdownLabel}>Digital Signature</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/shop-and-establishment-act-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Shop and Establishment Act Registration")}</span><span className={styles.dropdownLabel}>Shop and Establishment Act Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/drug-license" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Drug License")}</span><span className={styles.dropdownLabel}>Drug License</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fcra-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("FCRA Registration")}</span><span className={styles.dropdownLabel}>FCRA Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/registrations/fire-license" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getRegistrationIcon("Fire License")}</span><span className={styles.dropdownLabel}>Fire License</span></a></motion.div>
             </div>
             </motion.div>
           </AnimatePresence>
@@ -898,6 +903,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 3 || hovered === 3) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 3 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -914,14 +920,14 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               exit="exit"
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST Registration")}</span><span className={styles.dropdownLabel}>GST Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST Return Filing")}</span><span className={styles.dropdownLabel}>GST Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-annual-return-filing-(gstr-9)" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST Annual Return Filing (GSTR - 9)")}</span><span className={styles.dropdownLabel}>GST Annual Return Filing (GSTR - 9)</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-lut-form" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST LUT Form")}</span><span className={styles.dropdownLabel}>GST LUT Form</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-tax-notice" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST Tax Notice")}</span><span className={styles.dropdownLabel}>GST Tax Notice</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-amendment" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST Amendment")}</span><span className={styles.dropdownLabel}>GST Amendment</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-revocation" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GST Revocation")}</span><span className={styles.dropdownLabel}>GST Revocation</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gstr-10" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getGSTIcon("GSTR-10")}</span><span className={styles.dropdownLabel}>GSTR-10</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST Registration")}</span><span className={styles.dropdownLabel}>GST Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST Return Filing")}</span><span className={styles.dropdownLabel}>GST Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-annual-return-filing-(gstr-9)" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST Annual Return Filing (GSTR - 9)")}</span><span className={styles.dropdownLabel}>GST Annual Return Filing (GSTR - 9)</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-lut-form" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST LUT Form")}</span><span className={styles.dropdownLabel}>GST LUT Form</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-tax-notice" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST Tax Notice")}</span><span className={styles.dropdownLabel}>GST Tax Notice</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-amendment" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST Amendment")}</span><span className={styles.dropdownLabel}>GST Amendment</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gst-revocation" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GST Revocation")}</span><span className={styles.dropdownLabel}>GST Revocation</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/gst/gstr-10" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getGSTIcon("GSTR-10")}</span><span className={styles.dropdownLabel}>GSTR-10</span></a></motion.div>
             </div>
             </motion.div>
           </AnimatePresence>
@@ -941,6 +947,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 4 || hovered === 4) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 4 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -957,26 +964,26 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               exit="exit"
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/company-compliance" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Company Compliance")}</span><span className={styles.dropdownLabel}>Company Compliance</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/llp-compliance" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("LLP Compliance")}</span><span className={styles.dropdownLabel}>LLP Compliance</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/opc-compliance" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("OPC Compliance")}</span><span className={styles.dropdownLabel}>OPC Compliance</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/name-change-company" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Name Change - Company")}</span><span className={styles.dropdownLabel}>Name Change - Company</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/company-registered-office-change" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Company Registered Office Change")}</span><span className={styles.dropdownLabel}>Company Registered Office Change</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/din-ekyc-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("DIN eKYC Filing")}</span><span className={styles.dropdownLabel}>DIN eKYC Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/din-reactivation" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("DIN Reactivation")}</span><span className={styles.dropdownLabel}>DIN Reactivation</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/director-change" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Director Change")}</span><span className={styles.dropdownLabel}>Director Change</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/remove-director" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Remove Director")}</span><span className={styles.dropdownLabel}>Remove Director</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/appointment-of-auditor" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Appointment of Auditor")}</span><span className={styles.dropdownLabel}>Appointment of Auditor</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/dpt-3-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("DPT-3 Filing")}</span><span className={styles.dropdownLabel}>DPT-3 Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/llp-form-11-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("LLP Form 11 Filing")}</span><span className={styles.dropdownLabel}>LLP Form 11 Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/dormant-status-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Dormant Status Filing")}</span><span className={styles.dropdownLabel}>Dormant Status Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/moa-amendment" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("MOA Amendment")}</span><span className={styles.dropdownLabel}>MOA Amendment</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/aoa-amendment" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("AOA Amendment")}</span><span className={styles.dropdownLabel}>AOA Amendment</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/authorized-capital-increase" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Authorized Capital Increase")}</span><span className={styles.dropdownLabel}>Authorized Capital Increase</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/share-transfer" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Share Transfer")}</span><span className={styles.dropdownLabel}>Share Transfer</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/demat-of-shares" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Demat of Shares")}</span><span className={styles.dropdownLabel}>Demat of Shares</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/winding-up-llp" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Winding Up - LLP")}</span><span className={styles.dropdownLabel}>Winding Up - LLP</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/winding-up-company" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getMCAIcon("Winding Up - Company")}</span><span className={styles.dropdownLabel}>Winding Up - Company</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/company-compliance" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Company Compliance")}</span><span className={styles.dropdownLabel}>Company Compliance</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/llp-compliance" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("LLP Compliance")}</span><span className={styles.dropdownLabel}>LLP Compliance</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/opc-compliance" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("OPC Compliance")}</span><span className={styles.dropdownLabel}>OPC Compliance</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/name-change-company" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Name Change - Company")}</span><span className={styles.dropdownLabel}>Name Change - Company</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/company-registered-office-change" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Company Registered Office Change")}</span><span className={styles.dropdownLabel}>Company Registered Office Change</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/din-ekyc-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("DIN eKYC Filing")}</span><span className={styles.dropdownLabel}>DIN eKYC Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/din-reactivation" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("DIN Reactivation")}</span><span className={styles.dropdownLabel}>DIN Reactivation</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/director-change" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Director Change")}</span><span className={styles.dropdownLabel}>Director Change</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/remove-director" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Remove Director")}</span><span className={styles.dropdownLabel}>Remove Director</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/appointment-of-auditor" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Appointment of Auditor")}</span><span className={styles.dropdownLabel}>Appointment of Auditor</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/dpt-3-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("DPT-3 Filing")}</span><span className={styles.dropdownLabel}>DPT-3 Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/llp-form-11-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("LLP Form 11 Filing")}</span><span className={styles.dropdownLabel}>LLP Form 11 Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/dormant-status-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Dormant Status Filing")}</span><span className={styles.dropdownLabel}>Dormant Status Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/moa-amendment" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("MOA Amendment")}</span><span className={styles.dropdownLabel}>MOA Amendment</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/aoa-amendment" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("AOA Amendment")}</span><span className={styles.dropdownLabel}>AOA Amendment</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/authorized-capital-increase" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Authorized Capital Increase")}</span><span className={styles.dropdownLabel}>Authorized Capital Increase</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/share-transfer" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Share Transfer")}</span><span className={styles.dropdownLabel}>Share Transfer</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/demat-of-shares" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Demat of Shares")}</span><span className={styles.dropdownLabel}>Demat of Shares</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/winding-up-llp" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Winding Up - LLP")}</span><span className={styles.dropdownLabel}>Winding Up - LLP</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/mca/winding-up-company" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getMCAIcon("Winding Up - Company")}</span><span className={styles.dropdownLabel}>Winding Up - Company</span></a></motion.div>
                     </div>
             </motion.div>
           </AnimatePresence>
@@ -996,6 +1003,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 5 || hovered === 5) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 5 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -1012,15 +1020,15 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               exit="exit"
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/fssai-renewal" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("FSSAI Renewal")}</span><span className={styles.dropdownLabel}>FSSAI Renewal</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/fssai-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("FSSAI Return Filing")}</span><span className={styles.dropdownLabel}>FSSAI Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/hr-&-payrol-services" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("HR & Payroll Services")}</span><span className={styles.dropdownLabel}>HR & Payroll Services</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/pf-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("PF Return Filing")}</span><span className={styles.dropdownLabel}>PF Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/esi-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("ESI Return Filing")}</span><span className={styles.dropdownLabel}>ESI Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/professional-tax-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("Professional Tax Return Filing")}</span><span className={styles.dropdownLabel}>Professional Tax Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/partnership-compliance" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("Partnership Compliance")}</span><span className={styles.dropdownLabel}>Partnership Compliance</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/proprietorship-compliance" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("Proprietorship Compliance")}</span><span className={styles.dropdownLabel}>Proprietorship Compliance</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/book-keeping" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getComplianceIcon("Book-keeping")}</span><span className={styles.dropdownLabel}>Book-keeping</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/fssai-renewal" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("FSSAI Renewal")}</span><span className={styles.dropdownLabel}>FSSAI Renewal</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/fssai-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("FSSAI Return Filing")}</span><span className={styles.dropdownLabel}>FSSAI Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/hr-&-payrol-services" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("HR & Payroll Services")}</span><span className={styles.dropdownLabel}>HR & Payroll Services</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/pf-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("PF Return Filing")}</span><span className={styles.dropdownLabel}>PF Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/esi-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("ESI Return Filing")}</span><span className={styles.dropdownLabel}>ESI Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/professional-tax-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("Professional Tax Return Filing")}</span><span className={styles.dropdownLabel}>Professional Tax Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/partnership-compliance" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("Partnership Compliance")}</span><span className={styles.dropdownLabel}>Partnership Compliance</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/proprietorship-compliance" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("Proprietorship Compliance")}</span><span className={styles.dropdownLabel}>Proprietorship Compliance</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/compliance/book-keeping" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getComplianceIcon("Book-keeping")}</span><span className={styles.dropdownLabel}>Book-keeping</span></a></motion.div>
             </div>
             </motion.div>
           </AnimatePresence>
@@ -1040,6 +1048,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
             (openDropdown === 6 || hovered === 6) && styles.active
           )}
           href="#"
+          style={{ color: 'var(--nav-link-color)' }}
         >
           {hovered === 6 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
@@ -1056,17 +1065,17 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               exit="exit"
             >
             <div className={styles.dropdownGrid} style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-1-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-1 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-1 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-2-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-2 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-2 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-3-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-3 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-3 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-4-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-4 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-4 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-5-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-5 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-5 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-6-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-6 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-6 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-7-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("ITR-7 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-7 Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/tds-return-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("TDS Return Filing")}</span><span className={styles.dropdownLabel}>TDS Return Filing</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/income-tax-notice" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("Income Tax Notice")}</span><span className={styles.dropdownLabel}>Income Tax Notice</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/tan-registration" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("TAN Registration")}</span><span className={styles.dropdownLabel}>TAN Registration</span></a></motion.div>
-                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/15ca-&-15cb-filing" className={styles.dropdownLink}><span className={styles.dropdownIcon}>{getITRIcon("15CA & 15CB Filing")}</span><span className={styles.dropdownLabel}>15CA & 15CB Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-1-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-1 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-1 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-2-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-2 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-2 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-3-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-3 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-3 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-4-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-4 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-4 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-5-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-5 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-5 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-6-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-6 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-6 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/itr-7-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("ITR-7 Return Filing")}</span><span className={styles.dropdownLabel}>ITR-7 Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/tds-return-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("TDS Return Filing")}</span><span className={styles.dropdownLabel}>TDS Return Filing</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/income-tax-notice" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("Income Tax Notice")}</span><span className={styles.dropdownLabel}>Income Tax Notice</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/tan-registration" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("TAN Registration")}</span><span className={styles.dropdownLabel}>TAN Registration</span></a></motion.div>
+                <motion.div className={styles.dropdownItem} variants={dropdownItemVariants}><a href="/services/income-tax/15ca-&-15cb-filing" className={styles.dropdownLink} style={{ color: '#111827' }}><span className={styles.dropdownIcon}>{getITRIcon("15CA & 15CB Filing")}</span><span className={styles.dropdownLabel}>15CA & 15CB Filing</span></a></motion.div>
             </div>
             </motion.div>
           </AnimatePresence>
@@ -1085,8 +1094,9 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
               visible && styles.visible,
               (openDropdown === 7 || hovered === 7) && styles.active
             )}
-          href="/about"
-        >
+            href="/about"
+            style={{ color: 'var(--nav-link-color)' }}
+          >
           {hovered === 7 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
           )}

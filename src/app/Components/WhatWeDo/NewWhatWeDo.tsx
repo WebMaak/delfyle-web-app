@@ -153,12 +153,7 @@ const NewWhatWeDo: React.FC = () => {
           <Button 
             text="Get in touch"
             type="smallWhatWeDoButton"
-            onClick={() => {
-              const formElement = document.getElementById('modern-contact-form');
-              if (formElement) {
-                formElement.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+            href="/contact"
           />
           <Button
             text="Chat with us"

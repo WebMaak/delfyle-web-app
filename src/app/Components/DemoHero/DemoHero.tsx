@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import styles from "./DemoHero.module.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FiLayers, FiUserCheck, FiMapPin } from 'react-icons/fi';
+import { TbRocket } from 'react-icons/tb';
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -47,18 +49,18 @@ const DemoHero: React.FC = () => {
       // Calculate swap positions with adjustments
       const card1ToCard4 = {
         x: (card4Pos.left - card1Pos.left) + 10,
-        y: (card4Pos.top - card1Pos.top) + 10
+        y: 180 // move card 1 down at end
       };
       const card2ToCard3 = {
-        x: (card3Pos.left - card2Pos.left) + 70,
-        y: (card3Pos.top - card2Pos.top) + 10
+        x: -320,
+        y: 260 // move card 2 down at end
       };
       const card3ToCard2 = {
         x: (card2Pos.left - card3Pos.left) + 20,
         y: (card2Pos.top - card3Pos.top) - 50
       };
       const card4ToCard1 = {
-        x: (card1Pos.left - card4Pos.left) - 10,
+        x: -250,
         y: (card1Pos.top - card4Pos.top) - 15
       };
 
@@ -99,6 +101,8 @@ const DemoHero: React.FC = () => {
               x: card3ToCard2.x * self.progress,
               y: card3ToCard2.y * self.progress,
             });
+            // Debug: log the actual transform values for card 2 and 4
+            console.log('Card2 x:', card2ToCard3.x * self.progress, 'Card4 x:', card4ToCard1.x * self.progress, 'Progress:', self.progress);
           },
         },
       });
@@ -147,8 +151,8 @@ const DemoHero: React.FC = () => {
             <div className={styles.cardsContainer}>
               <div ref={card1Ref} className={styles.card1}>
                 <div className={styles.cardHeader}>
-                  <span className={styles.cardIcon}>🧩</span>
-                  <span className={styles.cardTitle}>All-in-One Legal & Compliance Hub</span>
+                  <span className={styles.cardIcon}><FiLayers size={32} color="#790046" /></span>
+                  <span className={styles.cardTitle}>Everything Compliance. One Roof.</span>
                 </div>
                 <p className={styles.cardDescription}>
                   End-to-end solutions for GST, trademarks, ISO, accounting and more. Under one roof.
@@ -156,8 +160,8 @@ const DemoHero: React.FC = () => {
               </div>
               <div ref={card2Ref} className={styles.card2}>
                 <div className={styles.cardHeader}>
-                  <span className={styles.cardIcon}>🚀</span>
-                  <span className={styles.cardTitle}>Built for Startups & SMEs</span>
+                  <span className={styles.cardIcon}><TbRocket size={32} color="#790046" /></span>
+                  <span className={styles.cardTitle}>Built for Startups. Trusted by <span style={{ fontWeight: 700, color: '#790046' }}>1500+ Businesses</span>.</span>
                 </div>
                 <p className={styles.cardDescription}>
                   Simplified, affordable services tailored for growing businesses.
@@ -165,17 +169,17 @@ const DemoHero: React.FC = () => {
               </div>
               <div ref={card3Ref} className={styles.card3}>
                 <div className={styles.cardHeader}>
-                  <span className={styles.cardIcon}>🌍</span>
-                  <span className={styles.cardTitle}>Trusted PAN India</span>
+                  <span className={styles.cardIcon}><FiUserCheck size={32} color="#790046" /></span>
+                  <span className={styles.cardTitle}>Real Experts. Real Support.</span>
                 </div>
                 <p className={styles.cardDescription}>
-                  <span className={styles.clientsValue}>1500+ clients</span> across India rely on us for consistent, reliable support.
+                  <span className={styles.clientsValue} style={{ fontWeight: 700, color: '#790046', background: '#fbe9f3', padding: '2px 8px', borderRadius: 6 }}>1500+ clients</span> across India rely on us for consistent, reliable support.
                 </p>
               </div>
               <div ref={card4Ref} className={styles.card4}>
                 <div className={styles.cardHeader}>
-                  <span className={styles.cardIcon}>👥</span>
-                  <span className={styles.cardTitle}>Expert Team, Personalized Care</span>
+                  <span className={styles.cardIcon}><FiMapPin size={32} color="#790046" /></span>
+                  <span className={styles.cardTitle}>PAN India Reach. Local-Level Care.</span>
                 </div>
                 <p className={styles.cardDescription}>
                   Legal experts delivering prompt, transparent, and human-focused service.

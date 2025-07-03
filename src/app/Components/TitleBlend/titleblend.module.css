@@ -33,6 +33,34 @@
   color: #1a1a1a;
 }
 
+@media (max-width: 1800px) {
+  .titleDelfyle {
+    margin: 1rem 0 2rem;
+  }
+}
+
+@media (max-width: 1536px) {
+  .title {
+    left: 10.2vw;
+    width: calc(100vw - 10.2vw);
+  }
+  
+  .welcomeTo {
+    font-size: 3.2rem;
+  }
+  
+  .titleDelfyle {
+    margin: 0;
+    font-size: 11rem;
+  }
+  
+  .subTitle {
+    font-size: 3.2rem;
+  }
+
+  
+}
+
 /* Laptop */
 @media (max-width: 1280px) {
   .title {
@@ -58,16 +86,16 @@
   .title {
     left: 3vw;
     width: calc(100vw - 3vw);
-    top: 6rem;
+    top: 8rem;
   }
   
   .welcomeTo {
-    font-size: 2.8rem;
+    font-size: 2rem;
     margin-left: 0.5rem;
   }
   
   .titleDelfyle {
-    font-size: 9rem;
+    font-size: 8rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
   }

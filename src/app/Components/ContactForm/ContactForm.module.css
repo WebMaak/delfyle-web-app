@@ -124,4 +124,9 @@ textarea.input::-webkit-scrollbar {
   flex-direction: column;
   padding: 2rem;
   transition: opacity 0.3s;
+}
+
+.lift-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
 } 

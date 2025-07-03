@@ -12,7 +12,7 @@
 }
 
 /* Top gradient overlay */
-.heroSection::before {
+/* .heroSection::before {
   content: '';
   position: absolute;
   top: 0;
@@ -22,7 +22,7 @@
   background: linear-gradient(to bottom,rgba(116, 0, 54, 0.438) 0%,rgba(255, 255, 255, 0) 100%);
   z-index: 1;
   pointer-events: none;
-}
+} */
 
 /* Background Video with Clip Path */
 .backgroundVideo {
@@ -321,7 +321,7 @@
 
 .cardsContainer:nth-child(2) .card2 {
   top: 31.5%;
-  left: 71%;
+  left: 80%;
   transform: translate(-50%, -50%) rotate(8deg);
 }
 
@@ -349,8 +349,8 @@
   text-align: left;
   transform-origin: center center;
   transition: transform 0.3s ease;
-  width: 240px;
-  min-height: 120px;
+  width: 280px;
+  min-height: 220px;
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -364,21 +364,21 @@
 
 .card2 {
   top: 31.5%;
-  left: 71%;
+  left: 82%;
   transform: translate(-50%, -50%) rotate(-8deg);
   z-index: 4;
 }
 
 .card3 {
-  top: 70%;
+  top: 71.5%;
   left: 31%;
   transform: translate(-50%, -50%) rotate(-8deg);
   z-index: 2;
 }
 
 .card4 {
-  top: 64%;
-  left: 73%;
+  top: 69%;
+  left: 78%;
   transform: translate(-50%, -50%) rotate(-8deg);
   z-index: 1;
 }

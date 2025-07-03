@@ -2,7 +2,7 @@
 .modernNavbar {
   position: relative;
   inset: 0;
-  /* top: 5rem; */
+  top: 1.4rem;
   z-index: 40;
   width: 100%;
 }
@@ -65,9 +65,9 @@
   color: rgb(82, 82, 91);
 }
 
-.modernNavItems:hover {
+/* .modernNavItems:hover {
   color: #111827;
-}
+} */
 
 
 .dropdownLink {
@@ -400,6 +400,12 @@
   .logoImage {
     max-height: 24px !important;
     width: auto !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .modernNavbar {
+    display: none;
   }
 }
 
