@@ -12,6 +12,8 @@ import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
 // import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
 // import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
+import ToggleNav from "../../../Components/ToggleNav/toggleNav";
+import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
 import { 
   ModernNavbar, 
   ModernNavBody, 
@@ -82,6 +84,27 @@ const PrivateLimitedCompany: React.FC = () => {
         smootherRef.current.kill();
       }
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+  // Listen for custom event from ToggleNav
+  useEffect(() => {
+    const handleToggleNavMenu = (e: any) => {
+      if (smootherRef.current) {
+        if (e.detail.isOpen) {
+          smootherRef.current.paused(true);
+        } else {
+          smootherRef.current.paused(false);
+        }
+      }
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('toggleNavMenu', handleToggleNavMenu);
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('toggleNavMenu', handleToggleNavMenu);
+      }
     };
   }, []);
 
@@ -160,12 +183,141 @@ const PrivateLimitedCompany: React.FC = () => {
   ];
 
   return (
+    <>
+    <TopMarquee />
+      {/* ToggleNav for tablet and mobile only - moved above progress bar */}
+      <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
+        <ToggleNav 
+          mainOptions={navItems.map(item => item.name)}
+          subMenus={[
+            // Startup
+            [
+              "Private Limited Company",
+              "Limited Liability Partnership (LLP)",
+              "One Person Company (OPC)",
+              "Section 8 Company",
+              "Partnership Firm",
+              "Trust Registration",
+              "Public Company",
+              "Producer Company",
+              "Nidhi Company"
+            ],
+            // Trademark
+            [
+              "Trademark Registration",
+              "Trademark Objection",
+              "Trademark Certificate",
+              "Trademark Opposition",
+              "Trademark Hearing",
+              "Trademark Rectification",
+              "Trademark Infringement Notice",
+              "Trademark Renewal",
+              "Trademark Restoration",
+              "Trademark Transfer",
+              "Expedited Trademark Registration",
+              "Logo Design + Trademark Protection",
+              "Design Registration",
+              "Design Objection",
+              "Copyright Registration",
+              "Copyright Objections"
+            ],
+            // Registrations
+            [
+              "StartUp Registration",
+              "Trade License",
+              "FSSAI Registration",
+              "FSSAI License",
+              "Halal Certification",
+              "ICEGATE Registration",
+              "ISO Registration",
+              "PF Registration",
+              "ESI Registration",
+              "Professional Tax Registration",
+              "RCMC Registration",
+              "WB RERA Registration",
+              "12A and 80G Registration",
+              "12A Registration",
+              "80G Registration",
+              "Darpan Registration",
+              "Udyam Registration",
+              "Digital Signature",
+              "Shop and Establishment Act Registration",
+              "Drug License",
+              "FCRA Registration",
+              "Fire License",
+              "EPR Certficate"
+            ],
+            // GST
+            [
+              "GST Registration",
+              "GST Return Filing",
+              "GST Annual Return Filing (GSTR - 9)",
+              "GST LUT Form",
+              "GST Tax Notice",
+              "GST Amendment",
+              "GST Revocation",
+              "GSTR-10"
+            ],
+            // MCA (already set previously)
+            [
+              "Company Compliance",
+              "LLP Compliance",
+              "OPC Compliance",
+              "Name Change - Company",
+              "Company Registered Office Change",
+              "DIN eKYC Filing",
+              "DIN Reactivation",
+              "Director Change",
+              "Remove Director",
+              "Appointment of Auditor",
+              "DPT-3 Filing",
+              "LLP Form 11 Filing",
+              "Dormant Status Filing",
+              "MOA Amendment",
+              "AOA Amendment",
+              "Authorized Capital Increase",
+              "Share Transfer",
+              "Demat of Shares",
+              "Winding Up - LLP",
+              "Winding Up - Company"
+            ],
+            // Compliance
+            [
+              "FSSAI Renewal",
+              "FSSAI Return Filing",
+              "HR & Payroll Services",
+              "PF Return Filing",
+              "ESI Return Filing",
+              "Professional Tax Return Filing",
+              "Partnership Compliance",
+              "Proprietorship Compliance",
+              "Book-keeping"
+            ],
+            // Income Tax
+            [
+              "ITR-1 Return Filing",
+              "ITR-2 Return Filing",
+              "ITR-3 Return Filing",
+              "ITR-4 Return Filing",
+              "ITR-5 Return Filing",
+              "ITR-6 Return Filing",
+              "ITR-7 Return Filing",
+              "TDS Return Filing",
+              "Income Tax Notice",
+              "TAN Registration",
+              "15CA & 15CB Filing"
+            ],
+            // About Us (default)
+            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
+          ]}
+        />
+      </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Progress Bar */}
       <div 
         style={{
           position: 'fixed',
-          top: 0,
+          top: 30,
           left: 0,
           width: '100%',
           height: '4px',
@@ -191,7 +343,7 @@ const PrivateLimitedCompany: React.FC = () => {
           <ModernNavBody>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="#signin">Signin</ModernNavbarButton>
+            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
           </ModernNavBody>
 
           <ModernMobileNav>
@@ -275,6 +427,7 @@ const PrivateLimitedCompany: React.FC = () => {
         <ModernFooter/>
       </main>
     </div>
+    </>
   );
 };
 
