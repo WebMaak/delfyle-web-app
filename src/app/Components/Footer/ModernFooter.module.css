@@ -281,6 +281,12 @@
     color: #fff;
 }
 
+.webmaakLink {
+    color: #fff;
+    text-decoration: none;
+}
+
+
 /* Responsive styles */
 @media (max-width: 1200px) {
     .linksSection {

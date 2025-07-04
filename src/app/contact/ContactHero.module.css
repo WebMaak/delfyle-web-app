@@ -377,3 +377,42 @@
   background-clip: text;
   text-fill-color: transparent;
 }
+
+
+.contactNumbers {
+  font-weight: 500;
+  font-size: 18px;
+  color: #222;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.seprator1 {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.seprator2 {
+  color: #64748b;
+  font-weight: 400;
+  display: none;
+}
+
+
+@media (max-width: 425px) {
+  .contactNumbers {
+    flex-direction: column !important;
+    gap: 0 !important;
+    align-items: center !important;
+  }
+
+  .seprator1 {
+    display: none;
+  }
+  
+  .seprator2 {
+    display: block;
+    margin: -8px 0;
+  }
+}

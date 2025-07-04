@@ -160,7 +160,7 @@ const ModernFooter = () => {
 
 
                 <div className={styles.legalSection}>
-                    <p className={styles.copyright}>©2025 Delfyle, All rights reserved. Designed & Developed by <a href="https://www.linkedin.com/in/tuhel-rana-0000000000000000000000000000000000000000/">WebMaak</a></p>
+                    <p className={styles.copyright}>©2025 Delfyle, All rights reserved. Crafted by <a href="https://wa.me/918759475316" className={styles.webmaakLink}>WebMaak</a></p>
                     <div className={styles.legalLinks}>
                         <a href="#">Privacy Policy</a>
                         <a href="#">Terms of Service</a>

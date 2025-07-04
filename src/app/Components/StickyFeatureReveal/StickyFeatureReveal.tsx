@@ -6,15 +6,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import styles from './StickyFeatureReveal.module.css';
 import Image from 'next/image';
+import { FaCogs, FaUserTie, FaMapMarkedAlt, FaLock, FaLaptopCode } from 'react-icons/fa';
+import Player from 'lottie-react';
+import animationData from '@/../public/animation/FiIEpG9skl.json';
+import React from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
-  { icon: '', title: 'End-to-End Services', desc: 'From company setup to compliance. Comprehensive solutions that cater to every stage of your needs, ensuring seamless execution and timely delivery.' },
-  { icon: '', title: 'Expert Team', desc: 'Chartered Accountants, CS, Lawyers and Legal Experts. Highly skilled and experienced professionals dedicated to providing expert guidance and support to drive your goals forward.' },
-  { icon: '', title: 'Pan-India Presence', desc: 'Remote and city-based operations. A widespread network of offices and partners that enables us to serve customers across the country, providing localized support and expertise.' },
-  { icon: '', title: 'Secure & Confidential', desc: 'Fully compliant with data protection norms. Robust measures in place to safeguard your data and maintain confidentiality, ensuring your trust and peace of mind with our services.' },
-  { icon: '', title: 'Tech-Enabled Process', desc: 'Seamless, paperless workflows. Leveraging cutting-edge technology to streamline our processes, enhance efficiency, and provide real-time insights to optimize your experience.' },
+  { icon: <FaCogs />, title: 'End-to-End Services', desc: 'From company setup to compliance. Comprehensive solutions that cater to every stage of your needs, ensuring seamless execution and timely delivery.' },
+  { icon: <FaUserTie />, title: 'Expert Team', desc: 'Chartered Accountants, CS, Lawyers and Legal Experts. Highly skilled and experienced professionals dedicated to providing expert guidance and support to drive your goals forward.' },
+  { icon: <FaMapMarkedAlt />, title: 'Pan-India Presence', desc: 'Remote and city-based operations. A widespread network of offices and partners that enables us to serve customers across the country, providing localized support and expertise.' },
+  { icon: <FaLock />, title: 'Secure & Confidential', desc: 'Fully compliant with data protection norms. Robust measures in place to safeguard your data and maintain confidentiality, ensuring your trust and peace of mind with our services.' },
+  { icon: <FaLaptopCode />, title: 'Tech-Enabled Process', desc: 'Seamless, paperless workflows. Leveraging cutting-edge technology to streamline our processes, enhance efficiency, and provide real-time insights to optimize your experience.' },
 ];
 
 const StickyFeatureReveal = () => {
@@ -88,13 +92,7 @@ const StickyFeatureReveal = () => {
           >
             <div className={styles.featureInner}>
               <div className={styles.featureLogo}>
-                <span style={{
-                  display: 'inline-block',
-                  width: '2.5rem',
-                  height: '2.5rem',
-                  borderRadius: '50%',
-                  background: 'rgba(180, 0, 104, 0.8)',
-                }} />
+                {React.cloneElement(feature.icon, { style: { fontSize: '2.5rem', color: '#BE0061', } })}
               </div>
               <div className={styles.featureContent}>
                 <h3 className={styles.featureTitle}>{feature.title}</h3>
@@ -107,24 +105,14 @@ const StickyFeatureReveal = () => {
 
       {/* Right: Pinned Block (with GSAP) */}
       <div className={styles.rightCol} ref={pinRef}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className={styles.pinnedBlock}
-          >
-            <Image
-              src={`/images/${activeIndex}.png`}
-              className={styles.pinnedImage}
-              alt="Sticky Feature Reveal"
-              width={664}
-              height={450}
-            />
-          </motion.div>
-        </AnimatePresence>
+        <div className={styles.pinnedBlock}>
+          <Player
+            autoplay
+            loop
+            animationData={animationData}
+            style={{ width: 500, height: 380 }}
+          />
+        </div>
       </div>
     </div>
     </>

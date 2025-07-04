@@ -628,9 +628,13 @@ export default function ToggleNav({
           <div className={styles.subMenu}>
             <button
               className={styles.backButton}
-              onClick={() => setActiveMenu("main")}
             >
-              <img src="/gif/back-arrow.gif" alt="Back" style={{ height: 24, width: 24, transform: 'rotate(90deg)', filter: 'brightness(0.85) saturate(1.2) sepia(0.7) hue-rotate(-15deg)' }} />
+              <img 
+                src="/gif/back-arrow.gif" 
+                alt="Back" 
+                style={{ height: 24, width: 24, transform: 'rotate(90deg)', filter: 'brightness(0.85) saturate(1.2) sepia(0.7) hue-rotate(-15deg)' }} 
+                onClick={() => setActiveMenu("main")}
+              />
             </button>
             <div className={styles.scrollWrapper}>
               <div className={styles.subOptions}>

@@ -295,7 +295,7 @@ export default function ContactPage() {
                   <FiMapPin size={40} color="#b40068" style={{ flexShrink: 0 }} />
                   <div>
                     <div style={{ color: '#64748b', fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Location</div>
-                    <a href="https://maps.google.com/?q=Draupadi+Mansion,+11,+Brabourne+Rd,+near+Tea+Board+of+India,+Murgighata,+B.B.D.+Bagh,+Kolkata,+West+Bengal+700001" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 700, fontSize: 18, color: '#222', whiteSpace: 'nowrap' }}>
+                    <a href="https://maps.google.com/?q=Draupadi+Mansion,+11,+Brabourne+Rd,+near+Tea+Board+of+India,+Murgighata,+B.B.D.+Bagh,+Kolkata,+West+Bengal+700001" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 500, fontSize: 18, color: '#222' }}>
                       Draupadi Mansion, 11, Brabourne Rd, near Tea Board of India, Murgighata, B.B.D. Bagh, Kolkata, West Bengal 700001
                     </a>
                   </div>
@@ -304,7 +304,7 @@ export default function ContactPage() {
                   <FiMail size={40} color="#b40068" style={{ flexShrink: 0 }} />
                   <div>
                     <div style={{ color: '#64748b', fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Email</div>
-                    <a href="mailto:delfylesales@gmail.com" style={{ fontWeight: 700, fontSize: 18, color: '#222' }}>delfylesales@gmail.com</a>
+                    <a href="mailto:delfylesales@gmail.com" style={{ fontWeight: 500, fontSize: 18, color: '#222' }}>delfylesales@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -313,10 +313,11 @@ export default function ContactPage() {
                   <FiPhone size={40} color="#b40068" style={{ flexShrink: 0 }} />
                   <div>
                     <div style={{ color: '#64748b', fontSize: 14, fontWeight: 600, marginBottom: 2 }}>Phone</div>
-                    <div style={{ fontWeight: 700, fontSize: 18, color: '#222', display: 'flex', flexDirection: 'row', gap: 16 }} className="contact-numbers">
-                      <a href="tel:8697603824" style={{ color: '#222' }}>86976 03824</a>
-                      <span style={{ color: '#64748b', fontWeight: 400 }}>|</span>
-                      <a href="tel:7439587419" style={{ color: '#222' }}>74395 87419</a>
+                    <div style={{ fontWeight: 500, fontSize: 18, color: '#222', display: 'flex', flexDirection: 'row', gap: 16 }} className={ContactHeroStyles.contactNumbers}>
+                      <a href="tel:8697603824" style={{ color: '#222' }}>+91 8697603824</a>
+                      <span className={ContactHeroStyles.seprator1} >|</span>
+                      <span className={ContactHeroStyles.seprator2} >—</span>
+                      <a href="tel:7439587419" style={{ color: '#222' }}>+91 7439587419</a>
                     </div>
                   </div>
                 </div>
@@ -324,10 +325,11 @@ export default function ContactPage() {
                   <FiMessageCircle size={40} color="#b40068" style={{ flexShrink: 0 }} />
                   <div>
                     <div style={{ color: '#64748b', fontSize: 14, fontWeight: 600, marginBottom: 2 }}>WhatsApp Chat</div>
-                    <div style={{ fontWeight: 700, fontSize: 18, color: '#222', display: 'flex', flexDirection: 'row', gap: 16 }} className="contact-numbers">
-                      <a href="https://wa.me/918697603824" target="_blank" rel="noopener noreferrer" style={{ color: '#222' }}>86976 03824</a>
-                      <span style={{ color: '#64748b', fontWeight: 400 }}>|</span>
-                      <a href="https://wa.me/917439587419" target="_blank" rel="noopener noreferrer" style={{ color: '#222' }}>74395 87419</a>
+                    <div className={ContactHeroStyles.contactNumbers}>
+                      <a href="https://wa.me/918697603824" target="_blank" rel="noopener noreferrer" style={{ color: '#222' }}>+91 8697603824</a>
+                      <span className={ContactHeroStyles.seprator1} >|</span>
+                      <span className={ContactHeroStyles.seprator2} >—</span>
+                      <a href="https://wa.me/917439587419" target="_blank" rel="noopener noreferrer" style={{ color: '#222' }}>+91 7439587419</a>
                     </div>
                   </div>
                 </div>
