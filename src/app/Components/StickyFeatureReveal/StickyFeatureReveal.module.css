@@ -256,7 +256,7 @@
 /* Mobile devices (phones) */
 @media (max-width: 767px) {
     .stickyFeatureSection {
-        padding: 2rem 1rem 0;
+        padding: 2rem 2rem 0;
         flex-direction: column;
     }
 
@@ -306,6 +306,7 @@
 
     .subHeading {
         font-size: 1rem;
+        padding: 0 2rem;
     }
 
 } 
