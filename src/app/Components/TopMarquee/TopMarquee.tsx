@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TopMarquee.module.css";
 
-type TopMarqueeProps = {
-  text?: string;
-};
+const TopMarquee: React.FC = () => {
+  const [announcement, setAnnouncement] = useState<string>("");
 
-const defaultText =
-  "ITR Filing for AY 2025–26 is Now Open! File your Income Tax Return on time and stay compliant. Our experts ensure accurate, hassle-free filing with personalized support. Get Started Today → ";
+  useEffect(() => {
+    fetch('/api/announcement')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.announcement && data.announcement.text) {
+          setAnnouncement(data.announcement.text);
+        } else {
+          setAnnouncement("");
+        }
+      });
+  }, []);
 
-const TopMarquee: React.FC<TopMarqueeProps> = ({ text = defaultText }) => {
+  const marqueeText = announcement || "No Announcement at this time.";
+
   return (
     <div className={styles.marqueeWrapper} aria-label="Scrolling announcement" onClick={() => {
       window.open('https://wa.me/+918697603824', '_blank');
     }}>
       <div className={styles.marquee}>
-        <span className={styles.marqueeText}>{text}<span className={styles.dot} aria-hidden="true"></span></span>
-        <span className={styles.marqueeText}>{text}<span className={styles.dot} aria-hidden="true"></span></span>
+        <span className={styles.marqueeText}>{marqueeText}<span className={styles.dot} aria-hidden="true"></span></span>
+        <span className={styles.marqueeText}>{marqueeText}<span className={styles.dot} aria-hidden="true"></span></span>
       </div>
     </div>
   );
 };
 
-export default TopMarquee; 
+export default TopMarquee;

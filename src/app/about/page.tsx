@@ -22,9 +22,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import ToggleNav from "../Components/ToggleNav/toggleNav";
 import TopMarquee from "../Components/TopMarquee/TopMarquee";
+import Button from "../Components/Button/Button";
+import AuthManager from "../Components/admin/AuthManager";
+import { useUser } from '../../hooks/useUser';
 
 const AboutPage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const smootherRef = useRef<any>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
@@ -245,13 +250,18 @@ const AboutPage = () => {
           color: 'rgba(66, 66, 66, 0.95)',
         }}
       >
-        <ModernNavbar navLinkColor="#111827">
-          <ModernNavBody>
+        <ModernNavbar user={user} navLinkColor="#111827">
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems 
               items={navItems} 
             />
+            <div className="modernNavActions">
             <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
 
           <ModernMobileNav>
@@ -279,6 +289,9 @@ const AboutPage = () => {
                 </div>
               ))}
               <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
+                Sign In
+              </ModernNavbarButton>
             </ModernMobileNavMenu>
           </ModernMobileNav>
         </ModernNavbar>
@@ -292,6 +305,12 @@ const AboutPage = () => {
         {/* Footer */}
         <ModernFooter/>
       </div>
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
     </main>
     </>
   );

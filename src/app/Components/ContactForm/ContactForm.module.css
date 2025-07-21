@@ -64,6 +64,44 @@ textarea.input::-webkit-scrollbar {
   display: none;
 }
 
+.countryDropdown {
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+  min-width: 90px;
+  max-width: 120px;
+  box-shadow: 0 2px 8px rgba(58,79,255,0.04);
+  outline: none;
+  transition: border 0.2s;
+  appearance: none;
+  position: relative;
+  margin-right: 0.5rem;
+}
+.countryDropdown:focus {
+  border-color: #3a4fff;
+}
+.countryDropdownMenu {
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  background: #fff;
+}
+.countryDropdownOption {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.05rem;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.countryDropdownOption:hover, .countryDropdownOption.selected {
+  background: #f0f4ff;
+  color: #3a4fff;
+}
+
 /* Responsive Design */
 @media (max-width: 900px) {
   .formCard {

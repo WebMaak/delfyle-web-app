@@ -6,7 +6,7 @@ import Arrow from "../../../../public/images/arrow.svg";
 
 interface ButtonProps {
   text: string;
-  type: "whiteButtonNoBackground" | "whiteButtonWithBackground" | "smallWhatWeDoButton";
+  type: "whiteButtonNoBackground" | "whiteButtonWithBackground" | "smallWhatWeDoButton" | "secondary";
   onClick?: () => void;
   href?: string;
 }
@@ -16,6 +16,8 @@ const Button = ({ text, type, onClick, href }: ButtonProps) => {
     ? styles.whiteButtonNoBackground 
     : type === "whiteButtonWithBackground"
     ? styles.whiteButtonWithBackground
+    : type === "secondary"
+    ? styles.signIn
     : styles.smallWhatWeDoButton;
 
   const buttonContent = (

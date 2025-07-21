@@ -28,12 +28,17 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import ToggleNav from '../../../Components/ToggleNav/toggleNav';
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const PrivateLimitedCompany: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -204,11 +209,16 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
+            <div className="modernNavActions">
             <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
 
           <ModernMobileNav>
@@ -235,6 +245,9 @@ const PrivateLimitedCompany: React.FC = () => {
                 </div>
               ))}
               <ModernNavbarButton href="/contact" className="w-full mt-4">Contact</ModernNavbarButton>
+              <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
+                Sign In
+              </ModernNavbarButton>
             </ModernMobileNavMenu>
           </ModernMobileNav>
         </ModernNavbar>
@@ -412,6 +425,12 @@ const PrivateLimitedCompany: React.FC = () => {
         {/* Footer */}
         <ModernFooter/>
       </main>
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
     </div>
     </>
   );

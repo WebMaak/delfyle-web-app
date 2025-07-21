@@ -27,9 +27,48 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import BigLogoMarquee from "./Components/BigLogoMarquee/BigLogoMarquee";
 import ToggleNav from "./Components/ToggleNav/toggleNav";
 import TopMarquee from "./Components/TopMarquee/TopMarquee";
+import Button from "./Components/Button/Button";
+import AuthManager from "./Components/admin/AuthManager";
+import Cookies from 'js-cookie';
+import { useUser } from '../hooks/useUser';
+import CookiePopupStyles from "./Components/CookiePopup.module.css";
+
+function CookiePopup() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (!sessionStorage.getItem('cookiePopupDismissed')) {
+        setVisible(true);
+      }
+    }
+  }, []);
+  const handleClose = () => {
+    setVisible(false);
+    sessionStorage.setItem('cookiePopupDismissed', 'true');
+  };
+  if (!visible) return null;
+  return (
+    <div className={CookiePopupStyles.popup}>
+      <span className={CookiePopupStyles.icon}>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" fill="#fff0f6" stroke="#b40068" strokeWidth="2"/>
+          <circle cx="12" cy="12" r="4" fill="#b40068" />
+          <circle cx="16.5" cy="8.5" r="1.5" fill="#b40068" />
+          <circle cx="7.5" cy="10.5" r="1" fill="#b40068" />
+        </svg>
+      </span>
+      <span className={CookiePopupStyles.text}>
+        <strong style={{color:'#fff'}}>We use cookies</strong> to enhance your experience, analyze site usage, and assist in our marketing efforts. By continuing to use our site, you consent to our use of cookies. <a href="/privacy" style={{color:'#fff',textDecoration:'underline'}}>Learn more</a>.
+      </span>
+      <button onClick={handleClose} className={CookiePopupStyles.okButton}>OK</button>
+    </div>
+  );
+}
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const smootherRef = useRef<any>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
@@ -94,6 +133,7 @@ export default function Home() {
 
   return (
     <>
+      <CookiePopup />
       <TopMarquee />
       <main>
         {/* ToggleNav for tablet and mobile only - moved above progress bar */}
@@ -246,11 +286,16 @@ export default function Home() {
           />
         </div>
         <div className="fixed inset-x-0 top-0 z-50">
-          <ModernNavbar>
-            <ModernNavBody>
+          <ModernNavbar user={user}>
+            <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
               <ModernNavbarLogo />
               <ModernNavItems items={navItems} />
-              <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              <div className="modernNavActions">
+                <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+                {loading ? null : !user && (
+                  <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+                )}
+              </div>
             </ModernNavBody>
 
             <ModernMobileNav>
@@ -279,6 +324,9 @@ export default function Home() {
                 <ModernNavbarButton href="/contact" className="w-full mt-4">
                   Contact Us
                 </ModernNavbarButton>
+                <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
+                  Sign In
+                </ModernNavbarButton>
               </ModernMobileNavMenu>
             </ModernMobileNav>
           </ModernNavbar>
@@ -287,6 +335,12 @@ export default function Home() {
             <ToggleNav mainOptions={navItems.map(item => item.name)} />
           </div>
         </div>
+        <AuthManager 
+          isOpen={!!panelType} 
+          onClose={() => setPanelType(null)} 
+          onUserChange={setUser} 
+          panelType={panelType} 
+        />
         <div id="smooth-content">
           <Hero />
           <BigLogoMarquee logos={[

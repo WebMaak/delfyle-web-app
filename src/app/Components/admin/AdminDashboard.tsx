@@ -1,0 +1,2732 @@
+"use client"
+
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import AuthManager from "./AuthManager";
+import styles from "./AdminDashboard.module.css";
+import UserManagement from "./UserManagement";
+import DashboardPanel from "./DashboardPanel";
+import BOEUser from "../../../models/boe/BOEUser"; // Only if needed for SSR, otherwise use fetch
+import signUpStyles from "./SignUpPanel.module.css";
+
+// Import the Lead interface from the schema
+interface ILead {
+  _id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+  service: string[]; // Changed to array
+  assignedBo: "none" | "BOE1" | "BOE2" | "BOE3" | "BOE4" | "BOE5";
+  assignedTo?: string | null; // Allow null for unassigned
+  status: "pending" | "assigned" | "completed" | "in progress";
+  trash?: boolean;
+  createdAt: string;
+  client?: { // Making client optional as it's not in the DB schema
+    name: string;
+    initials: string;
+  };
+}
+
+type User = {
+  _id: string;
+  userName: string; // Changed from 'name'
+  username?: string;
+  email: string;
+  phone: string;
+  status: "Active" | "Inactive" | "Pending" | "Suspended" | "Verified" | "active" | "inactive" | "suspended" | "blocked"; // Added backend values
+  verified: boolean; // Corrected from isVerified
+  isVerified?: boolean; // Added
+  createdAt: string; // Changed from 'created'
+  requestStatus?: "Pending" | "In Progress" | "Completed" | "pending" | "in progress" | "completed" | "blocked"; // Added
+  trash?: boolean; // Added for filtering
+  profilePicture?: string; // Added for profile picture
+  leadsInitiated?: ILead[]; // Added to hold populated lead data
+  assignedLeads?: string[]; // Added to hold assigned lead IDs
+};
+
+type BackofficeItem = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  assigned: string;
+  status: "Completed" | "In Progress" | "Pending" | "On Hold" | "Cancelled";
+  isVerified: boolean; // Add this line
+  created: string;
+};
+
+type Tab = "Leads" | "Users" | "Backoffice" | "User Profile" | "Lead Details" | "Trashed Leads" | "Trashed Users" | "Admin Management" | "Announcement";
+
+// Function to get random BOE assignment
+const getRandomBOE = () => {
+  const boeOptions = ['BOE1', 'BOE2', 'BOE3', 'BOE4', 'BOE5'];
+  return boeOptions[Math.floor(Math.random() * boeOptions.length)];
+};
+
+function useLogoutWarning() {
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Try to detect refresh (not perfect, but works in most browsers)
+      const navEntries = performance.getEntriesByType('navigation');
+      const navType = (navEntries[0] as PerformanceNavigationTiming)?.type || (performance as any).navigation?.type;
+      if (navType === 'reload') {
+        // Allow refresh without warning
+        return;
+      }
+      e.preventDefault();
+      // Most browsers ignore custom messages, but you can set one for legacy support:
+      e.returnValue = 'Make sure to LOGOUT for security reasons.';
+      return 'Make sure to LOGOUT for security reasons.';
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+}
+
+export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState<Tab>("Leads");
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterStatus, setFilterStatus] = useState<string>("");
+  const [filterAssigned, setFilterAssigned] = useState<string>("");
+  const [showActionMenu, setShowActionMenu] = useState<string | null>(null);
+  const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+  const [selectedBackoffice, setSelectedBackoffice] = useState<string[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
+  const [showMessagePopup, setShowMessagePopup] = useState<string | null>(null);
+  const [showAssignedDropdown, setShowAssignedDropdown] = useState<string | null>(null);
+  const [showStatusDropdown, setShowStatusDropdown] = useState<string | null>(null);
+  const [showUserStatusDropdown, setShowUserStatusDropdown] = useState<string | null>(null);
+  const [showRequestStatusDropdown, setShowRequestStatusDropdown] = useState<string | null>(null);
+  const [showBulkActions, setShowBulkActions] = useState(false);
+  const [leadAssignments, setLeadAssignments] = useState<{[key: string]: string}>({});
+  const [leadStatuses, setLeadStatuses] = useState<{[key: string]: string}>({});
+  const [userStatuses, setUserStatuses] = useState<{[key: string]: string}>({});
+  const [requestStatuses, setRequestStatuses] = useState<{[key: string]: string}>({});
+  const [dropdownPositions, setDropdownPositions] = useState<{[key: string]: 'up' | 'down'}>({});
+  const [showUserProfile, setShowUserProfile] = useState(false);
+  const [profileStatus, setProfileStatus] = useState('Active');
+  const [profileRequestStatus, setProfileRequestStatus] = useState('Pending');
+  const [leadDetailsStatus, setLeadDetailsStatus] = useState('pending');
+  const [leadDetailsAssigned, setLeadDetailsAssigned] = useState('BOE1');
+  const [boeUsers, setBoeUsers] = useState<any[]>([]);
+  const [showAddBOEForm, setShowAddBOEForm] = useState(false);
+  const [boeForm, setBoeForm] = useState({ username: '', email: '', password: '' });
+  const [boeFormError, setBoeFormError] = useState('');
+  const [boeFormLoading, setBoeFormLoading] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  const [leads, setLeads] = useState<ILead[]>([]);
+  const [selectedLeadForDetails, setSelectedLeadForDetails] = useState<ILead | null>(null);
+  const [selectedUserForDetails, setSelectedUserForDetails] = useState<User | null>(null);
+  const [leadsCurrentPage, setLeadsCurrentPage] = useState(1);
+  const [leadsTotalPages, setLeadsTotalPages] = useState(1);
+  const [usersCurrentPage, setUsersCurrentPage] = useState(1);
+  const [usersTotalPages, setUsersTotalPages] = useState(1);
+  const [selectAllUsers, setSelectAllUsers] = useState(false);
+  const [userFilterStatus, setUserFilterStatus] = useState<string>("");
+  const [userFilterRequestStatus, setUserFilterRequestStatus] = useState<string>("");
+  const [userSearchQuery, setUserSearchQuery] = useState("");
+  const [adminUsers, setAdminUsers] = useState<any[]>([]);
+  const [showAddAdminForm, setShowAddAdminForm] = useState(false);
+  const [adminForm, setAdminForm] = useState({ username: '', email: '', password: '' });
+  const [adminFormError, setAdminFormError] = useState('');
+  const [adminFormLoading, setAdminFormLoading] = useState(false);
+  const [currentAdminId, setCurrentAdminId] = useState<string | null>(null);
+  const [currentAdmin, setCurrentAdmin] = useState<{ username: string; email: string } | null>(null);
+  const [announcement, setAnnouncement] = useState<string>("");
+  const [announcementDraft, setAnnouncementDraft] = useState<string>("");
+  const [showAnnouncementSaved, setShowAnnouncementSaved] = useState(false);
+  const [copiedCell, setCopiedCell] = useState<{ id: string; field: string } | null>(null);
+  const [showMobileOverlay, setShowMobileOverlay] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    fetchLeads(1); // Fetch all leads initially
+    fetchUsers(1); // Fetch all users initially
+    fetch('/api/boe/list')
+      .then(res => res.json())
+      .then(data => {
+        // Map username to userName for BOE users to match frontend expectations
+        const mappedUsers = (data.users || []).map((user: any) => ({
+          ...user,
+          userName: user.userName || user.username || 'Unknown User'
+        }));
+        setBoeUsers(mappedUsers);
+      });
+
+    const checkMobile = () => {
+      const isMobile = window.innerWidth < 1024;
+      setShowMobileOverlay(isMobile);
+      setIsMobile(isMobile);
+    };
+    window.addEventListener('resize', checkMobile);
+    checkMobile();
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (selectedUserForDetails) {
+      const updatedUser = users.find(u => u._id === selectedUserForDetails._id);
+      if (updatedUser && JSON.stringify(updatedUser) !== JSON.stringify(selectedUserForDetails)) {
+        setSelectedUserForDetails(updatedUser);
+      }
+    }
+  }, [users, selectedUserForDetails]);
+
+  useEffect(() => {
+    fetchLeads(leadsCurrentPage);
+  }, [leadsCurrentPage]);
+  
+  useEffect(() => {
+    fetchUsers(usersCurrentPage);
+  }, [usersCurrentPage]);
+
+  useEffect(() => {
+    fetchAdminUsers();
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/admin/me')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.user && data.user._id) {
+          setCurrentAdminId(data.user._id);
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/admin/me')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.user) {
+          setCurrentAdmin({ username: data.user.username, email: data.user.email });
+        }
+      });
+  }, []);
+  
+  useEffect(() => {
+    fetch('/api/announcement')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.announcement) {
+          setAnnouncement(data.announcement.text);
+          setAnnouncementDraft(data.announcement.text);
+        } else {
+          setAnnouncement("");
+          setAnnouncementDraft("");
+        }
+      });
+  }, []);
+
+  const fetchLeads = (page: number) => {
+    fetch(`/api/lead/list?page=${page}&limit=100&include_trashed=true`) // Fetch all leads, including trashed ones
+      .then(res => res.json())
+      .then(data => {
+        const leadsData = data.leads || [];
+        setLeads(leadsData);
+        setLeadsTotalPages(data.totalPages || 1);
+      });
+  };
+
+  const fetchUsers = (page: number) => {
+    fetch(`/api/user/list?page=${page}&limit=100&include_trashed=true`) // Fetch all users, including trashed ones
+      .then(res => res.json())
+      .then(data => {
+        const usersData = data.users || [];
+        setUsers(usersData);
+        setUsersTotalPages(data.totalPages || 1);
+      });
+  };
+
+  const fetchAdminUsers = () => {
+    fetch('/api/admin/list')
+      .then(res => res.json())
+      .then(data => setAdminUsers(data.admins || []));
+  };
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+
+      // Check if click is outside dropdown areas
+      if (!target.closest('.dropdown-container')) {
+        setShowAssignedDropdown(null);
+        setShowStatusDropdown(null);
+        setShowUserStatusDropdown(null);
+        setShowRequestStatusDropdown(null);
+        setShowActionMenu(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useLogoutWarning();
+
+  if (!mounted) {
+    return null;
+  }
+
+  const handleExport = (type: 'leads' | 'users') => {
+    if (type === 'leads') {
+      const leadsToExport = leads.filter(lead => !lead.trash);
+      if (leadsToExport.length === 0) {
+        alert("No active leads to export.");
+        return;
+      }
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Lead ID,Full Name,Email,Phone Number,Message,Service,Assigned To,Status,Created At\r\n";
+      leadsToExport.forEach(lead => {
+        const assignedUser = boeUsers.find(u => u._id === lead.assignedTo)?.userName || 'None';
+        const service = Array.isArray(lead.service) ? lead.service.join('; ') : lead.service;
+        csvContent += `${lead._id},${lead.fullName},${lead.email},${lead.phoneNumber},"${lead.message}","${service}",${assignedUser},${lead.status},${formatDate(lead.createdAt)}\r\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "active_leads.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else if (type === 'users') {
+      const usersToExport = users.filter(user => !user.trash);
+      if (usersToExport.length === 0) {
+        alert("No active users to export.");
+        return;
+      }
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Verified,User ID,Name,Email,Status,Request Status,Total Leads,Created At\r\n";
+      usersToExport.forEach(user => {
+        // Request Status: Service:Status for each lead
+        let requestStatus = '';
+        if (user.leadsInitiated && user.leadsInitiated.length > 0) {
+          requestStatus = user.leadsInitiated.map(l => {
+            let service = '';
+            if (Array.isArray(l.service)) {
+              service = l.service.length > 0 ? l.service.join('; ') : '';
+            } else if (typeof l.service === 'string') {
+              if ((l.service as string).trim() !== '') {
+                service = l.service as string;
+              }
+            }
+            if (!service) {
+              service = l._id || 'Unknown';
+            }
+            return `${service}:${l.status}`;
+          }).join(' | ');
+        }
+        csvContent += `${user.verified ? 'Yes' : 'No'},${user._id},${user.userName},${user.email},${user.status},"${requestStatus}",${user.leadsInitiated ? user.leadsInitiated.length : 0},${formatDate(user.createdAt)}\r\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "active_users.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const handleBulkAction = async (action: 'trash' | 'download' | 'restore' | 'deletePermanently', type: 'leads' | 'users') => {
+    const selectedIds = type === 'leads' ? selectedLeads : selectedUsers;
+    if (selectedIds.length === 0) {
+      alert(`Please select at least one ${type === 'leads' ? 'lead' : 'user'}.`);
+      return;
+    }
+  
+    if (type === 'leads') {
+    if (action === 'trash') {
+      try {
+        const res = await fetch('/api/lead/bulk-update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ leadIds: selectedIds, action: 'trash' }),
+        });
+        if (res.ok) {
+            setLeads(prev => prev.map(l => selectedIds.includes(l._id) ? { ...l, trash: true } : l));
+            setSelectedLeads([]);
+        }
+      } catch (error) {
+          console.error('Failed to bulk trash leads', error);
+      }
+      } else if (action === 'restore') {
+        try {
+          const res = await fetch('/api/lead/bulk-update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ leadIds: selectedIds, updates: { trash: false } }),
+          });
+          if (res.ok) {
+            setLeads(prev => prev.map(l => selectedIds.includes(l._id) ? { ...l, trash: false } : l));
+            setSelectedLeads([]);
+          }
+        } catch (error) {
+          console.error(`Failed to bulk ${action} leads`, error);
+        }
+      } else if (action === 'deletePermanently') {
+        try {
+          const res = await fetch('/api/lead/bulk-update', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ leadIds: selectedIds }),
+          });
+          if (res.ok) {
+            setLeads(prev => prev.filter(l => !selectedIds.includes(l._id)));
+            setSelectedLeads([]);
+          }
+        } catch (error) {
+          console.error('Failed to bulk delete leads permanently', error);
+        }
+      } else if (action === 'download') {
+        const leadsToDownload = leads.filter(lead => selectedIds.includes(lead._id));
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Lead ID,Full Name,Email,Phone Number,Message,Service,Assigned To,Status,Created At\r\n";
+      leadsToDownload.forEach(lead => {
+        const assignedUser = boeUsers.find(u => u._id === lead.assignedTo)?.userName || 'None';
+        const service = Array.isArray(lead.service) ? lead.service.join('; ') : lead.service;
+        csvContent += `${lead._id},${lead.fullName},${lead.email},${lead.phoneNumber},"${lead.message}","${service}",${assignedUser},${lead.status},${formatDate(lead.createdAt)}\r\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "leads_export.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      }
+    } else if (type === 'users') {
+      if (action === 'trash') {
+        try {
+          const res = await fetch('/api/user/bulk-update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userIds: selectedIds, action: 'trash' }),
+          });
+          if (res.ok) {
+            setUsers(prev => prev.map(u => selectedIds.includes(u._id) ? { ...u, trash: true } : u));
+            setSelectedUsers([]);
+          }
+        } catch (error) {
+          console.error('Failed to bulk trash users', error);
+        }
+      } else if (action === 'restore') {
+        try {
+          const res = await fetch('/api/user/bulk-update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userIds: selectedIds, updates: { trash: false } }),
+          });
+          if (res.ok) {
+            setUsers(prev => prev.map(u => selectedIds.includes(u._id) ? { ...u, trash: false } : u));
+            setSelectedUsers([]);
+          }
+        } catch (error) {
+          console.error(`Failed to bulk ${action} users`, error);
+        }
+      } else if (action === 'deletePermanently') {
+        try {
+          const res = await fetch('/api/user/permanent-delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userIds: selectedIds }),
+          });
+          if (res.ok) {
+            setUsers(prev => prev.filter(u => !selectedIds.includes(u._id)));
+            setSelectedUsers([]);
+          }
+        } catch (error) {
+          console.error('Failed to bulk delete users permanently', error);
+        }
+      } else if (action === 'download') {
+        const usersToDownload = users.filter(user => selectedIds.includes(user._id));
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "Verified,User ID,Name,Email,Status,Request Status,Total Leads,Created At\r\n";
+        usersToDownload.forEach(user => {
+          let requestStatus = '';
+          if (user.leadsInitiated && user.leadsInitiated.length > 0) {
+            requestStatus = user.leadsInitiated.map(l => {
+              let service = '';
+              if (Array.isArray(l.service)) {
+                service = l.service.length > 0 ? l.service.join('; ') : '';
+              } else if (typeof l.service === 'string') {
+                if ((l.service as string).trim() !== '') {
+                  service = l.service as string;
+                }
+              }
+              if (!service) {
+                service = l._id || 'Unknown';
+              }
+              return `${service}:${l.status}`;
+            }).join(' | ');
+          }
+          csvContent += `${user.verified ? 'Yes' : 'No'},${user._id},${user.userName},${user.email},${user.status},"${requestStatus}",${user.leadsInitiated ? user.leadsInitiated.length : 0},${formatDate(user.createdAt)}\r\n`;
+        });
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "users_export.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+    
+    setShowBulkActions(false);
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Customer": return "#10b981";
+      case "Qualified": return "#f59e0b";
+      case "Working": return "#3b82f6";
+      case "Contacted": return "#8b5cf6";
+      case "Proposal Sent": return "#ef4444";
+      case "Active": return "#10b981";
+      case "Verified": return "#059669";
+      case "Inactive": return "#6b7280";
+      case "Pending": return "#ef4444"; // Red for pending
+      case "Suspended": return "#ef4444";
+      case "Completed": return "#10b981"; // Green for completed
+      case "In Progress": return "#f59e0b"; // Yellow for in progress
+      case "On Hold": return "#f59e0b";
+      case "Cancelled": return "#ef4444";
+      case "pending": return "#ef4444"; // Red for pending
+      case "assigned": return "#3b82f6";
+      case "completed": return "#10b981"; // Green for completed
+      case "in progress": return "#f59e0b"; // Yellow for in progress
+      default: return "#6b7280";
+    }
+  };
+
+  const handleActionClick = (leadId: string, action: string) => {
+    console.log(`Action ${action} clicked for lead ${leadId}`);
+    setShowActionMenu(null);
+    // Handle the action logic here
+  };
+
+  const handleSelectAll = (leadsToSelect: ILead[]) => {
+    if (selectAll) {
+      setSelectedLeads([]);
+    } else {
+      setSelectedLeads(leadsToSelect.map(lead => lead._id));
+    }
+    setSelectAll(!selectAll);
+  };
+
+  const handleSelectLead = (leadId: string) => {
+    if (selectedLeads.includes(leadId)) {
+      setSelectedLeads(selectedLeads.filter(id => id !== leadId));
+    } else {
+      setSelectedLeads([...selectedLeads, leadId]);
+    }
+  };
+
+  const handleAssignmentChange = async (leadId: string, assignedToId: string | null) => {
+    // If assignedToId is null, unassign the lead from any BO user
+    const updates: Partial<ILead> = { assignedTo: assignedToId === "" ? null : assignedToId };
+    if (assignedToId) {
+      updates.status = "in progress";
+    }
+
+    try {
+      const res = await fetch('/api/lead/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId, updates }),
+      });
+      if (res.ok) {
+        const updatedLead = await res.json();
+        setLeads(prev => prev.map(l => (l._id === leadId ? updatedLead.lead : l)));
+        setShowAssignedDropdown(null);
+      }
+    } catch (error) {
+      console.error("Failed to update lead assignment", error);
+    }
+  };
+
+  const handleStatusChange = (leadId: string, status: string) => {
+    setLeadStatuses(prev => ({ ...prev, [leadId]: status }));
+    setShowStatusDropdown(null);
+  };
+
+  const handleAssignmentDropdownClick = (e: React.MouseEvent, leadId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowStatusDropdown(null); // Close status dropdown if open
+    setShowAssignedDropdown(showAssignedDropdown === leadId ? null : leadId);
+  };
+
+  const handleStatusDropdownClick = (e: React.MouseEvent, leadId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowAssignedDropdown(null); // Close assigned dropdown if open
+    setShowStatusDropdown(showStatusDropdown === leadId ? null : leadId);
+  };
+
+  const handleAssignmentChangeWithEvent = (e: React.MouseEvent, leadId: string, assignment: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLeadAssignments(prev => ({ ...prev, [leadId]: assignment }));
+    setShowAssignedDropdown(null);
+  };
+
+  const handleStatusChangeWithEvent = (e: React.MouseEvent, leadId: string, status: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLeadStatuses(prev => ({ ...prev, [leadId]: status }));
+    setShowStatusDropdown(null);
+  };
+
+  const handleUserStatusDropdownClick = (e: React.MouseEvent, userId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowRequestStatusDropdown(null); // Close request status dropdown if open
+    setShowUserStatusDropdown(showUserStatusDropdown === userId ? null : userId);
+  };
+
+  const handleRequestStatusDropdownClick = (e: React.MouseEvent, userId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowUserStatusDropdown(null); // Close user status dropdown if open
+    setShowRequestStatusDropdown(showRequestStatusDropdown === userId ? null : userId);
+  };
+
+  const handleUserStatusChangeWithEvent = (e: React.MouseEvent, userId: string, status: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setUserStatuses(prev => ({ ...prev, [userId]: status }));
+    setShowUserStatusDropdown(null);
+  };
+
+  const handleRequestStatusChangeWithEvent = (e: React.MouseEvent, userId: string, status: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setRequestStatuses(prev => ({ ...prev, [userId]: status }));
+    setShowRequestStatusDropdown(null);
+  };
+
+  const handleEmailClick = (email: string) => {
+    window.location.href = `mailto:${email}`;
+  };
+
+  const handlePhoneClick = (phone: string) => {
+    window.location.href = `tel:${phone}`;
+  };
+
+  const updateLead = async (leadId: string, updates: Partial<ILead>) => {
+      try {
+        const res = await fetch('/api/lead/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId, updates }),
+        });
+        if (res.ok) {
+        // Refetch leads to get the latest data
+        fetchLeads(leadsCurrentPage);
+        }
+      } catch (error) {
+      console.error("Failed to update lead", error);
+      }
+  };
+  
+  const handleActionIconClick = async (leadId: string, action: string) => {
+    if (action === 'delete') {
+      updateLead(leadId, { trash: true });
+    } else if (action === 'view') {
+      const leadToView = leads.find(l => l._id === leadId);
+      if (leadToView) {
+        setSelectedLeadForDetails(leadToView);
+        setActiveTab("Lead Details");
+      }
+    } else if (action === 'download') {
+      const leadToDownload = leads.find(l => l._id === leadId);
+      if (leadToDownload) {
+        const csvContent = "data:text/csv;charset=utf-8," 
+          + "FullName,Email,PhoneNumber,Message\n"
+          + `${leadToDownload.fullName},${leadToDownload.email},${leadToDownload.phoneNumber},"${leadToDownload.message}"`;
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `lead_${leadToDownload._id}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+    setShowActionMenu(null);
+  };
+
+  const handleSelectAllUsersClick = (usersToSelect: User[]) => {
+    if (selectAllUsers) {
+      setSelectedUsers([]);
+    } else {
+      setSelectedUsers(usersToSelect.map(user => user._id));
+    }
+    setSelectAllUsers(!selectAllUsers);
+  };
+
+  const handleSelectUser = (userId: string) => {
+    if (selectedUsers.includes(userId)) {
+      setSelectedUsers(selectedUsers.filter(id => id !== userId));
+    } else {
+      setSelectedUsers([...selectedUsers, userId]);
+    }
+  };
+
+  const handleSelectBackoffice = (itemId: string) => {
+    if (selectedBackoffice.includes(itemId)) {
+      setSelectedBackoffice(selectedBackoffice.filter(id => id !== itemId));
+    } else {
+      setSelectedBackoffice([...selectedBackoffice, itemId]);
+    }
+  };
+
+  const updateUser = async (userId: string, updates: Partial<User>) => {
+    try {
+      const res = await fetch('/api/user/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, updates }),
+      });
+
+      if (res.ok) {
+        // Refetch users to get the latest data
+        fetchUsers(usersCurrentPage);
+      } else {
+        console.error('Failed to update user');
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
+  const handleTrashUser = (userId: string) => {
+    updateUser(userId, { trash: true });
+  };
+
+  const handleRestoreUser = (userId: string) => {
+    updateUser(userId, { trash: false });
+  };
+  
+  const handlePermanentDeleteUser = async (userId: string) => {
+    if (!window.confirm("Are you sure you want to permanently delete this user?")) return;
+    try {
+      const res = await fetch('/api/user/permanent-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+      if (res.ok) {
+        setUsers(prev => prev.filter(u => u._id !== userId));
+      } else {
+        console.error("Failed to permanently delete user");
+      }
+    } catch (error) {
+      console.error("Error permanently deleting user:", error);
+    }
+  };
+
+  const handleBlockUser = (userId: string) => {
+    if (window.confirm('Are you sure you want to block this user?')) {
+      updateUser(userId, { status: 'blocked' });
+    }
+  };
+
+  // Helper function to format date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+  const renderLeadsTab = (isTrashed = false) => {
+    const tabLeads = leads.filter(lead => !!lead.trash === isTrashed);
+
+    const stats = {
+      last30Days: tabLeads.filter(l => new Date(l.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+      thisWeek: tabLeads.filter(l => new Date(l.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).length,
+      total: tabLeads.length,
+      pending: tabLeads.filter(l => l.status === 'pending').length,
+      pendingThisWeek: tabLeads.filter(l => l.status === 'pending' && new Date(l.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).length,
+      pendingThisMonth: tabLeads.filter(l => l.status === 'pending' && new Date(l.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+      assigned: tabLeads.filter(l => !!l.assignedTo).length,
+      notAssigned: tabLeads.filter(l => !l.assignedTo).length,
+      completed: tabLeads.filter(l => l.status === 'completed').length,
+      notCompleted: tabLeads.filter(l => l.status !== 'completed').length,
+    };
+
+    return (
+    <div className={styles.leadsContainer}>
+        <div className={styles.leadsHeader} style={isMobile ? { flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' } : {}}>
+        <div className={styles.headerLeft}>
+            <h2>{isTrashed ? 'Trashed Leads' : 'Leads Management'}</h2>
+            <p>{isTrashed ? 'Review and manage trashed leads' : 'Organize leads and track their progress effectively here'}</p>
+        </div>
+        <div className={styles.headerRight}>
+            {!isTrashed && (
+              <button className={styles.exportBtn} onClick={() => handleExport('leads')}>
+            Export All
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7,10 12,15 17,10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </button>
+            )}
+        </div>
+      </div>
+
+        <div className={styles.statsContainer} style={isMobile ? { gridTemplateColumns: '1fr', gap: '1rem' } : {}}>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>LEADS (LAST 30 DAYS)</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#3b82f6' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+            <div className={styles.statMainValue}>{stats.last30Days}</div>
+          <div className={styles.statSubLine}>
+          <div>
+            <span className={styles.statSubLabel}>This Week: </span>
+              <span className={styles.statSubValue}>{stats.thisWeek}</span>
+          </div>
+          <div>
+            <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Total Leads: </span> 
+              <span className={styles.statSubValue}>{stats.total}</span>
+          </div>
+          </div>
+        </div>
+
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>PENDING</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#f59e0b' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
+            </div>
+          </div>
+            <div className={styles.statMainValue}>{stats.pending}</div>
+          <div className={styles.statSubLine}>
+            <div>
+            <span className={styles.statSubLabel}>This Week: </span> 
+              <span className={styles.statSubValue}>{stats.pendingThisWeek}</span>
+            </div>
+            <div>
+            <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>This Month: </span>
+              <span className={styles.statSubValue}>{stats.pendingThisMonth}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>ASSIGNED</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#6f42c1' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect>
+  <line x1="8" y1="8" x2="16" y2="8"></line>
+  <line x1="8" y1="12" x2="16" y2="12"></line>
+  <line x1="8" y1="16" x2="16" y2="16"></line>
+  <circle cx="5" cy="8" r="1"></circle>
+  <circle cx="5" cy="12" r="1"></circle>
+  <circle cx="5" cy="16" r="1"></circle>
+</svg>  
+            </div>
+          </div>
+            <div className={styles.statMainValue}>{stats.assigned}</div>
+          <div className={styles.statSubLine}>
+            <div>
+            <span className={styles.statSubLabel}>Not Assigned: </span>
+              <span className={styles.statSubValue}>{stats.notAssigned}</span>
+            </div>
+            <div>
+            <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Total: </span>
+              <span className={styles.statSubValue}>{stats.total}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>COMPLETED</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#10b981' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22,4 12,14.01 9,11.01"></polyline></svg>
+            </div>
+          </div>
+            <div className={styles.statMainValue}>{stats.completed}</div>
+          <div className={styles.statSubLine}>
+            <div>
+            <span className={styles.statSubLabel}>Not Completed: </span>
+              <span className={styles.statSubValue}>{stats.notCompleted}</span>
+            </div>
+            <div>
+            <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Total: </span>
+              <span className={styles.statSubValue}>{stats.total}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div className={styles.tableControls} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.leftControls}>
+            {isTrashed ? (
+              <>
+                <button className={styles.bulkBtn} onClick={() => handleBulkAction('restore', 'leads')} disabled={selectedLeads.length === 0}>Restore</button>
+                <button className={styles.bulkBtn} onClick={() => handleBulkAction('deletePermanently', 'leads')} disabled={selectedLeads.length === 0}>Delete Permanently</button>
+              </>
+            ) : (
+              <>
+                <button className={styles.bulkBtn} style={{ color: '#ef4444', borderColor: '#ef4444' }}  onClick={() => handleBulkAction('trash', 'leads')} disabled={selectedLeads.length === 0}>
+                  Trash
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3,6 5,6 21,6"/>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                      </svg>
+                  </button>
+                <button className={styles.bulkBtn} style={{ color: '#10b981', borderColor: '#10b981'  }}  onClick={() => handleBulkAction('download', 'leads')} disabled={selectedLeads.length === 0}>
+                  Download
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7,10 12,15 17,10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                  </button>
+              </>
+            )}
+          </div>
+          <div className={styles.rightControls} style={isMobile ? { width: '100%' } : {}}>
+            <input
+              type="text"
+              placeholder="Search..."
+              className={styles.searchInput}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className={styles.filterContainer}>
+              <span className={styles.filterLabel}>Status :</span>
+              <select className={styles.filterDropdown} value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="in progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+              <span className={styles.filterLabel}>Assigned :</span>
+              <select className={styles.filterDropdown} value={filterAssigned} onChange={(e) => setFilterAssigned(e.target.value)}>
+                <option value="">All</option>
+                                    {boeUsers.map(u => <option key={u._id} value={u._id}>{u.userName}</option>)}
+                <option value="none">None</option>
+              </select>
+        </div>
+            {/* <button className={styles.filterBtn} style={{display: 'flex'}}>⚙ Filter</button> */}
+        </div>
+      </div>
+
+      <div className={styles.tableContainer}>
+        <table className={styles.leadsTable}>
+          <thead>
+            <tr>
+              <th>
+                <input 
+                  type="checkbox" 
+                  checked={selectAll}
+                    onChange={() => handleSelectAll(tabLeads)}
+                  className={styles.checkbox}
+                />
+              </th>
+              <th>Lead ID</th>
+              <th>Client</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Message</th>
+                <th>Service</th>
+              <th>Assigned</th>
+              <th>Status</th>
+              <th>Created At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              {tabLeads
+                .filter(lead => {
+                  const lowerCaseQuery = searchQuery.toLowerCase().trim();
+                  if (!lowerCaseQuery && !filterStatus && !filterAssigned) return true;
+
+                  const assignedBoUser = boeUsers.find(u => u._id === lead.assignedTo);
+                  const assignedBoName = assignedBoUser ? assignedBoUser.userName.toLowerCase() : 'none';
+
+                  const searchMatch = !lowerCaseQuery || (
+                      lead.fullName.toLowerCase().includes(lowerCaseQuery) ||
+                      lead._id.toLowerCase().includes(lowerCaseQuery) ||
+                      lead.phoneNumber.includes(lowerCaseQuery) ||
+                      lead.email.toLowerCase().includes(lowerCaseQuery) ||
+                      assignedBoName.includes(lowerCaseQuery) ||
+                      lead.message.toLowerCase().includes(lowerCaseQuery) ||
+                      lead.status.toLowerCase().includes(lowerCaseQuery) ||
+                      formatDate(lead.createdAt).toLowerCase().includes(lowerCaseQuery) ||
+                      (Array.isArray(lead.service) ? lead.service.join(', ').toLowerCase().includes(lowerCaseQuery) : (lead.service as string)?.toLowerCase().includes(lowerCaseQuery))
+                  );
+                  
+                  const statusMatch = !filterStatus || lead.status === filterStatus;
+                  const assignedMatch = !filterAssigned || (filterAssigned === 'none' ? (!lead.assignedTo || lead.assignedTo === null || lead.assignedTo === '') : lead.assignedTo === filterAssigned);
+
+                  return searchMatch && statusMatch && assignedMatch;
+                })
+                .map((lead) => (
+              <tr key={lead._id}>
+                  <td data-label="Select">
+                  <input 
+                    type="checkbox" 
+                    checked={selectedLeads.includes(lead._id)}
+                    onChange={() => handleSelectLead(lead._id)}
+                    className={styles.checkbox}
+                  />
+                </td>
+                  <td data-label="Lead ID">
+                    <span
+                      style={{ cursor: 'pointer', userSelect: 'all', position: 'relative' }}
+                      onClick={() => handleCopyCell(lead._id, 'id', lead._id)}
+                      title="Click to select"
+                    >
+                      {lead._id}
+                      {copiedCell && copiedCell.id === lead._id && copiedCell.field === 'id' && (
+                        <span style={{ position: 'absolute', left: '100%', marginLeft: 8, fontSize: 12, color: '#10b981', background: '#fff', borderRadius: 4, padding: '2px 6px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>Copied!</span>
+                      )}
+                    </span>
+                  </td>
+                  <td className={styles.customerCell} data-label="Client">
+                    <div className={styles.avatar}>{lead.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}</div>
+                    <span
+                      style={{ cursor: 'pointer', userSelect: 'all', position: 'relative' }}
+                      onClick={() => handleCopyCell(lead._id, 'name', lead.fullName)}
+                      title="Click to select"
+                    >
+                      {lead.fullName}
+                      {copiedCell && copiedCell.id === lead._id && copiedCell.field === 'name' && (
+                        <span style={{ position: 'absolute', left: '100%', marginLeft: 8, fontSize: 12, color: '#10b981', background: '#fff', borderRadius: 4, padding: '2px 6px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>Copied!</span>
+                      )}
+                    </span>
+                  </td>
+                <td 
+                  className={styles.emailCell}
+                  onClick={() => handleEmailClick(lead.email)}
+                  style={{ cursor: 'pointer', color: '#2563eb' }}
+                    data-label="Email"
+                >
+                  {lead.email}
+                </td>
+                <td 
+                  onClick={() => handlePhoneClick(lead.phoneNumber)}
+                  style={{ cursor: 'pointer', color: '#2563eb' }}
+                    data-label="Phone"
+                >
+                  {lead.phoneNumber}
+                </td>
+                  <td data-label="Message">
+                  <button
+                    onClick={() => setShowMessagePopup(lead._id)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#2563eb',
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    View
+                  </button>
+                </td>
+                  <td data-label="Service">
+                    <span
+                      style={{ cursor: 'pointer', userSelect: 'all', position: 'relative' }}
+                      onClick={() => handleCopyCell(lead._id, 'service', Array.isArray(lead.service) ? lead.service.join(', ') : (lead.service || ''))}
+                      title="Click to select"
+                    >
+                      {Array.isArray(lead.service) ? lead.service.join(', ') : lead.service}
+                      {copiedCell && copiedCell.id === lead._id && copiedCell.field === 'service' && (
+                        <span style={{ position: 'absolute', left: '100%', marginLeft: 8, fontSize: 12, color: '#10b981', background: '#fff', borderRadius: 4, padding: '2px 6px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>Copied!</span>
+                      )}
+                    </span>
+                  </td>
+                  <td data-label="Assigned">
+                  <div style={{ position: 'relative' }} className="dropdown-container">
+                    <button
+                      onClick={(e) => handleAssignmentDropdownClick(e, lead._id)}
+                      className={styles.dropdownButton}
+                    >
+                      {boeUsers.find(u => u._id === lead.assignedTo)?.userName || 'None'}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '4px' }}>
+                        <polyline points="6,9 12,15 18,9"/>
+                      </svg>
+                    </button>
+                    {showAssignedDropdown === lead._id && (
+                      <div className={`${styles.modernDropdown} ${dropdownPositions[lead._id] === 'up' ? styles.dropdownUp : ''}`}>
+                        <div className={`${styles.dropdownArrowUp} ${dropdownPositions[lead._id] === 'up' ? styles.arrowDown : ''}`}></div>
+                          <div
+                          key="none"
+                            className={styles.modernDropdownItem}
+                          onClick={() => handleAssignmentChange(lead._id, null)}
+                        >
+                          None
+                        </div>
+                        {boeUsers.map((user) => (
+                          <div
+                            key={user._id}
+                            className={styles.modernDropdownItem}
+                            onClick={() => handleAssignmentChange(lead._id, user._id)}
+                          >
+                            {user.userName}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </td>
+                  <td data-label="Status">
+                  <span style={{ color: getStatusColor(lead.status || 'pending'), textTransform: 'capitalize' }}>
+                    {lead.status || 'pending'}
+                  </span>
+                </td>
+                  <td data-label="Created At">{formatDate(lead.createdAt)}</td>
+                  <td data-label="Action">
+                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                      {isTrashed ? (
+                        <>
+                          <button onClick={() => handleRestoreLead(lead._id)} className={styles.actionIcon} style={{ color: '#10b981' }} title="Restore">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 15 18 18 22 18"></polyline><path d="M5.45 5.45A9 9 0 0 0 21 12h-3a6 6 0 0 1-6-6V3a9 9 0 0 0-9 9"></path></svg>
+                          </button>
+                          <button onClick={() => handlePermanentDeleteLead(lead._id)} className={styles.actionIcon} style={{ color: '#ef4444' }} title="Delete Permanently">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 5H3"/><path d="M18 5v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5"/><path d="M15 5V3a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2"/><path d="M9 10l6 6"/><path d="M15 10l-6 6"/></svg>
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => handleActionIconClick(lead._id, 'view')}
+                            className={styles.actionIcon}
+                            style={{ color: '#3b82f6' }}
+                            title="View"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                    <button
+                      onClick={() => handleActionIconClick(lead._id, 'download')}
+                      className={styles.actionIcon}
+                      style={{ color: '#10b981' }}
+                      title="Download"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7,10 12,15 17,10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                      </svg>
+                    </button>
+                    <div
+                      onClick={() => handleActionIconClick(lead._id, 'delete')}
+                      className={styles.actionIcon}
+                      style={{ color: '#ef4444' }}
+                      title="Delete"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3,6 5,6 21,6"/>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                      </svg>
+                    </div>
+                        </>
+                      )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className={styles.pagination}>
+        <button className={styles.paginationBtn} onClick={() => setLeadsCurrentPage(p => Math.max(1, p - 1))} disabled={leadsCurrentPage === 1}>← Previous</button>
+        <div className={styles.pageNumbers}>
+          <span>Page {leadsCurrentPage} of {leadsTotalPages}</span>
+        </div>
+        <button className={styles.paginationBtn} onClick={() => setLeadsCurrentPage(p => Math.min(leadsTotalPages, p + 1))} disabled={leadsCurrentPage === leadsTotalPages}>Next →</button>
+      </div>
+    </div>
+    
+  );
+  };
+
+  const renderUsersTab = (isTrashed = false) => {
+    const tabUsers = users.filter(user => !!user.trash === isTrashed);
+
+    const stats = {
+      total: tabUsers.length,
+      newToday: tabUsers.filter((u: User) => new Date(u.createdAt) > new Date(Date.now() - 24 * 60 * 60 * 1000)).length,
+      last30Days: tabUsers.filter((u: User) => new Date(u.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+      suspended: tabUsers.filter((u: User) => u.status === 'Suspended' || u.status === 'suspended' || u.status === 'blocked').length,
+      suspendedToday: tabUsers.filter((u: User) => (u.status === 'Suspended' || u.status === 'suspended' || u.status === 'blocked') && new Date(u.createdAt) > new Date(Date.now() - 24 * 60 * 60 * 1000)).length,
+      suspendedLast30Days: tabUsers.filter((u: User) => (u.status === 'Suspended' || u.status === 'suspended' || u.status === 'blocked') && new Date(u.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+    };
+
+    return (
+    <div className={styles.leadsContainer}>
+        <div className={styles.leadsHeader} style={isMobile ? { flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' } : {}}>
+        <div className={styles.headerLeft}>
+            <h2>{isTrashed ? 'Trashed Users' : 'Users Management'}</h2>
+            <p>{isTrashed ? 'Review and manage trashed user accounts' : 'Manage user accounts, permissions, and access levels'}</p>
+        </div>
+        <div className={styles.headerRight}>
+            {!isTrashed && (
+              <button className={styles.exportBtn} onClick={() => handleExport('users')}>
+                Export All
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7,10 12,15 17,10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            )}
+        </div>
+      </div>
+        <div className={styles.statsContainerCentered} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>USERS</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#3b82f6' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+            <div className={styles.statMainValue}>{stats.total}</div>
+          <div className={styles.statSubLine}>
+            <div>
+              <span className={styles.statSubLabel}>New Today: </span>
+                <span className={styles.statSubValue}>{stats.newToday}</span>
+            </div>
+            <div>
+              <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Last 30 days: </span>
+                <span className={styles.statSubValue}>{stats.last30Days}</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>BLOCKED</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#ef4444' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+            </div>
+          </div>
+            <div className={styles.statMainValue}>{stats.suspended}</div>
+          <div className={styles.statSubLine}>
+            <div>
+              <span className={styles.statSubLabel}>Today: </span>
+                <span className={styles.statSubValue}>{stats.suspendedToday}</span>
+            </div>
+            <div>
+              <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Last 30 days: </span>
+                <span className={styles.statSubValue}>{stats.suspendedLast30Days}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div className={styles.tableControls} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.leftControls}>
+            {isTrashed ? (
+              <>
+                <button className={styles.bulkBtn} onClick={() => handleBulkAction('restore', 'users')} disabled={selectedUsers.length === 0}>Restore</button>
+                <button className={styles.bulkBtn} onClick={() => handleBulkAction('deletePermanently', 'users')} disabled={selectedUsers.length === 0}>Delete Permanently</button>
+              </>
+            ) : (
+              <>
+                <button className={styles.bulkBtn} style={{ color: '#ef4444', borderColor: '#ef4444' }} onClick={() => handleBulkAction('trash', 'users')} disabled={selectedUsers.length === 0}>
+                  Trash
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3,6 5,6 21,6"/>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                      </svg>
+                  </button>
+                <button className={styles.bulkBtn} style={{ color: '#10b981', borderColor: '#10b981'  }} onClick={() => handleBulkAction('download', 'users')} disabled={selectedUsers.length === 0}>
+                  Download
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7,10 12,15 17,10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                  </button>
+              </>
+            )}
+        </div>
+          <div className={styles.rightControls} style={isMobile ? { width: '100%' } : {}}>
+            <input
+              type="text"
+              placeholder="Search..."
+              className={styles.searchInput}
+              value={userSearchQuery}
+              onChange={(e) => setUserSearchQuery(e.target.value)}
+            />
+            <div className={styles.filterContainer}>
+              <span className={styles.filterLabel}>Status :</span>
+              <select className={styles.filterDropdown} value={userFilterStatus} onChange={e => setUserFilterStatus(e.target.value)}>
+                <option value="">All</option>
+                <option value="active">Active</option>
+                <option value="blocked">Blocked</option>
+              </select>
+              <span className={styles.filterLabel}>Request Status :</span>
+              <select className={styles.filterDropdown} value={userFilterRequestStatus} onChange={e => setUserFilterRequestStatus(e.target.value)}>
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="in progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      <div className={styles.tableContainer}>
+        <table className={styles.leadsTable}>
+          <thead>
+            <tr>
+                <th><input type="checkbox" checked={selectAllUsers} onChange={() => handleSelectAllUsersClick(tabUsers)} className={styles.checkbox} /></th>
+              <th>Verified</th>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Request Status</th>
+                <th>Leads</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              {tabUsers
+                .filter(user => {
+                  const query = userSearchQuery.toLowerCase().trim();
+                  if (!query && !userFilterStatus && !userFilterRequestStatus) return true;
+                  const statusMatch = !userFilterStatus || user.status.toLowerCase() === userFilterStatus;
+                  let requestStatusMatch = true;
+                  if (userFilterRequestStatus === 'pending') {
+                    requestStatusMatch = user.requestStatus?.toLowerCase() === 'pending';
+                  } else if (userFilterRequestStatus === 'in progress') {
+                    requestStatusMatch = !!user.leadsInitiated?.some(l => l.status === 'pending');
+                  } else if (userFilterRequestStatus === 'completed') {
+                    requestStatusMatch = !!user.leadsInitiated?.some(l => l.status === 'completed');
+                  }
+                  const searchMatch = !query || (
+                    user.userName.toLowerCase().includes(query) ||
+                    user._id.toLowerCase().includes(query) ||
+                    user.email.toLowerCase().includes(query)
+                  );
+                  return statusMatch && requestStatusMatch && searchMatch;
+                })
+                .map((user: User) => {
+                  const leadCounts = {
+                    pending: user.leadsInitiated?.filter(l => l.status === 'pending').length || 0,
+                    inProgress: user.leadsInitiated?.filter(l => l.status === 'in progress').length || 0,
+                    completed: user.leadsInitiated?.filter(l => l.status === 'completed').length || 0,
+                  };
+                  const leadCount = user.leadsInitiated?.length || 0;
+                  return (
+              <tr key={user._id}>
+                      <td data-label="Select"><input type="checkbox" checked={selectedUsers.includes(user._id)} onChange={() => handleSelectUser(user._id)} className={styles.checkbox} /></td>
+                      <td data-label="Verified">{user.verified ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+                ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                )}</td>
+                      <td data-label="User ID">{user._id}</td>
+                      <td className={styles.customerCell} data-label="User Name">
+                    <div className={styles.avatar}>
+                    {user.profilePicture ? (
+                      <img src={user.profilePicture} alt={user.userName} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                  ) : (
+                      user.userName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)
+                  )}
+                  </div>
+                  {user.userName}
+                </td>
+                      <td data-label="Email"><a href={`mailto:${user.email}`} style={{ color: '#2563eb', textDecoration: 'none', cursor: 'pointer' }}>{user.email}</a></td>
+                      <td data-label="Status" style={{ color: user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#f50b0b', textTransform: 'capitalize' }}>{user.status}</td>
+                      <td data-label="Request Status">
+                        <span style={{color: '#ef4444'}}>P-{leadCounts.pending}</span> / <span style={{color: '#f59e0b'}}>IP-{leadCounts.inProgress}</span> / <span style={{color: '#10b981'}}>C-{leadCounts.completed}</span>
+                      </td>
+                      <td data-label="Leads Initiated">{leadCount}</td>
+                      <td data-label="Created">{formatDate(user.createdAt)}</td>
+                      <td data-label="Action" style={{display:'flex', gap: 5}}>
+                        {isTrashed ? (
+                          <>
+                            <button onClick={() => handleRestoreUser(user._id)} className={styles.actionIcon} style={{ color: '#10b981' }} title="Restore">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 15 18 18 22 18"></polyline><path d="M5.45 5.45A9 9 0 0 0 21 12h-3a6 6 0 0 1-6-6V3a9 9 0 0 0-9 9"></path></svg>
+                            </button>
+                            <button onClick={() => handlePermanentDeleteUser(user._id)} className={styles.actionIcon} style={{ color: '#ef4444' }} title="Delete Permanently">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 5H3"/><path d="M18 5v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5"/><path d="M15 5V3a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2"/><path d="M9 10l6 6"/><path d="M15 10l-6 6"/></svg>
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button onClick={() => handleViewUser(user)} className={styles.actionIcon} style={{ color: '#2563eb', width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="View">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                            {user.status?.toLowerCase() === 'blocked' ? (
+                              <button
+                                onClick={() => updateUser(user._id, { status: 'active' })}
+                                className={styles.actionIcon}
+                                style={{ color: '#10b981', width: 24, height: 24 }}
+                                title="Unblock"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 15 18 18 22 18"></polyline><path d="M5.45 5.45A9 9 0 0 0 21 12h-3a6 6 0 0 1-6-6V3a9 9 0 0 0-9 9"></path></svg>
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => updateUser(user._id, { status: 'blocked' })}
+                                className={styles.actionIcon}
+                                style={{ color: '#ef4444', width: 24, height: 24 }}
+                                title="Block"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ban"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+                              </button>
+                            )}
+                            <button onClick={() => handleTrashUser(user._id)} className={styles.actionIcon} style={{ color: '#ef4444', width: 24, height: 24 }} title="Delete">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3,6 5,6 21,6"/><path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                  </button>
+                          </>
+                        )}
+                </td>
+              </tr>
+                  )})}
+          </tbody>
+        </table>
+      </div>
+      <div className={styles.pagination}>
+        <button className={styles.paginationBtn} onClick={() => setUsersCurrentPage(p => Math.max(1, p - 1))} disabled={usersCurrentPage === 1}>← Previous</button>
+        <div className={styles.pageNumbers}>
+          <span>Page {usersCurrentPage} of {usersTotalPages}</span>
+        </div>
+        <button className={styles.paginationBtn} onClick={() => setUsersCurrentPage(p => Math.min(usersTotalPages, p + 1))} disabled={usersCurrentPage === usersTotalPages}>Next →</button>
+      </div>
+    </div>
+  );
+  };
+
+  const renderBackofficeTab = () => (
+    <div className={styles.leadsContainer}>
+      <div className={styles.leadsHeader} style={isMobile ? { flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' } : {}}>
+        <div className={styles.headerLeft}>
+          <h2>Backoffice Management</h2>
+          <p>Manage backoffice executives and their assignments</p>
+        </div>
+        <div className={styles.headerRight}>
+        </div>
+      </div>
+
+      <div className={styles.statsContainerCentered} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>Backoffice Executives</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#3b82f6' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div className={styles.statMainValue}>{boeUsers.length}</div>
+          <div className={styles.statSubLine}>
+            <div>
+              <span className={styles.statSubLabel}>Slots: </span>
+              <span className={styles.statSubValue}>5</span>
+            </div>
+            <div>
+              <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Empty Slots: </span> 
+              <span className={styles.statSubValue}>{5 - boeUsers.length}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.tableControls} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.leftControls}>
+          <button className={styles.bulkBtn} onClick={() => setShowAddBOEForm(true)} disabled={boeUsers.length >= 5}>Add Backoffice executive</button>
+        </div>
+        <div className={styles.rightControls} style={isMobile ? { width: '100%' } : {}}>
+        </div>
+      </div>
+
+      <div className={styles.tableContainer}>
+        <table className={styles.leadsTable}>
+          <thead>
+            <tr>
+              <th>Verified</th>
+              <th>User ID</th>
+              <th>User</th>
+              <th>Email</th>
+              <th>Created</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {boeUsers.filter((u: User) => !u.trash).map((user: User) => (
+              <tr key={user._id}>
+                <td data-label="Verified">{user.isVerified ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#10b981' }}>
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22,4 12,14.01 9,11.01"/>
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#ef4444' }}>
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                  </svg>
+                )}</td>
+                <td data-label="User ID">{user._id}</td>
+                <td className={styles.customerCell} data-label="User">
+  {user.userName ? (
+    <div className={styles.avatar}>
+      {user.userName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)}
+    </div>
+  ) : (
+    <div className={styles.avatar} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21v-2A4.5 4.5 0 0 1 10 14h4a4.5 4.5 0 0 1 4.5 4.5v2"/></svg>
+    </div>
+  )}
+  {user.userName}
+</td>
+<td data-label="Email"><a href={`mailto:${user.email}`} style={{ color: '#2563eb', textDecoration: 'none', cursor: 'pointer' }}>{user.email}</a></td>
+<td data-label="Created">{formatDate(user.createdAt)}</td>
+<td data-label="Status">
+  <span
+    style={{
+      color: (typeof user.status === 'boolean' && user.status === false) ? '#ef4444' : '#10b981',
+      fontWeight: 400,
+      fontSize: 15,
+      textTransform: 'capitalize',
+    }}
+  >
+    {(typeof user.status === 'boolean' && user.status === false) ? 'Blocked' : 'Active'}
+  </span>
+</td>
+<td data-label="Action" style={{display:'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8}}>
+  {(typeof user.status === 'boolean' && user.status === false) ? (
+    <>
+      <button
+        onClick={async () => {
+          // Restore (unblock) the BOE user
+          const res = await fetch('/api/boe/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: user._id, updates: { status: true } }),
+          });
+          if (res.ok) {
+            setBoeUsers(prev => prev.map(u => u._id === user._id ? { ...u, status: true } : u));
+          } else {
+            alert('Failed to restore user.');
+          }
+        }}
+        className={styles.actionIcon}
+        style={{ color: '#10b981', width: 24, height: 24 }}
+        title="Restore"
+      >
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 15 18 18 22 18"></polyline><path d="M5.45 5.45A9 9 0 0 0 21 12h-3a6 6 0 0 1-6-6V3a9 9 0 0 0-9 9"></path></svg>      </button>
+    </>
+  ) : (
+    <button
+      onClick={async () => {
+        if (window.confirm('Are you sure you want to block this backoffice user?')) {
+          const res = await fetch('/api/boe/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: user._id, updates: { status: false } }),
+          });
+          if (res.ok) {
+            setBoeUsers(prev => prev.map(u => u._id === user._id ? { ...u, status: false } : u));
+          } else {
+            alert('Failed to block user.');
+          }
+        }
+      }}
+      className={styles.actionIcon}
+      style={{ color: '#ef4444', width: 24, height: 24 }}
+      title="Block"
+      disabled={typeof user.status === 'boolean' ? !user.status : false}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ban"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+    </button>
+  )}
+  <button
+    onClick={async () => {
+      if (user.assignedLeads && Array.isArray(user.assignedLeads) && user.assignedLeads.length > 0) return;
+      if (window.confirm('Are you sure you want to permanently delete this backoffice user?')) {
+        const res = await fetch('/api/boe/permanent-delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: user._id }),
+        });
+        if (res.ok) {
+          setBoeUsers(prev => prev.filter(u => u._id !== user._id));
+        } else {
+          alert('Failed to delete user.');
+        }
+      }
+    }}
+    className={styles.actionIcon}
+    style={{ color: (user.assignedLeads && Array.isArray(user.assignedLeads) && user.assignedLeads.length > 0) ? '#cbd5e1' : '#ef4444', width: 24, height: 24, cursor: (user.assignedLeads && Array.isArray(user.assignedLeads) && user.assignedLeads.length > 0) ? 'not-allowed' : 'pointer', opacity: (user.assignedLeads && Array.isArray(user.assignedLeads) && user.assignedLeads.length > 0) ? 0.5 : 1 }}
+    title={user.assignedLeads && Array.isArray(user.assignedLeads) && user.assignedLeads.length > 0 ? 'Cannot delete: user has assigned leads' : 'Delete'}
+    disabled={user.assignedLeads && Array.isArray(user.assignedLeads) && user.assignedLeads.length > 0}
+  >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3,6 5,6 21,6"/><path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+  </button>
+</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  const renderUserProfileTab = () => {
+    const user = selectedUserForDetails;
+
+    if (!user) {
+      return (
+        <div className={styles.leadsContainer}>
+          <div className={styles.leadsHeader}>
+            <div className={styles.headerLeft}>
+              <h2>User Profile</h2>
+              <p>Select a user from the main table to view their profile here.</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Calculate lead statistics
+    const userLeads = user.leadsInitiated || [];
+    const leadStats = {
+      total: userLeads.length,
+      pending: userLeads.filter(lead => lead.status === 'pending').length,
+      inProgress: userLeads.filter(lead => lead.status === 'in progress').length,
+      completed: userLeads.filter(lead => lead.status === 'completed').length,
+    };
+
+    return (
+    <div className={styles.leadsContainer} style={{ minHeight: 'calc(100vh - 120px)', background: 'inherit', boxShadow: 'none', border: 'none', padding: 0 }}>
+      {/* Header */}
+              <div className={styles.leadsHeader} style={isMobile ? { flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' } : {}}>
+        <div className={styles.headerLeft}>
+          <h2>User Profile</h2>
+            <p>View user details and their initiated leads</p>
+        </div>
+      </div>
+
+      {/* Full-width, full-height profile section */}
+      <div style={{
+        display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        width: '100%',
+        minHeight: 'calc(100vh - 220px)',
+        background: 'inherit',
+        margin: '0',
+        padding: '0 0 40px 0',
+        boxShadow: 'none',
+        border: 'none',
+      }}>
+        {/* Left: Avatar and Basic Info */}
+        <div style={{
+          flex: isMobile ? '1' : '0 0 340px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          padding: '0 0 0 0',
+        }}>
+          {/* Avatar */}
+          <div style={{
+            width: 160,
+            height: 160,
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #b40068 0%, #a0005e 100%)',
+            color: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 80,
+            fontWeight: 700,
+            marginBottom: 32,
+            marginTop: 32,
+            boxShadow: '0 2px 8px rgba(180,0,104,0.08)'
+          }}>
+            {user.profilePicture ? (
+              <img src={user.profilePicture} alt={user.userName} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+            ) : (
+              user.userName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)
+            )}
+          </div>
+          {/* Name and Verified */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+            <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b' }}>{user.userName}</span>
+            {user.verified && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>}
+          </div>
+          <div style={{ color: '#64748b', fontSize: 20, fontWeight: 500, marginBottom: 12 }}>{user._id}</div>
+        </div>
+
+        {/* Divider */}
+        {!isMobile && <div style={{ width: 2, background: '#e5e7eb', margin: '48px 0' }} />}
+
+        {/* Right: Details */}
+        <div style={{ flex: 1, padding: isMobile ? '24px' : '48px 48px 48px 40px', display: 'flex', flexDirection: 'column', gap: 28, justifyContent: 'center', fontFamily: 'inherit' }}>
+          {/* Contact Info */}
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Contact Information</div>
+            <div style={{ color: '#374151', fontSize: 16, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 400 }}>{user.email}</span></div>
+          </div>
+          
+          {/* Status */}
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Status</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{
+                  background: '#fff',
+                color: user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#374151',
+                  border: `1px solid ${user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#374151'}`,
+                  borderRadius: 8,
+                  padding: '8px 24px',
+                  fontWeight: 600,
+                  fontSize: 15,
+                  transition: 'all 0.2s',
+                  boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+              }}>
+                {user.status}
+              </span>
+            </div>
+          </div>
+
+          {/* Lead Statistics */}
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Lead Statistics</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+              <span style={{
+                  background: '#fff',
+                color: '#ef4444',
+                border: '1px solid #ef4444',
+                  borderRadius: 8,
+                padding: '8px 16px',
+                  fontWeight: 600,
+                fontSize: 14,
+                  transition: 'all 0.2s',
+                boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+              }}>
+                Pending: {leadStats.pending}
+              </span>
+              <span style={{
+                  background: '#fff',
+                color: '#f59e0b',
+                border: '1px solid #f59e0b',
+                  borderRadius: 8,
+                padding: '8px 16px',
+                  fontWeight: 600,
+                fontSize: 14,
+                  transition: 'all 0.2s',
+                boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+              }}>
+                In Progress: {leadStats.inProgress}
+              </span>
+              <span style={{
+                  background: '#fff',
+                color: '#10b981',
+                border: '1px solid #10b981',
+                  borderRadius: 8,
+                padding: '8px 16px',
+                  fontWeight: 600,
+                fontSize: 14,
+                  transition: 'all 0.2s',
+                  boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+              }}>
+                Completed: {leadStats.completed}
+              </span>
+              <span style={{
+                  background: '#fff',
+                color: '#3b82f6',
+                border: '1px solid #3b82f6',
+                  borderRadius: 8,
+                padding: '8px 16px',
+                  fontWeight: 600,
+                fontSize: 14,
+                  transition: 'all 0.2s',
+                boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+              }}>
+                Total: {leadStats.total}
+              </span>
+            </div>
+          </div>
+
+          {/* Created At */}
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Created At</div>
+            <div style={{ color: '#64748b', fontSize: 16, fontWeight: 400 }}>{formatDate(user.createdAt)}</div>
+          </div>
+
+          {/* User's Leads */}
+          {userLeads.length > 0 && (
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Initiated Leads</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {userLeads.map((lead, index) => (
+                  <div key={lead._id} style={{
+                    background: '#fff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                    transition: 'all 0.2s ease'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '16px', marginBottom: '4px' }}>{lead.fullName}</div>
+                        <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '4px' }}>{lead.email}</div>
+                        <div style={{ color: '#64748b', fontSize: '14px' }}>
+                          Service: {Array.isArray(lead.service) ? lead.service.join(', ') : (lead.service || 'No service specified')}
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{
+                          background: '#fff',
+                          color: getStatusColor(lead.status),
+                          border: `1px solid ${getStatusColor(lead.status)}`,
+                          borderRadius: '6px',
+                          padding: '6px 12px',
+                          fontWeight: 600,
+                          fontSize: '12px',
+                          textTransform: 'uppercase'
+                        }}>
+                          {lead.status}
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ 
+                      display: 'flex', 
+                      justifyContent: 'space-between', 
+                      alignItems: 'center',
+                      paddingTop: '8px',
+                      borderTop: '1px solid #f3f4f6'
+                    }}>
+                      <div style={{ color: '#64748b', fontSize: '12px' }}>
+                        Created: {lead.createdAt ? formatDate(lead.createdAt) : 'Date unavailable'}
+                      </div>
+                      <div style={{ color: '#64748b', fontSize: '12px' }}>
+                        ID: {lead._id}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+  };
+
+  const renderLeadDetailsTab = () => {
+    const lead = selectedLeadForDetails;
+
+    if (!lead) {
+      return (
+        <div className={styles.leadsContainer}>
+          <div className={styles.leadsHeader}>
+            <div className={styles.headerLeft}>
+              <h2>Lead Details</h2>
+              <p>Select a lead from the main table to view its details here.</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+    return (
+      <div className={styles.leadsContainer} style={{ minHeight: 'calc(100vh - 120px)', background: 'inherit', boxShadow: 'none', border: 'none', padding: 0 }}>
+        {/* Header */}
+        <div className={styles.leadsHeader} style={isMobile ? { flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' } : {}}>
+          <div className={styles.headerLeft}>
+            <h2>Lead Details</h2>
+            <p>View and manage lead-specific information and status</p>
+          </div>
+        </div>
+  
+        {/* Full-width, full-height profile section */}
+        <div style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+          width: '100%',
+          minHeight: 'calc(100vh - 220px)',
+          background: 'inherit',
+          margin: '0',
+          padding: '0 0 40px 0',
+          boxShadow: 'none',
+          border: 'none',
+        }}>
+          {/* Left: Avatar and Basic Info */}
+          <div style={{
+            flex: isMobile ? '1' : '0 0 340px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            padding: '0 0 0 0',
+          }}>
+            {/* Avatar */}
+            <div style={{
+              width: 160,
+              height: 160,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 80,
+              fontWeight: 700,
+              marginBottom: 32,
+              marginTop: 32,
+              boxShadow: '0 2px 8px rgba(59,130,246,0.2)'
+            }}>
+              {lead.fullName.split(' ').map(n => n[0]).join('').toUpperCase()}
+            </div>
+            {/* Name */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+              <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b' }}>{lead.fullName}</span>
+            </div>
+            <div style={{ color: '#64748b', fontSize: 20, fontWeight: 500, marginBottom: 12 }}>{lead._id}</div>
+          </div>
+  
+          {/* Divider */}
+          {!isMobile && <div style={{ width: 2, background: '#e5e7eb', margin: '48px 0' }} />}
+  
+          {/* Right: Details */}
+          <div style={{ flex: 1, padding: isMobile ? '24px' : '48px 48px 48px 40px', display: 'flex', flexDirection: 'column', gap: 28, justifyContent: 'center', fontFamily: 'inherit' }}>
+            {/* Contact Info */}
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Contact Information</div>
+              <div style={{ color: '#374151', fontSize: 16, marginBottom: 6, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 400 }}>{lead.email}</span></div>
+              <div style={{ color: '#374151', fontSize: 16, fontWeight: 500 }}>Phone Number: <span style={{ color: '#2563eb', fontWeight: 400 }}>{lead.phoneNumber}</span></div>
+            </div>
+            {/* Service */}
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Service(s) Requested</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                {Array.isArray(lead.service) ? (
+                  lead.service.map((service, index) => (
+                    <span key={index} style={{
+                      background: '#fff',
+                      color: '#3b82f6',
+                      border: '1px solid #3b82f6',
+                      borderRadius: 8,
+                      padding: '8px 16px',
+                      fontWeight: 600,
+                      fontSize: 14,
+                      transition: 'all 0.2s',
+                      boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                    }}>
+                      {service}
+                    </span>
+                  ))
+                ) : (
+                  <span style={{
+                    background: '#fff',
+                    color: '#3b82f6',
+                    border: '1px solid #3b82f6',
+                    borderRadius: 8,
+                    padding: '8px 16px',
+                    fontWeight: 600,
+                    fontSize: 14,
+                    transition: 'all 0.2s',
+                    boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                  }}>
+                    {lead.service || 'No service specified'}
+                  </span>
+                )}
+              </div>
+            </div>
+            {/* Message */}
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Message</div>
+              <p style={{ color: '#374151', fontSize: 16, fontWeight: 400, margin: 0, lineHeight: 1.5, textTransform: 'capitalize' }}>{lead.message}</p>
+            </div>
+            {/* Status */}
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Status</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{
+                    background: '#fff',
+                    color: getStatusColor(lead.status),
+                    borderRadius: 8,
+                    padding: '8px 0',
+                    fontWeight: 600,
+                    fontSize: 15,
+                    textTransform: 'capitalize'
+                  }}>
+                  {lead.status}
+                </span>
+              </div>
+            </div>
+            {/* Assigned */}
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Assigned To</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{
+                    background: '#fff',
+                    color: '#374151',
+                    border: `1px solid #d1d5db`,
+                    borderRadius: 8,
+                    padding: '8px 24px',
+                    fontWeight: 600,
+                    fontSize: 15,
+                    transition: 'all 0.2s',
+                    boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                  }}>
+                  {boeUsers.find(u => u._id === lead.assignedTo)?.userName || 'None'}
+                </span>
+              </div>
+            </div>
+            {/* Created At */}
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Created At</div>
+              <div style={{ color: '#64748b', fontSize: 16, fontWeight: 400 }}>{formatDate(lead.createdAt)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const handleAddBOE = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setBoeFormError('');
+    setBoeFormLoading(true);
+    if (boeUsers.length >= 5) {
+      setBoeFormError('Maximum 5 Backoffice Executives allowed.');
+      setBoeFormLoading(false);
+      return;
+    }
+    const res = await fetch('/api/boe/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(boeForm),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setBoeFormError(data.error || 'Failed to add executive');
+      setBoeFormLoading(false);
+      return;
+    }
+    setShowAddBOEForm(false);
+    setBoeForm({ username: '', email: '', password: '' });
+    setBoeFormLoading(false);
+    // Refresh list
+    fetch('/api/boe/list')
+      .then(res => res.json())
+      .then(data => setBoeUsers(data.users || []));
+  };
+
+  const handleDeleteBOE = async (id: string) => {
+    await fetch('/api/boe/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    setBoeUsers(boeUsers.filter(u => u._id !== id));
+  };
+
+  const handleViewUser = (user: User) => {
+    setSelectedUserForDetails(user);
+    setActiveTab('User Profile');
+  };
+
+  const handleViewUserLeads = (user: User) => {
+    setActiveTab('Leads');
+    setSearchQuery(user.userName);
+  };
+
+  const handleBlockUserOld = async (user: User) => {
+    // Implement logic to block user
+    console.log(`Blocking user: ${user._id}`);
+  };
+
+  const handleDeleteUser = async (user: User) => {
+    // Implement logic to delete user
+    console.log(`Deleting user: ${user._id}`);
+  };
+
+  const handlePermanentDeleteLead = async (leadId: string) => {
+    if (!window.confirm("Are you sure you want to permanently delete this lead?")) return;
+    try {
+      const res = await fetch('/api/lead/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId }),
+      });
+      if (res.ok) {
+        setLeads(prev => prev.filter(l => l._id !== leadId));
+      } else {
+        console.error("Failed to permanently delete lead");
+      }
+    } catch (error) {
+      console.error("Error permanently deleting lead:", error);
+    }
+  };
+  
+  const handleRestoreLead = (leadId: string) => {
+    updateLead(leadId, { trash: false });
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/admin/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        // Redirect to login page or reload the page
+        window.location.href = '/admin-dashboard';
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+  const renderAdminManagementTab = () => (
+    <div className={styles.leadsContainer}>
+      <div className={styles.leadsHeader} style={isMobile ? { flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' } : {}}>
+        <div className={styles.headerLeft}>
+          <h2>Admin Management</h2>
+          <p>Manage admin users and their permissions</p>
+        </div>
+        <div className={styles.headerRight}>
+        </div>
+      </div>
+
+      <div className={styles.statsContainerCentered} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statTitle}>Admin Users</span>
+            <div className={styles.statIcon} style={{ backgroundColor: '#3b82f6' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+          </div>
+          <div className={styles.statMainValue}>{adminUsers.length}</div>
+          <div className={styles.statSubLine}>
+            <div>
+              <span className={styles.statSubLabel}>Slots: </span>
+              <span className={styles.statSubValue}>2</span>
+            </div>
+            <div>
+              <span className={styles.statSubLabel} style={{ marginLeft: '24px' }}>Empty Slots: </span> 
+              <span className={styles.statSubValue}>{2 - adminUsers.length}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.tableControls} style={isMobile ? { flexDirection: 'column', gap: '1rem' } : {}}>
+        <div className={styles.leftControls}>
+          <button className={styles.bulkBtn} onClick={() => setShowAddAdminForm(true)} disabled={adminUsers.length >= 2}>Add Admin</button>
+        </div>
+        <div className={styles.rightControls} style={isMobile ? { width: '100%' } : {}}>
+        </div>
+      </div>
+
+      <div className={styles.tableContainer}>
+        <table className={styles.leadsTable}>
+          <thead>
+            <tr>
+              <th>Verified</th>
+              <th>User ID</th>
+              <th>ADMIN</th>
+              <th>Email</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {adminUsers.filter((u: User) => !u.trash).map((user: User) => (
+              <tr key={user._id}>
+                <td data-label="Verified">{user.isVerified ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#10b981' }}>
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22,4 12,14.01 9,11.01"/>
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#ef4444' }}>
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                  </svg>
+                )}</td>
+                <td data-label="User ID">{user._id}</td>
+                <td className={styles.customerCell} data-label="ADMIN">
+  {user.username ? (
+    <div className={styles.avatar}>
+      {user.username.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)}
+    </div>
+  ) : (
+    <div className={styles.avatar} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21v-2A4.5 4.5 0 0 1 10 14h4a4.5 4.5 0 0 1 4.5 4.5v2"/></svg>
+    </div>
+  )}
+  {user.username}
+</td>
+<td data-label="Email"><a href={`mailto:${user.email}`} style={{ color: '#2563eb', textDecoration: 'none', cursor: 'pointer' }}>{user.email}</a></td>
+<td data-label="Created">{formatDate(user.createdAt)}</td>
+<td data-label="Action" style={{display:'flex'}}>
+  
+  <button onClick={() => handleDeleteAdmin(user._id)} disabled={user._id === currentAdminId}
+     title={user._id === currentAdminId ? 'You cannot delete yourself.' : 'Delete'} className={styles.actionIcon} style={{ color: '#ef4444' }} >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3,6 5,6 21,6"/><path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+  </button>
+</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  const handleAddAdmin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setAdminFormError('');
+    setAdminFormLoading(true);
+    if (adminUsers.length >= 2) {
+      setAdminFormError('Maximum 2 Admin Users allowed.');
+      setAdminFormLoading(false);
+      return;
+    }
+    const res = await fetch('/api/admin/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(adminForm),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setAdminFormError(data.error || 'Failed to add admin');
+      setAdminFormLoading(false);
+      return;
+    }
+    setShowAddAdminForm(false);
+    setAdminForm({ username: '', email: '', password: '' });
+    setAdminFormLoading(false);
+    // Refresh list
+    fetch('/api/admin/list')
+      .then(res => res.json())
+      .then(data => setAdminUsers(data.admins || []));
+  };
+
+  // Add this function near other delete handlers:
+  const handleDeleteAdmin = async (adminId: string) => {
+    if (!window.confirm("Are you sure you want to permanently delete this admin?")) return;
+    try {
+      const res = await fetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ adminId }),
+      });
+      if (res.ok) {
+        setAdminUsers((prev: any[]) => prev.filter((u: any) => u._id !== adminId));
+      } else {
+        alert('Failed to delete admin.');
+      }
+    } catch (error) {
+      alert('Error deleting admin.');
+    }
+  };
+
+  const handleSaveAnnouncement = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await fetch('/api/announcement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: announcementDraft }),
+    });
+    const data = await res.json();
+    if (data.success && data.announcement) {
+      setAnnouncement(data.announcement.text);
+      setAnnouncementDraft(data.announcement.text);
+      setShowAnnouncementSaved(true);
+      setTimeout(() => setShowAnnouncementSaved(false), 2000);
+    }
+  };
+
+  const handleCancelAnnouncement = () => {
+    setAnnouncementDraft(announcement);
+  };
+
+  const renderAnnouncementTab = () => (
+    <form
+      onSubmit={handleSaveAnnouncement}
+      style={{
+        maxWidth: 640,
+        margin: '64px auto',
+        background: '#ffffff',
+        borderRadius: 20,
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
+        padding: '40px 32px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 24,
+        border: '1px solid #b40068',
+      }}
+    >
+      <h2
+        style={{
+          fontWeight: 400,
+          fontSize: 28,
+          margin: 0,
+          color: 'rgba(180, 0, 104, 1)',
+        }}
+      >
+        Announcement
+      </h2>
+  
+      <textarea
+        value={announcementDraft}
+        onChange={(e) => setAnnouncementDraft(e.target.value)}
+        rows={6}
+        maxLength={250}
+        style={{
+          width: '100%',
+          fontSize: 16,
+          padding: 20,
+          borderRadius: 12,
+          border: '1.5px solid #b40068',
+          backgroundColor: '#fafafa',
+          color: '#1f1f1f',
+          fontFamily: 'inherit',
+          boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.04)',
+          resize: 'vertical',
+          outline: 'none',
+          transition: 'border 0.2s, background 0.2s',
+        }}
+        placeholder="Enter your announcement... (max 250 characters)"
+      />
+  
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <button
+          type="submit"
+          style={{
+            background: 'rgba(180, 0, 104, 1)',
+            color: 'white',
+            border: 'none',
+            borderRadius: 8,
+            padding: '10px 28px',
+            fontWeight: 500,
+            fontSize: 15,
+            cursor: 'pointer',
+            transition: 'background 0.2s',
+          }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.background = 'rgb(168, 0, 101)')
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.background = 'rgba(180, 0, 104, 1)')
+          }
+        >
+          Save
+        </button>
+  
+        <button
+          type="button"
+          onClick={handleCancelAnnouncement}
+          style={{
+            background: 'white',
+            color: '#374151',
+            border: '1px solid #e2e8f0',
+            borderRadius: 6,
+            padding: '10px 28px',
+            fontWeight: 500,
+            fontSize: 15,
+            cursor: 'pointer',
+            transition: 'background 0.2s',
+          }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.background = 'rgba(17, 24, 39, 0.05)')
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.background = 'white')
+          }
+        >
+          Cancel
+        </button>
+  
+        {showAnnouncementSaved && (
+          <span
+            style={{
+              color: '#10b981',
+              fontWeight: 600,
+              fontSize: 14,
+              marginLeft: 12,
+            }}
+          >
+            ✔ Saved!
+          </span>
+        )}
+      </div>
+  
+      <div
+        style={{
+          alignSelf: 'flex-end',
+          fontSize: 13,
+          fontWeight: 500,
+          color:
+            announcementDraft.length >= 230
+              ? '#ef4444'
+              : 'rgba(36, 36, 36, 0.6)',
+          transition: 'color 0.2s',
+        }}
+      >
+        {announcementDraft.length} / 250
+      </div>
+    </form>
+  );
+  
+  const handleCopyCell = (id: string, field: string, value: string) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(value);
+      setCopiedCell({ id, field });
+      setTimeout(() => setCopiedCell(null), 1200);
+    } else {
+      alert('Clipboard copy is not supported in this environment.');
+    }
+  };
+
+  return (
+    <>
+      {showMobileOverlay && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(180, 0, 54, 0.95)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}>
+          <div style={{
+            color: 'white',
+            fontSize: '1.2rem',
+            fontWeight: 600,
+            padding: 24,
+            borderRadius: 25,
+            background: 'rgba(180, 0, 54, 1)',
+            maxWidth: 500,
+            textAlign: 'center',
+            marginBottom: 24,
+          }}>
+            Highly recommended to login in Desktop or Laptop for better experience
+          </div>
+          <button
+            style={{
+              background: '#fff',
+              color: '#b40036',
+              fontWeight: 700,
+              fontSize: '1rem',
+              border: 'none',
+              borderRadius: 12,
+              padding: '12px 32px',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              marginTop: 8,
+            }}
+            onClick={() => setShowMobileOverlay(false)}
+          >
+            Use Anyway
+          </button>
+        </div>
+      )}
+      <div className={styles.dashboard}>
+        <div className={styles.sidebar}>
+          <div className={styles.profileSection}>
+            <div className={styles.profileIcon}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div className={styles.profileName}>{currentAdmin?.username || 'Admin User'}</div>
+            <div className={styles.profileEmail}>{currentAdmin?.email || 'admin@company.com'}</div>
+            <div className={styles.profileButtons}>
+              <Link href="/" className={styles.profileBtn}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Home
+              </Link>
+              <button 
+                className={`${styles.profileBtn} ${styles.logoutBtn}`}
+                onClick={handleLogout}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Logout
+              </button>
+            </div>
+          </div>
+          <nav className={styles.nav}>
+            {/* Management Section */}
+            <div style={{display:'flex', flexDirection:'row', alignItems:'center', gap: 10, width: '100%', marginBottom: 8, marginTop: 8}}>
+            <hr className={styles.navItemDivider} />
+            <span className={styles.navItemLabel}>Management</span>
+            <hr className={styles.navItemDivider} style={{marginLeft: 'auto'}} />
+            </div>
+            <button
+              className={`${styles.navItem} ${activeTab === 'Leads' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Leads')}
+            >
+              Leads
+            </button>
+            <button
+              className={`${styles.navItem} ${activeTab === 'Users' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Users')}
+            >
+              Users
+            </button>
+            <div style={{display:'flex', flexDirection:'row', alignItems:'center', gap: 10, width: '100%', marginBottom: 8, marginTop: 8}}>
+            <hr className={styles.navItemDivider} />
+            <span className={styles.navItemLabel}>BO Management</span>
+            <hr className={styles.navItemDivider} style={{marginLeft: 'auto'}} />
+            </div>
+            <button
+              className={`${styles.navItem} ${activeTab === 'Backoffice' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Backoffice')}
+            >
+              Backoffice
+            </button>
+            <div style={{display:'flex', flexDirection:'row', alignItems:'center', gap: 10, width: '100%', marginBottom: 8, marginTop: 8}}>
+            <hr className={styles.navItemDivider} />
+            <span className={styles.navItemLabel}>Admin Management</span>
+            <hr className={styles.navItemDivider} style={{marginLeft: 'auto'}} />
+            </div>
+            <button
+              className={`${styles.navItem} ${activeTab === 'Admin Management' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Admin Management')}
+            >
+              Admin Management
+            </button>
+            <div style={{display:'flex', flexDirection:'row', alignItems:'center', gap: 10, width: '100%', marginBottom: 8, marginTop: 8}}>
+            <hr className={styles.navItemDivider} />
+            <span className={styles.navItemLabel}>Announcement</span>
+            <hr className={styles.navItemDivider} style={{marginLeft: 'auto'}} />
+            </div>
+            <button
+              className={`${styles.navItem} ${activeTab === 'Announcement' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Announcement')}
+            >
+              Announcement
+            </button>
+            <div style={{display:'flex', flexDirection:'row', alignItems:'center', gap: 10, width: '100%', marginBottom: 8, marginTop: 8}}>
+            <hr className={`${styles.navItemDivider} ${styles.trashNavDivider}`} />
+            <span className={styles.navItemLabel} style={{ color: '#ef4444' }}>Trash</span>
+            <hr className={`${styles.navItemDivider} ${styles.trashNavDivider}`} style={{marginLeft: 'auto'}} />
+            </div>
+            <button
+              className={`${styles.navItem} ${styles.trashNavItem} ${activeTab === 'Trashed Leads' ? styles.activeTrash : ''}`}
+              onClick={() => setActiveTab('Trashed Leads')}
+            >
+              Leads
+            </button>
+            <button
+              className={`${styles.navItem} ${styles.trashNavItem} ${activeTab === 'Trashed Users' ? styles.activeTrash : ''}`}
+              onClick={() => setActiveTab('Trashed Users')}
+            >
+              Users
+            </button>
+          </nav>
+        </div>
+
+        <div className={styles.content}>
+          {activeTab === "Leads" && renderLeadsTab(false)}
+          {activeTab === "Users" && renderUsersTab(false)}
+          {activeTab === "Trashed Leads" && renderLeadsTab(true)}
+          {activeTab === "Trashed Users" && renderUsersTab(true)}
+          {activeTab === "Backoffice" && renderBackofficeTab()}
+          {activeTab === "User Profile" && renderUserProfileTab()}
+          {activeTab === "Lead Details" && renderLeadDetailsTab()}
+          {activeTab === "Admin Management" && renderAdminManagementTab()}
+          {activeTab === "Announcement" && renderAnnouncementTab()}
+        </div>
+
+        <AuthManager 
+          isOpen={showAuthPopup} 
+          onClose={() => setShowAuthPopup(false)} 
+        />
+
+        <DashboardPanel
+          isOpen={showUserProfile}
+          onClose={() => setShowUserProfile(false)}
+          onLogout={handleLogout}
+        />
+
+        {/* Message Popup */}
+        {showMessagePopup && (
+          <div 
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 1000
+            }}
+            onClick={() => setShowMessagePopup(null)}
+          >
+            <div 
+              style={{
+                background: 'white',
+                borderRadius: '12px',
+                padding: '24px',
+                maxWidth: '500px',
+                width: '90%',
+                maxHeight: '80vh',
+                overflow: 'auto'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: '600' }}>Message</h3>
+                <button
+                  onClick={() => setShowMessagePopup(null)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    fontSize: '1.5rem',
+                    cursor: 'pointer',
+                    color: '#6b7280'
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+              <div style={{ lineHeight: '1.6', color: '#374151' }}>
+                {leads.find(lead => lead._id === showMessagePopup)?.message}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showAddBOEForm && (
+          <div className={signUpStyles.overlay} onClick={e => { if (e.target === e.currentTarget) setShowAddBOEForm(false); }}>
+            <form className={signUpStyles.popup} onSubmit={handleAddBOE}>
+              <div className={signUpStyles.header}>
+                <h2 className={signUpStyles.title}>Add Backoffice Executive</h2>
+                <button type="button" className={signUpStyles.closeBtn} onClick={() => setShowAddBOEForm(false)} aria-label="Close">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>
+                </button>
+              </div>
+              <div className={signUpStyles.content}>
+                <div className={signUpStyles.inputGroup}>
+                  <label className={signUpStyles.label}><div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Username <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                  <input type="text" value={boeForm.username} onChange={e => setBoeForm({ ...boeForm, username: e.target.value })} required className={signUpStyles.input} />
+                </div>
+                <div className={signUpStyles.inputGroup}>
+                  <label className={signUpStyles.label}><div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                  <input type="email" value={boeForm.email} onChange={e => setBoeForm({ ...boeForm, email: e.target.value })} required className={signUpStyles.input} />
+                </div>
+                <div className={signUpStyles.inputGroup}>
+                  <label className={signUpStyles.label}><div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Password <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                  <input type="password" value={boeForm.password} onChange={e => setBoeForm({ ...boeForm, password: e.target.value })} required className={signUpStyles.input} />
+                </div>
+                {boeFormError && <div className={signUpStyles.errorMessage}>{boeFormError}</div>}
+                <button type="submit" className={`${signUpStyles.btn} ${signUpStyles.primaryBtn}`} disabled={boeFormLoading}>{boeFormLoading ? 'Adding...' : 'Add Executive'}</button>
+              </div>
+            </form>
+          </div>
+        )}
+        {showAddAdminForm && (
+          <div className={signUpStyles.overlay} onClick={e => { if (e.target === e.currentTarget) setShowAddAdminForm(false); }}>
+            <form className={signUpStyles.popup} onSubmit={handleAddAdmin}>
+              <div className={signUpStyles.header}>
+                <h2 className={signUpStyles.title}>Add Admin</h2>
+                <button type="button" className={signUpStyles.closeBtn} onClick={() => setShowAddAdminForm(false)} aria-label="Close">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>
+                </button>
+              </div>
+              <div className={signUpStyles.content}>
+                <div className={signUpStyles.inputGroup}>
+                  <label className={signUpStyles.label}><div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Username <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                  <input type="text" value={adminForm.username} onChange={e => setAdminForm({ ...adminForm, username: e.target.value })} required className={signUpStyles.input} />
+                </div>
+                <div className={signUpStyles.inputGroup}>
+                  <label className={signUpStyles.label}><div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                  <input type="email" value={adminForm.email} onChange={e => setAdminForm({ ...adminForm, email: e.target.value })} required className={signUpStyles.input} />
+                </div>
+                <div className={signUpStyles.inputGroup}>
+                  <label className={signUpStyles.label}><div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Password <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                  <input type="password" value={adminForm.password} onChange={e => setAdminForm({ ...adminForm, password: e.target.value })} required className={signUpStyles.input} />
+                </div>
+                {adminFormError && <div className={signUpStyles.errorMessage}>{adminFormError}</div>}
+                <button type="submit" className={`${signUpStyles.btn} ${signUpStyles.primaryBtn}`} disabled={adminFormLoading}>{adminFormLoading ? 'Adding...' : 'Add Admin'}</button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}

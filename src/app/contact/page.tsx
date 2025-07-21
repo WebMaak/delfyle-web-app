@@ -25,6 +25,9 @@ import { FiMapPin, FiMail, FiPhone, FiMessageCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { SocialIcon } from 'react-social-icons';
+import Button from "../Components/Button/Button";
+import AuthManager from "../Components/admin/AuthManager";
+import { useUser } from '../../hooks/useUser';
 
 // Define the gradient as a constant
 const contactIconGradient = 'linear-gradient(135deg, #b40068 0%, #ff0080 60%, #6b003e 100%)';
@@ -32,6 +35,8 @@ const contactIconGradientId = 'contact-icon-gradient';
 
 export default function ContactPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const navItems = [
     { name: "Startup", link: "/#startup" },
     { name: "Trademark", link: "/#trademark" },
@@ -354,12 +359,18 @@ export default function ContactPage() {
           <ModernFooter />
         </div>
         <div className="fixed inset-x-0 top-0 z-50">
-          <ModernNavbar navLinkColor="#111827">
-            <ModernNavBody>
+          <ModernNavbar user={user} navLinkColor="#111827">
+            <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
               <ModernNavbarLogo />
               <ModernNavItems items={navItems} />
+              <div className="modernNavActions">
               <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+                {loading ? null : !user && (
+                  <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+                )}
+              </div>
             </ModernNavBody>
+
             <ModernMobileNav>
               <ModernMobileNavHeader>
                 <ModernNavbarLogo />
@@ -384,10 +395,19 @@ export default function ContactPage() {
                   </div>
                 ))}
                 <ModernNavbarButton href="/contact" className="w-full mt-4">Contact us</ModernNavbarButton>
+                <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
+                  Sign In
+                </ModernNavbarButton>
               </ModernMobileNavMenu>
             </ModernMobileNav>
           </ModernNavbar>
         </div>
+        <AuthManager 
+          isOpen={!!panelType} 
+          onClose={() => setPanelType(null)} 
+          onUserChange={setUser} 
+          panelType={panelType} 
+        />
       </main>
       {/* Hidden SVG gradient definition */}
       <svg width="0" height="0" style={{ position: 'absolute' }}>

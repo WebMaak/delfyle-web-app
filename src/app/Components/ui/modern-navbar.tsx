@@ -123,6 +123,10 @@ import IncomeTaxNoticeIcon from "../../../../public/main-icons/itr/INCOME TAX NO
 import TANRegistrationIcon from "../../../../public/main-icons/itr/TAN Registration.png";
 import Filing15CA15CBIcon from "../../../../public/main-icons/itr/15CA 15 CB FILING.png";
 
+import Button from "../Button/Button";
+import AuthManager from "../admin/AuthManager";
+import { useRouter } from 'next/navigation';
+
 // Company icon mapping
 const getCompanyIcon = (label: string) => {
   const iconMap: { [key: string]: any } = {
@@ -564,12 +568,16 @@ interface NavbarProps {
   children: React.ReactNode;
   className?: string;
   navLinkColor?: string;
+  user?: any;
 }
 
 interface NavBodyProps {
   children: React.ReactNode;
   className?: string;
   visible?: boolean;
+  setShowAuthPopup?: (v: boolean) => void;
+  user?: any;
+  onProfileClick?: () => void;
 }
 
 interface NavItemsProps {
@@ -609,13 +617,14 @@ interface MobileNavMenuProps {
   onClose: () => void;
 }
 
-export const ModernNavbar = ({ children, className, navLinkColor }: NavbarProps) => {
+export const ModernNavbar = ({ children, className, navLinkColor, user = null }: NavbarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
   const [visible, setVisible] = useState<boolean>(false);
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 100) {
@@ -634,16 +643,18 @@ export const ModernNavbar = ({ children, className, navLinkColor }: NavbarProps)
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
+              child as React.ReactElement<{ visible?: boolean, setShowAuthPopup?: (v: boolean) => void, user?: any }>,
+              { visible, setShowAuthPopup, user },
             )
           : child,
       )}
+      <AuthManager isOpen={showAuthPopup} onClose={() => setShowAuthPopup(false)} />
     </motion.div>
   );
 };
 
-export const ModernNavBody = ({ children, className, visible }: NavBodyProps) => {
+export const ModernNavBody = ({ children, className, visible, setShowAuthPopup, user = null, onProfileClick }: NavBodyProps) => {
+  const router = useRouter();
   return (
     <motion.div
       animate={{
@@ -671,11 +682,26 @@ export const ModernNavBody = ({ children, className, visible }: NavBodyProps) =>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
+              child as React.ReactElement<{ visible?: boolean, setShowAuthPopup?: (v: boolean) => void, user?: any }>,
+              { visible, setShowAuthPopup, user },
             )
           : child,
       )}
+      {user ? (
+        <div
+          className="modernNavProfile"
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            router.push('/user-dashboard');
+          }}
+        >
+          {user.profilePicture ? (
+            <img src={user.profilePicture} alt="Profile" className="modernNavProfilePic" />
+          ) : (
+            <div className="modernNavProfileDefault">{user.userName?.charAt(0).toUpperCase() || "U"}</div>
+          )}
+        </div>
+      ) : null}
     </motion.div>
   );
 };
@@ -1301,12 +1327,14 @@ export const ModernNavbarButton = ({
   | React.ComponentPropsWithoutRef<"button">
 )) => {
   return (
-    <Tag
-      href={href || undefined}
-      className={cn(styles.modernNavbarButton, styles[variant], className)}
-      {...props}
-    >
-      {children}
-    </Tag>
+    <div className="modernNavbarButtonWrapper" style={{display:'flex'}}>
+      <Tag
+        href={href || undefined}
+        className={cn(styles.modernNavbarButton, styles[variant], className)}
+        {...props}
+      >
+        {children}
+      </Tag>
+    </div>
   );
-}; 
+};

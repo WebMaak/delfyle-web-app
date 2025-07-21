@@ -12,7 +12,7 @@
   position: relative;
   z-index: 60;
   margin: 0 auto;
-  display: none;
+  display: flex;
   width: 100%;
   max-width: 1340px;
   flex-direction: row;
@@ -36,8 +36,6 @@
 
 /* Modern Nav Items */
 .modernNavItems {
-  position: absolute;
-  inset: 0;
   display: none;
   flex: 1;
   flex-direction: row;
@@ -351,7 +349,7 @@
   padding: 0.5rem 1rem;
   border-radius: 1.5rem;
   background-color: white;
-  color: black;
+  color: #111827e1;
   font-size: 0.875rem;
   font-weight: 700;
   position: relative;
@@ -371,10 +369,14 @@
 
 .modernNavbarButton.secondary {
   background-color: transparent;
+  color: white;
   box-shadow: none;
+  transition: color 0.3s;
 }
 
-
+.modernNavBody.visible .modernNavbarButton.secondary {
+  color: #111827;
+}
 
 
 .modernNavbarButton.gradient {
@@ -407,5 +409,9 @@
   .modernNavbar {
     display: none;
   }
+}
+
+.whiteButtonNoBackground.visible {
+  color: #111827 !important;
 }
 

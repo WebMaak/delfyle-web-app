@@ -67,7 +67,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-rgb: 0, 0, 0;
+    --background-rgb: 255, 255, 255;
 
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
     --secondary-glow: linear-gradient(
@@ -139,6 +139,7 @@ p {
   font-weight: 300;
   line-height: 1.75rem; /* 155.556% */
   letter-spacing: 0.0125rem;
+  text-transform: capitalize;
 }
 
 /* Add styles for the navigation */
@@ -221,4 +222,37 @@ nav {
 
 .pin-spacer {
   background: #fff !important;
+}
+
+.modernNavActions {
+  display: flex ;
+}
+
+.modernNavProfileDefault {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffffd8;
+  margin-left: .5rem;
+  border: 2px solid #e4e4e4;
+  color: #111827;
+}
+
+.modernNavProfilePic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffffd8;
+  margin-left: .5rem;
+  border: 2px solid #e4e4e4;
+}
+
+select{
+  appearance: none;
 }

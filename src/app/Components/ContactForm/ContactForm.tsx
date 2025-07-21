@@ -15,6 +15,31 @@ interface ContactFormProps {
 const initialGreet = 'Ready to connect?';
 const thankYouGreet = 'Thank You.';
 
+const countryOptions = [
+  { code: '+91', label: '🇮🇳 +91' },   // India
+  { code: '+1', label: '🇺🇸 +1' },     // USA
+  { code: '+44', label: '🇬🇧 +44' },   // UK
+  { code: '+61', label: '🇦🇺 +61' },   // Australia
+  { code: '+971', label: '🇦🇪 +971' }, // UAE
+  { code: '+81', label: '🇯🇵 +81' },   // Japan
+  { code: '+49', label: '🇩🇪 +49' },   // Germany
+  { code: '+33', label: '🇫🇷 +33' },   // France
+  { code: '+39', label: '🇮🇹 +39' },   // Italy
+  { code: '+7', label: '🇷🇺 +7' },     // Russia
+  { code: '+86', label: '🇨🇳 +86' },   // China
+  { code: '+92', label: '🇵🇰 +92' },   // Pakistan
+  { code: '+880', label: '🇧🇩 +880' }, // Bangladesh
+  { code: '+94', label: '🇱🇰 +94' },   // Sri Lanka
+  { code: '+82', label: '🇰🇷 +82' },   // South Korea
+  { code: '+34', label: '🇪🇸 +34' },   // Spain
+  { code: '+55', label: '🇧🇷 +55' },   // Brazil
+  { code: '+27', label: '🇿🇦 +27' },   // South Africa
+  { code: '+20', label: '🇪🇬 +20' },   // Egypt
+  { code: '+234', label: '🇳🇬 +234' }, // Nigeria
+  // Add or remove as per your user base
+];
+
+
 const ContactForm: React.FC<ContactFormProps> = ({ 
   services = [
     'Business registration',
@@ -30,7 +55,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
   className = ""
 }) => {
   const [form, setForm] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     phone: '',
     email: '',
     service: '',
@@ -40,6 +66,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   const [submitted, setSubmitted] = useState(false);
   const [greetText, setGreetText] = useState(initialGreet);
   const [error, setError] = useState('');
+  const [countryCode, setCountryCode] = useState(countryOptions[0].code);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -47,6 +74,15 @@ const ContactForm: React.FC<ContactFormProps> = ({
       ...prev,
       [name]: value
     }));
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Only allow numbers, max 10 digits
+    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setForm(prev => ({ ...prev, phone: value }));
+  };
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountryCode(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,7 +94,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          phone: countryCode + form.phone,
+          fullName: form.firstName + ' ' + form.lastName
+        }),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -67,7 +107,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
       setGreetText(thankYouGreet);
       setSubmitted(true);
       setForm({
-        fullName: '',
+        firstName: '',
+        lastName: '',
         phone: '',
         email: '',
         service: '',
@@ -94,29 +135,59 @@ const ContactForm: React.FC<ContactFormProps> = ({
             {greetText}
           </div>
         )}
-        <label className={styles.label}>Full Name
-          <input
-            className={styles.input}
-            type="text"
-            name="fullName"
-            value={form.fullName}
-            onChange={handleChange}
-            placeholder="Enter your full name"
-            required
-          />
+        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Full Name <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
+          <div style={{display:'flex', flexDirection:'row', gap:'12px', alignItems:'center'}}>
+            <input
+              className={styles.input}
+              type="text"
+              name="firstName"
+              value={form.firstName}
+              onChange={handleChange}
+              placeholder="First name"
+              style={{width:'100%'}}
+              required
+            />
+            <input
+              className={styles.input}
+              type="text"
+              name="lastName"
+              value={form.lastName}
+              onChange={handleChange}
+              placeholder="Last name"
+              style={{width:'100%'}}
+              required
+            />
+          </div>
         </label>
-        <label className={styles.label}>Phone Number
+        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Phone Number <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
+          <div style={{display:'flex', flexDirection:'row', gap:'12px', alignItems:'center'}}>
+            <select
+              className={styles.countryDropdown}
+              name="countryCode"
+              value={countryCode}
+              onChange={handleCountryChange}
+              style={{width:'30%', minWidth: '90px'}}
+              required
+            >
+              {countryOptions.map((option) => (
+                <option key={option.code} value={option.code} className={styles.countryDropdownOption}>{option.label}</option>
+              ))}
+            </select>
           <input
             className={styles.input}
             type="tel"
             name="phone"
             value={form.phone}
-            onChange={handleChange}
+              onChange={handlePhoneChange}
             placeholder="Enter your phone number"
             required
+              pattern="\d{10}"
+              maxLength={10}
+              style={{width:'70%'}}
           />
+          </div>
         </label>
-        <label className={styles.label}>Email
+        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
           <input
             className={styles.input}
             type="email"
@@ -127,7 +198,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             required
           />
         </label>
-        <label className={styles.label}>Choose Your Required Service
+        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Choose Your Required Service <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
           <select
             className={styles.input}
             name="service"
@@ -141,7 +212,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             ))}
           </select>
         </label>
-        <label className={styles.label}>Message
+        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Message <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
           <textarea
             className={styles.input}
             name="message"

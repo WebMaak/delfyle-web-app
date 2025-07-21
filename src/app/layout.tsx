@@ -1,7 +1,10 @@
+
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Preloader from './Components/Preloader';
+import ClientLayoutWrapper from './Components/ClientLayoutWrapper';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +26,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Preloader />
-        {children}
+        <ClientLayoutWrapper>
+          {children}
+        </ClientLayoutWrapper>
       </body>
     </html>
   );
