@@ -154,7 +154,7 @@ export default function AuthPopup({
               </div>
 
               <button
-                onClick={handleGoogleSignIn}
+                // onClick={handleGoogleSignIn}
                 disabled={isLoading}
                 className={`${styles.btn} ${styles.googleBtn}`}
                 style={{display: 'none'}}
