@@ -109,6 +109,8 @@ import TDSReturnFilingIcon from "../../../../public/main-icons/itr/TDS.png";
 import IncomeTaxNoticeIcon from "../../../../public/main-icons/itr/INCOME TAX NOTICE.png";
 import TANRegistrationIcon from "../../../../public/main-icons/itr/TAN Registration.png";
 import Filing15CA15CBIcon from "../../../../public/main-icons/itr/15CA 15 CB FILING.png";
+import AuthManager from "../admin/AuthManager";
+import { useUser } from '../../../hooks/useUser';
 
 type ToggleNavProps = {
   mainOptions?: string[];
@@ -130,8 +132,11 @@ export default function ToggleNav({
 }: ToggleNavProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<"main" | number>("main");
+  const [showAuthManager, setShowAuthManager] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const { user } = useUser();
 
   useEffect(() => {
     // Try to disable ScrollSmoother when menu is open
@@ -584,17 +589,54 @@ export default function ToggleNav({
             <img src="/delfyle-logo/delfyle-logo.png" alt="Delfyle Logo" style={{ height: 24, width: 'auto'}} />
           </a>
         </div>
-        <button
-          className={styles.toggleButton}
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? (
-            <IconX className={styles.mobileToggle} />
-          ) : (
-            <IconMenu2 className={styles.mobileToggle} />
-          )}
-        </button>
+        {/* Profile picture or initial on the left of the toggle icon */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginLeft: 8 }}>
+          {user ? (
+            user.profilePicture ? (
+              <img
+                src={user.profilePicture}
+                alt="Profile"
+                style={{
+                  width: 30,
+                  height: 30,
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '2px solid #eee',
+                }}
+              />
+            ) : user.userName ? (
+              <div
+                style={{
+                  width: 30,
+                  height: 30,
+                  borderRadius: '50%',
+                  background: '#e0e0e0',
+                  color: '#333',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 600,
+                  fontSize: 16,
+                  border: '2px solid #eee',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {user.userName.charAt(0)}
+              </div>
+            ) : null
+          ) : null}
+          <button
+            className={styles.toggleButton}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? (
+              <IconX className={styles.mobileToggle} />
+            ) : (
+              <IconMenu2 className={styles.mobileToggle} />
+            )}
+          </button>
+        </div>
       </header>
 
       <div className={`${styles.panel} ${isOpen ? styles.panelOpen : ""}`}>
@@ -668,7 +710,7 @@ export default function ToggleNav({
             </div>
           </div>
         )}
-
+    <div style={{ display: 'flex', gap: 10 }}>
         <button
           className={styles['button-17']}
           role="button"
@@ -676,7 +718,28 @@ export default function ToggleNav({
         >
           Contact Us
         </button>
-
+        {user ? (
+  <button
+    className={styles['button-17']}
+    style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)', color: '#fff' }}
+    onClick={() => window.location.href = "/user-dashboard"}
+  >
+    Dashboard
+  </button>
+) : (
+  <button
+    className={styles['button-17']}
+    style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)', color: '#fff' }}
+    onClick={() => {
+      setIsOpen(false);
+      setPanelType('auth');
+      setShowAuthManager(true);
+    }}
+  >
+    Sign In
+  </button>
+)}
+        </div>
         <div className={styles.socialIcons}>
           <div className={styles.socialIconsWrapper}>
             <SocialIcon network="whatsapp" url="https://wa.me/918697603824" bgColor="transparent" fgColor="#b40068" style={{ width: 50, height: 50 }} className="contact-gradient-icon" />
@@ -688,6 +751,12 @@ export default function ToggleNav({
           </div>
         </div>
       </div>
+      {/* AuthManager Sign In Panel */}
+      <AuthManager
+        isOpen={showAuthManager}
+        onClose={() => setShowAuthManager(false)}
+        panelType={panelType}
+      />
     </>
   );
 }

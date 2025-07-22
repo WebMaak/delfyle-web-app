@@ -6,6 +6,8 @@ import { FaArrowRight } from 'react-icons/fa';
 import gsap from 'gsap';
 import Player from 'lottie-react';
 import whiteLoader from '@/assets/animation/white-loader.json';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/material.css';
 
 const service = [
   'Business registration',
@@ -59,7 +61,7 @@ const ModernContactForm = () => {
   const [greetText, setGreetText] = useState(initialGreet);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [countryCode, setCountryCode] = useState(countryOptions[0].code);
+  const [phone, setPhone] = useState('');
 
   // Refs for GSAP
   const leftRef = useRef<HTMLDivElement>(null);
@@ -68,31 +70,8 @@ const ModernContactForm = () => {
   const greetRef = useRef<HTMLHeadingElement>(null);
 
   // Animate background shapes
-  useEffect(() => {
-    if (leftRef.current && rightRef.current && centerRef.current) {
-      gsap.to(leftRef.current, {
-        y: 60,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-      gsap.to(rightRef.current, {
-        y: -60,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-      gsap.to(centerRef.current, {
-        y: 40,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-    }
-  }, []);
+  // Remove the GSAP animation for background shapes
+  // Remove useEffect for animating leftRef, rightRef, centerRef
 
   // Animate greet text in on mount
   useEffect(() => {
@@ -119,16 +98,6 @@ const ModernContactForm = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Only allow numbers, max 10 digits
-    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-    setForm({ ...form, phone: value });
-  };
-
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCountryCode(e.target.value);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (greetText === thankYouGreet || isSubmitting) return; // Prevent further submission if already submitted or submitting
@@ -145,7 +114,7 @@ const ModernContactForm = () => {
         },
         body: JSON.stringify({
           ...form,
-          phone: countryCode + form.phone,
+          phone: phone, // phone already includes country code and number
           fullName: form.firstName + ' ' + form.lastName
         }),
       });
@@ -197,11 +166,37 @@ const ModernContactForm = () => {
     }
   };
 
+  // Pause/resume ScrollSmoother and lock body and smooth scroll container when phone dropdown is open/closed
+  const handlePhoneDropdownOpen = () => {
+    if (typeof window !== 'undefined' && (window as any).ScrollSmoother) {
+      const smoother = (window as any).ScrollSmoother.get && (window as any).ScrollSmoother.get();
+      if (smoother) smoother.paused(true);
+      // Lock the scroll container
+      const scrollContainer = document.querySelector('#smooth-content') as HTMLElement | null;
+      if (scrollContainer) scrollContainer.style.overflow = 'hidden';
+    }
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden';
+    }
+  };
+  const handlePhoneDropdownClose = () => {
+    if (typeof window !== 'undefined' && (window as any).ScrollSmoother) {
+      const smoother = (window as any).ScrollSmoother.get && (window as any).ScrollSmoother.get();
+      if (smoother) smoother.paused(false);
+      // Restore the scroll container
+      const scrollContainer = document.querySelector('#smooth-content') as HTMLElement | null;
+      if (scrollContainer) scrollContainer.style.overflow = '';
+    }
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
+  };
+
   return (
     <div id="modern-contact-form" className={styles.wrapper}>
-      <div className={styles.bgLeft} ref={leftRef}></div>
-      <div className={styles.bgRight} ref={rightRef}></div>
-      <div className={styles.bgCenter} ref={centerRef}></div>
+      <div className={styles.bgLeft} ref={leftRef} style={{backgroundColor: '#b40068', opacity: 0.1}}></div>
+      <div className={styles.bgRight} ref={rightRef} style={{backgroundColor: '#b40068', opacity: 0.1}}></div>
+      <div className={styles.bgCenter} ref={centerRef} style={{backgroundColor: '#b40068', opacity: 0.1}}></div>
       <div className={styles.cardRow}>
         <div className={styles.formCard}>
           <h2 className={styles.title}>Start your service</h2>
@@ -231,34 +226,23 @@ const ModernContactForm = () => {
               </div>
             </label>
             <label className={styles.label}> <div style={{display:'flex', flexDirection:'row',  alignItems:'center'}}>Phone Number <span style={{ color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
-              <div style={{display:'flex', flexDirection:'row', gap:'12px', alignItems:'center'}}>
-                <select
-                  className={styles.countryDropdown}
-                  name="countryCode"
-                  value={countryCode}
-                  onChange={handleCountryChange}
-                  style={{width:'30%', minWidth: '90px'}}
-                  required
-                >
-                  {countryOptions.map((option) => (
-                    <option key={option.code} value={option.code} className={styles.countryDropdownOption}>{option.label}</option>
-                  ))}
-                </select>
-              <input
-                className={styles.input}
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={handlePhoneChange}
-                placeholder="Enter your phone number"
-                required
-                pattern="[0-9]{10}"
-                maxLength={10}
-                style={{width:'70%'}}
-                inputMode="numeric"
-                autoComplete="tel"
+              <PhoneInput
+                country={'in'}
+                value={phone}
+                onChange={phone => setPhone(phone)}
+                inputProps={{
+                  name: 'phone',
+                  required: true,
+                  autoFocus: false,
+                  className: styles.input
+                }}
+                inputStyle={{ width: '100%', paddingLeft: 48 }}
+                containerStyle={{ width: '100%' }}
+                specialLabel={''}
+                enableSearch
+                onFocus={handlePhoneDropdownOpen}
+                onBlur={handlePhoneDropdownClose}
               />
-              </div>
             </label>
             <label className={styles.label}> <div style={{display:'flex', flexDirection:'row',  alignItems:'center'}}>Email <span style={{ color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
               <input
@@ -339,19 +323,7 @@ const ModernContactForm = () => {
             <div className={styles.thankSub}>We'll be in touch.<br />Shortly!</div>
             <div className={styles.nextRow}>
               {submitted && (
-                <span style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  background: '#fff',
-                  color: '#3a4fff',
-                  fontSize: '2.2rem',
-                  fontWeight: 700,
-                  boxShadow: '0 4px 16px rgba(58,79,255,0.15)'
-                }}>
+                <span className={styles.nextTick}>
                   &#10003;
                 </span>
               )}

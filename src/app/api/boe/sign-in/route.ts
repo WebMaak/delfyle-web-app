@@ -4,7 +4,6 @@ import BOEUser from '../../../../models/boe/BOEUser';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '@/utils/jwt';
-import logger from '@/utils/logger';
 
 const rateLimitWindowMs = 60 * 1000; // 1 minute
 const rateLimitMax = 5;
@@ -35,19 +34,15 @@ export async function POST(request: NextRequest) {
     await dbConnect();
     const boe = await BOEUser.findOne({ email });
     if (!boe) {
-      logger.info({ event: 'boe_login_attempt', status: 'fail', email, ip, timestamp: new Date().toISOString(), message: 'BOE user not found' });
       return NextResponse.json({ error: 'BOE user not found' }, { status: 401 });
     }
     if (boe.status === false) {
-      logger.info({ event: 'boe_login_attempt', status: 'fail', email, ip, timestamp: new Date().toISOString(), message: 'BOE account blocked' });
       return NextResponse.json({ error: 'Your account is blocked. Please contact admin.' }, { status: 403 });
     }
     const valid = await bcrypt.compare(password, boe.password);
     if (!valid) {
-      logger.info({ event: 'boe_login_attempt', status: 'fail', email, ip, timestamp: new Date().toISOString(), message: 'Invalid password' });
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
-    logger.info({ event: 'boe_login_attempt', status: 'success', email, ip, timestamp: new Date().toISOString(), message: 'BOE login successful' });
     
     // Generate JWT token
     const token = jwt.sign(
@@ -79,7 +74,6 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error) {
-    logger.error({ event: 'boe_login_attempt', status: 'fail', email: undefined, ip, timestamp: new Date().toISOString(), message: 'BOE login failed', error: (error as any)?.message });
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 } 

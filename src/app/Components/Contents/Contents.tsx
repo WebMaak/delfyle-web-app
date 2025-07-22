@@ -24,8 +24,8 @@ const Contents = () => {
         From registration to regulation, Delfyle is your trusted partner for seamless business setup, accounting,  legal compliance, HR, and more.
 
         </p>
-        <div className={styles.buttons}>
-          <Button text="Chat with our expert" type="smallWhatWeDoButton" href="https://wa.me/917439587419"></Button>
+        <div className={styles.buttons} >
+          <Button text="Chat with our expert" type="smallWhatWeDoButton" href="https://wa.me/917439587419" ></Button>
         </div>
       </div>
       <motion.div

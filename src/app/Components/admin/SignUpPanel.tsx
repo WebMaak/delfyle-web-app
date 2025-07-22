@@ -147,6 +147,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
         <div className={styles.content}>
           {step === "form" ? (
             <>
+            <div className={styles.nameField}>
               <div className={styles.inputGroup}>
                 <label htmlFor="firstName" className={styles.label} > <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>First Name <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
                 <input
@@ -173,7 +174,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
                   required
                 />
               </div>
-
+              </div>
               <div className={styles.inputGroup}>
                 <label htmlFor="email" className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email Address <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
                 </label>

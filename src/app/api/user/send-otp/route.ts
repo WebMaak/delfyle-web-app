@@ -4,8 +4,6 @@ import nodemailer from 'nodemailer';
 import { dbConnect } from '@/lib/dbConnect';
 import Otp from '@/models/Otp';
 import mongoose from 'mongoose';
-import logger from '@/utils/logger';
-
 // EmailCounter model for persistent incrementing ID
 const EmailCounterSchema = new mongoose.Schema({
   key: { type: String, unique: true },
@@ -22,7 +20,6 @@ function getClientIp(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // Rate limiting logic
   const ip = getClientIp(request);
   const now = Date.now();
   const entry = rateLimitMap[ip] || { count: 0, lastRequest: now };
@@ -40,7 +37,6 @@ export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
     if (!email || typeof email !== 'string') {
-      logger.info({ event: 'otp_requested', status: 'fail', email, ip, timestamp: new Date().toISOString(), message: 'Invalid email for OTP request' });
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
     }
 
@@ -56,7 +52,6 @@ export async function POST(request: NextRequest) {
       { email, otp, expiresAt, createdAt: new Date() },
       { upsert: true, new: true }
     );
-    logger.info({ event: 'otp_requested', status: 'success', email, ip, timestamp: new Date().toISOString(), message: 'OTP generated and sent' });
 
     // Generate a random alphanumeric ID for the email subject
     function randomId(length = 6) {
@@ -99,12 +94,10 @@ export async function POST(request: NextRequest) {
     };
 
     await transporter.sendMail(mailOptions);
-    logger.info({ event: 'otp_sent', status: 'success', email, ip, timestamp: new Date().toISOString(), message: 'OTP email sent' });
 
     // For development: return OTP in response (remove in production)
     return NextResponse.json({ message: 'OTP sent successfully', otp, emailId });
   } catch (error) {
-    logger.error({ event: 'otp_requested', status: 'fail', email: undefined, ip, timestamp: new Date().toISOString(), message: 'OTP request failed', error: (error as any)?.message });
     console.error('Send OTP error:', error);
     return NextResponse.json({ error: 'Failed to send OTP' }, { status: 500 });
   }

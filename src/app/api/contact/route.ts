@@ -6,7 +6,6 @@ import Lead from '@/models/Lead';
 import User from '@/models/User';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '@/utils/jwt';
-import logger from '@/utils/logger';
 
 const rateLimitWindowMs = 60 * 1000; // 1 minute
 const rateLimitMax = 5;
@@ -73,7 +72,6 @@ export async function POST(request: NextRequest) {
       trash: false,
       user: userId,
     });
-    logger.info({ event: 'lead_created', status: 'success', email, userId, leadId: leadDoc._id, ip, timestamp: new Date().toISOString(), message: 'Lead created via contact form' });
     // Push lead ID to user's leadsInitiated
     await User.findByIdAndUpdate(userId, { $push: { leadsInitiated: leadDoc._id } });
 
@@ -102,7 +100,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: 'Email sent successfully' });
   } catch (error) {
-    logger.error({ event: 'lead_created', status: 'fail', email: undefined, userId: undefined, leadId: undefined, ip, timestamp: new Date().toISOString(), message: 'Lead creation failed', error: (error as any)?.message });
     console.error('Nodemailer error:', error);
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }

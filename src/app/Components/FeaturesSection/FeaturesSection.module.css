@@ -25,42 +25,31 @@
   height: 24rem;
   border-radius: 9999px;
   mix-blend-mode: multiply;
-  filter: blur(48px);
-  opacity: 0.7;
-  animation: blob 7s infinite;
+  filter: blur(60px);
+  opacity: 0.2;
 }
 
 .blobBlue {
   top: 5rem;
   left: -5rem;
-  background: #dbeafe;
+  background:#b40068;
+  opacity: 0.1
 }
 
 .blobPurple {
   top: 10rem;
   right: -5rem;
-  background: #ede9fe;
-  animation-delay: 2s;
-}
+  background: #b40068;
+  opacity: 0.1 ;
+ }
 
 .blobPink {
   bottom: 3rem;
   left: 40%;
-  background: #fce7f3;
-  animation-delay: 4s;
+  background: #b40068;
+  opacity: 0.1 ;
 }
 
-@keyframes blob {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  33% {
-    transform: translateY(-20px) scale(1.05);
-  }
-  66% {
-    transform: translateY(20px) scale(0.95);
-  }
-}
 
 .content {
   position: relative;
@@ -118,24 +107,24 @@
 
 .icon {
   margin-bottom: 1.5rem;
-  color: #2563eb;
+  color: #b40068;
   transition: color 0.3s;
 }
 
 .card:hover .icon {
-  color: #1d4ed8;
+  color: #b40068;
 }
 
 .cardTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #111827;
+  color: #b40068;
   margin-bottom: 0.75rem;
   transition: color 0.3s;
 }
 
 .card:hover .cardTitle {
-  color: #1d4ed8;
+  color: #b40068;
 }
 
 .cardDesc {

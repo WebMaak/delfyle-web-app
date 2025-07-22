@@ -10,7 +10,7 @@ export default function ClientLayoutWrapper({ children }: { children: React.Reac
           position: 'fixed',
           bottom: 24,
           right: 24,
-          zIndex: 9999,
+          zIndex: 10,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-end',

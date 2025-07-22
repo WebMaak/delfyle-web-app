@@ -6,9 +6,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 
 // Map dashboard routes to required roles
 const roleRouteMap: Record<string, string> = {
-  '/admin-dashboard': 'admin',
+  '/delfadmin': 'admin',
   '/user-dashboard': 'user',
-  '/bo-dashboard': 'boe',
+  '/delfbo': 'boe',
 };
 
 export function middleware(request: NextRequest) {
@@ -44,12 +44,12 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/admin-dashboard',
-    '/admin-dashboard/:path*',
+    '/delfadmin',
+    '/delfadmin/:path*',
     '/user-dashboard',
     '/user-dashboard/:path*',
-    '/bo-dashboard',
-    '/bo-dashboard/:path*',
+    '/delfbo',
+    '/delfbo/:path*',
   ],
 }; 
 

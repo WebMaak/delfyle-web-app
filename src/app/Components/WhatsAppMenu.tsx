@@ -22,7 +22,7 @@ export default function WhatsAppMenu() {
   }, [open]);
 
   return (
-    <div ref={menuRef} style={{ position: 'relative' }}>
+    <div ref={menuRef} style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 10 }}>
       <button
         aria-label="Chat with us on WhatsApp"
         onClick={() => setOpen((v) => !v)}
@@ -38,6 +38,7 @@ export default function WhatsAppMenu() {
           border: 'none',
           cursor: 'pointer',
           transition: 'box-shadow 0.2s',
+          zIndex: 10,
         }}
       >
         <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +61,7 @@ export default function WhatsAppMenu() {
             display: 'flex',
             flexDirection: 'column',
             gap: 4,
-            zIndex: 10000,
+            zIndex: 10,
           }}
         >
           <a

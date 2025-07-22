@@ -5,6 +5,9 @@ import styles from "./ContactForm.module.css";
 import { FaPaperPlane } from 'react-icons/fa';
 import Player from 'lottie-react';
 import whiteLoader from '@/assets/animation/white-loader.json';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/material.css';
+import { useRef } from 'react';
 
 interface ContactFormProps {
   services?: string[];
@@ -57,16 +60,41 @@ const ContactForm: React.FC<ContactFormProps> = ({
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
-    phone: '',
     email: '',
     service: '',
     message: ''
   });
+  const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [greetText, setGreetText] = useState(initialGreet);
   const [error, setError] = useState('');
-  const [countryCode, setCountryCode] = useState(countryOptions[0].code);
+
+  // Pause/resume ScrollSmoother and lock body and smooth scroll container when phone dropdown is open/closed
+  const handlePhoneDropdownOpen = () => {
+    if (typeof window !== 'undefined' && (window as any).ScrollSmoother) {
+      const smoother = (window as any).ScrollSmoother.get && (window as any).ScrollSmoother.get();
+      if (smoother) smoother.paused(true);
+      // Lock the scroll container
+      const scrollContainer = document.querySelector('#smooth-content') as HTMLElement | null;
+      if (scrollContainer) scrollContainer.style.overflow = 'hidden';
+    }
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden';
+    }
+  };
+  const handlePhoneDropdownClose = () => {
+    if (typeof window !== 'undefined' && (window as any).ScrollSmoother) {
+      const smoother = (window as any).ScrollSmoother.get && (window as any).ScrollSmoother.get();
+      if (smoother) smoother.paused(false);
+      // Restore the scroll container
+      const scrollContainer = document.querySelector('#smooth-content') as HTMLElement | null;
+      if (scrollContainer) scrollContainer.style.overflow = '';
+    }
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = '';
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -74,15 +102,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
       ...prev,
       [name]: value
     }));
-  };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Only allow numbers, max 10 digits
-    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-    setForm(prev => ({ ...prev, phone: value }));
-  };
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCountryCode(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -96,7 +115,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
-          phone: countryCode + form.phone,
+          phone: phone, // phone already includes country code and number
           fullName: form.firstName + ' ' + form.lastName
         }),
       });
@@ -109,11 +128,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
       setForm({
         firstName: '',
         lastName: '',
-        phone: '',
         email: '',
         service: '',
         message: ''
       });
+      setPhone('');
       setIsSubmitting(false);
       setTimeout(() => {
         setGreetText(initialGreet);
@@ -160,32 +179,23 @@ const ContactForm: React.FC<ContactFormProps> = ({
           </div>
         </label>
         <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Phone Number <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
-          <div style={{display:'flex', flexDirection:'row', gap:'12px', alignItems:'center'}}>
-            <select
-              className={styles.countryDropdown}
-              name="countryCode"
-              value={countryCode}
-              onChange={handleCountryChange}
-              style={{width:'30%', minWidth: '90px'}}
-              required
-            >
-              {countryOptions.map((option) => (
-                <option key={option.code} value={option.code} className={styles.countryDropdownOption}>{option.label}</option>
-              ))}
-            </select>
-          <input
-            className={styles.input}
-            type="tel"
-            name="phone"
-            value={form.phone}
-              onChange={handlePhoneChange}
-            placeholder="Enter your phone number"
-            required
-              pattern="\d{10}"
-              maxLength={10}
-              style={{width:'70%'}}
+          <PhoneInput
+            country={'in'}
+            value={phone}
+            onChange={phone => setPhone(phone)}
+            inputProps={{
+              name: 'phone',
+              required: true,
+              autoFocus: false,
+              className: styles.input
+            }}
+            inputStyle={{ width: '100%', paddingLeft: 48 }}
+            containerStyle={{ width: '100%' }}
+            specialLabel={''}
+            enableSearch
+            onFocus={handlePhoneDropdownOpen}
+            onBlur={handlePhoneDropdownClose}
           />
-          </div>
         </label>
         <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
           <input

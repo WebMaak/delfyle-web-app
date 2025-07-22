@@ -11,7 +11,7 @@
 .bgLeft,
 .bgRight,
 .bgCenter {
-  filter: blur(48px) brightness(1.1) contrast(1.1) drop-shadow(0 0 20px #a5b4fc80);
+  filter: blur(60px);
   opacity: 0.85;
 }
 
@@ -22,7 +22,6 @@
   left: -180px;
   width: 340px;
   height: 340px;
-  background: radial-gradient(circle at 30% 30%, #a5b4fc 0%, #e0e7ff 60%, #f7f7fa 100%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -34,7 +33,6 @@
   right: -160px;
   width: 280px;
   height: 280px;
-  background: radial-gradient(circle at 70% 70%, #818cf8 0%, #c7d2fe 60%, #f7f7fa 100%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -47,7 +45,6 @@
   left: 70%;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle at 50% 50%, #6366f1 0%, #a5b4fc 80%, transparent 100%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -113,7 +110,7 @@
   transition: border 0.2s;
 }
 .input:focus {
-  border-bottom: 1.5px solid #3a4fff;
+  border-bottom: 1.5px solid #b40068;
 }
 
 textarea.input {
@@ -257,6 +254,20 @@ textarea.input::-webkit-scrollbar {
   box-shadow: 0 4px 16px rgba(58,79,255,0.15);
 }
 
+.nextTick {
+  background: #b40068;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 2.2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(58,79,255,0.15);
+}
+
 @media (max-width: 900px) {
   .cardRow {
     flex-direction: column;
@@ -297,7 +308,7 @@ textarea.input::-webkit-scrollbar {
   padding: 0.5rem 0;
 }
 .dropdownField:focus, .dropdownField:active {
-  border-bottom: 1.5px solid #3a4fff;
+  border-bottom: 1.5px solid #b40068;
 }
 
 .dropdownArrow {
@@ -329,7 +340,7 @@ textarea.input::-webkit-scrollbar {
 }
 .dropdownOption:hover, .dropdownOption.selected {
   background: #f0f4ff;
-  color: #3a4fff;
+  color: #222;
 }
 
 .dropdownPlaceholder {
@@ -341,15 +352,15 @@ textarea.input::-webkit-scrollbar {
 }
 
 .countryDropdown {
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  color: #222;
-  font-size: 1.1rem;
-  padding: 0.5rem 0.75rem 0.5rem 2.2rem;
-  min-width: 90px;
-  max-width: 120px;
-  box-shadow: 0 2px 8px rgba(58,79,255,0.04);
+  border-bottom: 1px solid #DFE3E7;
+  border-radius: .267rem;
+  background: #FFF;
+  color: #888;
+  font-size: 1rem;
+  padding: 8px 19px;
+  min-width: 50px;
+  max-width: 80px;
+  box-shadow: none;
   outline: none;
   transition: border 0.2s;
   appearance: none;
@@ -357,7 +368,7 @@ textarea.input::-webkit-scrollbar {
   margin-right: 0.5rem;
 }
 .countryDropdown:focus {
-  border-color: #3a4fff;
+  border-color: #b40068;
 }
 .countryDropdownMenu {
   max-height: 220px;
@@ -375,7 +386,7 @@ textarea.input::-webkit-scrollbar {
 }
 .countryDropdownOption:hover, .countryDropdownOption.selected {
   background: #f0f4ff;
-  color: #3a4fff;
+  color: #111827;
 }
 
 /* Mobile devices (phones) */

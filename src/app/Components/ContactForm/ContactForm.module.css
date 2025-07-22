@@ -65,15 +65,15 @@ textarea.input::-webkit-scrollbar {
 }
 
 .countryDropdown {
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  color: #222;
-  font-size: 1.1rem;
-  padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+  border-bottom: 1px solid #DFE3E7;
+  border-radius: .267rem;
+  background: #FFF;
+  color: #475F7B;
+  font-size: 1rem;
+  padding: 5px 19px;
   min-width: 90px;
   max-width: 120px;
-  box-shadow: 0 2px 8px rgba(58,79,255,0.04);
+  box-shadow: none;
   outline: none;
   transition: border 0.2s;
   appearance: none;
@@ -81,7 +81,7 @@ textarea.input::-webkit-scrollbar {
   margin-right: 0.5rem;
 }
 .countryDropdown:focus {
-  border-color: #3a4fff;
+  border-color: #b40068;
 }
 .countryDropdownMenu {
   max-height: 220px;
@@ -99,7 +99,7 @@ textarea.input::-webkit-scrollbar {
 }
 .countryDropdownOption:hover, .countryDropdownOption.selected {
   background: #f0f4ff;
-  color: #3a4fff;
+  color: #222;
 }
 
 /* Responsive Design */

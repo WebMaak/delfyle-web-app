@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 
+export interface User {
+  userName?: string;
+  profilePicture?: string;
+  // add other fields as needed
+}
+
 export function useUser() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -152,12 +152,8 @@
 }
 
 .smallWhatWeDoButton {
-  background: linear-gradient(
-    135deg,
-    rgba(107, 0, 62, 1) 0%,
-    rgba(180, 0, 104, 1) 100%
-  );
-  color: white;
+ background: linear-gradient(90deg, #790046 0%, #E50078 100%);
+ color: white;
   padding: 0.702rem 1.755rem;
   padding-top: .8rem;
   border-radius: 50px;
