@@ -26,8 +26,8 @@ export function useUser() {
       })
       .catch((err) => {
         // console.error("/api/user/me fetch error:", err);
-        // setUser(null);
-        // setLoading(false);
+        setUser(null);
+        setLoading(false);
       });
   }, []);
 
