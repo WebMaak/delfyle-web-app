@@ -16,7 +16,7 @@ const TopMarquee: React.FC = () => {
       });
   }, []);
 
-  const marqueeText = announcement || "No Announcement at this time.";
+  const marqueeText = announcement || "Welcome to Delfyle";
 
   return (
     <div className={styles.marqueeWrapper} aria-label="Scrolling announcement" onClick={() => {

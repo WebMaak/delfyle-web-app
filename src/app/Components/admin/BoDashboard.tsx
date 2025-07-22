@@ -548,7 +548,15 @@ export default function AdminDashboard() {
       });
       if (res.ok) {
         const updatedLead = await res.json();
-        setLeads(prev => prev.map(l => (l._id === leadId ? updatedLead.lead : l)));
+        setLeads(prev => prev.map(l =>
+          l._id === leadId
+            ? {
+                ...l,
+                assignedTo: assignedToId || undefined,
+                status: assignedToId ? 'in progress' : 'pending',
+              }
+            : l
+        ));
         setShowAssignedDropdown(null);
       }
     } catch (error) {
@@ -1084,7 +1092,7 @@ export default function AdminDashboard() {
                   </td>
                   <td data-label="Assigned">
                     <span style={{ color: '#374151', fontWeight: 500 }}>
-                      {boeUsers.find(u => u._id === lead.assignedTo)?.userName || 'None'}
+                      {!lead.assignedTo ? 'None' : boeUsers.find(u => u._id === lead.assignedTo)?.userName}
                     </span>
                   </td>
                   <td data-label="Status">
@@ -1319,11 +1327,13 @@ export default function AdminDashboard() {
                   const statusMatch = !userFilterStatus || user.status.toLowerCase() === userFilterStatus;
                   let requestStatusMatch = true;
                   if (userFilterRequestStatus === 'pending') {
-                    requestStatusMatch = user.requestStatus?.toLowerCase() === 'pending';
+                    // Only show users who have at least one lead with status 'pending'
+                    if (!user.leadsInitiated || user.leadsInitiated.length === 0) return false;
+                    return user.leadsInitiated.some(l => l.status === 'pending');
                   } else if (userFilterRequestStatus === 'in progress') {
-                    requestStatusMatch = !!user.leadsInitiated?.some(l => l.status === 'pending');
+                    return !!user.leadsInitiated?.some(l => l.status === 'in progress');
                   } else if (userFilterRequestStatus === 'completed') {
-                    requestStatusMatch = !!user.leadsInitiated?.some(l => l.status === 'completed');
+                    return !!user.leadsInitiated?.some(l => l.status === 'completed');
                   }
                   const searchMatch = !query || (
                     user.userName.toLowerCase().includes(query) ||
@@ -2127,7 +2137,7 @@ export default function AdminDashboard() {
                     fontSize: 15,
                     textTransform: 'capitalize'
                   }}>
-                  {boeUsers.find(u => u._id === lead.assignedTo)?.userName || 'None'}
+                  {!lead.assignedTo ? 'None' : boeUsers.find(u => u._id === lead.assignedTo)?.userName}
                 </span>
               </div>
             </div>
@@ -2233,7 +2243,7 @@ export default function AdminDashboard() {
       
       if (response.ok) {
         // Redirect to login page or reload the page
-        window.location.href = '/bo-dashboard';
+        window.location.href = '/delfbo';
       } else {
         console.error('Logout failed');
       }
