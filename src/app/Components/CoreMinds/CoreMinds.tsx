@@ -210,10 +210,11 @@ const CoreMinds: React.FC = () => {
                 <div className={styles.item_media}>
                   <div className={styles.image_wrapper}>
                     <Image
+                    width={1000}
+                    height={1000}
                       src={member.image}
                       alt={member.name}
-                      fill
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", width: 'auto', height: 'auto' }}
                       className={styles.member_image}
                     />
                   </div>

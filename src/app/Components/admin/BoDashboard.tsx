@@ -84,6 +84,8 @@ function useLogoutWarning() {
   }, []);
 }
 
+
+
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>("Leads");
   const [mounted, setMounted] = useState(false);
@@ -138,6 +140,7 @@ export default function AdminDashboard() {
   // Add at the top of the component, after useState declarations
   const [copiedCell, setCopiedCell] = useState<{ id: string; field: string } | null>(null);
   const [showMobileOverlay, setShowMobileOverlay] = useState(false);
+  const [initiatedLeads, setInitiatedLeads] = useState<ILead[]>([]);
 
   // Compute filteredLeads at the top level for pagination and useEffect
   let filteredBackofficeLeads = assignedLeads;
@@ -208,6 +211,20 @@ export default function AdminDashboard() {
       }
     }
   }, [users, selectedUserForDetails]);
+  // To render service in initiated leads
+const user = selectedUserForDetails;
+useEffect(() => {
+  if (user && user.leadsInitiated && user.leadsInitiated.length > 0) {
+    const leadIds = user.leadsInitiated.map((l: any) => typeof l === 'string' ? l : l._id);
+    fetch(`/api/lead/listByIds?ids=${leadIds.join(',')}`)
+      .then(res => res.json())
+      .then(data => {
+        setInitiatedLeads(data.leads || []);
+      });
+  } else {
+    setInitiatedLeads([]);
+  }
+}, [user]);
 
   useEffect(() => {
     fetchLeads(leadsCurrentPage);
@@ -756,7 +773,15 @@ export default function AdminDashboard() {
 
   // Helper function to format date
   const formatDate = (dateString: string) => {
+    if (!dateString) return 'Date unavailable';
+    
     const date = new Date(dateString);
+    
+    // Check if date is valid
+    if (isNaN(date.getTime())) {
+      return 'Invalid date';
+    }
+    
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
@@ -862,12 +887,17 @@ export default function AdminDashboard() {
           <div className={styles.statCard}>
             <div className={styles.statHeader}>
               <span className={styles.statTitle}>ASSIGNED</span>
-              <div className={styles.statIcon} style={{ backgroundColor: '#10b981' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                  <polyline points="22,4 12,14.01 9,11.01"/>
-                </svg>
-              </div>
+              <div className={styles.statIcon} style={{ backgroundColor: '#6f42c1' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect>
+  <line x1="8" y1="8" x2="16" y2="8"></line>
+  <line x1="8" y1="12" x2="16" y2="12"></line>
+  <line x1="8" y1="16" x2="16" y2="16"></line>
+  <circle cx="5" cy="8" r="1"></circle>
+  <circle cx="5" cy="12" r="1"></circle>
+  <circle cx="5" cy="16" r="1"></circle>
+</svg>  
+            </div>
             </div>
             <div className={styles.statMainValue}>{stats.assigned}</div>
             <div className={styles.statSubLine}>
@@ -885,11 +915,10 @@ export default function AdminDashboard() {
           <div className={styles.statCard}>
             <div className={styles.statHeader}>
               <span className={styles.statTitle}>COMPLETED</span>
-              <div className={styles.statIcon} style={{ backgroundColor: '#ef4444' }}>
+              <div className={styles.statIcon} style={{ backgroundColor: '#10b981' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="15" y1="9" x2="9" y2="15"/>
-                  <line x1="9" y1="9" x2="15" y2="15"/>
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22,4 12,14.01 9,11.01"/>
                 </svg>
               </div>
             </div>
@@ -962,6 +991,11 @@ export default function AdminDashboard() {
             {/* <button className={styles.filterBtn} style={{display: 'flex'}}>⚙ Filter</button> */}
           </div>
         </div>
+        <div className={styles.scrollGuide}>
+  <span className={styles.scrollText}>
+    Scroll right using SHIFT + Mouse Wheel or Trackpad
+  </span>
+</div>
   
         <div className={styles.tableContainer}>
           <table className={styles.leadsTable}>
@@ -1091,9 +1125,31 @@ export default function AdminDashboard() {
                     </span>
                   </td>
                   <td data-label="Assigned">
-                    <span style={{ color: '#374151', fontWeight: 500 }}>
-                      {!lead.assignedTo ? 'None' : boeUsers.find(u => u._id === lead.assignedTo)?.userName}
-                    </span>
+                    {!lead.assignedTo ? (
+                      <button
+                        onClick={() => handleTakeoverLead(lead._id)}
+                        style={{
+                          backgroundColor: '#10b981',
+                          color: 'white',
+                          border: 'none',
+                          padding: '6px 12px',
+                          borderRadius: '4px',
+                          fontSize: '12px',
+                          fontWeight: '500',
+                          cursor: 'pointer',
+                          transition: 'background-color 0.2s'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#059669'}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#10b981'}
+                        title="Take over this lead"
+                      >
+                        Take Over
+                      </button>
+                    ) : (
+                      <span style={{ color: '#374151', fontWeight: 500 }}>
+                        {boeUsers.find(u => u._id === lead.assignedTo)?.userName}
+                      </span>
+                    )}
                   </td>
                   <td data-label="Status">
                     <span style={{ color: getStatusColor(lead.status || 'pending'), textTransform: 'capitalize' }}>
@@ -1303,6 +1359,11 @@ export default function AdminDashboard() {
           </div>
         </div>
         </div>
+        <div className={styles.scrollGuide}>
+  <span className={styles.scrollText}>
+    Scroll right using SHIFT + Mouse Wheel or Trackpad
+  </span>
+</div>
         <div className={styles.tableContainer}>
           <table className={styles.leadsTable}>
             <thead>
@@ -1556,7 +1617,7 @@ export default function AdminDashboard() {
                         <line x1="14" y1="11" x2="14" y2="17"/>
                       </svg>
               </button>
-            <button className={styles.bulkBtn} onClick={() => handleBulkAction('download', 'leads')} disabled={selectedLeads.length === 0}>
+            <button className={styles.bulkBtn} style={{ color: '#10b981', borderColor: '#10b981'  }} onClick={() => handleBulkAction('download', 'leads')} disabled={selectedLeads.length === 0}>
               Download
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -1588,6 +1649,11 @@ export default function AdminDashboard() {
             </div>
         </div>
       </div>
+      <div className={styles.scrollGuide}>
+  <span className={styles.scrollText}>
+    Scroll right using SHIFT + Mouse Wheel or Trackpad
+  </span>
+</div>
 
       <div className={styles.tableContainer}>
         <table className={styles.leadsTable}>
@@ -1679,7 +1745,7 @@ export default function AdminDashboard() {
                       fontSize: '0.875rem'
                     }}
                   >
-                      View Message
+                      View
                   </button>
                 </td>
                   <td data-label="Service">
@@ -1765,8 +1831,9 @@ export default function AdminDashboard() {
   );
   };
 
+  
   const renderUserProfileTab = () => {
-    const user = selectedUserForDetails;
+
 
     if (!user) {
       return (
@@ -1862,7 +1929,7 @@ export default function AdminDashboard() {
           {/* Contact Info */}
           <div>
             <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Contact Information</div>
-            <div style={{ color: '#374151', fontSize: 16, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 400 }}>{user.email}</span></div>
+            <div style={{ color: '#374151', fontSize: 20, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 500 }}>{user.email}</span></div>
           </div>
           
           {/* Status */}
@@ -1871,8 +1938,8 @@ export default function AdminDashboard() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <span style={{
                   color: user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#374151',
-                  fontWeight: 600,
-                  fontSize: 15,
+                  fontWeight: 500,
+                  fontSize: 20,
                   textTransform: 'capitalize'
               }}>
                 {user.status}
@@ -1886,32 +1953,38 @@ export default function AdminDashboard() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
               <span style={{
                   color: '#ef4444',
-                  fontWeight: 600,
-                  fontSize: 14,
+                  borderRight: '1px solid #e5e7eb',
+                  paddingRight: '12px',
+                  fontWeight: 500,
+                  fontSize: 20,
                   transition: 'all 0.2s'
               }}>
                 Pending: {leadStats.pending}
               </span>
               <span style={{
                   color: '#f59e0b',
-                  fontWeight: 600,
-                  fontSize: 14,
+                  borderRight: '1px solid #e5e7eb',
+                  paddingRight: '12px',
+                  fontWeight: 500,
+                  fontSize: 20,
                   transition: 'all 0.2s'
               }}>
                 In Progress: {leadStats.inProgress}
               </span>
               <span style={{
                   color: '#10b981',
-                  fontWeight: 600,
-                  fontSize: 14,
+                  borderRight: '1px solid #e5e7eb',
+                  paddingRight: '12px',
+                  fontWeight: 500,
+                  fontSize: 20,
                   transition: 'all 0.2s'
               }}>
                 Completed: {leadStats.completed}
               </span>
               <span style={{
                   color: '#3b82f6',
-                  fontWeight: 600,
-                  fontSize: 14,
+                  fontWeight: 500,
+                  fontSize: 20,
                   transition: 'all 0.2s'
               }}>
                 Total: {leadStats.total}
@@ -1926,11 +1999,11 @@ export default function AdminDashboard() {
           </div>
 
           {/* User's Leads */}
-          {userLeads.length > 0 && (
+          {initiatedLeads.length > 0 && (
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Initiated Leads</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {userLeads.map((lead, index) => (
+                {initiatedLeads.map((lead) => (
                   <div key={lead._id} style={{
                     background: '#fff',
                     border: '1px solid #e5e7eb',
@@ -1941,21 +2014,19 @@ export default function AdminDashboard() {
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '16px', marginBottom: '4px' }}>{lead.fullName}</div>
-                        <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '4px' }}>{lead.email}</div>
+                        <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '16px', marginBottom: '4px' }}>Name: {lead.fullName}</div>
+                        <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '4px' }}>Email: {lead.email}</div>
                         <div style={{ color: '#64748b', fontSize: '14px' }}>
-                          Service: {Array.isArray(lead.service) ? lead.service.join(', ') : (lead.service || 'No service specified')}
+                          Service: {Array.isArray(lead.service) ? lead.service[0] : lead.service}
                         </div>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{
                           background: '#fff',
                           color: getStatusColor(lead.status),
-                          border: `1px solid ${getStatusColor(lead.status)}`,
-                          borderRadius: '6px',
                           padding: '6px 12px',
-                          fontWeight: 600,
-                          fontSize: '12px',
+                          fontWeight: 500,
+                          fontSize: 16,
                           textTransform: 'uppercase'
                         }}>
                           {lead.status}
@@ -2057,7 +2128,7 @@ export default function AdminDashboard() {
             </div>
             {/* Name */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b' }}>{lead.fullName}</span>
+              <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b', textTransform: 'capitalize'  }}>{lead.fullName}</span>
             </div>
             <div style={{ color: '#64748b', fontSize: 20, fontWeight: 500, marginBottom: 12 }}>{lead._id}</div>
           </div>
@@ -2070,21 +2141,20 @@ export default function AdminDashboard() {
             {/* Contact Info */}
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Contact Information</div>
-              <div style={{ color: '#374151', fontSize: 16, marginBottom: 6, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 400 }}>{lead.email}</span></div>
-              <div style={{ color: '#374151', fontSize: 16, fontWeight: 500 }}>Phone Number: <span style={{ color: '#2563eb', fontWeight: 400 }}>{lead.phoneNumber}</span></div>
+              <div style={{ color: '#374151', fontSize: 20, marginBottom: 6, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 500 }}>{lead.email}</span></div>
+              <div style={{ color: '#374151', fontSize: 20, fontWeight: 500 }}>Phone Number: <span style={{ color: '#2563eb', fontWeight: 500 }}>{lead.phoneNumber}</span></div>
             </div>
             {/* Service */}
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Service(s) Requested</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-                {Array.isArray(lead.service) ? (
+                {lead.service && Array.isArray(lead.service) && lead.service.length > 0 ? (
                   lead.service.map((service, index) => (
                     <span key={index} style={{
                       color: '#3b82f6',
-                      borderRadius: 8,
                       padding: '8px 0',
-                      fontWeight: 600,
-                      fontSize: 14,
+                      fontWeight: 500,
+                      fontSize: 20,
                       textTransform: 'capitalize'
                     }}>
                       {service}
@@ -2093,13 +2163,14 @@ export default function AdminDashboard() {
                 ) : (
                   <span style={{
                     color: '#3b82f6',
-                    borderRadius: 8,
                     padding: '8px 0',
-                    fontWeight: 600,
-                    fontSize: 14,
+                    fontWeight: 500,
+                    fontSize: 20,
                     textTransform: 'capitalize'
                   }}>
-                    {lead.service || 'No service specified'}
+                    {typeof lead.service === 'string' && (lead.service as string).trim() !== '' 
+                      ? lead.service 
+                      : 'No service specified'}
                   </span>
                 )}
               </div>
@@ -2107,7 +2178,7 @@ export default function AdminDashboard() {
             {/* Message */}
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Message</div>
-              <p style={{ color: '#374151', fontSize: 16, fontWeight: 400, margin: 0, lineHeight: 1.5, textTransform: 'capitalize' }}>{lead.message}</p>
+              <p style={{ color: '#374151', fontSize: 20, fontWeight: 500, margin: 0, lineHeight: 1.5, textTransform: 'capitalize' }}>{lead.message}</p>
             </div>
             {/* Status */}
             <div>
@@ -2116,9 +2187,8 @@ export default function AdminDashboard() {
                 <span style={{
                     color: getStatusColor(lead.status),
                     borderRadius: 8,
-                    padding: '8px 0',
-                    fontWeight: 600,
-                    fontSize: 15,
+                    fontWeight: 500,
+                    fontSize: 20,
                     textTransform: 'capitalize'
                   }}>
                   {lead.status}
@@ -2129,16 +2199,28 @@ export default function AdminDashboard() {
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Assigned To</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span style={{
-                    color: '#374151',
-                    borderRadius: 8,
-                    padding: '8px 0',
-                    fontWeight: 600,
-                    fontSize: 15,
-                    textTransform: 'capitalize'
-                  }}>
-                  {!lead.assignedTo ? 'None' : boeUsers.find(u => u._id === lead.assignedTo)?.userName}
-                </span>
+                {!lead.assignedTo ? (
+                  <button
+                    onClick={() => handleTakeoverLead(lead._id)}
+                    style={{
+                      color: '#10b981',
+                      fontSize: 20,
+                      fontWeight: 500,
+                    }}
+                    title="Take over this lead"
+                  >
+                    Take Over
+                  </button>
+                ) : (
+                  <span style={{
+                      color: getStatusColor(lead.status),
+                      fontWeight: 500,
+                      fontSize: 20,
+                      textTransform: 'capitalize'
+                    }}>
+                    {boeUsers.find(u => u._id === lead.assignedTo)?.userName}
+                  </span>
+                )}
               </div>
             </div>
             {/* Created At */}
@@ -2249,6 +2331,33 @@ export default function AdminDashboard() {
       }
     } catch (error) {
       console.error('Error during logout:', error);
+    }
+  };
+  
+  const handleTakeoverLead = async (leadId: string) => {
+    try {
+      const response = await fetch('/api/boe/assign-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          leadId: leadId
+        }),
+      });
+
+      if (response.ok) {
+        // Refresh the leads data
+        fetchLeads(leadsCurrentPage);
+        // Show success message
+        alert('Lead taken over successfully!');
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.message || 'Failed to take over lead'}`);
+      }
+    } catch (error) {
+      console.error('Error taking over lead:', error);
+      alert('Error taking over lead. Please try again.');
     }
   };
   

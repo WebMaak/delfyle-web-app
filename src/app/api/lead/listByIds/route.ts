@@ -21,4 +21,13 @@ export async function POST(req: NextRequest) {
     console.error('Error fetching leads by IDs:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
+}
+
+export async function GET(req: NextRequest) {
+  await dbConnect();
+  const { searchParams } = new URL(req.url);
+  const ids = (searchParams.get('ids') || '').split(',').filter(Boolean);
+  if (!ids.length) return NextResponse.json({ leads: [] });
+  const leads = await Lead.find({ _id: { $in: ids } });
+  return NextResponse.json({ leads });
 } 

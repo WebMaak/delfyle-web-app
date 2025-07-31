@@ -15,6 +15,7 @@
   left: 0;
   height: 100vh;
   z-index: 10;
+  overflow: auto;
 }
 
 .profileSection {
@@ -234,13 +235,13 @@
 }
 
 .newLeadBtn {
-  background: #2563eb;
-  border: 1px solid #2563eb;
+  background: #b91c1c;
+  border: 1px solid #b91c1c;
   color: white;
 }
 
 .newLeadBtn:hover {
-  background: #1d4ed8;
+  background: #b91c1c;
 }
 
 .statsContainer {
@@ -347,6 +348,55 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
+.scrollGuide {
+  position: relative;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569; /* Slate gray */
+  background-color: #f8fafc; /* Soft neutral */
+  overflow: hidden;
+}
+
+/* Subtle moving background to hint scroll direction */
+.scrollGuide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(100, 116, 139, 0.04),
+    rgba(100, 116, 139, 0.04) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+  animation: slideRight 20s linear infinite; /* Slowed down */
+  z-index: 0;
+}
+
+.scrollText {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.3px;
+}
+
+/* Animation: very slow horizontal drift */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
+}
+
+
 .leftControls,
 .rightControls {
   display: flex;
@@ -398,18 +448,18 @@
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 0.875rem;
-  width: 200px;
+  width: 300px;
   color: #111827;
 }
 
 .searchInput:focus {
   outline: none;
-  border-color: #2563eb;
+  border-color: #b91c1c;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .tableContainer {
-  overflow: visible;
+  overflow: auto;
   position: relative;
   margin-bottom: 20px;
 }
@@ -418,6 +468,8 @@
   width: 100%;
   border-collapse: collapse;
   position: relative;
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
 }
 
 .leadsTable tbody tr {
@@ -478,15 +530,15 @@
 }
 
 .emailCell {
-  color: #2563eb;
+  color: #b91c1c;
 }
 
 .dropdownButton {
   background: none;
   border: none;
   cursor: pointer;
-  fontWeight: 500;
-  fontSize: 0.875rem;
+  font-weight: 500;
+  font-size: 0.875rem;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -764,7 +816,7 @@
 }
 
 .activePage {
-  background: #2563eb !important;
+  background: #b91c1c !important;
   color: white !important;
 }
 
@@ -929,8 +981,8 @@
   cursor: pointer;
 }
 .checkbox:checked {
-  background-color: #2563eb;
-  border-color: #2563eb;
+  background-color: #b91c1c;
+  border-color: #b91c1c;
 }
 .modernDropdown {
   position: absolute;

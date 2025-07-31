@@ -143,6 +143,7 @@ export default function AdminDashboard() {
   const [showAnnouncementSaved, setShowAnnouncementSaved] = useState(false);
   const [copiedCell, setCopiedCell] = useState<{ id: string; field: string } | null>(null);
   const [showMobileOverlay, setShowMobileOverlay] = useState(false);
+  const [initiatedLeads, setInitiatedLeads] = useState<ILead[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -270,6 +271,21 @@ export default function AdminDashboard() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+    // To display service in initiated leads
+const user = selectedUserForDetails;
+useEffect(() => {
+  if (user && user.leadsInitiated && user.leadsInitiated.length > 0) {
+    const leadIds = user.leadsInitiated.map((l: any) => typeof l === 'string' ? l : l._id);
+    fetch(`/api/lead/listByIds?ids=${leadIds.join(',')}`)
+      .then(res => res.json())
+      .then(data => {
+        setInitiatedLeads(data.leads || []);
+      });
+  } else {
+    setInitiatedLeads([]);
+  }
+}, [user]);
 
   useLogoutWarning();
 
@@ -949,6 +965,12 @@ export default function AdminDashboard() {
             {/* <button className={styles.filterBtn} style={{display: 'flex'}}>⚙ Filter</button> */}
         </div>
       </div>
+      <div className={styles.scrollGuide}>
+  <span className={styles.scrollText}>
+    Scroll right using SHIFT + Mouse Wheel or Trackpad
+  </span>
+</div>
+
 
       <div className={styles.tableContainer}>
         <table className={styles.leadsTable}>
@@ -1320,6 +1342,11 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
+        <div className={styles.scrollGuide}>
+  <span className={styles.scrollText}>
+    Scroll right using SHIFT + Mouse Wheel or Trackpad
+  </span>
+</div>
       <div className={styles.tableContainer}>
         <table className={styles.leadsTable}>
           <thead>
@@ -1629,7 +1656,6 @@ export default function AdminDashboard() {
   );
 
   const renderUserProfileTab = () => {
-    const user = selectedUserForDetails;
 
     if (!user) {
       return (
@@ -1683,12 +1709,12 @@ export default function AdminDashboard() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
           position: 'relative',
-          padding: '0 0 0 0',
+          padding: '0 0 0 0'
         }}>
           {/* Avatar */}
-          <div style={{
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'fixed', top: 200 }}>
+            <div style={{
             width: 160,
             height: 160,
             borderRadius: '50%',
@@ -1708,13 +1734,14 @@ export default function AdminDashboard() {
             ) : (
               user.userName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)
             )}
-          </div>
-          {/* Name and Verified */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-            <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b' }}>{user.userName}</span>
+            </div>
+            {/* Name and Verified */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+            <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b', textTransform: 'capitalize' }}>{user.userName}</span>
             {user.verified && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>}
+            </div>
+            <div style={{ color: '#64748b', fontSize: 20, fontWeight: 500, marginBottom: 12 }}>{user._id}</div>
           </div>
-          <div style={{ color: '#64748b', fontSize: 20, fontWeight: 500, marginBottom: 12 }}>{user._id}</div>
         </div>
 
         {/* Divider */}
@@ -1725,23 +1752,20 @@ export default function AdminDashboard() {
           {/* Contact Info */}
           <div>
             <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Contact Information</div>
-            <div style={{ color: '#374151', fontSize: 16, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 400 }}>{user.email}</span></div>
+            <div style={{ color: '#374151', fontSize: 20, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 500 }}>{user.email}</span></div>
           </div>
+          
           
           {/* Status */}
           <div>
             <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Status</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <span style={{
-                  background: '#fff',
-                color: user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#374151',
-                  border: `1px solid ${user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#374151'}`,
-                  borderRadius: 8,
-                  padding: '8px 24px',
-                  fontWeight: 600,
-                  fontSize: 15,
-                  transition: 'all 0.2s',
-                  boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                  color: user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#374151',
+                  fontWeight: 500,
+                  fontSize: 20,
+                  textTransform: 'capitalize',
+                  transition: 'all 0.2s'
               }}>
                 {user.status}
               </span>
@@ -1753,59 +1777,47 @@ export default function AdminDashboard() {
             <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Lead Statistics</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
               <span style={{
-                  background: '#fff',
                 color: '#ef4444',
-                border: '1px solid #ef4444',
-                  borderRadius: 8,
-                padding: '8px 16px',
-                  fontWeight: 600,
-                fontSize: 14,
-                  transition: 'all 0.2s',
-                boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                borderRight: '1px solid #e5e7eb',
+                paddingRight: '12px',
+                  fontWeight: 500,
+                fontSize: 20,
+                  transition: 'all 0.2s'
               }}>
                 Pending: {leadStats.pending}
               </span>
               <span style={{
-                  background: '#fff',
                 color: '#f59e0b',
-                border: '1px solid #f59e0b',
-                  borderRadius: 8,
-                padding: '8px 16px',
-                  fontWeight: 600,
-                fontSize: 14,
-                  transition: 'all 0.2s',
-                boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                borderRight: '1px solid #e5e7eb',
+                paddingRight: '12px',
+                  fontWeight: 500,
+                fontSize: 20,
+                  transition: 'all 0.2s'
               }}>
                 In Progress: {leadStats.inProgress}
               </span>
               <span style={{
-                  background: '#fff',
                 color: '#10b981',
-                border: '1px solid #10b981',
-                  borderRadius: 8,
-                padding: '8px 16px',
-                  fontWeight: 600,
-                fontSize: 14,
-                  transition: 'all 0.2s',
-                  boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                borderRight: '1px solid #e5e7eb',
+                paddingRight: '12px',
+                  fontWeight: 500,
+                fontSize: 20,
+                  transition: 'all 0.2s'
               }}>
                 Completed: {leadStats.completed}
               </span>
               <span style={{
-                  background: '#fff',
                 color: '#3b82f6',
-                border: '1px solid #3b82f6',
-                  borderRadius: 8,
-                padding: '8px 16px',
-                  fontWeight: 600,
-                fontSize: 14,
-                  transition: 'all 0.2s',
-                boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                  fontWeight: 500,
+                fontSize: 20,
+                  transition: 'all 0.2s'
               }}>
                 Total: {leadStats.total}
               </span>
             </div>
           </div>
+
+
 
           {/* Created At */}
           <div>
@@ -1814,11 +1826,11 @@ export default function AdminDashboard() {
           </div>
 
           {/* User's Leads */}
-          {userLeads.length > 0 && (
+          {initiatedLeads.length > 0 && (
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Initiated Leads</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {userLeads.map((lead, index) => (
+                {initiatedLeads.map((lead) => (
                   <div key={lead._id} style={{
                     background: '#fff',
                     border: '1px solid #e5e7eb',
@@ -1829,21 +1841,18 @@ export default function AdminDashboard() {
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '16px', marginBottom: '4px' }}>{lead.fullName}</div>
-                        <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '4px' }}>{lead.email}</div>
+                        <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '16px', marginBottom: '4px' }}>Name: {lead.fullName || 'N/A'}</div>
+                        <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '4px' }}>Email: {lead.email || 'N/A'}</div>
                         <div style={{ color: '#64748b', fontSize: '14px' }}>
-                          Service: {Array.isArray(lead.service) ? lead.service.join(', ') : (lead.service || 'No service specified')}
+                          Service: {Array.isArray(lead.service) ? lead.service[0] : lead.service || 'N/A'}
                         </div>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{
-                          background: '#fff',
                           color: getStatusColor(lead.status),
-                          border: `1px solid ${getStatusColor(lead.status)}`,
-                          borderRadius: '6px',
                           padding: '6px 12px',
-                          fontWeight: 600,
-                          fontSize: '12px',
+                          fontWeight: 500,
+                          fontSize: 16,
                           textTransform: 'uppercase'
                         }}>
                           {lead.status}
@@ -1945,7 +1954,7 @@ export default function AdminDashboard() {
             </div>
             {/* Name */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b' }}>{lead.fullName}</span>
+              <span style={{ fontWeight: 700, fontSize: 32, color: '#1e293b', textTransform: 'capitalize' }}>{lead.fullName}</span>
             </div>
             <div style={{ color: '#64748b', fontSize: 20, fontWeight: 500, marginBottom: 12 }}>{lead._id}</div>
           </div>
@@ -1958,8 +1967,8 @@ export default function AdminDashboard() {
             {/* Contact Info */}
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Contact Information</div>
-              <div style={{ color: '#374151', fontSize: 16, marginBottom: 6, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 400 }}>{lead.email}</span></div>
-              <div style={{ color: '#374151', fontSize: 16, fontWeight: 500 }}>Phone Number: <span style={{ color: '#2563eb', fontWeight: 400 }}>{lead.phoneNumber}</span></div>
+              <div style={{ color: '#374151', fontSize: 20, marginBottom: 6, fontWeight: 500 }}>Email: <span style={{ color: '#2563eb', fontWeight: 500 }}>{lead.email}</span></div>
+              <div style={{ color: '#374151', fontSize: 20, fontWeight: 500 }}>Phone Number: <span style={{ color: '#2563eb', fontWeight: 500 }}>{lead.phoneNumber}</span></div>
             </div>
             {/* Service */}
             <div>
@@ -1968,30 +1977,20 @@ export default function AdminDashboard() {
                 {Array.isArray(lead.service) ? (
                   lead.service.map((service, index) => (
                     <span key={index} style={{
-                      background: '#fff',
                       color: '#3b82f6',
-                      border: '1px solid #3b82f6',
-                      borderRadius: 8,
-                      padding: '8px 16px',
-                      fontWeight: 600,
-                      fontSize: 14,
-                      transition: 'all 0.2s',
-                      boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                      fontWeight: 500,
+                      fontSize: 20,
+                      transition: 'all 0.2s'
                     }}>
                       {service}
                     </span>
                   ))
                 ) : (
                   <span style={{
-                    background: '#fff',
                     color: '#3b82f6',
-                    border: '1px solid #3b82f6',
-                    borderRadius: 8,
-                    padding: '8px 16px',
-                    fontWeight: 600,
-                    fontSize: 14,
-                    transition: 'all 0.2s',
-                    boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                    fontWeight: 500,
+                    fontSize: 20,
+                    transition: 'all 0.2s'
                   }}>
                     {lead.service || 'No service specified'}
                   </span>
@@ -2001,19 +2000,16 @@ export default function AdminDashboard() {
             {/* Message */}
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Message</div>
-              <p style={{ color: '#374151', fontSize: 16, fontWeight: 400, margin: 0, lineHeight: 1.5, textTransform: 'capitalize' }}>{lead.message}</p>
+              <p style={{ color: '#374151', fontSize: 20, fontWeight: 500, margin: 0, lineHeight: 1.5, textTransform: 'capitalize' }}>{lead.message}</p>
             </div>
             {/* Status */}
             <div>
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Status</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span style={{
-                    background: '#fff',
                     color: getStatusColor(lead.status),
-                    borderRadius: 8,
-                    padding: '8px 0',
-                    fontWeight: 600,
-                    fontSize: 15,
+                    fontWeight: 500,
+                    fontSize: 20,
                     textTransform: 'capitalize'
                   }}>
                   {lead.status}
@@ -2025,15 +2021,10 @@ export default function AdminDashboard() {
               <div style={{ fontWeight: 600, fontSize: 20, color: '#1e293b', marginBottom: 12 }}>Assigned To</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span style={{
-                    background: '#fff',
                     color: '#374151',
-                    border: `1px solid #d1d5db`,
-                    borderRadius: 8,
-                    padding: '8px 24px',
-                    fontWeight: 600,
-                    fontSize: 15,
-                    transition: 'all 0.2s',
-                    boxShadow: `0 1px 4px rgba(0,0,0,0.04)`
+                    fontWeight: 500,
+                    fontSize: 20,
+                    transition: 'all 0.2s'
                   }}>
                   {!lead.assignedTo ? 'None' : boeUsers.find(u => u._id === lead.assignedTo)?.userName}
                 </span>
@@ -2190,7 +2181,7 @@ export default function AdminDashboard() {
         <div className={styles.rightControls} style={isMobile ? { width: '100%' } : {}}>
         </div>
       </div>
-
+    
       <div className={styles.tableContainer}>
         <table className={styles.leadsTable}>
           <thead>
@@ -2443,6 +2434,8 @@ export default function AdminDashboard() {
       </div>
     </form>
   );
+  
+
   
   const handleCopyCell = (id: string, field: string, value: string) => {
     if (typeof navigator !== 'undefined' && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {

@@ -94,6 +94,7 @@ export default function UserDashboard() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
 
   useEffect(() => {
     const checkMobile = () => {
@@ -136,6 +137,7 @@ export default function UserDashboard() {
     console.log("UserDashboard mounted", { user, loading });
   }, [user, loading]);
 
+  
   if (loading) {
     return <div style={{ color: '#b40068', textAlign: 'center', marginTop: 100, fontSize: 24 }}>Loading...</div>;
   }

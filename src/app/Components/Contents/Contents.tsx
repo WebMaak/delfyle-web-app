@@ -32,7 +32,7 @@ const Contents = () => {
         animate={floatingAnimation}
         className={styles['hero-image']}
       >
-        <Image alt="hero image" src={HeroImage} width={10000} height={5000} />
+        <Image alt="hero image" src={HeroImage} width={10000} height={5000} priority />
       </motion.div>
     </div>
   );
