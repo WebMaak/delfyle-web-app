@@ -1673,6 +1673,7 @@ useEffect(() => {
                 <th>Number</th>
               <th>Message</th>
                 <th>Service</th>
+                <th>Completed</th>
                 <th>Status</th>
               <th>Created At</th>
                 <th>Actions</th>
@@ -1759,6 +1760,25 @@ useEffect(() => {
                         <span style={{ position: 'absolute', left: '100%', marginLeft: 8, fontSize: 12, color: '#10b981', background: '#fff', borderRadius: 4, padding: '2px 6px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>Copied!</span>
                       )}
                     </span>
+                  </td>
+                  <td data-label="Completed">
+                    <button
+                      onClick={() => handleMarkAsCompleted(lead._id)}
+                      disabled={lead.status === "completed"}
+                      style={{
+                        padding: '6px 12px',
+                        borderRadius: '6px',
+                        border: 'none',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        cursor: lead.status === "completed" ? 'not-allowed' : 'pointer',
+                        backgroundColor: lead.status === "completed" ? '#9ca3af' : '#10b981',
+                        color: lead.status === "completed" ? '#6b7280' : 'white',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      Completed
+                    </button>
                   </td>
                   <td data-label="Status">
                   <span style={{
@@ -2358,6 +2378,15 @@ useEffect(() => {
     } catch (error) {
       console.error('Error taking over lead:', error);
       alert('Error taking over lead. Please try again.');
+    }
+  };
+
+  const handleMarkAsCompleted = async (leadId: string) => {
+    try {
+      await updateLead(leadId, { status: "completed" });
+      await fetchAssignedLeads(); // Refresh assigned leads after status update
+    } catch (error) {
+      console.error("Failed to mark lead as completed", error);
     }
   };
   
