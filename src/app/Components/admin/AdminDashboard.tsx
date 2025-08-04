@@ -2272,17 +2272,25 @@ useEffect(() => {
   const handleDeleteAdmin = async (adminId: string) => {
     if (!window.confirm("Are you sure you want to permanently delete this admin?")) return;
     try {
+      console.log('Attempting to delete admin with ID:', adminId);
       const res = await fetch('/api/admin/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ adminId }),
       });
+      console.log('Response status:', res.status);
       if (res.ok) {
+        const data = await res.json();
+        console.log('Response data:', data);
         setAdminUsers((prev: any[]) => prev.filter((u: any) => u._id !== adminId));
+        alert('Admin deleted successfully');
       } else {
-        alert('Failed to delete admin.');
+        const errorData = await res.json();
+        console.error('Error response:', errorData);
+        alert(`Failed to delete admin: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
+      console.error('Network error:', error);
       alert('Error deleting admin.');
     }
   };

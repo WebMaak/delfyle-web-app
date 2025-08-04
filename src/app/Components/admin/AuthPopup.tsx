@@ -155,7 +155,7 @@ export default function AuthPopup({
                   disabled={false}
                   className={`${styles.btn} ${styles.signUpBtn}`}
                 >
-                  Sign Up
+                  Register
                 </button>
                 </div>
 
@@ -163,7 +163,7 @@ export default function AuthPopup({
                   onClick={handleForgetPassword}
                   className={`${styles.btn} ${styles.forgetPasswordBtn}`}
                 >
-                  Forget password
+                  Forgot Password
                 </button>
 
                 <div className={styles.divider} style={{display: 'none'}} >
