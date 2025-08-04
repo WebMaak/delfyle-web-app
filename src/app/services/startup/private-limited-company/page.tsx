@@ -60,7 +60,7 @@ const PrivateLimitedCompany: React.FC = () => {
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
       smooth: 1.5,
-      effects: true,
+      effects: false,
       normalizeScroll: true,
       smoothTouch: 0.1,
     });

@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import styles from "./SignUpPanel.module.css";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/material.css';
 
 type SignUpPanelProps = {
   isOpen: boolean;
@@ -12,6 +14,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
   const [step, setStep] = useState<"form" | "otp">("form");
@@ -42,6 +45,11 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
     }
     if (!email.includes("@")) {
       setMessage("Please enter a valid email address");
+      setIsLoading(false);
+      return;
+    }
+    if (!phone.trim()) {
+      setMessage("Phone number is required");
       setIsLoading(false);
       return;
     }
@@ -89,7 +97,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
       const res = await fetch("/api/user/verify-otp-and-register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp, userName: `${firstName} ${lastName}`, password, profilePicture: "" }),
+        body: JSON.stringify({ email, otp, userName: `${firstName} ${lastName}`, password, phone, profilePicture: "" }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -114,6 +122,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
     setFirstName("");
     setLastName("");
     setEmail("");
+    setPhone("");
     setOtp("");
     setPassword("");
     setStep("form");
@@ -148,6 +157,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
           {step === "form" ? (
             <>
             <div className={styles.nameField}>
+              <div style={{ display:"flex", flexDirection:"row", gap: 10 }} >
               <div className={styles.inputGroup}>
                 <label htmlFor="firstName" className={styles.label} > <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>First Name <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
                 <input
@@ -155,7 +165,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Enter your first name"
+                  placeholder="Your first name"
                   className={styles.input}
                   disabled={isLoading}
                   required
@@ -168,26 +178,46 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Enter your last name"
+                  placeholder="Your last name"
                   className={styles.input}
                   disabled={isLoading}
                   required
                 />
               </div>
               </div>
+              </div>
+
               <div className={styles.inputGroup}>
-                <label htmlFor="email" className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email Address <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className={styles.input}
-                  disabled={isLoading}
-                  required
+                <label htmlFor="phone" className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Phone Number <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div></label>
+                <PhoneInput
+                  country={'in'}
+                  value={phone}
+                  onChange={phone => setPhone(phone)}
+                  inputProps={{
+                    name: 'phone',
+                    required: true,
+                    className: styles.input
+                  }}
+                  inputStyle={{ width: '100%', paddingLeft: 48 }}
+                  containerStyle={{ width: '100%' }}
+                  specialLabel={''}
+                  enableSearch
                 />
+              </div>
+
+              <div className={styles.inputGroup}>
+                      <label htmlFor="email" className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Email Address <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        className={styles.input}
+                        disabled={isLoading}
+                        required
+                      />
               </div>
 
               <div className={styles.inputGroup}>

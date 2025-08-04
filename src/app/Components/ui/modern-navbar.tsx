@@ -640,14 +640,27 @@ export const ModernNavbar = ({ children, className, navLinkColor, user = null }:
       className={cn(styles.modernNavbar, className)}
       style={navLinkColor ? { '--nav-link-color': navLinkColor } as React.CSSProperties : {}}
     >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean, setShowAuthPopup?: (v: boolean) => void, user?: any }>,
-              { visible, setShowAuthPopup, user },
-            )
-          : child,
-      )}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          // Only pass props to components that expect them
+          const clonedProps: { visible?: boolean; setShowAuthPopup?: (v: boolean) => void; user?: any } = {};
+          
+          // Check if the child component is one that expects these props
+          if (
+            child.type === ModernNavBody
+          ) {
+            clonedProps.visible = visible;
+            clonedProps.setShowAuthPopup = setShowAuthPopup;
+            clonedProps.user = user;
+          }
+          
+          return React.cloneElement(
+            child as React.ReactElement<any>,
+            clonedProps
+          );
+        }
+        return child;
+      })}
       <AuthManager isOpen={showAuthPopup} onClose={() => setShowAuthPopup(false)} />
     </motion.div>
   );
@@ -679,14 +692,33 @@ export const ModernNavBody = ({ children, className, visible, setShowAuthPopup, 
         className,
       )}
     >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean, setShowAuthPopup?: (v: boolean) => void, user?: any }>,
-              { visible, setShowAuthPopup, user },
-            )
-          : child,
-      )}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          // Only pass props to components that expect them
+          const clonedProps: { visible?: boolean; setShowAuthPopup?: (v: boolean) => void; user?: any } = {};
+          
+          // Check if the child component is one that expects these props
+          if (
+            child.type === ModernNavbarLogo ||
+            child.type === ModernNavItems
+          ) {
+            clonedProps.visible = visible;
+          }
+          
+          // Only pass user prop to components that might need it
+          if (child.type === ModernNavbarLogo || child.type === ModernNavItems) {
+            clonedProps.user = user;
+          }
+          
+          // Don't pass setShowAuthPopup via cloneElement as it's not needed by direct children
+          
+          return React.cloneElement(
+            child as React.ReactElement<any>,
+            clonedProps
+          );
+        }
+        return child;
+      })}
       {user ? (
         <div
           className="modernNavProfile"
@@ -1326,12 +1358,15 @@ export const ModernNavbarButton = ({
   | React.ComponentPropsWithoutRef<"a">
   | React.ComponentPropsWithoutRef<"button">
 )) => {
+  // Destructure visible from props to prevent it from being passed to DOM
+  const { visible: _, ...domProps } = props;
+  
   return (
     <div className="modernNavbarButtonWrapper" style={{display:'flex'}}>
       <Tag
         href={href || undefined}
         className={cn(styles.modernNavbarButton, styles[variant], className)}
-        {...props}
+        {...domProps}
       >
         {children}
       </Tag>

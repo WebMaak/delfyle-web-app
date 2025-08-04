@@ -8,11 +8,15 @@ import Player from 'lottie-react';
 import whiteLoader from '@/assets/animation/white-loader.json';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
+import Portal from '../Portal';
+import SignUpPanel from '../admin/SignUpPanel';
+import AuthManager from '../admin/AuthManager';
+import { useUser } from '../../../hooks/useUser';
 
 const service = [
   'Business registration',
   'Trademark',
-  'Registration',
+  'License',
   'Goods & Service Tax',
   'Compliance',
   'Services',
@@ -62,6 +66,14 @@ const ModernContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [phone, setPhone] = useState('');
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const { setUser } = useUser();
+
+  const handleSignUpSuccess = () => {
+    setIsSignUpOpen(false);
+    setIsAuthOpen(true);
+  };
 
   // Refs for GSAP
   const leftRef = useRef<HTMLDivElement>(null);
@@ -270,7 +282,7 @@ const ModernContactForm = () => {
                 ))}
               </select>
             </label>
-            <label className={styles.label}> <div style={{display:'flex', flexDirection:'row',  alignItems:'center'}}>Message <span style={{ color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
+            <label className={styles.label}> <div style={{display:'flex', flexDirection:'row',  alignItems:'center'}}>Message</div>
               <textarea
                 className={styles.input}
                 name="message"
@@ -278,7 +290,6 @@ const ModernContactForm = () => {
                 onChange={handleChange}
                 rows={2}
                 placeholder="Your message"
-                required
               />
             </label>
             <div className={styles.buttonRow}>
@@ -321,7 +332,34 @@ const ModernContactForm = () => {
           <div className={styles.thankContent}>
             <h1 className={styles.thankTitle} ref={greetRef}>{greetText}</h1>
             <hr className={styles.hr} />
-            <div className={styles.thankSub}>We'll be in touch.<br />Shortly!</div>
+            <div className={styles.thankSub} style={{ marginBottom: '8px' }}>Want to keep an eye on your service status? Create your account now using the same email and phone number – it’s quick, easy, and keeps you in control.</div>
+            <button 
+              className={styles.signinBtn} 
+              onClick={() => setIsSignUpOpen(true)}
+              style={{
+                marginTop: '12px',
+                padding: '10px 24px 9px',
+                backgroundColor: 'white',
+                color: '#b40068',
+                border: '2px solid #b40068',
+                borderRadius: '50px',
+                fontSize: '16px',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                width: '50%',
+                textTransform: 'capitalize',
+                letterSpacing: '0.5px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              Register Now
+            </button>
             <div className={styles.nextRow}>
               {submitted && (
                 <span className={styles.nextTick}>
@@ -332,6 +370,19 @@ const ModernContactForm = () => {
           </div>
         </div>
       </div>
+      <Portal>
+        <SignUpPanel 
+          isOpen={isSignUpOpen}
+          onClose={() => setIsSignUpOpen(false)}
+          onSuccess={handleSignUpSuccess}
+        />
+        <AuthManager 
+          isOpen={isAuthOpen}
+          onClose={() => setIsAuthOpen(false)}
+          onUserChange={setUser}
+          panelType="auth"
+        />
+      </Portal>
     </div>
   );
 };

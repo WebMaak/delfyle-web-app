@@ -47,7 +47,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   services = [
     'Business registration',
     'Trademark',
-    'Registration',
+    'License',
     'Goods & Service Tax',
     'Compliance',
     'Services',
@@ -222,7 +222,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             ))}
           </select>
         </label>
-        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Message <span style={{color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
+        <label className={styles.label}> <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>Message</div>
           <textarea
             className={styles.input}
             name="message"

@@ -10,8 +10,14 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '15', 10);
     const skip = (page - 1) * limit;
     const includeTrashed = searchParams.get('include_trashed') === 'true';
+    const verified = searchParams.get('verified');
 
-    const query = includeTrashed ? {} : { trash: { $ne: true } };
+    let query: any = includeTrashed ? {} : { trash: { $ne: true } };
+
+    // Add verified filter if provided
+    if (verified !== null && verified !== undefined) {
+      query.verified = verified === 'true';
+    }
 
     const leads = await Lead.find(query)
       .sort({ createdAt: -1 })

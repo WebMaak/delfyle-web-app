@@ -62,58 +62,7 @@ const PrivateLimitedPost: React.FC<PrivateLimitedPostProps> = ({
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const header = headerRef.current;
-    const cards = cardsRef.current.filter(Boolean);
 
-    if (section && header && cards.length > 0) {
-      // Entrance Animation
-      gsap.set(header.children, { opacity: 0, y: 40 });
-      gsap.set(cards, { opacity: 0, y: 50 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        }
-      });
-
-      tl.to(header.children, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 0.6,
-        ease: 'power3.out'
-      }).to(cards, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 0.5,
-        ease: 'power2.out'
-      }, '-=0.3');
-
-      // Hover Animations
-      const eventListeners: { el: HTMLElement; enter: () => void; leave: () => void }[] = [];
-      cards.forEach(card => {
-        const onEnter = () => gsap.to(card, { y: -10, duration: 0.3, ease: 'power2.out' });
-        const onLeave = () => gsap.to(card, { y: 0, duration: 0.3, ease: 'power2.out' });
-        
-        card.addEventListener('mouseenter', onEnter);
-        card.addEventListener('mouseleave', onLeave);
-        eventListeners.push({ el: card, enter: onEnter, leave: onLeave });
-      });
-
-      return () => {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        eventListeners.forEach(({ el, enter, leave }) => {
-          el.removeEventListener('mouseenter', enter);
-          el.removeEventListener('mouseleave', leave);
-        });
-      };
-    }
-  }, []);
 
   return (
     <section ref={sectionRef} className={styles.container}>

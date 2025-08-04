@@ -18,6 +18,9 @@ export default function AuthManager({ isOpen, onClose, onUserChange, panelType }
   const [user, setUser] = useState<any>(null);
   const router = useRouter();
 
+  // Debug: log props
+  console.log('AuthManager props:', { isOpen, panelType, panelState });
+
   // Sync panelState with panelType prop
   useEffect(() => {
     if (panelType === 'profile') setPanelState('dashboard');

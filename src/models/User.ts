@@ -6,6 +6,7 @@ export type RequestStatus = "pending" | "in progress" | "completed" ;
 export interface IUser extends Document {
   userName: string;
   email: string;
+  phone: string;
   verified: boolean;
   status: UserStatus;
   requestStatus: RequestStatus;
@@ -21,6 +22,7 @@ const UserSchema = new Schema<IUser>(
   {
     userName: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
+    phone: { type: String, required: true },
     verified: { type: Boolean, default: false },
     status: {
       type: String,

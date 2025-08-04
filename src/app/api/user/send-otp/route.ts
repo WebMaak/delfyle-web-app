@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: `Delfyle <${process.env.GMAIL_USER}>`,
       to: email,
-      subject: `Delfyle email verification code #${emailId}`,
+      subject: `Delfyle email verification code (#${emailId})`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto; border: 1px solid #eee; border-radius: 8px; padding: 32px 24px; background: #fafbfc;">
           <h2 style="color: #1a237e;">Delfyle Account Verification</h2>

@@ -79,7 +79,6 @@ const StatusCard = ({ title, isActive }: { title: string, isActive: boolean }) =
 };
 
 export default function UserDashboard() {
-  // All hooks at the top!
   const { user, loading, setUser } = useUser() as { user: User | null, loading: boolean, setUser: (u: any) => void };
   const [activeTab, setActiveTab] = useState('My Profile');
   const [firstName, setFirstName] = useState('');
@@ -92,6 +91,7 @@ export default function UserDashboard() {
   const [initiatedLeads, setInitiatedLeads] = useState<Lead[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -130,6 +130,8 @@ export default function UserDashboard() {
         }
       };
       fetchLeads();
+    } else {
+      setInitiatedLeads([]);
     }
   }, [user]);
 
@@ -137,6 +139,21 @@ export default function UserDashboard() {
     console.log("UserDashboard mounted", { user, loading });
   }, [user, loading]);
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      const res = await fetch('/api/user/refresh-leads', {
+        method: 'POST',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user); // Update user context with the latest data
+      }
+    } catch (error) {
+      console.error("Failed to refresh leads", error);
+    }
+    setIsRefreshing(false);
+  };
   
   if (loading) {
     return <div style={{ color: '#b40068', textAlign: 'center', marginTop: 100, fontSize: 24 }}>Loading...</div>;
@@ -305,7 +322,13 @@ export default function UserDashboard() {
             </div>
             
             <hr style={{ margin: '10px 0', color: 'rgb(206, 0, 69)', height: 1, width:'94%', marginLeft: 50 }} />
-            <h2 className={styles.statusStatSection} style={{ fontSize: 32, fontWeight: 700, color: '#1e293b', marginLeft: 20 }}>Your requested services</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <h2 className={styles.statusStatSection} style={{ fontSize: 32, fontWeight: 700, color: '#1e293b', marginLeft: 20, marginBottom: 0 }}>Your requested services</h2>
+              <button onClick={handleRefresh} disabled={isRefreshing} style={{ background: 'none', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', cursor: isRefreshing ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px', opacity: isRefreshing ? 0.6 : 1 }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6"/><path d="M22 11.5A10 10 0 0 0 3.5 12.5"/><path d="M2 12.5a10 10 0 0 0 18.5-1"/></svg>
+                <span style={{ fontWeight: 500 }}>{isRefreshing ? 'Refreshing...' : 'Refresh'}</span>
+              </button>
+            </div>
             {initiatedLeads.length > 0 ? (
               [...initiatedLeads].reverse().map((lead, index) => (
                 <div key={lead._id} className={styles.statusStatSection} style={{ paddingTop: 0 }}>
@@ -500,4 +523,4 @@ export default function UserDashboard() {
       </div>
     </div>
   );
-} 
+}

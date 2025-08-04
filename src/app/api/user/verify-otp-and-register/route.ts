@@ -6,9 +6,9 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, otp, userName, password, profilePicture } = await request.json();
-    if (!email || !otp || !userName || !password) {
-      return NextResponse.json({ error: 'Email, OTP, userName, and password are required' }, { status: 400 });
+    const { email, otp, userName, password, phone, profilePicture } = await request.json();
+    if (!email || !otp || !userName || !password || !phone) {
+      return NextResponse.json({ error: 'Email, OTP, userName, password, and phone are required' }, { status: 400 });
     }
     await dbConnect();
     // Verify OTP
@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
       user = await User.create({
         userName,
         email,
+        phone,
         verified: true,
         status: 'active',
         requestStatus: 'pending',

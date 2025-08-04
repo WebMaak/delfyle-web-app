@@ -23,7 +23,7 @@ const LeadSchema = new Schema<ILead>(
     fullName: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true },
     phoneNumber: { type: String, required: true, trim: true },
-    message: { type: String, required: true },
+    message: { type: String, required: false },
     service: { type: [String], default: [], required: true },
     assignedBo: {
       type: String,

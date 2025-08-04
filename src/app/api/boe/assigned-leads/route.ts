@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
       .populate({
         path: 'assignedLeads',
         model: 'Lead',
-        select: '_id fullName email phoneNumber message service status assignedTo createdAt trash'
+        select: '_id fullName email phoneNumber message service status assignedTo createdAt trash verified'
       })
       .select('assignedLeads');
 

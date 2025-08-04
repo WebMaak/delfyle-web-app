@@ -22,6 +22,7 @@ interface ILead {
   assignedTo?: string | null; // Allow null for unassigned
   status: "pending" | "assigned" | "completed" | "in progress";
   trash?: boolean;
+  verified?: boolean; // Added verified property
   createdAt: string;
   client?: { // Making client optional as it's not in the DB schema
     name: string;
@@ -57,7 +58,7 @@ type BackofficeItem = {
   created: string;
 };
 
-type Tab = "Leads" | "Users" | "Backoffice" | "User Profile" | "Lead Details" | "Trashed Leads" | "Trashed Users" | "Admin Management" | "Announcement";
+type Tab = "Leads" | "Unverified Leads" | "Users" | "Backoffice" | "User Profile" | "Lead Details" | "Trashed Leads" | "Trashed Users" | "Admin Management" | "Announcement";
 
 // Function to get random BOE assignment
 const getRandomBOE = () => {
@@ -180,12 +181,30 @@ export default function AdminDashboard() {
   }, [users, selectedUserForDetails]);
 
   useEffect(() => {
-    fetchLeads(leadsCurrentPage);
-  }, [leadsCurrentPage]);
+    if (activeTab === "Unverified Leads") {
+      fetchUnverifiedLeads(1); // Always fetch page 1 for unverified leads (no pagination)
+    } else if (activeTab === "Leads") {
+      fetchLeads(leadsCurrentPage);
+    } else if (activeTab === "Trashed Leads") {
+      fetchTrashedLeads(leadsCurrentPage);
+    }
+    
+    // Fetch stats when Leads tab is active
+    if (activeTab === "Leads") {
+      fetchLeadsStats();
+    }
+  }, [leadsCurrentPage, activeTab]);
   
   useEffect(() => {
-    fetchUsers(usersCurrentPage);
-  }, [usersCurrentPage]);
+    if (activeTab === "Users" || activeTab === "Trashed Users") {
+      fetchUsers(usersCurrentPage);
+    }
+    
+    // Fetch stats when Users tab is active
+    if (activeTab === "Users") {
+      fetchUsersStats();
+    }
+  }, [usersCurrentPage, activeTab]);
 
   useEffect(() => {
     fetchAdminUsers();
@@ -226,12 +245,77 @@ export default function AdminDashboard() {
   }, []);
 
   const fetchLeads = (page: number) => {
-    fetch(`/api/lead/list?page=${page}&limit=100&include_trashed=true`) // Fetch all leads, including trashed ones
+    fetch(`/api/lead/list?page=${page}&limit=100&include_trashed=true&verified=true`) // Fetch only verified leads
       .then(res => res.json())
       .then(data => {
         const leadsData = data.leads || [];
         setLeads(leadsData);
         setLeadsTotalPages(data.totalPages || 1);
+      });
+  };
+
+  const fetchUnverifiedLeads = (page: number) => {
+    fetch(`/api/lead/list?page=1&limit=10000&include_trashed=true&verified=false`) // Fetch ALL unverified leads without pagination
+      .then(res => res.json())
+      .then(data => {
+        const leadsData = data.leads || [];
+        setLeads(leadsData);
+        setLeadsTotalPages(1); // Set to 1 since we're not paginating
+      });
+  };
+
+  // Fetch trashed leads (both verified and unverified)
+  const fetchTrashedLeads = (page: number) => {
+    fetch(`/api/lead/list?page=${page}&limit=100&include_trashed=true`) // Fetch ALL trashed leads (no verified filter)
+      .then(res => res.json())
+      .then(data => {
+        const leadsData = data.leads || [];
+        setLeads(leadsData);
+        setLeadsTotalPages(data.totalPages || 1);
+      });
+  };
+
+  // State for stats data
+  const [leadsStats, setLeadsStats] = useState<any>(null);
+  const [usersStats, setUsersStats] = useState<any>(null);
+
+  // Fetch stats for all verified leads (for Leads tab)
+  const fetchLeadsStats = () => {
+    fetch(`/api/lead/list?page=1&limit=10000&include_trashed=true&verified=true`) // Fetch ALL verified leads for stats
+      .then(res => res.json())
+      .then(data => {
+        const allLeads = data.leads || [];
+        const stats = {
+          last30Days: allLeads.filter((l: any) => new Date(l.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+          thisWeek: allLeads.filter((l: any) => new Date(l.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).length,
+          total: allLeads.length,
+          pending: allLeads.filter((l: any) => l.status === 'pending').length,
+          pendingThisWeek: allLeads.filter((l: any) => l.status === 'pending' && new Date(l.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).length,
+          pendingThisMonth: allLeads.filter((l: any) => l.status === 'pending' && new Date(l.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+          assigned: allLeads.filter((l: any) => !!l.assignedTo).length,
+          notAssigned: allLeads.filter((l: any) => !l.assignedTo).length,
+          completed: allLeads.filter((l: any) => l.status === 'completed').length,
+          notCompleted: allLeads.filter((l: any) => l.status !== 'completed').length,
+        };
+        setLeadsStats(stats);
+      });
+  };
+
+  // Fetch stats for all users
+  const fetchUsersStats = () => {
+    fetch(`/api/user/list?page=1&limit=10000&include_trashed=true`) // Fetch ALL users for stats
+      .then(res => res.json())
+      .then(data => {
+        const allUsers = data.users || [];
+        const stats = {
+          total: allUsers.length,
+          newToday: allUsers.filter((u: any) => new Date(u.createdAt) > new Date(Date.now() - 24 * 60 * 60 * 1000)).length,
+          last30Days: allUsers.filter((u: any) => new Date(u.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+          suspended: allUsers.filter((u: any) => u.status === 'Suspended' || u.status === 'suspended' || u.status === 'blocked').length,
+          suspendedToday: allUsers.filter((u: any) => (u.status === 'Suspended' || u.status === 'suspended' || u.status === 'blocked') && new Date(u.createdAt) > new Date(Date.now() - 24 * 60 * 60 * 1000)).length,
+          suspendedLast30Days: allUsers.filter((u: any) => (u.status === 'Suspended' || u.status === 'suspended' || u.status === 'blocked') && new Date(u.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
+        };
+        setUsersStats(stats);
       });
   };
 
@@ -775,10 +859,11 @@ useEffect(() => {
     return `${day}-${month}-${year}`;
   };
 
-  const renderLeadsTab = (isTrashed = false) => {
+  const renderLeadsTab = (isTrashed = false, isUnverified = false) => {
     const tabLeads = leads.filter(lead => !!lead.trash === isTrashed);
 
-    const stats = {
+    // Use stats data if available (for Leads tab), otherwise calculate from paginated data
+    const stats = activeTab === "Leads" && leadsStats ? leadsStats : {
       last30Days: tabLeads.filter(l => new Date(l.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
       thisWeek: tabLeads.filter(l => new Date(l.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).length,
       total: tabLeads.length,
@@ -984,6 +1069,7 @@ useEffect(() => {
                   className={styles.checkbox}
                 />
               </th>
+              <th>Verified</th>
               <th>Lead ID</th>
               <th>Client</th>
               <th>Email</th>
@@ -1031,6 +1117,14 @@ useEffect(() => {
                     onChange={() => handleSelectLead(lead._id)}
                     className={styles.checkbox}
                   />
+                </td>
+                <td data-label="Verified">
+                  <span style={{ 
+                    color: lead.verified ? '#10b981' : '#ef4444',
+                    fontWeight: '500'
+                  }}>
+                    {lead.verified ? 'Verified' : 'Unverified'}
+                  </span>
                 </td>
                   <td data-label="Lead ID">
                     <span
@@ -1198,13 +1292,15 @@ useEffect(() => {
         </table>
       </div>
 
-      <div className={styles.pagination}>
-        <button className={styles.paginationBtn} onClick={() => setLeadsCurrentPage(p => Math.max(1, p - 1))} disabled={leadsCurrentPage === 1}>← Previous</button>
-        <div className={styles.pageNumbers}>
-          <span>Page {leadsCurrentPage} of {leadsTotalPages}</span>
+      {!isUnverified && (
+        <div className={styles.pagination}>
+          <button className={styles.paginationBtn} onClick={() => setLeadsCurrentPage(p => Math.max(1, p - 1))} disabled={leadsCurrentPage === 1}>← Previous</button>
+          <div className={styles.pageNumbers}>
+            <span>Page {leadsCurrentPage} of {leadsTotalPages}</span>
+          </div>
+          <button className={styles.paginationBtn} onClick={() => setLeadsCurrentPage(p => Math.min(leadsTotalPages, p + 1))} disabled={leadsCurrentPage === leadsTotalPages}>Next →</button>
         </div>
-        <button className={styles.paginationBtn} onClick={() => setLeadsCurrentPage(p => Math.min(leadsTotalPages, p + 1))} disabled={leadsCurrentPage === leadsTotalPages}>Next →</button>
-      </div>
+      )}
     </div>
     
   );
@@ -1213,7 +1309,8 @@ useEffect(() => {
   const renderUsersTab = (isTrashed = false) => {
     const tabUsers = users.filter(user => !!user.trash === isTrashed);
 
-    const stats = {
+    // Use stats data if available (for Users tab), otherwise calculate from paginated data
+    const stats = activeTab === "Users" && usersStats ? usersStats : {
       total: tabUsers.length,
       newToday: tabUsers.filter((u: User) => new Date(u.createdAt) > new Date(Date.now() - 24 * 60 * 60 * 1000)).length,
       last30Days: tabUsers.filter((u: User) => new Date(u.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length,
@@ -1355,6 +1452,7 @@ useEffect(() => {
               <th>Verified</th>
               <th>User ID</th>
               <th>User Name</th>
+              <th>Ph. Number</th>
               <th>Email</th>
               <th>Status</th>
               <th>Request Status</th>
@@ -1407,12 +1505,13 @@ useEffect(() => {
                     {user.profilePicture ? (
                       <img src={user.profilePicture} alt={user.userName} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
                   ) : (
-                      user.userName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)
+                                            user.userName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0,2)
                   )}
                   </div>
                   {user.userName}
                 </td>
-                      <td data-label="Email"><a href={`mailto:${user.email}`} style={{ color: '#2563eb', textDecoration: 'none', cursor: 'pointer' }}>{user.email}</a></td>
+                <td data-label="Ph. Number"><a href={`tel:${user.phone}`} style={{ color: '#2563eb', textDecoration: 'none', cursor: 'pointer' }}>{user.phone}</a></td>
+                <td data-label="Email"><a href={`mailto:${user.email}`} style={{ color: '#2563eb', textDecoration: 'none', cursor: 'pointer' }}>{user.email}</a></td>
                       <td data-label="Status" style={{ color: user.status?.toLowerCase() === 'active' ? '#10b981' : user.status?.toLowerCase() === 'blocked' ? '#ef4444' : '#f50b0b', textTransform: 'capitalize' }}>{user.status}</td>
                       <td data-label="Request Status">
                         <span style={{color: '#ef4444'}}>P-{leadCounts.pending}</span> / <span style={{color: '#f59e0b'}}>IP-{leadCounts.inProgress}</span> / <span style={{color: '#10b981'}}>C-{leadCounts.completed}</span>
@@ -2513,7 +2612,7 @@ useEffect(() => {
               </svg>
             </div>
             <div className={styles.profileName}>{currentAdmin?.username || 'Admin User'}</div>
-            <div className={styles.profileEmail}>{currentAdmin?.email || 'admin@company.com'}</div>
+            <div className={styles.profileEmail} style={{ width: '100%', wordWrap: 'break-word' }} >{currentAdmin?.email || 'admin@company.com'}</div>
             <div className={styles.profileButtons}>
               <Link href="/" className={styles.profileBtn} style={{ display: 'none' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -2547,6 +2646,12 @@ useEffect(() => {
               onClick={() => setActiveTab('Leads')}
             >
               Leads
+            </button>
+            <button
+              className={`${styles.navItem} ${activeTab === 'Unverified Leads' ? styles.active : ''}`}
+              onClick={() => setActiveTab('Unverified Leads')}
+            >
+              Unverified Leads
             </button>
             <button
               className={`${styles.navItem} ${activeTab === 'Users' ? styles.active : ''}`}
@@ -2608,9 +2713,10 @@ useEffect(() => {
         </div>
 
         <div className={styles.content}>
-          {activeTab === "Leads" && renderLeadsTab(false)}
+          {activeTab === "Leads" && renderLeadsTab(false, false)}
+          {activeTab === "Unverified Leads" && renderLeadsTab(false, true)}
           {activeTab === "Users" && renderUsersTab(false)}
-          {activeTab === "Trashed Leads" && renderLeadsTab(true)}
+          {activeTab === "Trashed Leads" && renderLeadsTab(true, false)}
           {activeTab === "Trashed Users" && renderUsersTab(true)}
           {activeTab === "Backoffice" && renderBackofficeTab()}
           {activeTab === "User Profile" && renderUserProfileTab()}
