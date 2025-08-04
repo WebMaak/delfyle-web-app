@@ -150,6 +150,7 @@ const ModernContactForm = () => {
         service: '',
         message: ''
       });
+      setPhone(''); // Reset phone input
 
       // Reset greet after 3 seconds
       setTimeout(() => {

@@ -12,6 +12,7 @@ export interface ILead extends Document {
   assignedTo?: mongoose.Types.ObjectId;
   status: LeadStatus;
   trash: boolean;
+  verified: boolean;
   createdAt: Date;
   service: string[];
   user: mongoose.Types.ObjectId;
@@ -42,9 +43,10 @@ const LeadSchema = new Schema<ILead>(
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
     },    
     trash: { type: Boolean, default: false },
+    verified: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }

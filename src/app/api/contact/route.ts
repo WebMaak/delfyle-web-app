@@ -38,30 +38,37 @@ export async function POST(request: NextRequest) {
 
     // Get JWT token from cookies
     const token = request.cookies.get('token')?.value;
-    if (!token) {
-      return NextResponse.json({ error: 'Sign in to Submit' }, { status: 401 });
-    }
-
-    // Verify JWT and extract user ID
-    let payload;
-    try {
-      payload = jwt.verify(token, JWT_SECRET);
-    } catch (err) {
-      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-    }
-
-    // Extract userId from payload
     let userId: string | undefined;
-    if (typeof payload === 'object' && payload && 'userId' in payload) {
-      userId = (payload as { userId?: string }).userId;
-    }
-    if (!userId) {
-      return NextResponse.json({ error: 'Invalid token payload' }, { status: 400 });
+    let verified = false;
+
+    if (token) {
+      // Verify JWT and extract user ID
+      let payload;
+      try {
+        payload = jwt.verify(token, JWT_SECRET);
+      } catch (err) {
+        // Token is invalid, treat as unauthenticated
+        userId = "";
+        verified = false;
+      }
+
+      // Extract userId from payload
+      if (typeof payload === 'object' && payload && 'userId' in payload) {
+        userId = (payload as { userId?: string }).userId;
+        verified = true; // User is logged in, so verified is true
+      } else {
+        userId = "";
+        verified = false;
+      }
+    } else {
+      // No token, treat as unauthenticated
+      userId = "";
+      verified = false;
     }
 
     // Save to DB (leads collection)
     let leadDoc;
-    leadDoc = await Lead.create({
+    const leadData: any = {
       fullName,
       email,
       phoneNumber: phone,
@@ -70,10 +77,20 @@ export async function POST(request: NextRequest) {
       status: 'pending',
       assignedBo: 'none',
       trash: false,
-      user: userId,
-    });
-    // Push lead ID to user's leadsInitiated
-    await User.findByIdAndUpdate(userId, { $push: { leadsInitiated: leadDoc._id } });
+      verified: verified,
+    };
+
+    // Only set user field if userId is valid
+    if (userId && userId !== "") {
+      leadData.user = userId;
+    }
+
+    leadDoc = await Lead.create(leadData);
+
+    // Only push lead ID to user's leadsInitiated if user is authenticated
+    if (userId && userId !== "") {
+      await User.findByIdAndUpdate(userId, { $push: { leadsInitiated: leadDoc._id } });
+    }
 
     // Configure your SMTP transport (Gmail example)
     const transporter = nodemailer.createTransport({
