@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
@@ -60,30 +61,52 @@ const PrivateLimitedCompany: React.FC = () => {
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
       smooth: 1.5,
-      effects: false,
+      effects: true,
       normalizeScroll: true,
       smoothTouch: 0.1,
     });
 
-    // Progress bar animation
+    // Progress bar animation with more robust configuration
     if (progressBarRef.current) {
       gsap.to(progressBarRef.current, {
         width: "100%",
-        duration: 1,
         ease: "none",
         scrollTrigger: {
           trigger: "#smooth-content",
           start: "top top",
           end: "bottom bottom",
-          scrub: true,
+          scrub: 0.3, // Smoother scrubbing
+          invalidateOnRefresh: true, // Recalculate on page refresh
+          markers: false, // For debugging
           onUpdate: (self) => {
-            // Optional: You can add additional logic here if needed
+            // Update progress bar width directly for more reliability
+            if (progressBarRef.current) {
+              progressBarRef.current.style.width = `${self.progress * 100}%`;
+            }
           }
         }
       });
     }
 
-    // Listen for custom event from ToggleNav
+    // Refresh ScrollTrigger on window resize for better responsiveness
+    window.addEventListener('resize', () => {
+      ScrollTrigger.refresh();
+    });
+
+    // Cleanup
+    return () => {
+      if (smootherRef.current) {
+        smootherRef.current.kill();
+      }
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('resize', () => {
+        ScrollTrigger.refresh();
+      });
+    };
+  }, []);
+
+  // Listen for custom event from ToggleNav
+  useEffect(() => {
     const handleToggleNavMenu = (e: any) => {
       if (smootherRef.current) {
         if (e.detail.isOpen) {
@@ -93,15 +116,13 @@ const PrivateLimitedCompany: React.FC = () => {
         }
       }
     };
-    window.addEventListener('toggleNavMenu', handleToggleNavMenu);
-
-    // Cleanup
+    if (typeof window !== 'undefined') {
+      window.addEventListener('toggleNavMenu', handleToggleNavMenu);
+    }
     return () => {
-      if (smootherRef.current) {
-        smootherRef.current.kill();
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('toggleNavMenu', handleToggleNavMenu);
       }
-      window.removeEventListener('toggleNavMenu', handleToggleNavMenu);
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
@@ -182,76 +203,6 @@ const PrivateLimitedCompany: React.FC = () => {
   return (
     <>
       <TopMarquee />
-    <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
-      {/* Progress Bar */}
-      <div 
-        style={{
-          position: 'fixed',
-          top: 30,
-          left: 0,
-          width: '100%',
-          height: '4px',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
-          zIndex: 1000,
-        }}
-      >
-        <div
-          ref={progressBarRef}
-          style={{
-            width: '0%',
-            height: '100%',
-            background: 'linear-gradient(90deg, #ff0080 0%,#ff0080 25%, #ff0080 50%,rgb(206, 2, 70) 75%, rgb(206, 2, 70) 100%)',
-            transition: 'width 0.1s ease-out',
-            // boxShadow: '0 0 15px rgba(255, 0, 128, 0.6)',
-          }}
-        />
-      </div>
-
-      {/* Modern Navbar */}
-      <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar user={user}>
-          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
-            <ModernNavbarLogo />
-            <ModernNavItems items={navItems} />
-            <div className="modernNavActions">
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-              {loading ? null : !user && (
-                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
-              )}
-            </div>
-          </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
-              <ModernNavbarButton href="/contact" className="w-full mt-4">Contact</ModernNavbarButton>
-              <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
-                Sign In
-              </ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
-        </ModernNavbar>
-      </div>
       {/* ToggleNav for mobile */}
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
@@ -379,11 +330,55 @@ const PrivateLimitedCompany: React.FC = () => {
           ]}
         />
       </div>
+    <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
+      {/* Progress Bar */}
+      <div 
+        style={{
+          position: 'fixed',
+          top: 30,
+          left: 0,
+          width: '100%',
+          height: '4px',
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          zIndex: 1000,
+        }}
+      >
+        <div
+          ref={progressBarRef}
+          style={{
+            width: '0%',
+            height: '100%',
+            background: 'linear-gradient(90deg, #ff0080 0%,#ff0080 25%, #ff0080 50%,rgb(206, 2, 70) 75%, rgb(206, 2, 70) 100%)',
+            transition: 'width 0.1s ease-out',
+            // boxShadow: '0 0 15px rgba(255, 0, 128, 0.6)',
+          }}
+        />
+      </div>
+
+      {/* Modern Navbar */}
+      <div className="fixed inset-x-0 top-0 z-50">
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
+            <ModernNavbarLogo />
+            <ModernNavItems items={navItems} />
+            <div className="modernNavActions">
+            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
+          </ModernNavBody>
+        </ModernNavbar>
+      </div>
+      
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div className="bg-white">
-          <StartupHero />
+          <StartupHero 
+          heading={<><span className={styles.coloredplc}>Private Limited Company</span><br /><span className={styles.coloredreg}>Registration</span> in India <br /> with <span className={styles.colored}>Delfyle</span></>}
+          description="Setting up a business in India often involves choosing a private limited company as a preferred option. This structure offers shareholders limited liability protection while placing specific ownership constraints. In contrast, in the case of an LLP, partners oversee the management. Private limited company registration allows for a clear distinction between directors and shareholders."
+          />
           
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
@@ -436,4 +431,4 @@ const PrivateLimitedCompany: React.FC = () => {
   );
 };
 
-export default PrivateLimitedCompany; 
+export default PrivateLimitedCompany;

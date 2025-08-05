@@ -1,6 +1,6 @@
 .container {
   background-color: #ffffff;
-  padding: 5rem 2.25rem;
+  padding: 5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,11 +85,6 @@
   .featureItem {
     font-size: 1.35rem;
   }
-  
-  .titleContainer {
-    min-width: 100%;
-    text-align: left;
-  }
 }
 
 .content {
@@ -101,17 +96,17 @@
   align-items: flex-start;
 }
 
+.titleContainer {
+  min-width: 700px;
+  text-align: left;
+}
+
 .title {
   font-size: 36px;
   color: #1a1a1a;
   margin-bottom: 20px;
   text-align: left;
-}
-
-@media screen and (min-width: 1200px) {
-  .title {
-    min-width: 700px;
-  }
+  font-weight: 700;
 }
 
 .descriptionContainer {
@@ -149,6 +144,9 @@
 .features {
   display: flex;
   gap: 40px;
+  /* margin-left:4rem; */
+  width: 100%;
+  justify-content: end;
 }
 
 .featureColumn {
@@ -166,6 +164,8 @@
 }
 
 .checkmark {
+  width: 14px !important;
+  height: 14px !important;
   color: white;
   background: linear-gradient(
     135deg,

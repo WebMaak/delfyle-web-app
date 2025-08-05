@@ -29,6 +29,7 @@
 }
 
 .rightColumn {
+  min-height: 100%;
   flex: 0.4;
   display: flex;
   justify-content: center;
@@ -39,7 +40,7 @@
 
 .subHeading {
   font-size: 0.9rem;
-  color: #614efc;
+  color: #b44593;
   font-weight: 600;
   margin-bottom: 0.5rem;
   text-align: left;
@@ -78,7 +79,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #e6e6fa;
+  background-color: #b4459308;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,13 +133,13 @@
   height: 100%;
   border-radius: 50%;
   border: 2px solid transparent;
-  background: conic-gradient(from 0deg at 50% 50%, rgba(97, 78, 252, 0) 0%, #614efc 180deg, rgba(97, 78, 252, 0) 360deg);
+  background: conic-gradient(from 0deg at 50% 50%, rgba(180, 69, 147, 0) 0%, #790046 180deg, rgba(180, 69, 147, 0) 360deg);
   background-clip: padding-box;
   mask-image: radial-gradient(circle at center, transparent 60%, black 60.3%); /* Reduced thickness by 40% */
   -webkit-mask-image: radial-gradient(circle at center, transparent 60%, black 60.3%);
   transform: rotate(0deg);
   animation: rotateCircle 10s linear infinite, pulseGlow 2s ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 15px #614efc); /* Increased base glow */
+  filter: drop-shadow(0 0 15px #b44593); /* Increased base glow */
 }
 
 .circleText {
@@ -160,11 +161,23 @@
 }
 
 @keyframes pulseGlow {
-  from { filter: drop-shadow(0 0 10px #614efc); opacity: 0.8; }
-  to { filter: drop-shadow(0 0 25px #614efc); opacity: 1; }
+  from { filter: drop-shadow(0 0 10px #b44593); opacity: 0.8; }
+  to { filter: drop-shadow(0 0 25px #b44593); opacity: 1; }
 }
 
 /* Responsive adjustments */
+@media (max-width: 1024px) {
+  .container {
+    padding-bottom: 0 !important;
+  }
+  .contentWrapper {
+    flex-direction: column;
+  }
+  .rightColumn {
+    display: none;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .contentWrapper {
     flex-direction: row;

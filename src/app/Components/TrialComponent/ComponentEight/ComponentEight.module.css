@@ -1,6 +1,6 @@
 .container {
   padding: 5rem 3rem;
-  background-color: #f8fbfd;
+  background-color: #ffffff;
   font-family: 'Inter', sans-serif;
   max-width: 1400px;
   margin: 0 auto;
@@ -53,8 +53,8 @@
 
 .cardTag {
   font-size: 13px;
-  color: #007bff;
-  background-color: #e6f2ff;
+  color: #b44593;
+  background-color: #b4459308;
   border-radius: 4px;
   padding: 5px 10px;
   display: inline-flex;
@@ -67,7 +67,7 @@
 .tagIcon {
   margin-right: 8px;
   font-size: 16px;
-  color: #007bff;
+  color: #b44593;
 }
 
 .cardHeading {
@@ -92,7 +92,7 @@
 
 .cardLink {
   font-size: 15px;
-  color: #007bff;
+  color: #b44593;
   text-decoration: none;
   font-weight: 500;
   align-self: flex-start;

@@ -1,0 +1,61 @@
+.section-container {
+    background: linear-gradient(to bottom right, #f26a8d, #a26bf2);
+    padding: 3rem 1.5rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .content-wrapper {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .section-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .section-subheading {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .list-block {
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .list-block li {
+    list-style: disc;
+    font-size: 1rem;
+  }
+  
+  .bottom-note {
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .section-heading {
+      font-size: 1.75rem;
+    }
+  
+    .section-subheading {
+      font-size: 1.1rem;
+    }
+  
+    .list-block li {
+      font-size: 0.95rem;
+    }
+  }
+  

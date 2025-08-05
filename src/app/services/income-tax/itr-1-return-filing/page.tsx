@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
@@ -20,12 +21,25 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
+import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ComponentEight from "./ComponentEight";
+import ComponentSeven from "./ComponentSeven";
+import ComponentSevenTop from "./ComponentSevenTop";
+import ListComponent from "./ListComponent";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const PrivateLimitedCompany: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -331,11 +345,16 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+            <div className="modernNavActions">
+              <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
 
           <ModernMobileNav>
@@ -362,20 +381,29 @@ const PrivateLimitedCompany: React.FC = () => {
                 </div>
               ))}
               <ModernNavbarButton href="/contact" className="w-full mt-4">
-                Contact us
+                Contact Us
+              </ModernNavbarButton>
+              <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
+                Sign In
               </ModernNavbarButton>
             </ModernMobileNavMenu>
           </ModernMobileNav>
         </ModernNavbar>
       </div>
 
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
+
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>ITR 1 Return Filing</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>ITR 1 Return Filing</span><br /><span className={styles.coloredreg}>Return Filing</span> in India <br /> with <span className={styles.colored}>Delfyle</span></>}
           description="Ensure timely ITR 1 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 1 return filing, return filing, and compliance monitoring."
-          buttonText="Get ITR 1 Return Filing Help"
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -388,7 +416,35 @@ const PrivateLimitedCompany: React.FC = () => {
               speed="100s"
             />
           </section>
+
+          <PrivateLimitedCompanyContent/>
+
+          <ComponentSevenTop/>
+
+          <PrivateLimitedCompanyBenefits/>
+
+          <PrivateLimitedCompanyDisadvantages/>
+          
+          <ListComponent/>
+
+          {/* <ComponentSeven/> */}
+
+          <ComponentEight/>
+
+          {/* Company Registration Process Accordion */}
+          <CustomAccordion
+            subheading="Requirements for registering"
+            title="Company Registration Process – How to Register a Company in India with Delfyle?"
+            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
+            items={registrationProcessData}
+            variant="numbered"
+            theme="light"
+            maxOpenItems={1}
+          />
+
         </div>
+
+
 
         {/* Footer */}
         <ModernFooter/>

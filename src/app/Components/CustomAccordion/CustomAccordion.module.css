@@ -46,7 +46,7 @@
 
 .subHeading {
   font-size: 0.9rem;
-  color: #614efc;
+  color: #b44593;
   font-weight: 600;
   margin-bottom: 0.5rem;
   text-align: left;
@@ -108,7 +108,7 @@
 }
 
 .accordionHeader:hover {
-  background-color: #f7fafc;
+  background-color: #b4459308;
 }
 
 .accordionHeader:focus {
@@ -132,9 +132,10 @@
 }
 
 .stepNumber {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, rgba(107, 0, 62, 1) 0%, rgba(180, 0, 104, 1) 100%);
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(90deg, #790046 0%, #E50078 100%);
+  opacity: .875;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -166,6 +167,7 @@
   color: #666;
   transition: transform 0.3s ease;
   flex-shrink: 0;
+  transform: rotate(0deg);
 }
 
 .chevron.rotated {
@@ -173,18 +175,17 @@
 }
 
 .accordionContent {
-  max-height: 0;
+  /* Remove max-height transition - now handled by GSAP */
   overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.accordionContent.expanded {
-  max-height: 500px;
-  padding-top: 1rem;
+  /* Initial state - will be animated by GSAP */
+  height: 0;
 }
 
 .contentInner {
-  padding: 0 2rem 1.5rem 2rem;
+  padding: 1rem 2rem 1.5rem 2rem;
+  /* Ensure content is visible when expanded */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contentText {
@@ -291,22 +292,6 @@
   }
 }
 
-/* Animation for content expansion */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.accordionContent.expanded .contentInner {
-  animation: slideDown 0.3s ease forwards;
-}
-
 /* Focus states for accessibility */
 .accordionHeader:focus-visible {
   outline: 2px solid rgba(107, 0, 62, 0.5);
@@ -326,13 +311,12 @@
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .accordionContent,
-  .chevron,
-  .accordionItem {
+  .chevron {
     transition: none;
   }
   
-  /* .accordionContent.expanded .contentInner {
-    animation: none;
-  } */
+  /* Disable GSAP animations for users who prefer reduced motion */
+  .accordionContent {
+    transition: height 0.3s ease;
+  }
 } 

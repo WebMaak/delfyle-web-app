@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
-import styles from './ComponentEight.module.css';
-import Button from '../../Button/Button';
+import styles from '../../../Components/TrialComponent/ComponentEight/ComponentEight.module.css';
+import Button from '../../../Components/Button/Button';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -26,55 +26,56 @@ interface ComponentEightProps {
 }
 
 const defaultProps = {
-  title: "ComponentEight",
-  description: "Market insights, trends, and reports to keep you on the cutting edge of financial technology.",
+  title: "How Delfyle Simplifies ITR-1 (Sahaj) Filing?",
+  description: "At Delfyle, we ensure:",
   showTitle: true,
   showDescription: true,
   cards: [
     {
-      type: 'online-event',
-      title: "How Zoom and Wix build exceptional customer experiences in a fast-paced market",
-      description: "Hear how enterprise executives are overcoming institutional risk aversion, brittle systems, and a bias toward the status quo to foster an innovative culture.",
-      buttonText: "Watch the talk",
-      buttonLink: "#"
+      type: 'step',
+      title: "Correct ITR Form Selection",
+      description: "We help choose the right ITR form based on your income source and eligibility.",
+      buttonText: "Contact team",
+      buttonLink: ""
     },
     {
-      type: 'report',
-      title: "Four ways modern payment systems drive growth",
-      description: "Learn how brands like Toyota, Alaska Airlines, and River Island are transforming their payments strategy to stay competitive.",
-      buttonText: "Read the report",
-      buttonLink: "#"
+      type: 'step',
+      title: "Accurate Tax Calculations",
+      description: "All tax liability and deductions are computed with precision to avoid errors.",
+      buttonText: "Contact team",
+      buttonLink: ""
     },
     {
-      type: 'guide',
-      title: "Guide to payments provider RFPs",
-      description: "Evaluate payment providers, including overlooked capabilities and important questions to ask, and get a downloadable RFP template.",
-      buttonText: "Download the guide",
-      buttonLink: "#"
+      type: 'step',
+      title: "Expert Review",
+      description: "A tax expert reviews your return to ensure compliance and accuracy.",
+      buttonText: "Contact team",
+      buttonLink: ""
     },
     {
-      type: 'report',
-      title: "How to increase revenue with an optimised checkout",
-      description: "Read about how businesses using Stripe's Optimized Checkout Suite achieved 11.9% more revenue on average.",
-      buttonText: "Read the report",
-      buttonLink: "#"
+      type: 'step',
+      title: "Timely Filing",
+      description: "Your return is filed well within the due date to avoid penalties or interest.",
+      buttonText: "Contact team",
+      buttonLink: ""
     },
     {
-      type: 'report',
-      title: "Stripe named a Leader in Payments",
-      description: "According to the IDC MarketScape evaluation, \"merchants of all sizes can benefit from Stripe's wide range of products and services.\"",
-      buttonText: "Read the report",
-      buttonLink: "#"
+      type: 'step',
+      title: "Refund & Notice Assistance",
+      description: "We assist with tracking refunds and responding to any notices from the IT Department.",
+      buttonText: "Contact team",
+      buttonLink: ""
     },
     {
-      type: 'report',
-      title: "Stripe named a Leader in Billing",
-      description: "According to The Forrester Wave™, \"Along with Stripe Payments' synergies, Stripe Billing's architecture and reliability are its key strengths.\"",
-      buttonText: "Read the report",
-      buttonLink: "#"
+      type: 'step',
+      title: "Bank-Grade Security",
+      description: "Your data is protected with industry-standard, bank-grade encryption.",
+      buttonText: "Contact team",
+      buttonLink: ""
     }
   ]
 };
+
 
 const getIconForType = (type: CardItem['type']) => {
   switch (type) {
@@ -120,45 +121,16 @@ const ComponentEight: React.FC<ComponentEightProps> = ({
     if (section && cards.length > 0) {
       // Initial states
       gsap.set([header, cards], {
-        y: 50,
-        opacity: 0
+        y: 5
       });
 
-      // Create timeline for entrance animation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      });
-
-      // Animate header entrance
-      if (header) {
-        tl.to(header, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out"
-        });
-      }
-
-      // Animate cards entrance
-      tl.to(cards, {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
-      }, "-=0.5"); // Start slightly before header animation ends
 
       // Add hover animations for each card
       cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
           gsap.to(card, {
-            y: -10,
-            scale: 1.02,
+            y: -5,
+            scale: 1.015,
             boxShadow: "0 10px 20px rgba(0, 0, 0, 0.05)",
             duration: 0.3,
             ease: "power2.out"
@@ -186,8 +158,8 @@ const ComponentEight: React.FC<ComponentEightProps> = ({
   return (
     <section ref={sectionRef} className={styles.container}>
       <div ref={headerRef} className={styles.header}>
-        {showTitle && <h2 className={styles.mainHeading}>{title}</h2>}
-        {showDescription && <p className={styles.mainDescription}>{description}</p>}
+       <h2 className={styles.mainHeading}>{title}</h2>
+        <p className={styles.mainDescription}>{description}</p>
       </div>
       <div className={styles.grid}>
         {cards.map((card, index) => (
