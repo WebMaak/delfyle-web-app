@@ -62,15 +62,18 @@
 .coloredreg{
   color:#f7fde1;;
   font-size: 4rem;
+  letter-spacing: normal;
 }
 
 .coloredplc{
   color:#ffffff;
+  letter-spacing: normal;
 }
 .colored {
   font-size: 6rem;
   color: #FFD580;
   display: inline-block;
+  letter-spacing: normal;
 }
 
 .description {
