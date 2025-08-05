@@ -32,6 +32,7 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "./CallToAction";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -152,41 +153,42 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
+      title: 'Get Expert Assistance',
+      content: 'Obtain DSCs for directors and shareholders to sign documents online.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
+      title: 'Apply for DIN',
+      content: 'Directors must get their Director Identification Number via the MCA portal.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
+      title: 'Reserve Company Name',
+      content: 'Choose a unique name and submit it for approval through SPICe+ Part A.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
+      title: 'Submit Company Info',
+      content: 'Fill in capital, office address, and director details in SPICe+ Part B. Apply for PAN & TAN.',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
+      title: 'Submit Incorporation Docs',
+      content: 'Submit signed MOA, AOA, and AGILE-PRO-S for GST, EPFO, ESIC & bank account setup.',
       stepNumber: 5
     },
     {
       id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
+      title: 'Get Certificate of Incorporation',
+      content: 'Receive COI from MCA with CIN, PAN & TAN after approval.',
       stepNumber: 6
     }
   ];
+  
 
   return (
     <>
@@ -427,20 +429,20 @@ const PrivateLimitedCompany: React.FC = () => {
           
           <ListComponent/>
 
-          {/* <ComponentSeven/> */}
-
           <ComponentEight/>
 
           {/* Company Registration Process Accordion */}
           <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
+            subheading="ITR with Delfyle"
+            title="Why File ITR with Delfyle? Discover a Smarter, Simpler Way to Handle Your Taxes"
+            description="At Delfyle, we simplify tax filing with personalized support and reliable service. Whether you're employed, self-employed, or running a business, we make the process stress-free and precise—so you can file with confidence."
             items={registrationProcessData}
             variant="numbered"
             theme="light"
-            maxOpenItems={1}
+            // maxOpenItems={1}
           />
+
+          <CallToAction/>
 
         </div>
 

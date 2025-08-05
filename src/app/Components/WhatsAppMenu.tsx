@@ -90,7 +90,7 @@ export default function WhatsAppMenu() {
     >
       <div
         style={{
-          width: `${panelWidth}px`,
+          width: open ? `${panelWidth}px` : '0px',
           height: '100%',
           background: '#fff',
           borderRadius: '16px 0 0 16px',
@@ -98,11 +98,12 @@ export default function WhatsAppMenu() {
           transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
           transform: open ? 'translateX(0%)' : 'translateX(100%)',
           visibility: open ? 'visible' : 'hidden',
+          pointerEvents: open ? 'auto' : 'none',
           border: '1px solid #f0f0f0',
           borderRight: 'none',
           display: 'flex',
           flexDirection: 'column',
-          zIndex: 9
+          zIndex: open ? 9 : -1
         }}
       >
         {!isMobile && (

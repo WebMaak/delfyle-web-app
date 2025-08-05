@@ -35,35 +35,35 @@ const defaultProps = {
       type: 'step',
       title: "Correct ITR Form Selection",
       description: "We help choose the right ITR form based on your income source and eligibility.",
-      buttonText: "Contact team",
+      buttonText: "Contact",
       buttonLink: ""
     },
     {
       type: 'step',
       title: "Accurate Tax Calculations",
       description: "All tax liability and deductions are computed with precision to avoid errors.",
-      buttonText: "Contact team",
+      buttonText: "Contact",
       buttonLink: ""
     },
     {
       type: 'step',
       title: "Expert Review",
       description: "A tax expert reviews your return to ensure compliance and accuracy.",
-      buttonText: "Contact team",
+      buttonText: "Contact",
       buttonLink: ""
     },
     {
       type: 'step',
       title: "Timely Filing",
       description: "Your return is filed well within the due date to avoid penalties or interest.",
-      buttonText: "Contact team",
+      buttonText: "Contact",
       buttonLink: ""
     },
     {
       type: 'step',
       title: "Refund & Notice Assistance",
       description: "We assist with tracking refunds and responding to any notices from the IT Department.",
-      buttonText: "Contact team",
+      buttonText: "Contact",
       buttonLink: ""
     },
     {
@@ -121,7 +121,7 @@ const ComponentEight: React.FC<ComponentEightProps> = ({
     if (section && cards.length > 0) {
       // Initial states
       gsap.set([header, cards], {
-        y: 5
+        y: 8
       });
 
 
@@ -129,9 +129,9 @@ const ComponentEight: React.FC<ComponentEightProps> = ({
       cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
           gsap.to(card, {
-            y: -5,
+            y: -8,
             scale: 1.015,
-            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.05)",
+            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
             duration: 0.3,
             ease: "power2.out"
           });
@@ -141,7 +141,7 @@ const ComponentEight: React.FC<ComponentEightProps> = ({
           gsap.to(card, {
             y: 0,
             scale: 1,
-            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.05)",
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)",
             duration: 0.3,
             ease: "power2.out"
           });
