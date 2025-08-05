@@ -459,10 +459,16 @@
 }
 
 .tableContainer {
-  overflow: auto;
+  overflow-x: auto;
   position: relative;
   margin-bottom: 20px;
 }
+
+.leadsTable tbody tr:hover {
+  position: relative;
+  z-index: 2;
+}
+
 
 .leadsTable {
   width: 100%;
@@ -1043,7 +1049,7 @@
 .leadsTable th:nth-child(6), .leadsTable td:nth-child(6) { max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .leadsTable th:nth-child(7), .leadsTable td:nth-child(7) { max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .leadsTable th:nth-child(8), .leadsTable td:nth-child(8) { max-width: 140px; white-space: nowrap; text-overflow: ellipsis; }
-.leadsTable th:nth-child(9), .leadsTable td:nth-child(9) { max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.leadsTable th:nth-child(9), .leadsTable td:nth-child(9) { max-width: 120px; white-space: nowrap; text-overflow: ellipsis; }
 .leadsTable th:nth-child(10), .leadsTable td:nth-child(10) { max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .leadsTable th:nth-child(11), .leadsTable td:nth-child(11) { max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .leadsTable th, .leadsTable td {

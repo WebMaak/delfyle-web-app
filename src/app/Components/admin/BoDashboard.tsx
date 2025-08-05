@@ -1780,7 +1780,27 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
-              {paginatedBackofficeLeads.map((lead) => (
+              {paginatedBackofficeLeads
+                .filter(lead => {
+                  const lowerCaseQuery = searchQuery.toLowerCase().trim();
+                  if (!lowerCaseQuery && !filterStatus) return true;
+
+                  const searchMatch = !lowerCaseQuery || (
+                      lead.fullName.toLowerCase().includes(lowerCaseQuery) ||
+                      lead._id.toLowerCase().includes(lowerCaseQuery) ||
+                      lead.phoneNumber.includes(lowerCaseQuery) ||
+                      lead.email.toLowerCase().includes(lowerCaseQuery) ||
+                      lead.message.toLowerCase().includes(lowerCaseQuery) ||
+                      lead.status.toLowerCase().includes(lowerCaseQuery) ||
+                      formatDate(lead.createdAt).toLowerCase().includes(lowerCaseQuery) ||
+                      (Array.isArray(lead.service) ? lead.service.join(', ').toLowerCase().includes(lowerCaseQuery) : (lead.service as string)?.toLowerCase().includes(lowerCaseQuery))
+                  );
+                  
+                  const statusMatch = !filterStatus || lead.status === filterStatus;
+
+                  return searchMatch && statusMatch;
+                })
+                .map((lead) => (
               <tr key={lead._id}>
                 <td data-label="Select">
                   <input 

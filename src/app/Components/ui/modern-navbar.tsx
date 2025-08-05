@@ -1346,7 +1346,7 @@ export const ModernNavbarButton = ({
   className,
   variant = "primary",
   visible,
-  ...props
+  ...domProps
 }: {
   href?: string;
   as?: React.ElementType;
@@ -1358,9 +1358,7 @@ export const ModernNavbarButton = ({
   | React.ComponentPropsWithoutRef<"a">
   | React.ComponentPropsWithoutRef<"button">
 )) => {
-  // Destructure visible from props to prevent it from being passed to DOM
-  const { visible: _, ...domProps } = props;
-  
+  // visible is destructured and not passed to the DOM
   return (
     <div className="modernNavbarButtonWrapper" style={{display:'flex'}}>
       <Tag
