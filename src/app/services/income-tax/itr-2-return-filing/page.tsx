@@ -392,7 +392,7 @@ const PrivateLimitedCompany: React.FC = () => {
         <div >
           <StartupHero 
           heading={<><span className={styles.coloredplc}>Expert ITR-2 Filing </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
-          description="Ensure timely ITR 1 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 1 return filing, return filing, and compliance monitoring."
+          description="Ensure timely ITR 2 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 2 return filing, return filing, and compliance monitoring."
           />
           
           {/* Big Company Logo Marquee Section */}

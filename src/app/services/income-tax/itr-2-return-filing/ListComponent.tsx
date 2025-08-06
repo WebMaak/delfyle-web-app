@@ -29,7 +29,7 @@ const ListComponent = () => {
                   className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]"
                 >
                   <FaCheckCircle className="text-[#b44593] m-1 text-lg" />
-                  <span>{item}</span>
+                  <span className="w-[90%]">{item}</span>
                 </li>
               ))}
             </ul>
@@ -52,7 +52,7 @@ const ListComponent = () => {
                   className="flex items-start gap-3 text-sm md:text-base text-gray-700"
                 >
                   <FaCheckCircle className="text-[#b44593] m-1 text-lg" />
-                  <span>{item}</span>
+                  <span className="w-[90%]">{item}</span>
                 </li>
               ))}
             </ul>
