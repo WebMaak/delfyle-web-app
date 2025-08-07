@@ -152,27 +152,33 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Expert Guidance at Every Step',
-      content: "Our seasoned tax professionals guide you from form selection to e-verification, ensuring 100% compliance.",
+      title: 'Expert Guidance from CA Professionals',
+      content: "Avoid mistakes, incorrect filings, or non-compliance. Our experts assist you at every step.",
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Accurate Tax Computation',
-      content: 'We calculate capital gains, foreign income, and deductions with precision — no errors, no tax notices.',
+      title: 'Accurate Tax ComputatiComplete Compliance',
+      content: 'We keep you updated with the latest tax regulations, sections, and compliance requirements.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Secure, Hassle-Free Platform',
-      content: 'Experience safe and encrypted tax filing from the comfort of your home.',
+      title: 'Accuracy & Review',
+      content: 'All returns undergo a multi-stage verification process to eliminate errors and ensure accuracy.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'On-Time Filing',
-      content: 'We make sure you never miss a deadline — we track due dates and follow up proactively.',
+      title: 'Smart Deductions & Refund Maximization',
+      content: 'We ensure you claim every eligible deduction and optimize your tax liability.',
       stepNumber: 4
+    },
+    {
+      id: 'step-5',
+      title: ' End-to-End Support',
+      content: 'From documents to filing to post-filing queries—Delfyle is with you, always.',
+      stepNumber: 5
     }
   ];
   
@@ -413,6 +419,21 @@ const PrivateLimitedCompany: React.FC = () => {
           <ListComponent/>
 
           <SingleList/>
+
+          <PrivateLimitedCompanyDisadvantages/>
+          
+          <PrivateLimitedCompanyContentTwo/>
+
+          {/* ITR-3 Filing Process Accordion */}
+          <CustomAccordion
+            subheading="ITR with Delfyle"
+            title="Why File ITR-3 with Delfyle? Discover a Smarter, Simpler Way to Handle Your Taxes"
+            description="At Delfyle, we simplify tax filing with personalized support and reliable service. Whether you're employed, self-employed, or running a business, we make the process stress-free and precise—so you can file with confidence."
+            items={registrationProcessData}
+            variant="numbered"
+            theme="light"
+            maxOpenItems={1}
+          />
 
           <CallToAction/>
 

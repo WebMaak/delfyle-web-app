@@ -23,56 +23,71 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
   return (
     <section ref={sectionRef} className={styles.container}>
     <div className={styles.topAnchorContainer}>
-      <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>ITR-2 Filing</a>
+      <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>ITR-3 Filing</a>
     </div>
     <div className={styles.mainContentWrapper}>
       <div ref={leftColumnRef} className={styles.leftColumn}>
+        {/* Section 1 */}
         <div className={styles.leftTopContainer}>
           <h2 ref={mainHeadingRef} className={styles.mainHeading}>
-          Modes of ITR-2 Filing
+          ITR-3 Form Structure: What You Need to Fill
           </h2>
         </div>
         <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-          <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>Online ITR-2 Filing (Recommended):</h3>
+          <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>1. General Information</h3>
           <p ref={el => { if (el) leftBottomContentRef.current[1] = el }} className={styles.paragraphContent}>
-          Filing Income Tax Return (ITR) is a key responsibility for every Indian taxpayer. Among the various forms prescribed under the Income Tax Act, 1961, the ITR-2 Form is specifically for individuals and Hindu Undivided Families (HUFs) who do not earn income from business or profession. If your income comes from salary, house property, capital gains, or foreign assets, ITR-2 is the right form for you.
+          PAN, Name, Address, DOB, Employer Category, Filing Status, etc.
           </p>
   
-          <h3 ref={el => { if (el) leftBottomContentRef.current[2] = el }} className={styles.subContentHeading} style={{display: 'none'}}>How does Delfyle assist taxpayers with ITR-2 filing?</h3>
-          <p ref={el => { if (el) leftBottomContentRef.current[3] = el }} className={styles.paragraphContent} style={{display: 'none'}}>
-          At Delfyle, we provide expert-assisted ITR-2 filing services, making tax filing stress-free, secure, and efficient. Whether you're an NRI, salaried individual with capital gains, or a director in a company, Delfyle ensures accurate filing and complete compliance.
+          <h3 ref={el => { if (el) leftBottomContentRef.current[2] = el }} className={styles.subContentHeading} >2. Computation of Income</h3>
+          <p ref={el => { if (el) leftBottomContentRef.current[3] = el }} className={styles.paragraphContent} >
+          Income from Salary, House Property, Business/Profession, Capital Gains, and Other Sources
           </p>
-  
-          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading}>Online ITR-2 Filing (Recommended):</h3>
+
+          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading}>3. Deductions and Tax Payments</h3>
           <div ref={el => { if (el) leftBottomContentRef.current[5] = el }} className={styles.productsGrid} style={{display: 'flex', flexDirection: 'column'}}>
             <ul className={styles.productsList}>
-              <li><span className={styles.checkIcon}>✔</span> Log in to Income Tax Portal and submit digitally (with or without DSC)</li>
-              <li><span className={styles.checkIcon}>✔</span> Verify using e-Verification or ITR-V (sent to CPC)</li>
-            </ul>
-            <ul className={styles.productsList} style={{display: 'none'}}>
-              <li><span className={styles.checkIcon}>✔</span> Capital gains or losses</li>
-              <li><span className={styles.checkIcon}>✔</span> Income from foreign assets or NRIs</li>
+              <li><span className={styles.checkIcon}>•</span> Deductions under Sections 80C to 80Uigitally (with or without DSC)</li>
+              <li><span className={styles.checkIcon}>•</span> Advance Tax & Self-Assessment Tax paid</li>
             </ul>
           </div>
-          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading}>Offline ITR-2 Filing (Only for Age 80+):</h3>
-          <div ref={el => { if (el) leftBottomContentRef.current[5] = el }} className={styles.productsGrid} style={{display: 'flex', flexDirection: 'column'}}>
+
+          <h3 ref={el => { if (el) leftBottomContentRef.current[2] = el }} className={styles.subContentHeading}>4. TDS/TCS Credits</h3>
+          <p ref={el => { if (el) leftBottomContentRef.current[3] = el }} className={styles.paragraphContent}>
+          Tax deducted or collected at source from income
+          </p>
+          <h3 ref={el => { if (el) leftBottomContentRef.current[2] = el }} className={styles.subContentHeading}>5. Verification Section</h3>
+          <p ref={el => { if (el) leftBottomContentRef.current[3] = el }} className={styles.paragraphContent}>
+          Declaration & E-Verification or ITR-V submission
+          </p>
+  
+          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading} style={{display: 'none'}}>Offline ITR-3 Filing (Only for Age 80+):</h3>
+          <div ref={el => { if (el) leftBottomContentRef.current[5] = el }} className={styles.productsGrid} style={{display: 'none', flexDirection: 'column'}}>
             <ul className={styles.productsList}>
               <li><span className={styles.checkIcon}>✔</span> Physical submission or barcode return</li>
               <li><span className={styles.checkIcon}>✔</span> Acknowledgment issued by Income Tax Department</li>
             </ul>
           </div>
-          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading}> Late Filing Penalties for ITR-2</h3>
-          <div ref={el => { if (el) leftBottomContentRef.current[5] = el }} className={styles.productsGrid} style={{display: 'flex', flexDirection: 'column'}}>
-            <ul className={styles.productsList}>
-              <li><span className={styles.checkIcon}>✔</span> ₹5,000 if income &gt; ₹5L</li>
-              <li><span className={styles.checkIcon}>✔</span> ₹1,000 if income &lt; ₹5L</li>
-              <li><span className={styles.checkIcon}>✔</span> 1% monthly interest on outstanding tax </li>
-              <li><span className={styles.checkIcon}>✔</span> Penalties up to 200% for misreporting</li>
-              <li><span className={styles.checkIcon}>✔</span> Prosecution risk for repeat non-filers</li>
-            </ul>
-          </div>
-          <p ref={el => { if (el) leftBottomContentRef.current[3] = el }} className={styles.paragraphContent}>
-          File before July 31, 2025 to avoid penalties.
+        </div>
+
+        {/* Section 2 */}
+        <div className={styles.leftTopContainer}>
+          <h2 ref={mainHeadingRef} className={styles.mainHeading}>
+          Modes of ITR-3 Filing
+          </h2>
+        </div>
+        <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
+          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading}>Online ITR-3 Filing (Preferred)</h3>
+            <div ref={el => { if (el) leftBottomContentRef.current[5] = el }} className={styles.productsGrid} style={{display: 'flex', flexDirection: 'column'}}>
+              <ul className={styles.productsList}>
+                <li><span className={styles.checkIcon}>•</span> File via Income Tax e-filing portal</li>
+                <li><span className={styles.checkIcon}>•</span> Use Digital Signature or EVC (Aadhaar OTP, bank EVC, etc.)</li>
+              </ul>
+            </div>
+  
+          <h3 ref={el => { if (el) leftBottomContentRef.current[2] = el }} className={styles.subContentHeading} >Offline Filing (For senior citizens above 80 years)</h3>
+          <p ref={el => { if (el) leftBottomContentRef.current[3] = el }} className={styles.paragraphContent} >
+          File paper return or bar-coded return
           </p>
         </div>
       </div>
@@ -80,7 +95,7 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
       <div ref={rightColumnRef} className={styles.rightColumn}>
         <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
           <p className={styles.rightDescription}>
-            Delfyle offers secure, expert-assisted ITR-2 filing for residents, NRIs, and high-net-worth individuals. We ensure compliance, optimize deductions, and file your returns on time—stress-free.
+          Filing Income Tax Return (ITR) is a key responsibility for every Indian taxpayer. Among the various forms prescribed under the Income Tax Act, 1961, the ITR-3 Form is specifically for individuals and Hindu Undivided Families (HUFs) who do not earn income from business or profession. If your income comes from salary, house property, capital gains, or foreign assets, ITR-3 is the right form for you.
           </p>
         </div>
         <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
@@ -93,7 +108,7 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
             className={styles.companyLogo}
           />
           <p className={styles.bottomQuote}>
-            "Filing your ITR accurately is more than a task—it’s a responsibility. Delfyle ensures you get it right every time."
+          "At Delfyle, we understand the importance of accurate and timely ITR-3 filing. Our team of experts ensures that your tax return is prepared and submitted with utmost care, ensuring you avoid any penalties or interest. Trust us to handle your ITR-3 filing needs and focus on your business growth."
           </p>
           <p className={styles.bottomAuthor}>Team Delfyle</p>
         </div>

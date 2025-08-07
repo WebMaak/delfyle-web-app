@@ -83,7 +83,7 @@ const ITR2EligibilitySection: React.FC = () => {
         {/* Right Circle Graphic */}
         <div ref={rightColumnRef} className={styles.rightColumn}>
           <div ref={circleGraphicRef} className={styles.circleGraphic}>
-            <p className={styles.circleText}>ITR-2</p>
+            <p className={styles.circleText}>ITR-3</p>
           </div>
         </div>
       </div>

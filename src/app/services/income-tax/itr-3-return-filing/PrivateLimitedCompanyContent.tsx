@@ -43,7 +43,7 @@ const PrivateLimitedCompanyContent: React.FC = () => {
           Our team of seasoned tax professionals makes complex tax reporting simple. From assessing eligibility to maximizing deductions, we handle your return with precision and care.
           </p>
   
-          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading} style={{display:'none'}}>Who should file ITR-2?</h3>
+          <h3 ref={el => { if (el) leftBottomContentRef.current[4] = el }} className={styles.subContentHeading} style={{display:'none'}}>Who should file ITR-3?</h3>
           <div ref={el => { if (el) leftBottomContentRef.current[5] = el }} className={styles.productsGrid} style={{display:'none'}} >
             <ul className={styles.productsList}>
               <li><span className={styles.checkIcon}>✔</span> Individuals or HUFs not having income from business/profession</li>
