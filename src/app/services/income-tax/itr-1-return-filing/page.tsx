@@ -345,7 +345,7 @@ const PrivateLimitedCompany: React.FC = () => {
         />
       </div>
 
-      {/* Modern Navbar */}
+      Modern Navbar
       <div className="fixed inset-x-0 top-0 z-50">
         <ModernNavbar user={user}>
           <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
@@ -358,38 +358,6 @@ const PrivateLimitedCompany: React.FC = () => {
               )}
             </div>
           </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
-              <ModernNavbarButton href="/contact" className="w-full mt-4">
-                Contact Us
-              </ModernNavbarButton>
-              <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
-                Sign In
-              </ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
         </ModernNavbar>
       </div>
 
@@ -445,9 +413,6 @@ const PrivateLimitedCompany: React.FC = () => {
           <CallToAction/>
 
         </div>
-
-
-
         {/* Footer */}
         <ModernFooter/>
       </main>

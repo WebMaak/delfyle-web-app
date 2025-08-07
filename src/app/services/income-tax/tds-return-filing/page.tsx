@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -19,21 +12,29 @@ import {
   ModernNavBody, 
   ModernNavItems, 
   ModernNavbarLogo, 
-  ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
+  ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ListComponent from "./ListComponent";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "./CallToAction";
+import ListComponentReusable from "./ListComponentReusable";
+import ColumnRowTable from "../../../Components/TrialComponent/ColumnRowTable/ColumnRowTable";
+import { FaBalanceScale, FaCheckCircle, FaFileAlt, FaFolderOpen } from "react-icons/fa";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const PrivateLimitedCompany: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -146,41 +147,43 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
+      title: 'Expert Guidance:',
+      content:
+        'TDS experts with in-depth tax compliance knowledge',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
+      title: 'Quarterly Compliance Alerts:',
+      content:
+        'Never miss a deadline again',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
+      title: 'Complete Filing Assistance:',
+      content:
+        'From document collection to e-verification',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
+      title: 'Revised Return Support:',
+      content:
+        'Timely rectifications for rejected/incorrect filings',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
+      title: 'Compliance with Latest Tax Norms:',
+      content:
+        'Stay ahead of changing laws',
       stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
-      stepNumber: 6
     }
   ];
+ 
+  
+  
 
   return (
     <>
@@ -339,51 +342,33 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+            <div className="modernNavActions">
+              <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
-              <ModernNavbarButton href="/contact" className="w-full mt-4">
-                Contact us
-              </ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
         </ModernNavbar>
       </div>
+
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-            heading={<><span>Income Tax</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-            description="File your Income Tax returns and manage all tax compliance with Delfyle's professional assistance."
-            buttonText="Get Income Tax Help"
+          heading={<><span className={styles.coloredplc}>Expert TDS Return Filing </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          description="Ensure timely TDS return filing with Delfyle's expert assistance. We handle all compliance requirements, including TDS return filing, return filing, and compliance monitoring."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -397,30 +382,122 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
+          <ListComponent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ColumnRowTable
+            title="TDS Deposit & Due Dates"
+            description="TDS deducted must be deposited on or before the 7th of the following month. For March deductions, due date is April 30th (in most cases)."
+            columns={[
+              ['Quarter', 'Period', 'TDS Return Due Date'],
+              ['Q1', 'April - June', '31st July'],
+              ['Q2', 'July - September', '31st October'],
+              ['Q3', 'October - December', '31st January'],
+              ['Q4', 'January - March', '31st May'],
+            ]}
+          />
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <ColumnRowTable
+            title="Common TDS Sections & Thresholds"
+            columns={[
+              ['Section', 'Nature of Payment', 'Threshold', 'Rate'],
+              ['192', 'Salary', 'Basic Exemption Limit', 'As per slab'],
+              ['194A', 'Interest (non-securities)', 'Rs. 40,000 / 50,000', '10%'],
+              ['194C', 'Contractor/Sub-contractor', 'Rs. 30,000 (single) / 1L', '1% / 2%'],
+              ['194I', 'Rent (Land/Building/Machinery)', 'Rs. 2,40,000', '2% / 10%'],
+              ['194J', 'Professional/Technical Fees', 'Rs. 30,000', '10%'],
+            ]}
+          />
 
-          <PrivateLimitedCompanyRequirements/> */}
+          <ColumnRowTable
+            title="Types of TDS Return Forms"
+            columns={[
+              ['Form', 'Use Case'],
+              ['24Q', 'Salary payments'],
+              ['26Q', 'Non-salary resident payments'],
+              ['27Q', 'Payments to non-residents'],
+              ['27EQ', 'Tax Collected at Source (TCS)'],
+            ]}
+          />
 
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
+          <ListComponentReusable
+            title="Claiming TDS Credit"
+            description="Deductees must quote correct TDS certificate numbers and match TDS amounts when filing their Income Tax Returns. Accurate returns ensure correct reflection in Form 26AS and seamless refund/credit."
+            listBlocks={[
+              {
+                icon: FaCheckCircle,
+                iconColor:"#6ee7b7", // green-500
+                title: "Importance of Timely TDS Return Filing",
+                items: [
+                  "Legal Compliance under Income Tax Act",
+                  "Avoid Interest & Penalties (up to Rs. 200/day under Sec 234E)",
+                  "Maintain Credibility & Government Compliance",
+                  "Enable Deductees to Claim TDS Credit",
+                  "Faster Refund & Reduced Tax Scrutiny",
+                ],
+              },
+              {
+                icon: FaBalanceScale,
+                iconColor:"#fca5a5", // red-500
+                title: "Penalties for Non-Compliance",
+                items: [
+                  "Late Deduction: Interest @ 1% p.m.",
+                  "Late Payment: Interest @ 1.5% p.m.",
+                  "Late Filing: Rs. 200/day till return filed",
+                  "Penalty by Assessing Officer: Up to amount of TDS not paid",
+                ],
+              },
+              {
+                icon: FaFileAlt,
+                iconColor:"#93c5fd", // blue-500
+                title: "Penalties for Non-Compliance",
+                items: [
+                  "Late Deduction: Interest @ 1% p.m.",
+                  "Late Payment: Interest @ 1.5% p.m.",
+                  "Late Filing: Rs. 200/day till return filed",
+                  "Penalty by Assessing Officer: Up to amount of TDS not paid",
+                ],
+              },
+              {
+                icon: FaFolderOpen,
+                iconColor:"#c4b5fd", // purple-500
+                title: "Filing Revised TDS Returns",
+                items: [
+                  "Required if PANs, challans, or deduction figures were incorrect",
+                  "Submit corrected return after original is accepted by TIN-CPC",
+                  "Retrieve Consolidated TDS File (Conso file) from TRACES for revision",
+                ],
+              },
+              {
+                icon: FaFileAlt,
+                iconColor:"#fdba74", // purple-500
+                title: "Essential Details Required for TDS Filing",
+                items: [
+                  "TAN and PAN of deductor and deductees",
+                  "Period of deduction",
+                  "Entity Type (Proprietor, LLP, Company, etc.)",
+                  "Number of transactions",
+                  "Incorporation date",
+                  "Previous return acknowledgement details",
+                ],
+              },
+            ]}
+          />
+
+          {/* ITR-3 Filing Process Accordion */}
+          <CustomAccordion
+            subheading="TDS with Delfyle"
+            title="Why Choose Delfyle for TDS Return Filing?"
+            description="At Delfyle, we provide trusted and efficient solutions for TDS return filing. Here’s what sets us apart:"
             items={registrationProcessData}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
+          <CallToAction/>
 
-          <PrivateLimitedPost/> */}
         </div>
 
         {/* Footer */}
