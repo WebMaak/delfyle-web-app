@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -28,12 +21,25 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ListComponent from "./ListComponent";
+import IconTextList from "./IconTextList";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "./CallToAction";
+import SingleList from "../../../Components/TrialComponent/SingleList/SingleList";
+import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const PrivateLimitedCompany: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -146,41 +152,80 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
+      title: 'Expert Company Tax Consultants',
+      content:
+        'We have seasoned professionals who specialize in corporate taxation, compliance, and financial planning.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
+      title: 'Accuracy & Error-Free Returns',
+      content:
+        'Each ITR-6 is reviewed by professionals to eliminate mismatches, errors, or audit triggers.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
+      title: 'Data Security & Confidentiality',
+      content:
+        'We follow bank-grade encryption and secure infrastructure to protect your sensitive data.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
+      title: 'Deadline Tracking',
+      content:
+        'Receive proactive alerts and filing reminders—never miss a tax deadline.',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
+      title: 'Support for Audited Companies',
+      content:
+        'From Form 3CD to Form 3CA/3CB, we handle audit-related compliances as per Income Tax Rules.',
       stepNumber: 5
     },
     {
       id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
+      title: 'Affordable & Transparent Pricing',
+      content:
+        'Delfyle offers competitive ITR-6 filing packages with no hidden costs.',
       stepNumber: 6
+    },
+    {
+      id: 'step-7',
+      title: 'Consultation & Evaluation:',
+      content: 'We assess your company’s compliance needs and ITR-6 applicability.',
+      stepNumber: 7
+    },
+    {
+      id: 'step-8',
+      title: 'Document Collection & Verification:',
+      content: 'You provide the necessary financials, and we review your records.',
+      stepNumber: 8
+    },
+    {
+      id: 'step-9',
+      title: 'Preparation of ITR:',
+      content: 'You provide the necessary financials, and we review your records.',
+      stepNumber: 9
+    },
+    {
+      id: 'step-10',
+      title: 'E-Filing:',
+      content: 'ITR-6 is filed electronically on the Income Tax Portal.',
+      stepNumber: 10
+    },
+    {
+      id: 'step-11',
+      title: 'Acknowledgement & Verification:',
+      content: 'We assist with E-verification and provide you with the ITR-V receipt.',
+      stepNumber: 11
     }
   ];
+ 
+  
+  
 
   return (
     <>
@@ -339,11 +384,16 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+            <div className="modernNavActions">
+              <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
 
           <ModernMobileNav>
@@ -370,20 +420,29 @@ const PrivateLimitedCompany: React.FC = () => {
                 </div>
               ))}
               <ModernNavbarButton href="/contact" className="w-full mt-4">
-                Contact us
+                Contact Us
+              </ModernNavbarButton>
+              <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
+                Sign In
               </ModernNavbarButton>
             </ModernMobileNavMenu>
           </ModernMobileNav>
         </ModernNavbar>
       </div>
 
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
+
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>ITR 6 Return Filing</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-          description="Ensure timely ITR 6 returns with Delfyle's expert assistance. We handle all compliance requirements, including ITR 6 registration, return filing, and compliance monitoring."
-          buttonText="Get ITR 6 Return Filing Help"
+          heading={<><span className={styles.coloredplc}>Expert ITR-6 Filing </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          description="Ensure timely ITR 6 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 6 return filing, return filing, and compliance monitoring."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -397,30 +456,59 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
+          <ListComponent/>
 
+          <SingleList
+            title="Why Timely ITR-6 Filing is Important"
+            description="Filing your company return before the deadline ensures more than just compliance:"
+            buttonText="Learn More"
+            showButton={true}
+            features={{
+              column: [
+                "Carry Forward Business Losses (up to 8 years under Section 72)",
+                "Avoid Late Filing Penalty (up to ₹10,000 under Section 234F)",
+                "Lower Risk of Scrutiny and Notices",
+                "Faster Tax Refunds",
+                "Improved Creditworthiness for Loans or Government Tenders",
+                "Smoother Exit Process in case of business winding up"
+              ]
+            }}  
+          showFeatures={true}
+          showTitle={true}
+          showDescription={true}
+          />
           <PrivateLimitedCompanyBenefits/>
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <IconTextList/>
 
-          <PrivateLimitedCompanyRequirements/> */}
+          <ListComponentTwo
+            title="Documents Required for ITR-6 Filing"
+            description="No physical documents or annexures are required to be attached while submitting ITR-6. However, companies should maintain and reconcile:"
+            listItems={[
+              "Form 26AS (Tax Credit Statement)",
+              "Trial Balance & Financial Statements",
+              "TDS/TCS Certificates",
+              "Bank Statements",
+              "Audit Reports (if applicable)"
+            ]}
+          />
 
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
+
+          {/* ITR-3 Filing Process Accordion */}
+          <CustomAccordion
+            subheading="ITR with Delfyle"
+            title="Why File ITR-6 with Delfyle?"
+            description="At Delfyle, we simplify tax filing with personalized support and reliable service. Whether you're employed, self-employed, or running a business, we make the process stress-free and precise—so you can file with confidence."
             items={registrationProcessData}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
+          <CallToAction/>
 
-          <PrivateLimitedPost/> */}
         </div>
 
         {/* Footer */}

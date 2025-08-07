@@ -1,0 +1,36 @@
+// components/CallToAction.tsx
+import React from 'react';
+import { FaPhone } from 'react-icons/fa';
+
+const CallToAction = () => {
+  return (
+    <section className="bg-white from-pink-100 via-purple-100 to-white py-16 px-6 text-center md:px-20">
+      <h2 className="md:text-[3.5rem] text-[2.5rem] font-bold text-gray-800 leading-tight mb-4 text-left md:text-center">
+      Get Expert Assistance for ITR-6 Filing Today!
+      </h2>
+      <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center">
+      Avoid penalties, ensure accuracy, and stay tax compliant with Delfyle’s ITR-6 Filing Services. Contact us today for a free consultation and let our team handle the complexities of corporate income tax filing while you focus on growing your business.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)' }}
+          className="text-white px-8 py-4 rounded-lg shadow-md transition transform hover:-translate-y-1 hover:shadow-lg"
+        >
+          Start ITR-6 Filing Now
+        </a>
+        <a
+          href="/contact"
+          className="border border-[#E50078] text-[#E50078] px-8 py-3 rounded-lg bg-white transition transform hover:-translate-y-1 hover:shadow sm:text-base"
+        >
+          Book Free Consultation
+        </a>
+      </div>
+      <p className="text-gray-600 mt-10 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center italic">
+      File Smarter. File with Delfyle.
+      </p>
+    </section>
+  );
+};
+
+export default CallToAction;
