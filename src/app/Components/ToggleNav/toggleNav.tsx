@@ -590,7 +590,7 @@ export default function ToggleNav({
           </a>
         </div>
         {/* Profile picture or initial on the left of the toggle icon */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginLeft: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginLeft: 8 }} >
           {user ? (
             user.profilePicture ? (
               <img
@@ -603,6 +603,7 @@ export default function ToggleNav({
                   objectFit: 'cover',
                   border: '2px solid #eee',
                 }}
+                onClick={() => window.location.href = "/user-dashboard"}
               />
             ) : user.userName ? (
               <div
@@ -620,6 +621,7 @@ export default function ToggleNav({
                   border: '2px solid #eee',
                   textTransform: 'uppercase',
                 }}
+                onClick={() => window.location.href = "/user-dashboard"}
               >
                 {user.userName.charAt(0)}
               </div>
