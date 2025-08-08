@@ -26,7 +26,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part A */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon}><FaUserAlt /></div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaUserAlt /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part A: General Information</h3>
           <p className={styles.featureDescription}>
@@ -37,7 +37,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part B */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon}><MdOutlineAccountBalanceWallet /></div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><MdOutlineAccountBalanceWallet /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part B: Gross Total Income</h3>
           <p className={styles.featureDescription}>
@@ -48,7 +48,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part C */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon}><RiScissors2Fill /></div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><RiScissors2Fill /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part C: Deductions & Total Taxable Income</h3>
           <p className={styles.featureDescription}>
@@ -59,7 +59,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part D */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon}><FaCalculator /></div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}} ><FaCalculator /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part D: Tax Computation & Tax Status</h3>
           <p className={styles.featureDescription}>

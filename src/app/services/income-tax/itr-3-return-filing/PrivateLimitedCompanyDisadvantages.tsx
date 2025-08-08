@@ -27,7 +27,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </p>
   
         <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><AiOutlineIdcard /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineIdcard /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>PAN & Aadhaar Card</h3>
             <p className={styles.featureDescription}>
@@ -37,7 +37,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><AiOutlineBank /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBank /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>Bank Account Details</h3>
             <p className={styles.featureDescription}>
@@ -47,7 +47,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><AiOutlineFileText /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineFileText /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>Form 16 (if salaried)</h3>
             <p className={styles.featureDescription}>
@@ -57,7 +57,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><AiOutlineBarChart /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBarChart /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>Capital Gains Statements</h3>
             <p className={styles.featureDescription}>
@@ -67,7 +67,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><BsBook /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><BsBook /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>Business Income Details</h3>
             <p className={styles.featureDescription}>
@@ -77,7 +77,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><BsGlobe2 /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><BsGlobe2 /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>Foreign Asset Details</h3>
             <p className={styles.featureDescription}>
@@ -87,7 +87,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[6] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><FiBriefcase /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>Investment & Deduction Proofs</h3>
             <p className={styles.featureDescription}>
@@ -97,7 +97,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[7] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon}><FiPieChart /></div>
+          <div className={styles.featureIcon} style={{color: '#B40068'}}><FiPieChart /></div>
           <div className={styles.featureTextContent}>
             <h3 className={styles.featureHeading}>TDS/TCS Details</h3>
             <p className={styles.featureDescription}>

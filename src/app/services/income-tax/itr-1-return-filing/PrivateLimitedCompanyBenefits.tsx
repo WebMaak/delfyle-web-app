@@ -4,6 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import styles from '../../../Components/TrialComponent/ComponentEleven/ComponentEleven.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaGlobe } from 'react-icons/fa';
+import { FaMoneyBill } from 'react-icons/fa';
+import { FaChartLine } from 'react-icons/fa';
+import { FaBriefcase } from 'react-icons/fa';
+import { FaChartBar } from 'react-icons/fa';
+import { FaDice } from 'react-icons/fa';
+import { FaCalendar } from 'react-icons/fa';
+import { FaBuilding } from 'react-icons/fa';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +36,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </p>
 
       <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🌐</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaGlobe /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Are an NRI or RNOR</h3>
           <p className={styles.featureDescription}>
@@ -38,7 +46,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>💸</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMoneyBill /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Have total income exceeding ₹50 lakhs</h3>
           <p className={styles.featureDescription}>
@@ -48,7 +56,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>📈</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaChartLine /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Have capital gains</h3>
           <p className={styles.featureDescription}>
@@ -58,7 +66,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🏘️</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Own more than one house property</h3>
           <p className={styles.featureDescription}>
@@ -68,7 +76,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>💼</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBriefcase /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Earn income from business or profession</h3>
           <p className={styles.featureDescription}>
@@ -78,7 +86,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🏢</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Are a director in a company</h3>
           <p className={styles.featureDescription}>
@@ -88,7 +96,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[6] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>📊</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaChartBar /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Have invested in unlisted shares</h3>
           <p className={styles.featureDescription}>
@@ -98,7 +106,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[7] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🎰</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaDice /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Have income from lottery, gambling, racehorses</h3>
           <p className={styles.featureDescription}>
@@ -108,7 +116,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[8] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>📅</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaCalendar /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Have deferred tax on ESOPs from start-ups</h3>
           <p className={styles.featureDescription}>
@@ -118,7 +126,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[9] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🏦</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Claim deduction under section 194N</h3>
           <p className={styles.featureDescription}>

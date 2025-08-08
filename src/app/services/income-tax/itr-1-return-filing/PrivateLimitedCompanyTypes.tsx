@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from 'react';
 import styles from '../../../Components/TrialComponent/ComponentEleven/ComponentEleven.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaUser } from 'react-icons/fa';
+import { FaMoneyBill } from 'react-icons/fa';
+import { FaBuilding } from 'react-icons/fa';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +31,7 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>👤</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaUser /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Resident Individual</h3>
               <p className={styles.featureDescription}>
@@ -38,7 +41,7 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>💰</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMoneyBill /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Income Up to ₹50 Lakhs</h3>
               <p className={styles.featureDescription}>
@@ -48,7 +51,7 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>🌾</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Other Conditions</h3>
               <p className={styles.featureDescription}>

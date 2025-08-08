@@ -26,7 +26,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </p>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><HiOutlineClipboardList /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><HiOutlineClipboardList /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part A: General Information</h3>
               <p className={styles.featureDescription}>
@@ -36,7 +36,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><MdOutlineSummarize /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><MdOutlineSummarize /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part B: Total Income & Tax Computation</h3>
               <p className={styles.featureDescription}>
@@ -46,7 +46,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><TbReportAnalytics /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><TbReportAnalytics /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>19+ Schedules</h3>
               <p className={styles.featureDescription}>

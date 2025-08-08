@@ -4,6 +4,13 @@ import React, { useEffect, useRef } from 'react';
 import styles from '../../../Components/TrialComponent/ComponentEleven/ComponentEleven.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaFile } from 'react-icons/fa';
+import { FaBriefcase } from 'react-icons/fa';
+import { FaChartLine } from 'react-icons/fa';
+import { FaCalculator } from 'react-icons/fa';
+import { FaMapMarker } from 'react-icons/fa';
+import { FaFolder } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +35,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </p>
     
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>🧾</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaFile /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part A: Personal Details</h3>
               <p className={styles.featureDescription}>
@@ -38,7 +45,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>💼</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBriefcase /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part B: Income Details</h3>
               <p className={styles.featureDescription}>
@@ -48,7 +55,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>📉</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaChartLine /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part C: Deductions</h3>
               <p className={styles.featureDescription}>
@@ -58,7 +65,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>🧮</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaCalculator /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part D: Tax & Refund</h3>
               <p className={styles.featureDescription}>
@@ -68,7 +75,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>📌</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMapMarker /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part E: Additional Disclosures</h3>
               <p className={styles.featureDescription}>
@@ -78,7 +85,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>🗂️</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaFolder /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Schedule IT</h3>
               <p className={styles.featureDescription}>
@@ -88,7 +95,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[6] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>📥</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaDownload /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Schedule TDS/TCS</h3>
               <p className={styles.featureDescription}>

@@ -27,7 +27,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* ✅ Who Can File */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiBriefcase /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Individuals and HUFs who earn income from business or profession</h3>
               <p className={styles.featureDescription}>
@@ -37,7 +37,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><MdBusinessCenter /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><MdBusinessCenter /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Directors of companies</h3>
               <p className={styles.featureDescription}>
@@ -47,7 +47,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FaGlobe /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaGlobe /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Individuals with foreign assets or income</h3>
               <p className={styles.featureDescription}>
@@ -57,7 +57,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><AiOutlineStock /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineStock /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Persons holding unlisted equity shares</h3>
               <p className={styles.featureDescription}>
@@ -67,7 +67,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><MdAttachMoney /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}} ><MdAttachMoney /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Taxpayers with capital gains, house property income, salary, and other income sources</h3>
               <p className={styles.featureDescription}>

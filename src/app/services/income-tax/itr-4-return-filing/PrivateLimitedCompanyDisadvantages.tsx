@@ -4,6 +4,12 @@ import React, { useEffect, useRef } from 'react';
 import styles from '../../../Components/TrialComponent/ComponentEleven/ComponentEleven.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaPen } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+import { FaCalculator } from 'react-icons/fa';
+import { FaBuilding } from 'react-icons/fa';
+import { FaGlobe } from 'react-icons/fa';
+import { FaCalendar } from 'react-icons/fa';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +34,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </p>
 
       <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>📝</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaPen /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Fill sections in order</h3>
           <p className={styles.featureDescription}>
@@ -38,7 +44,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>❌</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaTimes /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Use ‘NA’ where applicable</h3>
           <p className={styles.featureDescription}>
@@ -48,7 +54,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🔢</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaCalculator /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Rounding off values</h3>
           <p className={styles.featureDescription}>
@@ -58,7 +64,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🏢</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Select employer type accurately</h3>
           <p className={styles.featureDescription}>
@@ -68,7 +74,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>🌍</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaGlobe /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Restriction for Double Taxation Relief</h3>
           <p className={styles.featureDescription}>
@@ -78,7 +84,7 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon}>📆</div>
+        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaCalendar /></div>
         <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Filing previous years’ returns</h3>
           <p className={styles.featureDescription}>

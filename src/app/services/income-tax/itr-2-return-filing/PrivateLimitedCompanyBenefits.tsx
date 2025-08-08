@@ -24,7 +24,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* ✅ Who Can File */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiBriefcase /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Have income from salary or pension</h3>
               <p className={styles.featureDescription}>
@@ -34,7 +34,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiHome /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiHome /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Own more than one house property</h3>
               <p className={styles.featureDescription}>
@@ -44,7 +44,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiTrendingUp /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiTrendingUp /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Earn capital gains</h3>
               <p className={styles.featureDescription}>
@@ -54,7 +54,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiGlobe /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiGlobe /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Have foreign assets or foreign income</h3>
               <p className={styles.featureDescription}>
@@ -64,7 +64,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><AiOutlineDollar /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineDollar /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Have income from lotteries or racehorses</h3>
               <p className={styles.featureDescription}>
@@ -74,7 +74,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiUsers /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiUsers /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Are a director in a company</h3>
               <p className={styles.featureDescription}>
@@ -84,7 +84,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FiAward /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiAward /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Have agricultural income over ₹5,000</h3>
               <p className={styles.featureDescription}>
@@ -94,7 +94,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><AiOutlineBank /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBank /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Are RNOR or NRI</h3>
               <p className={styles.featureDescription}>
@@ -112,7 +112,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </p>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{ color: 'red' }}><AiOutlineStop /></div>
+            <div className={styles.featureIcon} style={{ color: '#B40068' }}><AiOutlineStop /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Have income from business or profession</h3>
               <p className={styles.featureDescription}>
@@ -122,7 +122,7 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{ color: 'red' }}><AiOutlineAppstoreAdd /></div>
+            <div className={styles.featureIcon} style={{ color: '#B40068' }}><AiOutlineAppstoreAdd /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Are eligible to file ITR-1 Sahaj</h3>
               <p className={styles.featureDescription}>

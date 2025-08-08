@@ -30,7 +30,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Part A – Entity Details & Financials */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><AiOutlineInfoCircle /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineInfoCircle /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part A: Entity Details & Financials</h3>
               <p className={styles.featureDescription}>
@@ -41,7 +41,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Balance Sheet */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><BsBarChartFill /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><BsBarChartFill /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Balance Sheet</h3>
               <p className={styles.featureDescription}>
@@ -52,7 +52,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Trading & Profit and Loss */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><HiOutlineClipboardList /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><HiOutlineClipboardList /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Trading & Profit and Loss Account</h3>
               <p className={styles.featureDescription}>
@@ -63,7 +63,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Manufacturing Account */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><TbReportAnalytics /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><TbReportAnalytics /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Manufacturing Account</h3>
               <p className={styles.featureDescription}>
@@ -74,7 +74,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Part B-TI – Computation of Total Income */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><MdOutlineSummarize /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><MdOutlineSummarize /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part B-TI: Total Income</h3>
               <p className={styles.featureDescription}>
@@ -85,7 +85,7 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Part B-TTI – Computation of Tax Liability */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon}><FaBalanceScale /></div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBalanceScale /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part B-TTI: Tax Liability</h3>
               <p className={styles.featureDescription}>
