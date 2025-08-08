@@ -69,11 +69,20 @@ const ModernContactForm = () => {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const { setUser } = useUser();
-
+  const [isMobile, setIsMobile] = useState(false);
   const handleSignUpSuccess = () => {
     setIsSignUpOpen(false);
     setIsAuthOpen(true);
   };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Refs for GSAP
   const leftRef = useRef<HTMLDivElement>(null);
@@ -207,11 +216,11 @@ const ModernContactForm = () => {
 
   return (
     <div id="modern-contact-form" className={styles.wrapper}>
-      <div className={styles.bgLeft} ref={leftRef} style={{backgroundColor: '#b40068', opacity: 0.1}}></div>
-      <div className={styles.bgRight} ref={rightRef} style={{backgroundColor: '#b40068', opacity: 0.1}}></div>
-      <div className={styles.bgCenter} ref={centerRef} style={{backgroundColor: '#b40068', opacity: 0.1}}></div>
+      <div className={styles.bgLeft} ref={leftRef} style={{backgroundColor: '#b40068', opacity: 0.1, display: isMobile ? 'none' : 'block'}}></div>
+      <div className={styles.bgRight} ref={rightRef} style={{backgroundColor: '#b40068', opacity: 0.1, display: isMobile ? 'none' : 'block'}}></div>
+      <div className={styles.bgCenter} ref={centerRef} style={{backgroundColor: '#b40068', opacity: 0.1, display: isMobile ? 'none' : 'block'}}></div>
       <div className={styles.cardRow}>
-        <div className={styles.formCard}>
+        <div className={styles.formCard} style={{ boxShadow: isMobile ? 'none' : '0 12px 48px rgba(180,0,104,0.18), 0 2px 8px rgba(0,0,0,0.10)', border: isMobile ? '2px solid #b40068' : 'none', marginTop: isMobile ? '50px' : '0px' }}>
           <h2 className={styles.title}>Start your service</h2>
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label} > <div style={{display:'flex', flexDirection:'row',  alignItems:'center'}}>Full Name <span style={{ color: '#ef4444', opacity: .75, fontSize: '1em', marginLeft: 2}}>*</span></div>
