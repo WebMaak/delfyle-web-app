@@ -411,6 +411,12 @@
   }
 }
 
+@media screen and (max-width: 1536px) {
+  .navLinkText {
+    font-size: .7rem !important;
+  }
+}
+
 .whiteButtonNoBackground.visible {
   color: #111827 !important;
 }

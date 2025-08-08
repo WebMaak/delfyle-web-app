@@ -766,7 +766,7 @@ export const ModernNavItems = ({ className, onItemClick, visible }: NavItemsProp
           {hovered === 0 && (
             <motion.div layoutId="hovered" className={styles.navLinkHover} />
           )}
-          <span className={styles.navLinkText}>Startup</span>
+          <span className={styles.navLinkText} >Startup</span>
         </a>
         {openDropdown === 0 && (
           <AnimatePresence>
