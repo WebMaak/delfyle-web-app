@@ -4,6 +4,12 @@
   background: #f8fafc;
 }
 
+.sidebarWrapper{
+  display: flex;
+  width: fit-content;
+  position: relative;
+}
+
 .sidebar {
   width: 250px;
   background: white;
@@ -14,6 +20,16 @@
   left: 0;
   height: 100vh;
   z-index: 10;
+}
+
+.closeSpace{
+  width: 150px;
+  height: 100%;
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  right: -150px;
+  bottom: 0;
 }
 
 .profileSection {

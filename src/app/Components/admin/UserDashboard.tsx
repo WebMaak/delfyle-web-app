@@ -80,7 +80,7 @@ const StatusCard = ({ title, isActive }: { title: string, isActive: boolean }) =
 
 export default function UserDashboard() {
   const { user, loading, setUser } = useUser() as { user: User | null, loading: boolean, setUser: (u: any) => void };
-  const [activeTab, setActiveTab] = useState('My Profile');
+  const [activeTab, setActiveTab] = useState('Status');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -265,7 +265,7 @@ export default function UserDashboard() {
           </div>
         </div>
         <nav className={styles.nav}>
-          {['My Profile', 'Status'].map(tab => (
+          {[ 'Status', 'My Profile' ].map(tab => (
             <button
               key={tab}
               className={`${styles.navItem} ${activeTab === tab ? styles.active : ""}`}
@@ -275,21 +275,22 @@ export default function UserDashboard() {
             </button>
           ))}
         </nav>
+        <div className={styles.closeSpace} style={{display: isSidebarOpen ? 'block' : 'none'}} onClick={() => setIsSidebarOpen(false)}></div>
       </div>
-      <div className={styles.content}>
+      <div className={styles.content} >
         {activeTab === "Status" && (
           <>
             <div className={styles.statusStatSection} style={{ marginBottom: 0}}>
                 {/* Header and stats remain unchanged */}
-               <div className={styles.leadsHeader}>
+               <div className={styles.leadsHeader} style={{paddingLeft: isMobile ? '10px' : 'auto'}}>
                   <div className={styles.headerLeft}>
                     <h2>Account Status</h2>
                     <p>Track and view the current status of your Account and Requests.</p>
                   </div>
                 </div>
-                <div className={styles.statsContainer}>
+                <div className={styles.statsContainer} style={{flexDirection: isMobile ? 'column' : 'row', paddingLeft: isMobile ? '10px' : 'auto', paddingRight: isMobile ? '10px' : 'auto'}}>
                 {/* Card 1: PROFILE STATUS */}
-                <div className={ styles.statCard}>
+                <div className={ styles.statCard} >
                   <div className={styles.statHeader}>
                     <span className={styles.statTitle}>PROFILE STATUS</span>
                     <div className={styles.statIcon + ' ' + styles.statIconGreen} style={{display: 'flex'}}>
@@ -311,7 +312,7 @@ export default function UserDashboard() {
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="16 8 11 13 8 10"/>
                         <path d="M4.93 4.93a10 10 0 0 1 14.14 0"></path>
-  <path d="M19.07 19.07a10 10 0 0 1-14.14 0"></path>
+                        <path d="M19.07 19.07a10 10 0 0 1-14.14 0"></path>
                       </svg>
                     </div>
                   </div>
@@ -321,12 +322,12 @@ export default function UserDashboard() {
               </div>
             </div>
             
-            <hr style={{ margin: '10px 0', color: 'rgb(206, 0, 69)', height: 1, width:'94%', marginLeft: 50 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <h2 className={styles.statusStatSection} style={{ fontSize: 32, fontWeight: 700, color: '#1e293b', marginLeft: 20, marginBottom: 0 }}>Your requested services</h2>
-              <button onClick={handleRefresh} disabled={isRefreshing} style={{ background: 'none', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', cursor: isRefreshing ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px', opacity: isRefreshing ? 0.6 : 1 }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6"/><path d="M22 11.5A10 10 0 0 0 3.5 12.5"/><path d="M2 12.5a10 10 0 0 0 18.5-1"/></svg>
-                <span style={{ fontWeight: 500 }}>{isRefreshing ? 'Refreshing...' : 'Refresh'}</span>
+            <hr style={{ color: 'rgb(206, 0, 69)', height: 1, width: isMobile ? '86%' : '96%', marginLeft: 'auto', marginRight: 'auto' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexDirection: isMobile ? 'column' : 'row' }}>
+              <h2 className={styles.statusStatSection} style={{   fontSize: 32, fontWeight: 700, color: '#1e293b', marginLeft: isMobile ? '16px' : '20px', marginBottom: 0 }}>Your requested services</h2>
+              <button onClick={handleRefresh} disabled={isRefreshing} style={{ background: 'none', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', cursor: isRefreshing ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', alignSelf: isMobile ? 'flex-start' : 'auto', gap: '8px', opacity: isRefreshing ? 0.6 : 1, marginLeft: isMobile ? '40px' : 'auto' }}>
+                <span style={{ fontWeight: 600, fontSize: 24, color: isRefreshing ? '#1a1a1a/50' : '#1a1a1a', marginTop: '-4px' }}>⟲</span>                
+                <span style={{ fontWeight: 500, color: isRefreshing ? '#1a1a1a/50' : '#1a1a1a' }}>{isRefreshing ? 'Refreshing...' : 'Refresh'}</span>
               </button>
             </div>
             {initiatedLeads.length > 0 ? (
