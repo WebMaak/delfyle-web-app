@@ -71,7 +71,7 @@ export default function WhatsAppMenu() {
   // Dynamically calculate sizes based on isMobile state
   const containerHeight = isMobile ? 138 : 230;
   const panelWidth = isMobile ? 200 : 280;
-  const buttonWidth = isMobile ? 26 : 44;
+  const buttonWidth = isMobile ? 20 : 30;
   const buttonHeight = containerHeight;
 
   return (
@@ -124,13 +124,13 @@ export default function WhatsAppMenu() {
           background: '#b40068',
           color: '#fff',
           border: 'none',
-          padding: isMobile ? '10px 6px' : '16px 10px',
+          padding: isMobile ? '10px 6px' : '10px 10px',
           writingMode: 'vertical-rl',
           textOrientation: 'mixed',
           borderRadius: open ? '0' : '12px 0 0 12px',
           cursor: 'pointer',
-          fontWeight: '600',
-          fontSize: isMobile ? '14px' : '16px',
+          fontWeight: '400',
+          fontSize: isMobile ? '12px' : '14px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
           height: '100%',
           width: `${buttonWidth}px`,
