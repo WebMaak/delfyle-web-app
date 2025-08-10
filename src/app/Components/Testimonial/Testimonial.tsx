@@ -93,6 +93,13 @@ const Testimonial: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    setExpanded(false); // collapse quote when testimonial changes
+  }, [active]);
+  
+  const [expanded, setExpanded] = useState(false);
+  const WORD_LIMIT = 30;
+
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
   };
@@ -228,7 +235,7 @@ const Testimonial: React.FC = () => {
                     )}
                   </p>
                 </a>
-                <motion.p className={styles.quote}>
+                {/* <motion.p className={styles.quote}>
                   {testimonials[active].quote.split(" ").map((word, index) => (
                     <motion.span
                       key={index}
@@ -252,7 +259,43 @@ const Testimonial: React.FC = () => {
                       {word}&nbsp;
                     </motion.span>
                   ))}
-                </motion.p>
+                </motion.p> */}
+                <motion.p className={styles.quote}>
+  {(
+    testimonials[active].quote
+      .split(" ")
+      .slice(0, expanded ? undefined : 20)
+  ).map((word, index) => (
+    <motion.span
+      key={index}
+      initial={{ filter: "blur(10px)", opacity: 0, y: 5 }}
+      animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.2,
+        ease: "easeInOut",
+        delay: 0.02 * index,
+      }}
+      className={styles.word}
+    >
+      {word}&nbsp;
+    </motion.span>
+  ))}
+
+  {!expanded &&
+    testimonials[active].quote.split(" ").length > 20 && (
+      <motion.span
+        onClick={() => setExpanded(true)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.02 * 20 }}
+        className={styles.readMore}
+        style={{ cursor: "pointer", color: "#eee", fontWeight: 500 }}
+      >
+        ... Read more
+      </motion.span>
+    )}
+</motion.p>
+
               </motion.div>
 
               <div className={styles.navigation}>

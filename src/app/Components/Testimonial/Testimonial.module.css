@@ -109,6 +109,13 @@
   margin-top: 2rem;
 }
 
+.readMore {
+  display: inline-block;
+  cursor: pointer;
+  color: #b40068;
+  font-weight: 500;
+}
+
 .navButton {
   background: linear-gradient(
     135deg,
