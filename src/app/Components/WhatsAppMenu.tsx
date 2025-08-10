@@ -15,7 +15,7 @@ const WhatsAppCard = ({ name, number, link, isMobile }: { name: string; number: 
       color: '#333',
       borderRadius: '8px',
       transition: 'background-color 0.3s, transform 0.3s',
-      border: '1px solid #eee',
+      border: '1px solid #b4006850',
       margin: isMobile ? '0 10px 6px 10px' : '0 16px 8px 16px',
     }}
     onMouseEnter={(e) => {
@@ -93,13 +93,14 @@ export default function WhatsAppMenu() {
           width: open ? `${panelWidth}px` : '0px',
           height: '100%',
           background: '#fff',
-          borderRadius: '16px 0 0 16px',
+          marginRight: '10px',
+          borderRadius: '16px',
           boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
           transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
           transform: open ? 'translateX(0%)' : 'translateX(100%)',
           visibility: open ? 'visible' : 'hidden',
           pointerEvents: open ? 'auto' : 'none',
-          border: '1px solid #f0f0f0',
+          border: '1px solid #b4006850',
           borderRight: 'none',
           display: 'flex',
           flexDirection: 'column',
@@ -107,8 +108,8 @@ export default function WhatsAppMenu() {
         }}
       >
         {!isMobile && (
-          <div style={{ padding: '16px', borderBottom: '1px solid #f0f0f0', textAlign: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600 }}>Contact Us</h3>
+          <div style={{ padding: '16px', textAlign: 'center' }}>
+            <h3 style={{ color: '#b40068', margin: 0, fontSize: '16px', fontWeight: 600 }}>Contact Us</h3>
           </div>
         )}
         <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: isMobile ? '4px' : '8px' }}>
@@ -124,15 +125,15 @@ export default function WhatsAppMenu() {
           background: '#b40068',
           color: '#fff',
           border: 'none',
-          padding: isMobile ? '10px 6px' : '10px 10px',
+          padding: isMobile ? '20px 12px' : '20px 15px',
           writingMode: 'vertical-rl',
           textOrientation: 'mixed',
-          borderRadius: open ? '0' : '12px 0 0 12px',
+          borderRadius: '12px 0 0 12px',
           cursor: 'pointer',
           fontWeight: '400',
           fontSize: isMobile ? '12px' : '14px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          height: '100%',
+          height: 'fit-content',
           width: `${buttonWidth}px`,
           transition: 'border-radius 0.4s ease, background-color 0.3s ease',
           marginLeft: '-1px',
