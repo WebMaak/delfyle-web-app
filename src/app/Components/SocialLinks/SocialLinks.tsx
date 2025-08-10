@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import styles from "./SocialLinks.module.css";
-import { FaLinkedin, FaYoutube, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FaLinkedin, FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const socialLinks = [
   {
@@ -19,9 +20,9 @@ const socialLinks = [
   },
   {
     name: "Twitter",
-    icon: FaTwitter,
+    icon: FaXTwitter,
     url: "https://x.com/delfyle_co?s=21",
-    color: "#1DA1F2"
+    color: "#111"
   },
   {
     name: "Instagram",
@@ -52,6 +53,8 @@ const SocialLinks = () => {
   };
 
   return (
+    <>
+    {/* Blurred Gradient Background */}
     <section 
       className={styles.section}
       style={{ 
@@ -102,6 +105,7 @@ const SocialLinks = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
