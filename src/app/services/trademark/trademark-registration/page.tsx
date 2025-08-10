@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -19,21 +12,28 @@ import {
   ModernNavBody, 
   ModernNavItems, 
   ModernNavbarLogo, 
-  ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
+  ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ListComponent from "./ListComponent";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "./CallToAction";
+import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const PrivateLimitedCompany: React.FC = () => {
+const TrademarkRegistration: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -146,41 +146,44 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
+      title: 'Specialized Expertise',
+      content:
+        'Our team specializes in filing returns for charitable organizations, political entities, and educational institutions, ensuring full compliance with exemption rules.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
+      title: 'Optimized Compliance',
+      content:
+        'We help you claim eligible exemptions and reduce tax liabilities by filing your return with precision.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
+      title: 'Data Security',
+      content:
+        'Your financial information is protected with bank-grade encryption and privacy protocols.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
+      title: 'Deadline Management',
+      content:
+        'With automated reminders and proactive support, we ensure you never miss an important tax deadline.',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
+      title: 'End-to-End Filing Support',
+      content:
+        'From preparation to submission and post-filing support, Delfyle handles the entire process so you can focus on your mission—not on paperwork.',
       stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
-      stepNumber: 6
     }
   ];
+  
+ 
+  
+  
 
   return (
     <>
@@ -339,49 +342,33 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-          </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
+            <div className="modernNavActions">
               <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
+          </ModernNavBody>
         </ModernNavbar>
       </div>
+
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-            heading={<><span>Trademark</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-            description="Protect your brand with trademark registration, renewal, and legal support from Delfyle."
-            buttonText="Get Trademark Help"
+          heading={<><span className={styles.coloredplc}>Expert ITR-7 Filing </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          description="Ensure timely ITR 7 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 7 return filing, return filing, and compliance monitoring."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -395,30 +382,27 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
-
-          <PrivateLimitedCompanyTypes/>
-
-          <PrivateLimitedCompanyBenefits/>
+          <PrivateLimitedCompanyContent/>
 
           <PrivateLimitedCompanyDisadvantages/>
 
-          <PrivateLimitedCompanyRequirements/> */}
+          <ListComponent/>
 
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
+          <PrivateLimitedCompanyContentTwo/>
+
+          {/* ITR-3 Filing Process Accordion */}
+          <CustomAccordion
+            subheading="ITR with Delfyle"
+            title="Why Choose Delfyle for ITR-7 Filing?"
+            description="At Delfyle, we provide trusted and efficient solutions for NGO, Trust, and Institutional ITR filing. Here’s what sets us apart:"
             items={registrationProcessData}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
+          <CallToAction/>
 
-          <PrivateLimitedPost/> */}
         </div>
 
         {/* Footer */}
@@ -429,4 +413,4 @@ const PrivateLimitedCompany: React.FC = () => {
   );
 };
 
-export default PrivateLimitedCompany; 
+export default TrademarkRegistration; 

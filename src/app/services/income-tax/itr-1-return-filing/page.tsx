@@ -26,7 +26,6 @@ import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
 import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ComponentEight from "./ComponentEight";
-import ComponentSeven from "./ComponentSeven";
 import ComponentSevenTop from "./ComponentSevenTop";
 import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";

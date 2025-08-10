@@ -15,7 +15,7 @@
   max-width: 100%;
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch; /* ✅ Make both columns equal height */
   justify-content: space-between;
 }
 
@@ -29,14 +29,14 @@
 }
 
 .rightColumn {
-  min-height: 100%;
   flex: 0.4;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  min-height: 500px; /* Ensure right column has height for graphic */
+  /* Remove fixed min-height — let flex handle it */
 }
+
 
 .subHeading {
   font-size: 0.9rem;
@@ -226,3 +226,90 @@
     font-size: 1.35rem;
   }
 } 
+
+
+
+
+
+/*  Animation for right col  */
+
+.contentStack {
+  width: 90%;
+  height: 94%;
+  position: relative; /* Important so absolute children position inside */
+  overflow: hidden; /* Prevents animations from leaking out */
+  background: linear-gradient(#b44593, #b4459305, #b44593);
+  /* background: linear-gradient(90deg, #790047ec 0%, #e50076e3 100%); */
+  border-radius: 16px;
+  margin-left: auto;
+}
+
+/* Scope the shapes inside rightColumn */
+.square {
+  position: absolute;
+  width: 100%; /* slightly larger than container width */
+  height:  100%; /* makes sure the rotation covers fully */
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+}
+
+/* Adjust positions relative to the container */
+.squareTl {
+  top: -50%;
+  left: 115%;
+  animation: bounce 3s infinite ease-in-out;
+  background: linear-gradient(to top, #fff, #fff5, #b4459380);
+  border-radius: 16px;
+}
+
+.squareBr {
+  bottom: -50%;
+  right: 110%;
+  animation: bounce 3s infinite ease-in-out;
+  background: linear-gradient(to bottom, #fff, #fff5, #b4459380);
+  border-radius: 16px;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0) rotate(45deg);
+  }
+  50% {
+    transform: translateY(20px) rotate(45deg);
+    border-radius: 50px;
+  }
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+}
+
+.star {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  box-shadow: 0 0 5px rgba(34, 34, 34, 0.5);
+}
+
+.star1 {
+  bottom: -10%;
+  left: -30%;
+  transform: rotate(-30deg);
+  animation: sweep 3.5s infinite;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.star2 {
+  bottom: -30%;
+  left: -10%;
+  transform: rotate(-30deg);
+  animation: sweep 3s infinite;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes sweep {
+  100% {
+    bottom: 120%;
+    left: 120%;
+    transform: rotate(360deg);
+  }
+}

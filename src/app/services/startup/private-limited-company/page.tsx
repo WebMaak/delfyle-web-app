@@ -19,11 +19,7 @@ import {
   ModernNavBody, 
   ModernNavItems, 
   ModernNavbarLogo, 
-  ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
+  ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

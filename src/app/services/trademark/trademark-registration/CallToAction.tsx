@@ -1,0 +1,39 @@
+// components/CallToAction.tsx
+import React from 'react';
+import { FaPhone } from 'react-icons/fa';
+
+const CallToAction = () => {
+  return (
+    <section className="bg-white from-pink-100 via-purple-100 to-white py-16 px-6 text-center md:px-20">
+      <h2 className="md:text-[3.5rem] text-[2.5rem] font-bold text-gray-800 leading-tight mb-4 text-left md:text-center">
+        File Your ITR-7 with Delfyle Today
+      </h2>
+      <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center">
+        Ensure your trust, society, or institution remains compliant with the Income Tax Act by choosing Delfyle’s ITR-7 Filing Services. Contact us now for expert assistance and let us help you file your return safely, accurately, and on time.
+      </p>
+      <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center">
+        Transparent Process | Zero Hassle | Full Compliance
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://wa.me/917439587419"
+          style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)' }}
+          className="text-white px-8 py-4 rounded-lg shadow-md transition transform hover:-translate-y-1 hover:shadow-lg"
+        >
+          Start ITR-7 Filing Now
+        </a>
+        <a
+          href="/contact"
+          className="border border-[#E50078] text-[#E50078] px-8 py-3 rounded-lg bg-white transition transform hover:-translate-y-1 hover:shadow sm:text-base"
+        >
+          Book Free Consultation
+        </a>
+      </div>
+      <p className="text-gray-600 mt-10 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center italic">
+        File ITR-7 Online with Delfyle — Your Trusted Compliance Partner.
+      </p>
+    </section>
+  );
+};
+
+export default CallToAction;

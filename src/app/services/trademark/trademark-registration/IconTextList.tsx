@@ -43,7 +43,7 @@ const ITR6Schedules = () => {
   return (
     <section className="py-16 px-6 md:px-20 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-[#1a1a1a] font-bold text-center text-3xl md:text-[3.5rem] mb-12">Key Schedules in ITR-6 Filing</h2>
+        <h2 className="text-center text-3xl md:text-5xl font-semibold mb-12">Key Schedules in ITR-6 Filing</h2>
         <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
           Here are the major <strong>ITR-6 Schedules</strong> required based on the company’s nature of income:
         </p>
@@ -54,10 +54,10 @@ const ITR6Schedules = () => {
             {leftColumn.map((item, index) => (
               <div key={index} className="flex justify-between items-start text-right">
                 <div className="flex-1">
-                  <h3 className="text-[#1a1a1a] font-semibold text-lg">{item.schedule}</h3>
+                  <h3 className="font-semibold text-lg">{item.schedule}</h3>
                   <p className="text-gray-600 mt-1">Purpose: {item.purpose}</p>
                 </div>
-                <div className="w-12 h-12 rounded-full border-2 border-[#b40068] bg-[#b4006805] text-[#b40068] ml-4 mt-1 text-2xl flex items-center justify-center">{item.icon}</div>
+                <div className="text-[#b40068] ml-4 mt-1 text-2xl">{item.icon}</div>
               </div>
             ))}
           </div>
@@ -66,9 +66,9 @@ const ITR6Schedules = () => {
           <div className="flex flex-col gap-8">
             {rightColumn.map((item, index) => (
               <div key={index} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full border-2 border-[#b40068] bg-[#b4006805] text-[#b40068] ml-4 mt-1 text-2xl flex items-center justify-center">{item.icon}</div>
+                <div className="text-[#b40068] mt-1 text-2xl">{item.icon}</div>
                 <div>
-                  <h3 className="text-[#1a1a1a] font-semibold text-lg">{item.schedule}</h3>
+                  <h3 className="font-semibold text-lg">{item.schedule}</h3>
                   <p className="text-gray-600 mt-1">Purpose: {item.purpose}</p>
                 </div>
               </div>

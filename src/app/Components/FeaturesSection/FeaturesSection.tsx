@@ -67,7 +67,7 @@ export default function FeaturesSection() {
   const lineWidth = useTransform(scrollYProgress, [0, 1], ["2%", "30%"]);
 
   return (
-    <div className={styles.featuresSection}>
+    <div className={styles.featuresSection} id="services">
       {/* Header Section for FeaturesSection */}
       <div ref={headerRef} className={styles.headerSection}>
         <div className={styles.headingWrapper}>

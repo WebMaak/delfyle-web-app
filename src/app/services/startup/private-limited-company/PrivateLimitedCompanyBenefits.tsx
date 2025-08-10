@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from 'react';
 import styles from '../../../Components/TrialComponent/ComponentEleven/ComponentEleven.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaShieldAlt } from 'react-icons/fa';
+import { FaBuilding } from 'react-icons/fa';
+import { FaMoneyBill } from 'react-icons/fa';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +31,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>🛡️</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaShieldAlt /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Limited Liability</h3>
               <p className={styles.featureDescription}>
@@ -38,7 +41,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>🏛️</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Separate Legal Entity</h3>
               <p className={styles.featureDescription}>
@@ -48,7 +51,7 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}>💰</div>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMoneyBill /></div>
             <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Ease of Raising Funds</h3>
               <p className={styles.featureDescription}>
@@ -57,9 +60,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
             </div>
           </div>
         </div>
-        <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div ref={circleGraphicRef} className={styles.circleGraphic}>
-            <p className={styles.circleText}>Benefits</p>
+        <div className={styles.rightColumn}>
+          <p className={styles.subHeading} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-10%, -50%)', fontSize: '1.2rem'}}>ITR-6 Filing Guide</p>
+          <div className={styles.contentStack}>
+            <span className={`${styles.square} ${styles.squareTl}`} style={{left: '115%'}}></span>
+            <span className={`${styles.square} ${styles.squareBr}`} style={{right: '115%'}}></span>
+            <span className={`${styles.star} ${styles.star1}`}></span>
+            <span className={`${styles.star} ${styles.star2}`}></span>
           </div>
         </div>
       </div>

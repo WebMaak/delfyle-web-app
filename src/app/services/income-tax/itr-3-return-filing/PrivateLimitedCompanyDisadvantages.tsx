@@ -108,10 +108,14 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
       </div>
   
       <div ref={rightColumnRef} className={styles.rightColumn}>
-        <div ref={circleGraphicRef} className={styles.circleGraphic}>
-          <p className={styles.circleText}>Checklist</p>
+          <p className={styles.subHeading} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-10%, -50%)', fontSize: '1.2rem'}}>ITR-3 Checklist</p>
+          <div className={styles.contentStack}>
+            <span className={`${styles.square} ${styles.squareTl}`} style={{left: '125%'}}></span>
+            <span className={`${styles.square} ${styles.squareBr}`} style={{right: '125%'}}></span>
+            <span className={`${styles.star} ${styles.star1}`}></span>
+            <span className={`${styles.star} ${styles.star2}`}></span>
+          </div>
         </div>
-      </div>
     </div>
   </section>
 

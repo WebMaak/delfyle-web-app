@@ -4,6 +4,13 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import styles from "./WhoWeWorkWith.module.css";
+import {
+  FaLightbulb,
+  FaChartLine,
+  FaIndustry,
+  FaHandsHelping,
+  FaLandmark,
+} from "react-icons/fa";
 
 const WhoWeWorkWith = () => {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -23,34 +30,34 @@ const WhoWeWorkWith = () => {
       subtitle: "Idea to Series A",
       description:
         "Supporting innovative ideas from conception to growth stage",
-      icon: "🚀",
+      icon: <FaLightbulb />, // Symbolizes ideas & innovation
     },
     {
       title: "SMEs & MSMEs",
       subtitle: "",
       description:
         "Empowering small and medium enterprises to scale efficiently",
-      icon: "💼",
+      icon: <FaChartLine />, // Represents growth & scaling
     },
     {
       title: "Corporates & Enterprises",
       subtitle: "",
       description: "Streamlining operations for established businesses",
-      icon: "🏢",
+      icon: <FaIndustry />, // Industrial/corporate look
     },
     {
       title: "NGOs & Trusts",
       subtitle: "",
       description:
         "Enabling social impact organizations to focus on their mission",
-      icon: "🤝",
+      icon: <FaHandsHelping />, // Represents helping & social causes
     },
     {
       title: "Government Bodies & PSUs",
       subtitle: "",
       description:
         "Modernizing public sector operations with efficient solutions",
-      icon: "🏛️",
+      icon: <FaLandmark />, // Represents government & institutions
     },
   ];
 

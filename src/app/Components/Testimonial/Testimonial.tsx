@@ -98,7 +98,7 @@ const Testimonial: React.FC = () => {
   }, [active]);
   
   const [expanded, setExpanded] = useState(false);
-  const WORD_LIMIT = 30;
+  const WORD_LIMIT = 40;
 
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
@@ -264,7 +264,7 @@ const Testimonial: React.FC = () => {
   {(
     testimonials[active].quote
       .split(" ")
-      .slice(0, expanded ? undefined : 20)
+      .slice(0, expanded ? undefined : 30)
   ).map((word, index) => (
     <motion.span
       key={index}

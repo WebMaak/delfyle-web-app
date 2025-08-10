@@ -23,7 +23,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ListComponent from "./ListComponent";
 import ListComponentTwo from "./ListComponentTwo";
@@ -32,7 +31,6 @@ import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "./CallToAction";
 import SingleList from "./SingleList";
-import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);

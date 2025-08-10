@@ -132,10 +132,13 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Circle Graphic */}
         <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div ref={circleGraphicRef} className={styles.circleGraphic}>
-            <p className={styles.circleText}>ITR-2</p>
+          <p className={styles.subHeading} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-10%, -50%)', fontSize: '1.2rem'}}>ITR-2 Filing Guide</p>
+          <div className={styles.contentStack}>
+            <span className={`${styles.square} ${styles.squareTl}`} style={{left: '90%'}}></span>
+            <span className={`${styles.square} ${styles.squareBr}`} style={{right: '90%'}}></span>
+            <span className={`${styles.star} ${styles.star1}`}></span>
+            <span className={`${styles.star} ${styles.star2}`}></span>
           </div>
         </div>
       </div>
