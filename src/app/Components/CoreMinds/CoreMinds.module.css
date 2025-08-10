@@ -502,3 +502,40 @@
     height: 600px;
   }
 } 
+
+/* desktop with 1560px width */
+@media screen and (min-width: 1536px) {
+  .coreMindsSection {
+    padding: 4rem 2rem;
+  }
+  .title {
+    font-size: 3.5rem;
+  }
+  .subtitle {
+    font-size: 1.8rem;
+  }
+  .cardsContainer {
+    height: 70vh;
+  }
+  .card {
+    height: 600px;
+  }
+  .member_name {
+    font-size: 2.5rem;
+  }
+  .member_position {
+    font-size: 1.2rem;
+  }
+  .member_quote {
+    font-size: 1rem;
+  }
+  .bullet_points li {
+    font-size: .875rem;
+  }
+  .item_content {
+    padding: 1.5rem;
+  }
+  .item_number {
+    font-size: 1rem;
+  }
+} 

@@ -23,7 +23,7 @@ const teamMembers = [
     position: "Co-founder & Chief Executive Officer",
     quote:
       "As a qualified Company Secretary (CS), CA Finalist and the Co-founder & CEO of Delfyle, Adwitiya Mukherjee brings in-depth knowledge and years of experience in Corporate and Secretarial Laws. She has successfully handled clients of high repute and has assisted in numerous high-stakes NCLT cases. Adwitiya's analytical approach and compliance expertise make her an integral pillar of Delfyle's operations. Her work ensures that every client, from startups to large enterprises, receives precise, up-to-date, and compliant corporate governance solutions.",
-    color: "#4ECDC4",
+    color: "#FF6B6B",
     image: "/images/team-members/adwitiya.png"
   },
   {
@@ -31,7 +31,7 @@ const teamMembers = [
     position: "Legal Associate",
     quote:
       "Abhinandan Das is a legal associate specializing in corporate and civil litigation, with hands-on experience representing clients in various courts and tribunals across India. A law graduate from Calcutta University, Abhinandan excels in contract management, corporate advisory, and dispute resolution. His sharp understanding of commercial laws and contractual risk management makes him an essential member of Delfyle's legal team, offering strategic counsel to businesses across sectors.",
-    color: "#45B7D1",
+    color: "#FF6B6B",
     image: "/images/team-members/abhinandan.png"
   },
   {
@@ -51,7 +51,7 @@ const teamMembers = [
       "Crimes against women and children",
       "Property disputes and administrative legal matters",
     ],
-    color: "#96CEB4",
+    color: "#FF6B6B",
     image: "/images/team-members/sourav.png"
   },
   {
@@ -68,7 +68,7 @@ const teamMembers = [
       "Structuring tax-efficient business models",
       "TDS management and e-filing services",
     ],
-    color: "#FFEEAD",
+    color: "#FF6B6B",
     image: "/images/team-members/avinash.png"
   },
   {
@@ -82,7 +82,7 @@ const teamMembers = [
       "Drafting of Board Resolutions, Shareholder Agreements, NDAs, MOA/AOA, and compliance documents",
       "Legal vetting and contract management",
     ],
-    color: "#D4A5A5",
+    color: "#FF6B6B",
     image: "/images/team-members/debangshu.png"
   }
 ];
