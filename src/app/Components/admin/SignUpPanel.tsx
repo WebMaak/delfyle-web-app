@@ -143,7 +143,7 @@ export default function SignUpPanel({ isOpen, onClose, onSuccess }: SignUpPanelP
 
   return (
     <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div className={styles.popup}>
+      <div className={styles.popup} style={{boxShadow: 'rgba(180, 0, 104, .15) 0px 48px 100px 0px', border: '2px solid rgb(211, 209, 209)'}}>
         <div className={styles.header}>
           <h2 className={styles.title}>
             {step === "form" ? "Create Account" : "Verify OTP"}
