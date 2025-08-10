@@ -97,7 +97,7 @@ export default function AuthPopup({
     <>
       {!showForgetPassword && (
         <div className={styles.overlay} onClick={handleOverlayClick}>
-          <div className={styles.popup}>
+          <div className={styles.popup} style={{border: '2px solid rgb(211, 209, 209)'}}>
             <div className={styles.header}>
               <h2 className={styles.title}>Welcome</h2>
               <button className={styles.closeBtn} onClick={onClose}>
