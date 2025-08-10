@@ -71,7 +71,7 @@ const VisionMission: React.FC = () => {
       <div className={styles.contentContainer}>
         <div ref={leftColumnRef} className={styles.leftColumn}>
           <div ref={blankCardRef} className={styles.blankCard}>
-            <div ref={lottieRef} className={styles.lottieAnimation} />
+            <div ref={lottieRef} className={styles.lottieAnimation} style={{ filter: 'drop-shadow(0 0 10px rgba(138, 23, 77, 0.3))' }} />
           </div>
         </div>
         <div ref={rightColumnRef} className={styles.rightColumn}>

@@ -36,7 +36,6 @@
   position: absolute;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease;
   height: 300px;
   width: 400px;
