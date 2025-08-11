@@ -9,10 +9,10 @@ const CallToAction = () => {
       Get Started Today!
       </h2>
       <h2 className=" text-xl font-bold text-gray-800 leading-tight mb-4 text-left md:text-center">
-      Let our experts handle your objection—so you can focus on growing your brand.
+      Let our experts handle your Trademark Infringement Notice so  you can focus on growing your brand.
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center">
-      Need help with a trademark objection? | 
+      Need help with a Trademark Infringement Notice? | 
       Connect with our specialists for a free consultation.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -21,7 +21,7 @@ const CallToAction = () => {
           style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)' }}
           className="text-white px-8 py-4 rounded-lg shadow-md transition transform hover:-translate-y-1 hover:shadow-lg"
         >
-          Ready to take your brand to the next level?
+          Get Trademark Infringement Notice
         </a>
         <a
           href="/contact"
@@ -31,7 +31,7 @@ const CallToAction = () => {
         </a>
       </div>
       <p className="text-gray-600 mt-10 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center italic">
-        Trademark Registration Online with Delfyle — Your Trusted Compliance Partner.
+        Trademark Infringement Notice Online with Delfyle — Your Trusted Compliance Partner.
       </p>
     </section>
   );
