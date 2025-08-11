@@ -23,7 +23,7 @@ const ColumnRowTable: React.FC<ColumnRowTableProps> = ({
   const isCompactTable = columnCount <= 3;
 
   return (
-    <section className="w-full py-12 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
+    <section className="w-full py-10 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2">{title}</h2>
