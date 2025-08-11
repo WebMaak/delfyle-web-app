@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 6rem 2rem;
+  padding: 2.5rem 2rem;
   background-color: #fff;
   font-family: 'Inter', sans-serif;
   color: #1a1a1a;
@@ -46,7 +46,7 @@
   font-size: 3rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
   line-height: 1.2;
   text-align: left;
 
@@ -108,11 +108,15 @@
   align-items: center;
 }
 
+
+
 .checkIcon {
   color: #b44593; /* Purple checkmark */
   margin-right: 0.5rem;
+  padding-top: 0.15rem;
   font-size: 1.1rem;
   line-height: 1;
+  align-self: flex-start;
 }
 
 .rightColumn {

@@ -15,6 +15,8 @@ interface TrademarkRegistrationProps {
   description?: string;
   features: FeatureItem[];
   rightColumnTranslate?: { x: number; y: number }; // Controls translate values
+  rightShape?: { x: number };
+  leftShape?: { x: number };
 }
 
 const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
@@ -22,7 +24,9 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
   subHeading = "Trademark Registration Guide",
   description = "In India, various trademark registrations cater to different needs and purposes, enabling consumers to recognize products and services associated with specific providers.",
   features,
-  rightColumnTranslate = { x: -20, y: -50 } // Default position
+  rightColumnTranslate = { x: -20, y: -50 }, // Default position
+  rightShape = { x: 150 },
+  leftShape = { x: 150 }
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const leftColumnRef = useRef<HTMLDivElement>(null);
@@ -52,6 +56,7 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
 
         {/* Right Column */}
         <div ref={rightColumnRef} className={styles.rightColumn}>
+          <div className={styles.contentStack}>
           <p
             className={styles.subHeading}
             style={{
@@ -64,14 +69,13 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
           >
             {subHeading}
           </p>
-          <div className={styles.contentStack}>
             <span
               className={`${styles.square} ${styles.squareTl}`}
-              style={{ left: "150%" }}
+              style={{ left: `${rightShape.x}%` }}
             ></span>
             <span
               className={`${styles.square} ${styles.squareBr}`}
-              style={{ right: "150%" }}
+              style={{ right: `${leftShape.x}%` }}
             ></span>
             <span className={`${styles.star} ${styles.star1}`}></span>
             <span className={`${styles.star} ${styles.star2}`}></span>
