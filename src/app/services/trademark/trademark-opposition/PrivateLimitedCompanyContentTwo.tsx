@@ -23,44 +23,71 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
   return (
     <section ref={sectionRef} className={styles.container}>
       <div className={styles.topAnchorContainer}>
-        <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Trademark Registration</a>
+        <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Trademark Opposition Procedure</a>
       </div>
       <div className={styles.mainContentWrapper}>
         <div ref={leftColumnRef} className={styles.leftColumn}>
           <div className={styles.leftTopContainer}>
             <h2 ref={mainHeadingRef} className={styles.mainHeading}>
-            Choosing the Correct Trademark Class
+            Trademark Opposition Procedure Explained by Delfyle
             </h2>
           </div>
 
           <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-            <p
-            ref={(el) => {
-              if (el) leftBottomContentRef.current[1] = el;
-            }}
-            className={styles.paragraphContent}
-            >
-            Trademark classes are a critical aspect of the registration process, as they categorize goods and services into 45 distinct classes. To register a trademark, you should carefully select the appropriate class because it determines the validity of your trademark registration online concerning your business's products or services. If your company operates across various areas falling into different classes, it's crucial to ensure that you apply for a trademark under all the relevant classes.
+            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
+              1. Filing an Opposition:
+            </h3>
+            <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent}>
+            Anyone may file a notice of opposition within four months of the trademark’s advertisement in the journal, using Form TM-O and paying the prescribed fee. The notice must outline the opposing party’s identity, the application opposed, and the grounds for objection.
             </p>
 
             <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
-            In India, some commonly chosen trademark classes to register a trademark include:
+              2. Counterstatement by Applicant:
+            </h3>
+            <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent}>
+             Within two months of receiving the opposition notice, the trademark applicant must file a counterstatement (also via Form TM-O). Failure to do so results in the application being considered abandoned.
+            </p>
+           
+            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
+              3. Submission of Evidence:
             </h3>
             <div className={styles.productsGrid} style={{ display: 'flex', flexDirection: 'column' }}>
               <ul className={styles.productsList}>
-                <li><span className={styles.checkIcon}>Class 9:</span> Encompassing computer software and electronics</li>
-                <li><span className={styles.checkIcon}>Class 25:</span> Covering Clothing</li>
-                <li><span className={styles.checkIcon}>Class 35:</span> About business management and advertising</li>
-                <li><span className={styles.checkIcon}>Class 41:</span> Related to education and entertainment</li>
+                <li><span className={styles.checkIcon}>•</span> The opponent must submit supporting evidence within two months of the counterstatement.</li>
+                <li><span className={styles.checkIcon}>•</span> The applicant then has two months to file evidence supporting the application.</li>
+                <li><span className={styles.checkIcon}>•</span> The opponent may file rebuttal evidence within one month if needed.</li>
               </ul>
             </div>
+            
+            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
+              4. Hearing and Decision:
+            </h3>
+            <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent}>
+              Both parties are notified of a scheduled hearing. Absence of the opponent results in dismissal of the opposition; absence of the applicant results in abandonment of the application. The Registrar evaluates the evidence and submissions before issuing a final decision in writing.<br/>
+              Post-Hearing Outcomes:
+            </p>
+            <ul className={styles.productsList}>
+                <li><span className={styles.checkIcon}>•</span> If the opposition fails, the trademark is registered, and a certificate is issued.</li>
+                <li><span className={styles.checkIcon}>•</span> If the opposition succeeds, the application is rejected.</li>
+            </ul>
+
+            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
+              Why Filing Timely Responses Matters?
+            </h3>
+            <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent}>
+              Failure to meet deadlines during opposition proceedings can result in severe consequences:
+            </p>
+            <ul className={styles.productsList}>
+                <li><span className={styles.checkIcon}>•</span> Opposition may be dismissed if no evidence or response is filed</li>
+                <li><span className={styles.checkIcon}>•</span> Trademark applications may be abandoned without applicant response</li>
+              </ul>
           </div>
         </div>
 
         <div ref={rightColumnRef} className={styles.rightColumn}>
           <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
             <p className={styles.rightDescription}>
-            At Delfyle, we understand the paramount importance of brand name registration and ensuring the distinctiveness of your products and services in today's competitive market. That's why we offer expert assistance in filing for trademarks. Whether you're a dynamic startup, an established business, or an individual entrepreneur, our dedicated team is here to guide you through the intricate trademark registration online process. Let Delfyle be your trusted partner, securing your brand's identity and protecting your intellectual property.
+            Trademark opposition is a crucial stage in the trademark registration process. It allows any individual or entity to challenge the registration of a trademark if they believe it infringes upon their rights or is similar to an existing trademark. Delfyle provides expert assistance in navigating this process, ensuring a smooth and successful outcome.
             </p>
           </div>
           <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>

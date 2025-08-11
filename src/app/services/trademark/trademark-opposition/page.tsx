@@ -29,6 +29,7 @@ import ListComponentTwo from "./ListComponentTwo";
 import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
+import ColumnRowTable from "../../../Components/TrialComponent/ColumnRowTable/ColumnRowTable";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -149,37 +150,37 @@ const TrademarkOpposition: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Specialized Expertise',
+      title: 'Expert Legal Advice:',
       content:
-        'Our team specializes in filing returns for charitable organizations, political entities, and educational institutions, ensuring full compliance with exemption rules.',
+        'Our experienced professionals provide strategic advice and ensure your rights are strongly defended.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Optimized Compliance',
+      title: 'Thorough Trademark Search:',
       content:
-        'We help you claim eligible exemptions and reduce tax liabilities by filing your return with precision.',
+        'We assess potential conflicts before initiating opposition, ensuring a robust foundation for your case.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Data Security',
+      title: 'Document Drafting & Filing: ',
       content:
-        'Your financial information is protected with bank-grade encryption and privacy protocols.',
+        'From notice preparation to hearing documentation, we handle it all.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Deadline Management',
+      title: 'Seamless Hearing Representation:',
       content:
-        'With automated reminders and proactive support, we ensure you never miss an important tax deadline.',
+        'Delfyle represents clients before the Registrar, advocating persuasively at every stage.',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'End-to-End Filing Support',
+      title: 'Transparent Communication:',
       content:
-        'From preparation to submission and post-filing support, Delfyle handles the entire process so you can focus on your mission—not on paperwork.',
+        "You receive regular updates so you're never in the dark.",
       stepNumber: 5
     }
   ];
@@ -189,42 +190,25 @@ const TrademarkOpposition: React.FC = () => {
   const features = [
     {
       icon: <FiPackage />,
-      title: "Product Mark",
-      description: "This type of trademark is affixed to goods or products, aiding in identifying their origin and preserving a company's reputation. Trademark applications falling under classes 1-34 are typically classified as product marks as they pertain to tangible commodities."
+      title: "Analyze Carefully: ",
+      description: "Understand the nature of the objection thoroughly."
     },
     {
       icon: <FiTool />,
-      title: "Service Mark",
-      description: "Similar to a product mark, a service mark is used to identify services rather than physical products. Service marks primarily help differentiate the providers of certain services from others. Trademark applications falling under classes 35-45 are often regarded as service marks related to service offerings."
+      title: "Draft Professionally:",
+      description: "Use correct legal terminology and references."
     },
     {
       icon: <FiUsers />,
-      title: "Collective Mark",
-      description: "A collective mark conveys specific characteristics of products or services associated with a particular group. It allows individuals or entities to protect and represent goods and services collectively. The trademark holder may be an association, a public institution, or a Section 8 corporation."
+      title: "Submit Evidence:",
+      description: "Attach all relevant documentation."
     },
     {
       icon: <FiAward />,
-      title: "Certification Mark",
-      description: "The owner issues these marks to indicate information about a product's origin, composition, quality, or other pertinent data. Certification marks establish product standards and assure consumers that the product meets standardized quality benchmarks. They are commonly found in packaged goods, toys, and electronics."
-    },
-    {
-      icon: <FiHexagon />,
-      title: "Shape Mark",
-      description: "Shape marks are employed to secure the distinct shape of a product, making it easily recognizable to consumers as originating from a specific manufacturer. Registration is contingent on the shape being deemed distinctive."
-    },
-    {
-      icon: <FiGrid />,
-      title: "Pattern Mark",
-      description: "Pattern marks are used for products featuring unique, designed patterns that serve as distinguishing features. To qualify for registration, these patterns must stand out as distinctly recognizable."
-    },
-    {
-      icon: <FiMusic />,
-      title: "Sound Mark",
-      description: "Sound marks are distinctive sounds associated with products or services from suppliers. Sound logos, often known as audio mnemonics, are commonly heard at the beginning or end of commercials. An example in India is the IPL tune. These diverse categories of trademark registrations like logo trademark registration offer businesses and entities the flexibility to protect their brand identity following their unique offerings and market presence."
+      title: "Add an Affidavit:",
+      description: "Especially for digital brands or e-commerce stores."
     }
   ];
-  
-  
 
   return (
     <>
@@ -306,20 +290,34 @@ const TrademarkOpposition: React.FC = () => {
 
           <ListComponent/>
 
-          <ListComponentTwo/>
-
-          <TitleDescCanvas
-            features={features}
-            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
-            subHeading="Trademark Registration Guide"
-            heading="Trademark Types You Can Register"
-            description="Safeguard your brand identity with various trademark categories available in India."
-          />
-
           <PrivateLimitedCompanyContentTwo/>
 
-          <CallToAction/>
+          <ColumnRowTable
+            title="Trademark Objection vs. Trademark Opposition"
+            columns={[
+              ['Trademark Objection', 'Trademark Opposition'],
+              ['Raised by trademark examiner', 'Filed by third-party individuals or entities'],
+              ['No filing fee required', 'Requires prescribed fee with Form TM-O'],
+              ['Must reply within one month', 'Must respond within 2-3 months (extendable by 1 month)'],
+              ['Occurs during examination stage', 'Occurs after publication in journal'],
+              ['Non-response leads to application refusal', 'Non-response leads to application abandonment'],
+              ['Can appeal rejection', 'Can appeal decision'],
+            ]}
+          />
 
+          {/* Company Registration Process Accordion */}
+          <CustomAccordion
+            subheading="Trademark Opposition"
+            title="Delfyle: Your Partner in Trademark Opposition"
+            description="At Delfyle, we simplify the trademark opposition process with:"
+            items={registrationProcessData}
+            variant="numbered"
+            theme="light"
+            maxOpenItems={1}
+          />
+
+          <CallToAction/>
+          
         </div>
 
         {/* Footer */}

@@ -8,28 +8,55 @@ const ListComponent = () => {
   return (
     <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-        Trademark Search
-        </h2>
-        <p className="text-center text-base md:text-lg mb-10 text-gray-600">
-        </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+          Common Reasons for Opposition 
+          </h2>
+          <p className="text-center text-base md:text-lg mb-10 text-gray-600">
+          Trademark opposition can arise for various reasons, including:
+          </p>
         <div className="grid gap-6 md:grid-cols-2">
           {/* Left - Who Can File ITR-6 */}
         <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-          <h3 className="text-lg font-semibold text-[#1a1a1a]">Trademark Search</h3>
-          <p className="text-sm md:text-base text-[#1a1a1a]">
-          Before registering the trademark, conducting a comprehensive trademark search is of paramount importance. This step is critical to safeguard the integrity and exclusivity of your brand. An online trademark search entails furnishing the brand name and the relevant class for scrutiny. This meticulous search aids in identifying pre-existing trademarks in the market, enabling the assessment of potential conflicts and, ultimately, ensuring the protection of your brand. Delfyle provides online trademark search tools and support to facilitate this pivotal process, assisting you in making informed decisions regarding your trademark or brand name registration.
-          </p>
-          <p className="text-sm md:text-base text-[#1a1a1a]">
-          In addition to these details, you will be required to submit the following documents to complete the trademark registration online, or even logo trademark registration process.
+          <h3 className="text-lg font-semibold text-[#1a1a1a]">Who Can Oppose a Trademark?</h3>
+          <p className="text-left text-base md:text-lg mb-10 text-gray-600">
+          According to Section 21 of the Trademark Act, any individual, business, or entity may oppose a trademark—regardless of direct commercial interest. This includes:
           </p>
           <ul className="space-y-4">
             {[
-              "Charitable/Religious Institutions",
-              "Political Parties",
-              "Scientific Research Bodies",
-              "Educational Institutions",
-              "Business Trusts & Investment Funds",
+              "Competitors",
+              "Existing trademark owners",
+              "Consumers",
+              "General public",
+
+            ].map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
+                <FaCheckCircle className="text-[#790046] m-1 text-lg" />
+                <span className="w-[90%]">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-left text-base md:text-lg mb-10 text-gray-600">
+          Typically, those who believe the mark may cause confusion or infringe upon their rights are most likely to initiate opposition.
+          </p>
+        </div>
+
+
+        {/* Right - Who Cannot File ITR-6 & Due Dates */}
+        <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-6 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
+          <h3 className="text-lg font-semibold text-[#1a1a1a]">Grounds for Trademark Opposition</h3>
+          <p className="text-left text-base md:text-lg mb-10 text-gray-600">
+          Although the law doesn’t specify a fixed list of grounds, common reasons include:
+          </p>          
+          <ul className="space-y-4">
+            {[
+              "Similarity or identity to an existing registered trademark",
+              "Lack of distinctiveness",
+              "Descriptive nature",
+              "Filed in bad faith",
+              "Common usage in trade",
+              "Potential to mislead or confuse consumers",
+              "Legal prohibitions or religious sensitivity",
+              "Violation of the Emblems and Names Act, 1950",
             ].map((item, idx) => (
               <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
                 <FaCheckCircle className="text-[#790046] m-1 text-lg" />
@@ -38,52 +65,7 @@ const ListComponent = () => {
             ))}
           </ul>
         </div>
-
-
-        {/* Right - Who Cannot File ITR-6 & Due Dates */}
-        <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-6 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-          <h3 className="text-lg font-semibold text-[#1a1a1a]">Required Documents & Details for Online Trademark Registration</h3>
-          <p className="text-sm md:text-base text-[#1a1a1a]">
-          To initiate the trademark registration online or brand name registration process in India, you will need to furnish the following initial details:
-          </p>
-          <ul className="space-y-4">
-            {[
-              "Applicant's Name: The name of the individual, company, or entity applying for the trademark registration.",
-              "Business Type: Specify the type of business entity, such as sole proprietorship, partnership, private limited company, etc.",
-              "Business Objectives: Provide a brief description of your business objectives or activities.",
-              "Brand/Logo/Slogan Name: Clearly mention the name, logo, or slogan that you intend to trademark.",
-              "Registration Address: Furnish the official address of the entity applying for the trademark.",
-            ].map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
-                <FaTimesCircle className="text-[#790046] m-1 w-4 h-4" />
-                <span className="w-[90%]">{item}</span>
-              </li>
-            ))}
-          </ul>
-
         </div>
-
-        </div>
-
-        {/* Document Upload Note */}
-        <div className="mt-12 bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-3 hover:scale-[1.01] hover:shadow-lg transition-all duration-300">
-          <h3 className="text-lg font-semibold text-[#1a1a1a] flex items-center gap-2">
-            {/* <HiOutlineDocumentText className="text-blue-500" /> */}
-            Note: Let Delfyle help you protect your brand by ensuring seamless and hassle-free trademark registration!
-          </h3>
-          <div className="text-gray-700 text-sm md:text-base">
-            <ul className="flex flex-col md:flex-row gap-2">
-              <li>July 31 (Non-Audit Cases)</li>
-              <li>|</li>
-              <li>October 31 (Audit Applicable)</li>
-              <li>|</li>
-              <li>November 30 (if Transfer Pricing provisions apply)</li>
-            </ul>
-          </div>
-        </div>
-        <p className="text-center text-base md:text-lg mt-10 text-gray-600 italic">
-        <span className="font-bold">Note: </span> For Assessment Year 2025–26, the last date may vary based on government notifications.
-        </p>
       </div>
     </section>
 

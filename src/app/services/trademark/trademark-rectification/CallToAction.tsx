@@ -9,10 +9,10 @@ const CallToAction = () => {
       Get Started Today!
       </h2>
       <h2 className="max-w-[60%] mx-auto text-xl font-bold text-gray-800 leading-tight mb-4 text-left md:text-center">
-      Trust Delfyle to protect your brand through professional trademark opposition support, ensuring your business identity remains secure in India's competitive market.
+      Contact Delfyle today for seamless and professional Trademark Rectification assistance!
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center">
-      Need help with a trademark opposition? | 
+      Need help with a trademark rectification? | 
       Connect with our specialists for a free consultation.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -31,7 +31,7 @@ const CallToAction = () => {
         </a>
       </div>
       <p className="text-gray-600 mt-10 max-w-2xl mx-auto mb-8 text-lg text-left md:text-center italic">
-        Trademark Opposition with Delfyle — Your Trusted Compliance Partner.
+        Trademark Rectification with Delfyle — Your Trusted Compliance Partner.
       </p>
     </section>
   );
