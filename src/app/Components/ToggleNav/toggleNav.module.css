@@ -107,6 +107,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: background 0.2s;
+  touch-action: auto;
 }
 
 .menuItem:hover,
@@ -259,7 +260,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: background 0.2s;
-  display: block;
+  display: inline;
   text-decoration: none;
 }
 
