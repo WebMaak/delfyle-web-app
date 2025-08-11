@@ -3,7 +3,7 @@ import React from 'react';
 
 const CallToAction = () => {
   return (
-    <section className="bg-white from-pink-100 via-purple-100 to-white py-16 px-6 text-center md:px-20">
+    <section className="bg-white from-pink-100 via-purple-100 to-white py-10 px-6 text-center md:px-20">
       <h2 className="md:text-[3.5rem] text-[2.5rem] font-bold text-gray-800 leading-tight mb-4 text-left md:text-center">
         Start Your ITR-1 Filing with Delfyle Today
       </h2>
