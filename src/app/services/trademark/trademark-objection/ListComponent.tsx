@@ -26,6 +26,20 @@ const ListComponent = () => {
           <p className="text-sm md:text-base text-[#1a1a1a]">
           In addition to these details, you will be required to submit the following documents to complete the trademark registration online, or even logo trademark registration process.
           </p>
+          {/* <ul className="space-y-4">
+            {[
+              "Charitable/Religious Institutions",
+              "Political Parties",
+              "Scientific Research Bodies",
+              "Educational Institutions",
+              "Business Trusts & Investment Funds",
+            ].map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
+                <FaCheckCircle className="text-[#790046] m-1 text-lg" />
+                <span className="w-[90%]">{item}</span>
+              </li>
+            ))}
+          </ul> */}
         </div>
 
 
@@ -44,20 +58,35 @@ const ListComponent = () => {
               "Registration Address: Furnish the official address of the entity applying for the trademark.",
             ].map((item, idx) => (
               <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
-                <FaCheckCircle className="text-[#790046] m-1 w-4 h-4" />
+                <FaTimesCircle className="text-[#790046] m-1 w-4 h-4" />
                 <span className="w-[90%]">{item}</span>
               </li>
             ))}
           </ul>
+
         </div>
+
         </div>
+
         {/* Document Upload Note */}
         <div className="mt-12 bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-3 hover:scale-[1.01] hover:shadow-lg transition-all duration-300">
           <h3 className="text-lg font-semibold text-[#1a1a1a] flex items-center gap-2">
             {/* <HiOutlineDocumentText className="text-blue-500" /> */}
             Note: Let Delfyle help you protect your brand by ensuring seamless and hassle-free trademark registration!
           </h3>
+          {/* <div className="text-gray-700 text-sm md:text-base">
+            <ul className="flex flex-col md:flex-row gap-2">
+              <li>July 31 (Non-Audit Cases)</li>
+              <li>|</li>
+              <li>October 31 (Audit Applicable)</li>
+              <li>|</li>
+              <li>November 30 (if Transfer Pricing provisions apply)</li>
+            </ul>
+          </div> */}
         </div>
+        {/* <p className="text-center text-base md:text-lg mt-10 text-gray-600 italic">
+        <span className="font-bold">Note: </span> For Assessment Year 2025–26, the last date may vary based on government notifications.
+        </p> */}
       </div>
     </section>
 

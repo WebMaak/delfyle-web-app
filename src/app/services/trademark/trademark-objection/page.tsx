@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -19,21 +12,31 @@ import {
   ModernNavBody, 
   ModernNavItems, 
   ModernNavbarLogo, 
-  ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
+  ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ListComponent from "./ListComponent";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import CallToAction from "./CallToAction";
+import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import ListComponentTwo from "./ListComponentTwo";
+import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
+import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
+import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const PrivateLimitedCompany: React.FC = () => {
+const TrademarkOpposition: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -146,41 +149,82 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
+      title: 'Specialized Expertise',
+      content:
+        'Our team specializes in filing returns for charitable organizations, political entities, and educational institutions, ensuring full compliance with exemption rules.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
+      title: 'Optimized Compliance',
+      content:
+        'We help you claim eligible exemptions and reduce tax liabilities by filing your return with precision.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
+      title: 'Data Security',
+      content:
+        'Your financial information is protected with bank-grade encryption and privacy protocols.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
+      title: 'Deadline Management',
+      content:
+        'With automated reminders and proactive support, we ensure you never miss an important tax deadline.',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
+      title: 'End-to-End Filing Support',
+      content:
+        'From preparation to submission and post-filing support, Delfyle handles the entire process so you can focus on your mission—not on paperwork.',
       stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
-      stepNumber: 6
     }
   ];
+  
+ 
+  // TitleDescCanvas Features
+  const features = [
+    {
+      icon: <FiPackage />,
+      title: "Product Mark",
+      description: "This type of trademark is affixed to goods or products, aiding in identifying their origin and preserving a company's reputation. Trademark applications falling under classes 1-34 are typically classified as product marks as they pertain to tangible commodities."
+    },
+    {
+      icon: <FiTool />,
+      title: "Service Mark",
+      description: "Similar to a product mark, a service mark is used to identify services rather than physical products. Service marks primarily help differentiate the providers of certain services from others. Trademark applications falling under classes 35-45 are often regarded as service marks related to service offerings."
+    },
+    {
+      icon: <FiUsers />,
+      title: "Collective Mark",
+      description: "A collective mark conveys specific characteristics of products or services associated with a particular group. It allows individuals or entities to protect and represent goods and services collectively. The trademark holder may be an association, a public institution, or a Section 8 corporation."
+    },
+    {
+      icon: <FiAward />,
+      title: "Certification Mark",
+      description: "The owner issues these marks to indicate information about a product's origin, composition, quality, or other pertinent data. Certification marks establish product standards and assure consumers that the product meets standardized quality benchmarks. They are commonly found in packaged goods, toys, and electronics."
+    },
+    {
+      icon: <FiHexagon />,
+      title: "Shape Mark",
+      description: "Shape marks are employed to secure the distinct shape of a product, making it easily recognizable to consumers as originating from a specific manufacturer. Registration is contingent on the shape being deemed distinctive."
+    },
+    {
+      icon: <FiGrid />,
+      title: "Pattern Mark",
+      description: "Pattern marks are used for products featuring unique, designed patterns that serve as distinguishing features. To qualify for registration, these patterns must stand out as distinctly recognizable."
+    },
+    {
+      icon: <FiMusic />,
+      title: "Sound Mark",
+      description: "Sound marks are distinctive sounds associated with products or services from suppliers. Sound logos, often known as audio mnemonics, are commonly heard at the beginning or end of commercials. An example in India is the IPL tune. These diverse categories of trademark registrations like logo trademark registration offer businesses and entities the flexibility to protect their brand identity following their unique offerings and market presence."
+    }
+  ];
+  
+  
 
   return (
     <>
@@ -339,49 +383,33 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-          </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
+            <div className="modernNavActions">
               <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
+          </ModernNavBody>
         </ModernNavbar>
       </div>
+
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>Trademark Objection</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-          description="Ensure timely trademark objection with Delfyle's expert assistance. We handle all compliance requirements, including trademark objection, return filing, and compliance monitoring."
-          buttonText="Get Trademark Objection Help"
+          heading={<><span className={styles.coloredplc}>Trademark Registration </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          description="Ensure timely trademark registration with Delfyle's expert assistance. We handle all compliance requirements, including trademark registration, trademark objection, trademark certificate, trademark opposition, trademark hearing, trademark rectification, trademark infringement notice, trademark renewal, trademark restoration, trademark transfer, expedited trademark registration, logo design + trademark protection, design registration, design objection, copyright registration, copyright objections."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -395,30 +423,24 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
+          <ListComponentTwo/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <TitleDescCanvas
+            features={features}
+            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
+            subHeading="Trademark Registration Guide"
+            heading="Trademark Types You Can Register"
+            description="Safeguard your brand identity with various trademark categories available in India."
+          />
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <PrivateLimitedCompanyContentTwo/>
 
-          <PrivateLimitedCompanyRequirements/> */}
+          <ListComponent/>
 
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
-            items={registrationProcessData}
-            variant="numbered"
-            theme="light"
-            maxOpenItems={1}
-          /> */}
+          <CallToAction/>
 
-          {/* <PrivateLimitedCompanyDocs/>
-
-          <PrivateLimitedPost/> */}
         </div>
 
         {/* Footer */}
@@ -429,4 +451,4 @@ const PrivateLimitedCompany: React.FC = () => {
   );
 };
 
-export default PrivateLimitedCompany; 
+export default TrademarkOpposition; 

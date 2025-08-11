@@ -22,114 +22,112 @@ const PrivateLimitedCompanyContent: React.FC = () => {
 
   return (
     <section ref={sectionRef} className={styles.container}>
-      <div className={styles.topAnchorContainer}>
-        <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>
-          Producer Company Registration
-        </a>
-      </div>
-      <div className={styles.mainContentWrapper}>
-        <div ref={leftColumnRef} className={styles.leftColumn}>
-          <div className={styles.leftTopContainer}>
-            <h2 ref={mainHeadingRef} className={styles.mainHeading}>
-              Producer Company Registration with Delfyle | Empowering Farmers and Agriculturists
-            </h2>
-          </div>
-          <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-            <h3
-              ref={(el) => {
-                if (el) leftBottomContentRef.current[0] = el;
-              }}
-              className={styles.subContentHeading}
-            >
-              What is a Producer Company?
-            </h3>
-            <p
-              ref={(el) => {
-                if (el) leftBottomContentRef.current[1] = el;
-              }}
-              className={styles.paragraphContent}
-            >
-              A Producer Company is an officially established group of farmers or agriculturists aimed
-              at improving their quality of life, financial support, and income. This type of company
-              combines elements of both private limited companies and cooperatives, encouraging
-              cooperative businesses to operate as companies and helping existing cooperatives
-              transition into company structures.
-            </p>
+  <div className={styles.topAnchorContainer}>
+    <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>
+      Trademark Registration
+    </a>
+  </div>
 
-            <h3
-              ref={(el) => {
-                if (el) leftBottomContentRef.current[2] = el;
-              }}
-              className={styles.subContentHeading}
-            >
-              Why choose Delfyle for Producer Company registration?
-            </h3>
-            <p
-              ref={(el) => {
-                if (el) leftBottomContentRef.current[3] = el;
-              }}
-              className={styles.paragraphContent}
-            >
-              Delfyle simplifies the registration process of Farmer Producer Organizations under the
-              Companies Act 2013. Our team ensures full compliance while guiding you at every step,
-              helping you create a sustainable, democratically governed company that empowers its
-              members and enhances profitability.
-            </p>
-            <h3
-              ref={(el) => {
-                if (el) leftBottomContentRef.current[2] = el;
-              }}
-              className={styles.subContentHeading}
-            >
-              Benefits of Producer Company Registration
-            </h3>
-            <p
-              ref={(el) => {
-                if (el) leftBottomContentRef.current[3] = el;
-              }}
-              className={styles.paragraphContent}
-            >
-              A Producer Company, also referred to as a Farmer Producer Company, is a legally recognized farmer producer organization composed of farmers or agriculturists. Its primary goal is to enhance the livelihoods of its members and ensure the long-term sustainability of their resources, incomes, and profitability. Functioning as a hybrid between private limited companies and cooperative societies, a Producer Company is registered under the Companies Act 2013. Farmer producer organizations operate based on democratic governance principles, ensuring that each member has an equal say in decision-making, regardless of the number of shares they hold.
-            </p>
-          </div>
-        </div>
-
-        <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div
-            ref={(el) => {
-              if (el) rightColumnContentRef.current[0] = el;
-            }}
-            className={styles.rightTopContainer}
-          >
-            <p className={styles.rightDescription}>
-              Delfyle’s expertise in Producer Company registration ensures that your agricultural
-              venture is set up correctly from the start, giving you the foundation to grow, sustain,
-              and prosper.
-            </p>
-          </div>
-          <div
-            ref={(el) => {
-              if (el) rightColumnContentRef.current[1] = el;
-            }}
-            className={styles.rightBottomContainer}
-          >
-            <Image
-              src="/delfyle-logo/delfyle-logo.png"
-              alt="Delfyle Logo"
-              width={180}
-              height={50}
-              objectFit="contain"
-              className={styles.companyLogo}
-            />
-            <p className={styles.bottomQuote}>
-              "We guide farmers and agriculturists in building sustainable businesses through Producer
-              Company registration."
-            </p>
-            <p className={styles.bottomAuthor}>Team Delfyle</p>
-          </div>
-        </div>
+  <div className={styles.mainContentWrapper}>
+    {/* Left Column */}
+    <div ref={leftColumnRef} className={styles.leftColumn}>
+      <div className={styles.leftTopContainer}>
+        <h2 ref={mainHeadingRef} className={styles.mainHeading}>
+          Trademark Registration with Delfyle | Safeguard Your Brand Identity
+        </h2>
       </div>
-    </section>
+
+      <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
+        <h3
+          ref={(el) => {
+            if (el) leftBottomContentRef.current[0] = el;
+          }}
+          className={styles.subContentHeading}
+        >
+        </h3>
+        <p
+          ref={(el) => {
+            if (el) leftBottomContentRef.current[1] = el;
+          }}
+          className={styles.paragraphContent}
+        >
+         Within the competitive business realm, a product is frequently distinguished by its brand name and the distinctive elements that set it apart. These elements, ranging from logos and jingles to packaging design, collectively constitute what we refer to as a trademark. In today's digital era, safeguarding your brand identity has gained even greater significance. Whether you are launching a startup, managing an established business, or embarking on the entrepreneurial path as an individual, trademark registration online remains a vital step to guarantee the uniqueness and distinctiveness of your products and services.
+
+        </p>
+
+        <h3
+          ref={(el) => {
+            if (el) leftBottomContentRef.current[2] = el;
+          }}
+          className={styles.subContentHeading}
+        >
+          What is a Trademark?
+        </h3>
+        <p
+          ref={(el) => {
+            if (el) leftBottomContentRef.current[3] = el;
+          }}
+          className={styles.paragraphContent}
+        >
+          Following the Indian Trademarks Act of 1999 (Section 2(zb)), a trademark is a distinctive marker that distinguishes products or services from competitors in the market. It encompasses various elements such as symbols, designs, expressions, or any identifiable feature linked to a specific brand. Remarkably, trademarks are open to ownership by individuals, corporations, or legal entities, making them accessible to a broad spectrum of entities and individuals alike.
+        </p>
+
+        <h3
+          ref={(el) => {
+            if (el) leftBottomContentRef.current[2] = el;
+          }}
+          className={styles.subContentHeading}
+        >
+          Why Should You Register Your Trademark?
+        </h3>
+        <p
+          ref={(el) => {
+            if (el) leftBottomContentRef.current[3] = el;
+          }}
+          className={styles.paragraphContent}
+        >
+          Trademark registration in India protects your rights to use the mark in association with your goods or services. It offers a robust shield against infringement, empowering you to take legal action against unauthorized trademark use. Upon successful trademark or brand name registration, your trademark remains valid for ten years from the filing date, with the option to renew it indefinitely.
+        </p>
+      </div>
+    </div>
+
+    {/* Right Column */}
+    <div ref={rightColumnRef} className={styles.rightColumn}>
+      <div
+        ref={(el) => {
+          if (el) rightColumnContentRef.current[0] = el;
+        }}
+        className={styles.rightTopContainer}
+      >
+        <p className={styles.rightDescription}>
+        At Delfyle, we understand the paramount importance of brand name registration and ensuring the distinctiveness of your products and services in today's competitive market. That's why we offer expert assistance in filing for trademarks. Whether you're a dynamic startup, an established business, or an individual entrepreneur, our dedicated team is here to guide you through the intricate trademark registration online process. Let Delfyle be your trusted partner, securing your brand's identity and protecting your intellectual property.
+        </p>
+      </div>
+
+      <div
+        ref={(el) => {
+          if (el) rightColumnContentRef.current[1] = el;
+        }}
+        className={styles.rightBottomContainer}
+      >
+        <Image
+          src="/delfyle-logo/delfyle-logo.png"
+          alt="Delfyle Logo"
+          width={180}
+          height={50}
+          objectFit="contain"
+          className={styles.companyLogo}
+        />
+        <p className={styles.bottomQuote}>
+          "Let Delfyle be your trusted partner in securing your brand’s identity and protecting your
+          intellectual property."
+        </p>
+        <p className={styles.bottomAuthor}>Team Delfyle</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 

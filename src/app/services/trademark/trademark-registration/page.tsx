@@ -18,14 +18,15 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "./CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
-import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
+import ListComponentTwo from "./ListComponentTwo";
+import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
+import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -182,6 +183,44 @@ const TrademarkRegistration: React.FC = () => {
   ];
   
  
+  // TitleDescCanvas Features
+  const features = [
+    {
+      icon: <FiPackage />,
+      title: "Product Mark",
+      description: "This type of trademark is affixed to goods or products, aiding in identifying their origin and preserving a company's reputation. Trademark applications falling under classes 1-34 are typically classified as product marks as they pertain to tangible commodities."
+    },
+    {
+      icon: <FiTool />,
+      title: "Service Mark",
+      description: "Similar to a product mark, a service mark is used to identify services rather than physical products. Service marks primarily help differentiate the providers of certain services from others. Trademark applications falling under classes 35-45 are often regarded as service marks related to service offerings."
+    },
+    {
+      icon: <FiUsers />,
+      title: "Collective Mark",
+      description: "A collective mark conveys specific characteristics of products or services associated with a particular group. It allows individuals or entities to protect and represent goods and services collectively. The trademark holder may be an association, a public institution, or a Section 8 corporation."
+    },
+    {
+      icon: <FiAward />,
+      title: "Certification Mark",
+      description: "The owner issues these marks to indicate information about a product's origin, composition, quality, or other pertinent data. Certification marks establish product standards and assure consumers that the product meets standardized quality benchmarks. They are commonly found in packaged goods, toys, and electronics."
+    },
+    {
+      icon: <FiHexagon />,
+      title: "Shape Mark",
+      description: "Shape marks are employed to secure the distinct shape of a product, making it easily recognizable to consumers as originating from a specific manufacturer. Registration is contingent on the shape being deemed distinctive."
+    },
+    {
+      icon: <FiGrid />,
+      title: "Pattern Mark",
+      description: "Pattern marks are used for products featuring unique, designed patterns that serve as distinguishing features. To qualify for registration, these patterns must stand out as distinctly recognizable."
+    },
+    {
+      icon: <FiMusic />,
+      title: "Sound Mark",
+      description: "Sound marks are distinctive sounds associated with products or services from suppliers. Sound logos, often known as audio mnemonics, are commonly heard at the beginning or end of commercials. An example in India is the IPL tune. These diverse categories of trademark registrations like logo trademark registration offer businesses and entities the flexibility to protect their brand identity following their unique offerings and market presence."
+    }
+  ];
   
   
 
@@ -192,127 +231,6 @@ const TrademarkRegistration: React.FC = () => {
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
           mainOptions={navItems.map(item => item.name)}
-          subMenus={[
-            // Startup
-            [
-              "Private Limited Company",
-              "Limited Liability Partnership (LLP)",
-              "One Person Company (OPC)",
-              "Section 8 Company",
-              "Partnership Firm",
-              "Trust Registration",
-              "Public Company",
-              "Producer Company",
-              "Nidhi Company"
-            ],
-            // Trademark
-            [
-              "Trademark Registration",
-              "Trademark Objection",
-              "Trademark Certificate",
-              "Trademark Opposition",
-              "Trademark Hearing",
-              "Trademark Rectification",
-              "Trademark Infringement Notice",
-              "Trademark Renewal",
-              "Trademark Restoration",
-              "Trademark Transfer",
-              "Expedited Trademark Registration",
-              "Logo Design + Trademark Protection",
-              "Design Registration",
-              "Design Objection",
-              "Copyright Registration",
-              "Copyright Objections"
-            ],
-            // Registrations
-            [
-              "StartUp Registration",
-              "Trade License",
-              "FSSAI Registration",
-              "FSSAI License",
-              "Halal Certification",
-              "ICEGATE Registration",
-              "ISO Registration",
-              "PF Registration",
-              "ESI Registration",
-              "Professional Tax Registration",
-              "RCMC Registration",
-              "WB RERA Registration",
-              "12A and 80G Registration",
-              "12A Registration",
-              "80G Registration",
-              "Darpan Registration",
-              "Udyam Registration",
-              "Digital Signature",
-              "Shop and Establishment Act Registration",
-              "Drug License",
-              "FCRA Registration",
-              "Fire License",
-              "EPR Certficate"
-            ],
-            // GST
-            [
-              "GST Registration",
-              "GST Return Filing",
-              "GST Annual Return Filing (GSTR - 9)",
-              "GST LUT Form",
-              "GST Tax Notice",
-              "GST Amendment",
-              "GST Revocation",
-              "GSTR-10"
-            ],
-            // MCA (already set previously)
-            [
-              "Company Compliance",
-              "LLP Compliance",
-              "OPC Compliance",
-              "Name Change - Company",
-              "Company Registered Office Change",
-              "DIN eKYC Filing",
-              "DIN Reactivation",
-              "Director Change",
-              "Remove Director",
-              "Appointment of Auditor",
-              "DPT-3 Filing",
-              "LLP Form 11 Filing",
-              "Dormant Status Filing",
-              "MOA Amendment",
-              "AOA Amendment",
-              "Authorized Capital Increase",
-              "Share Transfer",
-              "Demat of Shares",
-              "Winding Up - LLP",
-              "Winding Up - Company"
-            ],
-            // Compliance
-            [
-              "FSSAI Renewal",
-              "FSSAI Return Filing",
-              "HR & Payroll Services",
-              "PF Return Filing",
-              "ESI Return Filing",
-              "Professional Tax Return Filing",
-              "Partnership Compliance",
-              "Proprietorship Compliance",
-              "Book-keeping"
-            ],
-            // Income Tax
-            [
-              "ITR-1 Return Filing",
-              "ITR-2 Return Filing",
-              "ITR-3 Return Filing",
-              "ITR-4 Return Filing",
-              "ITR-5 Return Filing",
-              "ITR-6 Return Filing",
-              "ITR-7 Return Filing",
-              "TDS Return Filing",
-              "Income Tax Notice",
-              "TAN Registration",
-              "15CA & 15CB Filing"
-            ],
-            // About Us (default)
-            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
-          ]}
         />
       </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -367,8 +285,8 @@ const TrademarkRegistration: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Expert ITR-7 Filing </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
-          description="Ensure timely ITR 7 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 7 return filing, return filing, and compliance monitoring."
+          heading={<><span className={styles.coloredplc}>Trademark Registration </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          description="Ensure timely trademark registration with Delfyle's expert assistance. We handle all compliance requirements, including trademark registration, trademark objection, trademark certificate, trademark opposition, trademark hearing, trademark rectification, trademark infringement notice, trademark renewal, trademark restoration, trademark transfer, expedited trademark registration, logo design + trademark protection, design registration, design objection, copyright registration, copyright objections."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -384,22 +302,19 @@ const TrademarkRegistration: React.FC = () => {
 
           <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <ListComponentTwo/>
 
-          <ListComponent/>
+          <TitleDescCanvas
+            features={features}
+            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
+            subHeading="Trademark Registration Guide"
+            heading="Trademark Types You Can Register"
+            description="Safeguard your brand identity with various trademark categories available in India."
+          />
 
           <PrivateLimitedCompanyContentTwo/>
 
-          {/* ITR-3 Filing Process Accordion */}
-          <CustomAccordion
-            subheading="ITR with Delfyle"
-            title="Why Choose Delfyle for ITR-7 Filing?"
-            description="At Delfyle, we provide trusted and efficient solutions for NGO, Trust, and Institutional ITR filing. Here’s what sets us apart:"
-            items={registrationProcessData}
-            variant="numbered"
-            theme="light"
-            maxOpenItems={1}
-          />
+          <ListComponent/>
 
           <CallToAction/>
 

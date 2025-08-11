@@ -62,15 +62,18 @@
 .coloredreg{
   color:#f7fde1;;
   font-size: 4rem;
+  letter-spacing: normal;
 }
 
 .coloredplc{
   color:#ffffff;
+  letter-spacing: normal;
 }
 .colored {
   font-size: 6rem;
   color: #FFD580;
   display: inline-block;
+  letter-spacing: normal;
 }
 
 .description {
@@ -173,6 +176,99 @@
   padding: 5rem 2rem;
   position: relative;
   z-index: 1;
+}
+
+/* Mobile devices (phones) */
+@media (max-width: 767px) {
+  .heroSection {
+    height: fit-content;
+    padding: 5rem 1rem 0
+  }
+  .container {
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+  }
+  .left, .right {
+    flex: unset;
+    width: 100%;
+    min-width: unset;
+    justify-content: center;
+  }
+  .right {
+    margin-top: 2rem;
+    padding-top: 40px;
+    min-width: unset;
+    padding: 2rem 1rem 2rem;
+  }
+  .cardStack {
+    width: 100vw;
+    max-width: 300px;
+    height: 220px;
+  }
+  .cardWrapper {
+    width: 180px;
+    height: 90px;
+  }
+.heading {
+  letter-spacing: .1px;
+}
+
+  .heading, .coloredreg {
+    font-size: 2.5rem;
+  }
+  .colored {
+    font-size: 2.5rem;
+  }
+  .description {
+    font-size: 1rem;
+    max-width: 95vw;
+  }
+  .leftContentWrapper {
+    min-width: unset;
+    padding-right: 0;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    padding: 2rem 1rem;
+  }
+  .left, .right {
+    flex: unset;
+    width: 100%;
+    min-width: unset;
+    justify-content: center;
+  }
+  .right {
+    margin-top: 2rem;
+    padding-top: 60px;
+    min-width: unset;
+  }
+  .cardStack {
+    width: 100vw;
+    max-width: 350px;
+    height: 320px;
+  }
+  .cardWrapper {
+    width: 220px;
+    height: 120px;
+  }
+  .heading, .coloredreg {
+    font-size: 2.5rem;
+  }
+  .colored {
+    font-size: 3.5rem;
+  }
+  .description {
+    font-size: 1.1rem;
+    max-width: 90vw;
+  }
+  .leftContentWrapper {
+    min-width: unset;
+    padding-right: 0;
+  }
 }
 
 /* Mobile devices (phones) */
