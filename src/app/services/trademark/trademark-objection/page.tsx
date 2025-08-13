@@ -281,9 +281,6 @@ const TrademarkObjection: React.FC = () => {
 
           <TitleDescCanvas
             features={features}
-            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
-            rightShape={{ x: 100 }} // Adjusts position
-            leftShape={{ x: 100 }} // Adjusts position
             subHeading="Trademark Objection Guide"
             heading="Expert Tips for Filing a Reply"
             description="Ensure a strong response by : Providing clear explanations | Including supporting documents | Addressing each objection | Following the deadline | "

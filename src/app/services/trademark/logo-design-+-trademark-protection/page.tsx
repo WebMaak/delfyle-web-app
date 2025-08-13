@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -19,21 +12,30 @@ import {
   ModernNavBody, 
   ModernNavItems, 
   ModernNavbarLogo, 
-  ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
+  ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "./CallToAction";
+import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
+import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
+
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const PrivateLimitedCompany: React.FC = () => {
+const TrademarkObjection: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -146,39 +148,79 @@ const PrivateLimitedCompany: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
+      title: 'Creative Meets Legal',
+      content: 'We combine the talent of experienced graphic designers with the precision of trademark experts. This dual approach ensures that your logo is not only compelling but also compliant and registrable.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
+      title: 'Tailored for Your Industry',
+      content: 'Our team has expertise across diverse sectors—tech, retail, healthcare, education, and more—ensuring your logo aligns with industry norms while standing out.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
+      title: 'Strategic Branding Approach',
+      content: 'We understand branding psychology and how design influences consumer behavior, ensuring your logo speaks directly to your audience.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
+      title: 'Delivered in All Key Formats',
+      content: 'We use top-tier tools like Adobe Photoshop and Illustrator to provide you with final logo files in multiple formats: JPG, PNG (for web), PDF, EPS, AI (for printing), PSD (editable for future use).',
       stepNumber: 4
     },
     {
       id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
+      title: 'Trademark Search Included',
+      content: 'Every logo we create undergoes a comprehensive trademark search to confirm originality and avoid conflicts with existing marks.',
       stepNumber: 5
     },
     {
       id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
+      title: 'Trademark Filing Support',
+      content: 'We don’t just design—we protect. Delfyle offers end-to-end trademark registration services to ensure your brand identity is legally secure from day one.',
       stepNumber: 6
+    }
+  ];
+  
+ 
+  // TitleDescCanvas Features
+  const features = [
+    {
+      icon: <FaPhone />,
+      title: "Brand Identity",
+      description: "Your logo acts as your business’s face—it’s what customers see first and remember most. It reflects your vision, values, and professionalism."
+    },
+    {
+      icon: <FaEnvelope />,
+      title: "Customer Recognition",
+      description: "Logos help customers instantly identify your brand in a sea of competitors. A strong logo makes a lasting impression."
+    },
+    {
+      icon: <FaUsers />,
+      title: "Trust & Professionalism",
+      description: "A professionally designed logo builds credibility and assures customers of your quality and reliability."
+    },
+    {
+      icon: <FaCalendar />,
+      title: "Marketing Consistency",
+      description: "From your website to packaging, your logo is used everywhere. It ensures brand consistency across all marketing platforms."
+    },
+    {
+      icon: <FaPaintBrush />,
+      title: "Emotional Connection",
+      description: "Colours, shapes, and design elements evoke emotions. Your logo helps build a subconscious connection with your audience."
+    },
+    {
+      icon: <FaRocket />,
+      title: "Competitive Edge",
+      description: "A unique and appealing logo sets you apart in crowded markets. It can be the deciding factor when customers make choices."
+    },
+    {
+      icon: <FaShieldAlt />,
+      title: "Legal Protection",
+      description: "Trademarking your logo grants you exclusive rights to use it, shielding your brand from imitators and legal disputes."
     }
   ];
 
@@ -189,127 +231,6 @@ const PrivateLimitedCompany: React.FC = () => {
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
           mainOptions={navItems.map(item => item.name)}
-          subMenus={[
-            // Startup
-            [
-              "Private Limited Company",
-              "Limited Liability Partnership (LLP)",
-              "One Person Company (OPC)",
-              "Section 8 Company",
-              "Partnership Firm",
-              "Trust Registration",
-              "Public Company",
-              "Producer Company",
-              "Nidhi Company"
-            ],
-            // Trademark
-            [
-              "Trademark Registration",
-              "Trademark Objection",
-              "Trademark Certificate",
-              "Trademark Opposition",
-              "Trademark Hearing",
-              "Trademark Rectification",
-              "Trademark Infringement Notice",
-              "Trademark Renewal",
-              "Trademark Restoration",
-              "Trademark Transfer",
-              "Expedited Trademark Registration",
-              "Logo Design + Trademark Protection",
-              "Design Registration",
-              "Design Objection",
-              "Copyright Registration",
-              "Copyright Objections"
-            ],
-            // Registrations
-            [
-              "StartUp Registration",
-              "Trade License",
-              "FSSAI Registration",
-              "FSSAI License",
-              "Halal Certification",
-              "ICEGATE Registration",
-              "ISO Registration",
-              "PF Registration",
-              "ESI Registration",
-              "Professional Tax Registration",
-              "RCMC Registration",
-              "WB RERA Registration",
-              "12A and 80G Registration",
-              "12A Registration",
-              "80G Registration",
-              "Darpan Registration",
-              "Udyam Registration",
-              "Digital Signature",
-              "Shop and Establishment Act Registration",
-              "Drug License",
-              "FCRA Registration",
-              "Fire License",
-              "EPR Certficate"
-            ],
-            // GST
-            [
-              "GST Registration",
-              "GST Return Filing",
-              "GST Annual Return Filing (GSTR - 9)",
-              "GST LUT Form",
-              "GST Tax Notice",
-              "GST Amendment",
-              "GST Revocation",
-              "GSTR-10"
-            ],
-            // MCA (already set previously)
-            [
-              "Company Compliance",
-              "LLP Compliance",
-              "OPC Compliance",
-              "Name Change - Company",
-              "Company Registered Office Change",
-              "DIN eKYC Filing",
-              "DIN Reactivation",
-              "Director Change",
-              "Remove Director",
-              "Appointment of Auditor",
-              "DPT-3 Filing",
-              "LLP Form 11 Filing",
-              "Dormant Status Filing",
-              "MOA Amendment",
-              "AOA Amendment",
-              "Authorized Capital Increase",
-              "Share Transfer",
-              "Demat of Shares",
-              "Winding Up - LLP",
-              "Winding Up - Company"
-            ],
-            // Compliance
-            [
-              "FSSAI Renewal",
-              "FSSAI Return Filing",
-              "HR & Payroll Services",
-              "PF Return Filing",
-              "ESI Return Filing",
-              "Professional Tax Return Filing",
-              "Partnership Compliance",
-              "Proprietorship Compliance",
-              "Book-keeping"
-            ],
-            // Income Tax
-            [
-              "ITR-1 Return Filing",
-              "ITR-2 Return Filing",
-              "ITR-3 Return Filing",
-              "ITR-4 Return Filing",
-              "ITR-5 Return Filing",
-              "ITR-6 Return Filing",
-              "ITR-7 Return Filing",
-              "TDS Return Filing",
-              "Income Tax Notice",
-              "TAN Registration",
-              "15CA & 15CB Filing"
-            ],
-            // About Us (default)
-            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
-          ]}
         />
       </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -339,49 +260,33 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-          </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
+            <div className="modernNavActions">
               <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
+          </ModernNavBody>
         </ModernNavbar>
       </div>
+
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>Logo Design & Trademark Protection</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-          description="Ensure timely logo design & trademark protection with Delfyle's expert assistance. We handle all compliance requirements, including logo design & trademark protection, return filing, and compliance monitoring."
-          buttonText="Get Logo Design & Trademark Protection Help"
+          heading={<><span className={styles.coloredplc}>Logo Design + Trademark Protection </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          description="Delfyle offers comprehensive logo design and trademark protection services, ensuring your brand’s identity is secure and unique."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -395,30 +300,47 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
-
-          <PrivateLimitedCompanyBenefits/>
-
-          <PrivateLimitedCompanyDisadvantages/>
-
-          <PrivateLimitedCompanyRequirements/> */}
+          <TitleDescCanvas
+            features={features}
+            subHeading="Logo Design"
+            heading="Why a Logo is Vital for Your Business?"
+            description="A well-designed logo is more than a graphic—it’s the visual cornerstone of your brand. Here's why a logo is essential:"
+          />
 
           {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
+          <CustomAccordion
+            subheading="Logo Design Online"
+            title="Why Choose Delfyle for Logo Design Online?"
+            description="A well-designed logo is more than a graphic—it’s the visual cornerstone of your brand. Here's why a logo is essential:"
             items={registrationProcessData}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
+          <ListComponentTwo
+            title="The Delfyle Logo Design Process"
+            description="At Delfyle, our logo design services are integrated with legal expertise to protect your brand from the start. We serve businesses across all 45 trademark classes and offer:"
+            listBlocks = {[
+              {
+                items: [
+                  "Consultation & Brand Discovery- Understand your business, values, and goals.",
+                  "Concept Development- Present initial logo concepts based on your vision and market research.",
+                  "Feedback & Revisions- Refine the selected concept based on your feedback.",
+                  "Trademark Search- Conduct legal screening to ensure logo eligibility for registration.",
+                  "Final Design Delivery- Provide logos in multiple file formats and sizes for all use cases.",
+                  "Trademark Registration (Optional)- File your logo for trademark protection under your desired class(es).",
+                ],
+                icon: FaCheckCircle,
+                iconColor: "#22c55e", // Tailwind's green-500
+              },
+            ]}
+          />
 
-          <PrivateLimitedPost/> */}
+          <CallToAction/>
+          
         </div>
 
         {/* Footer */}
@@ -429,4 +351,4 @@ const PrivateLimitedCompany: React.FC = () => {
   );
 };
 
-export default PrivateLimitedCompany; 
+export default TrademarkObjection; 

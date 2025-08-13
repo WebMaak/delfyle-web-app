@@ -306,7 +306,6 @@ const TrademarkRegistration: React.FC = () => {
 
           <TitleDescCanvas
             features={features}
-            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
             subHeading="Trademark Registration Guide"
             heading="Trademark Types You Can Register"
             description="Safeguard your brand identity with various trademark categories available in India."

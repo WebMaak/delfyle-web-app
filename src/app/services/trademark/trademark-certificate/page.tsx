@@ -332,9 +332,6 @@ const TrademarkCertificate: React.FC = () => {
 
           <TitleDescCanvas
             features={features}
-            rightColumnTranslate={{ x: -20, y: -60 }} // Adjusts position
-            rightShape={{ x: 135 }} // Adjusts position
-            leftShape={{ x: 135 }} // Adjusts position
             subHeading="Trademark Certificate Part 3"
             heading="Trademark Certificate in India: Everything You Need to Know Part 3"
             description=""
@@ -385,9 +382,7 @@ const TrademarkCertificate: React.FC = () => {
                   'Delfyle can help customers with trademark registration certificates by providing them with up-to-date information about the process and the necessary documents that need to be submitted. Our team of experts guide our customers through each step of the registration process and ensure they clearly understand what is required. Our experts can review documents, provide feedback on any potential issues, and help resolve any conflicts that may arise. Additionally, we can help customers to understand the implications of registering a trademark and the potential legal problems that may occur. We also provide comprehensive services to help ensure that customers have a successful trademark registration. Our team can help customers to create an effective trademark that meets all the criteria set by the Indian Trademark Office, and we can provide advice on how to protect their trademark from infringement. Once the application is complete, our team will ensure that the application is complete and accurate and will provide any necessary guidance to the customer. At Delfyle, we understand the importance of having a secure, reliable trademark registration and are committed to helping our customers to achieve this goal. We strive to provide the best customer service and guidance to ensure our customers can register their trademarks without hassle.',
               }
             ]}
-            rightColumnTranslate={{ x: -20, y: -60 }} // Adjusts position
-            rightShape={{ x: 135 }} // Adjusts position
-            leftShape={{ x: 135 }} // Adjusts position
+            
             subHeading="Trademark Certificate Part 4"
             heading="Trademark Certificate in India: Everything You Need to Know Part 4"
             description=""

@@ -280,9 +280,6 @@ const TrademarkHearing: React.FC = () => {
 
           <TitleDescCanvas
             features={features}
-            rightColumnTranslate={{ x: -15, y: -60 }} // Adjusts position
-            rightShape={{ x: 100 }} // Adjusts position
-            leftShape={{ x: 100 }} // Adjusts position
             subHeading="Documents Required"
             heading="Key Documents for Trademark Hearing"
             description="To make a strong case, the following documents are typically required:"
