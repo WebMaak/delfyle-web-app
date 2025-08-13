@@ -31,9 +31,13 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaBuilding />
+              </div>
               <h3 className={styles.featureHeading}>Company Limited by Shares</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Shareholders' liability is limited to their shareholding. This is the most common type of private limited company structure.
               </p>
@@ -41,9 +45,13 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaShieldAlt /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaShieldAlt />
+              </div>
               <h3 className={styles.featureHeading}>Company Limited by Guarantee</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Members provide a financial guarantee in case of winding up. Often used by non-profit organizations and professional associations.
               </p>
@@ -51,22 +59,17 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBalanceScale /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaBalanceScale />
+              </div>
               <h3 className={styles.featureHeading}>Unlimited Company</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 No limit on members' liability, but the entity remains legally distinct. Rarely used due to unlimited liability exposure.
               </p>
             </div>
-          </div>
-        </div>
-        <div className={styles.rightColumn}>
-          <p className={styles.subHeading} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-20%, -50%)', fontSize: '1.2rem'}}>Company Registration Guide</p>
-          <div className={styles.contentStack}>
-            <span className={`${styles.square} ${styles.squareTl}`} style={{left: '100%'}}></span>
-            <span className={`${styles.square} ${styles.squareBr}`} style={{right: '100%'}}></span>
-            <span className={`${styles.star} ${styles.star1}`}></span>
-            <span className={`${styles.star} ${styles.star2}`}></span>
           </div>
         </div>
       </div>

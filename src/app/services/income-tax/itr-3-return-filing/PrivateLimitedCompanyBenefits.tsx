@@ -27,9 +27,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* ✅ Who Can File */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
               <h3 className={styles.featureHeading}>Individuals and HUFs who earn income from business or profession</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
               For those earning from freelancing, consulting, or any self-owned business not registered as a company.
               </p>
@@ -37,9 +39,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><MdBusinessCenter /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><MdBusinessCenter /></div>
               <h3 className={styles.featureHeading}>Directors of companies</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
               Mandatory for company directors, even if they don’t have business income.
               </p>
@@ -47,9 +51,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaGlobe /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FaGlobe /></div>
               <h3 className={styles.featureHeading}>Individuals with foreign assets or income</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
               Required if you hold foreign bank accounts, assets, or earn income from abroad.
               </p>
@@ -57,9 +63,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineStock /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineStock /></div>
               <h3 className={styles.featureHeading}>Persons holding unlisted equity shares</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
               Applicable if you own shares in private (unlisted) companies.
               </p>
@@ -67,9 +75,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}} ><MdAttachMoney /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}} ><MdAttachMoney /></div>
               <h3 className={styles.featureHeading}>Taxpayers with capital gains, house property income, salary, and other income sources</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
               When you earn from multiple sources along with business or profession.
               </p>

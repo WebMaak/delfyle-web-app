@@ -30,9 +30,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Part A – Entity Details & Financials */}
           <div className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineInfoCircle /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part A: Entity Details & Financials</h3>
+        </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Contains general information such as Name, PAN, CIN, incorporation details, and contact info. Includes financial reports like Balance Sheet, Profit & Loss Account, and Manufacturing Account.
               </p>
@@ -41,9 +43,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Balance Sheet */}
           <div className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><BsBarChartFill /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Balance Sheet</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Reports assets, liabilities, share capital, reserves, and other figures as of the financial year-end.
               </p>
@@ -52,9 +56,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Trading & Profit and Loss */}
           <div className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><HiOutlineClipboardList /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Trading & Profit and Loss Account</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Reflects income, expenditures, and resulting profit or loss during the year.
               </p>
@@ -63,9 +69,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Manufacturing Account */}
           <div className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><TbReportAnalytics /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Manufacturing Account</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Includes data related to inventory, production cost, and movement of raw materials and finished goods.
               </p>
@@ -74,9 +82,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Part B-TI – Computation of Total Income */}
           <div className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><MdOutlineSummarize /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part B-TI: Total Income</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Calculates total taxable income from various heads of income.
               </p>
@@ -85,9 +95,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* 🔷 Part B-TTI – Computation of Tax Liability */}
           <div className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBalanceScale /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Part B-TTI: Tax Liability</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Determines total tax payable after adjustments for surcharge, rebate, interest, and eligible refunds.
               </p>

@@ -24,9 +24,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
           {/* ✅ Who Can File */}
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
               <h3 className={styles.featureHeading}>Have income from salary or pension</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Individuals receiving income through employment or pension can use ITR-2, provided they meet the other eligibility criteria.
               </p>
@@ -34,9 +36,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiHome /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiHome /></div>
               <h3 className={styles.featureHeading}>Own more than one house property</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 If you own multiple properties, ITR-2 allows detailed reporting of income from house property.
               </p>
@@ -44,9 +48,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiTrendingUp /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiTrendingUp /></div>
               <h3 className={styles.featureHeading}>Earn capital gains</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Those who have earned capital gains from shares, mutual funds, or sale of property must file ITR-2.
               </p>
@@ -54,9 +60,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiGlobe /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiGlobe /></div>
               <h3 className={styles.featureHeading}>Have foreign assets or foreign income</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 If you hold foreign assets or earned income outside India, ITR-2 is the correct form for you.
               </p>
@@ -64,9 +72,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineDollar /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineDollar /></div>
               <h3 className={styles.featureHeading}>Have income from lotteries or racehorses</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Winnings from legal gambling, lotteries, or horse racing must be reported using ITR-2.
               </p>
@@ -74,9 +84,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiUsers /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiUsers /></div>
               <h3 className={styles.featureHeading}>Are a director in a company</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Directors in listed or unlisted companies must use ITR-2 for additional disclosure compliance.
               </p>
@@ -84,9 +96,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiAward /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FiAward /></div>
               <h3 className={styles.featureHeading}>Have agricultural income over ₹5,000</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 If your agricultural income exceeds ₹5,000, ITR-2 is mandatory for tax filing.
               </p>
@@ -94,9 +108,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBank /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBank /></div>
               <h3 className={styles.featureHeading}>Are RNOR or NRI</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Non-Resident Indians (NRIs) and Resident but Not Ordinarily Residents (RNORs) are required to file ITR-2.
               </p>
@@ -112,9 +128,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </p>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{ color: '#B40068' }}><AiOutlineStop /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: '#B40068' }}><AiOutlineStop /></div>
               <h3 className={styles.featureHeading}>Have income from business or profession</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Individuals or HUFs earning from business, freelancing, or professional services must not use ITR-2.
               </p>
@@ -122,9 +140,11 @@ const ITR2EligibilitySection: React.FC = () => {
           </div>
 
           <div className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{ color: '#B40068' }}><AiOutlineAppstoreAdd /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: '#B40068' }}><AiOutlineAppstoreAdd /></div>
               <h3 className={styles.featureHeading}>Are eligible to file ITR-1 Sahaj</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 If your income is limited to salary, one house property, and total income is under ₹50 lakhs, ITR-1 is the correct form, not ITR-2.
               </p>

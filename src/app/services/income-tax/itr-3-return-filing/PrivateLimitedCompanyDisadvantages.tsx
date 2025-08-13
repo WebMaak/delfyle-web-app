@@ -27,9 +27,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </p>
   
         <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineIdcard /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineIdcard /></div>
             <h3 className={styles.featureHeading}>PAN & Aadhaar Card</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Ensure your PAN and Aadhaar are linked and up to date for verification.
             </p>
@@ -37,9 +39,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBank /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBank /></div>
             <h3 className={styles.featureHeading}>Bank Account Details</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Keep your bank account number and IFSC code ready for refund or payment purposes.
             </p>
@@ -47,9 +51,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineFileText /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineFileText /></div>
             <h3 className={styles.featureHeading}>Form 16 (if salaried)</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Required to report income from salary and tax deducted at source.
             </p>
@@ -57,9 +63,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBarChart /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><AiOutlineBarChart /></div>
             <h3 className={styles.featureHeading}>Capital Gains Statements</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Include reports from brokers or mutual fund statements for capital gains.
             </p>
@@ -67,9 +75,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><BsBook /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><BsBook /></div>
             <h3 className={styles.featureHeading}>Business Income Details</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Include profit & loss statements and books of accounts if applicable.
             </p>
@@ -77,9 +87,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><BsGlobe2 /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><BsGlobe2 /></div>
             <h3 className={styles.featureHeading}>Foreign Asset Details</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Report any foreign income or assets if applicable under disclosure rules.
             </p>
@@ -87,9 +99,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[6] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiBriefcase /></div>
             <h3 className={styles.featureHeading}>Investment & Deduction Proofs</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Submit documents for Section 80C, 80D, and other deductions claimed.
             </p>
@@ -97,9 +111,11 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
         </div>
   
         <div ref={el => { if (el) featureItemsRef.current[7] = el }} className={styles.featureItem}>
-          <div className={styles.featureIcon} style={{color: '#B40068'}}><FiPieChart /></div>
-          <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{color: '#B40068'}}><FiPieChart /></div>
             <h3 className={styles.featureHeading}>TDS/TCS Details</h3>
+          </div>
+          <div className={styles.featureTextContent}>
             <p className={styles.featureDescription}>
               Verify Form 26AS, AIS, and TIS for taxes deducted or collected.
             </p>

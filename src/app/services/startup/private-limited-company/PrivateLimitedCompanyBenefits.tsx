@@ -31,9 +31,12 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaShieldAlt /></div>
-            <div className={styles.featureTextContent}>
+            
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{color: '#B40068'}}><FaShieldAlt /></div>
               <h3 className={styles.featureHeading}>Limited Liability</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Protects personal assets from company debts. Shareholders are only liable to the extent of their shareholding.
               </p>
@@ -41,9 +44,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Separate Legal Entity</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Independent identity from its owners. The company can own property, enter contracts, and sue or be sued in its own name.
               </p>
@@ -51,22 +56,15 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
+          <div className={styles.featureHeadingContainer}>
             <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMoneyBill /></div>
-            <div className={styles.featureTextContent}>
               <h3 className={styles.featureHeading}>Ease of Raising Funds</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Attracts investments from venture capitalists and angel investors. Better credibility for securing loans and funding.
               </p>
             </div>
-          </div>
-        </div>
-        <div className={styles.rightColumn}>
-          <p className={styles.subHeading} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-10%, -50%)', fontSize: '1.2rem'}}>ITR-6 Filing Guide</p>
-          <div className={styles.contentStack}>
-            <span className={`${styles.square} ${styles.squareTl}`} style={{left: '115%'}}></span>
-            <span className={`${styles.square} ${styles.squareBr}`} style={{right: '115%'}}></span>
-            <span className={`${styles.star} ${styles.star1}`}></span>
-            <span className={`${styles.star} ${styles.star2}`}></span>
           </div>
         </div>
       </div>

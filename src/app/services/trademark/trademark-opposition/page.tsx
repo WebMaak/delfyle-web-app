@@ -25,10 +25,7 @@ import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "./CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
-import ListComponentTwo from "./ListComponentTwo";
-import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
+import { FiPackage, FiTool, FiUsers, FiAward } from "react-icons/fi";
 import ColumnRowTable from "../../../Components/TrialComponent/ColumnRowTable/ColumnRowTable";
 
 // Register ScrollTrigger and ScrollSmoother plugins

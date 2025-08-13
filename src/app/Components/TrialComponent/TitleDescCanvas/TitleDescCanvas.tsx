@@ -43,11 +43,13 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
 
           {features.map((item, idx) => (
             <div key={idx} className={styles.featureItem}>
-              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
-                {item.icon}
+              <div className={styles.featureHeadingContainer}>
+                <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                  {item.icon}
+                </div>
+                <h3 className={styles.featureHeading}>{item.title}</h3>
               </div>
               <div className={styles.featureTextContent}>
-                <h3 className={styles.featureHeading}>{item.title}</h3>
                 <p className={styles.featureDescription}>{item.description}</p>
               </div>
             </div>
@@ -55,7 +57,7 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
         </div>
 
         {/* Right Column */}
-        <div ref={rightColumnRef} className={styles.rightColumn}>
+        {/* <div ref={rightColumnRef} className={styles.rightColumn}>
           <div className={styles.contentStack}>
           <p
             className={styles.subHeading}
@@ -80,7 +82,7 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
             <span className={`${styles.star} ${styles.star1}`}></span>
             <span className={`${styles.star} ${styles.star2}`}></span>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

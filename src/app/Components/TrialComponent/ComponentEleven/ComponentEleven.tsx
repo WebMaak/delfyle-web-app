@@ -130,12 +130,16 @@ const ComponentEleven: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon}></div>
-            <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+            <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+              <div className={styles.featureIcon}></div>
               <h3 className={styles.featureHeading}>Uncover insights</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Explore opportunities through customer research, data analysis, customer interviews, and industry trends.
               </p>
+            </div>
             </div>
           </div>
 
@@ -158,12 +162,6 @@ const ComponentEleven: React.FC = () => {
               </p>
             </div>
           </div>
-        </div>
-        <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div ref={circleGraphicRef} className={styles.circleGraphic}>
-            <p className={styles.circleText}>Build for the future</p>
-          </div>
-          {/* Placeholder for lines and other small icons */}
         </div>
       </div>
     </section>

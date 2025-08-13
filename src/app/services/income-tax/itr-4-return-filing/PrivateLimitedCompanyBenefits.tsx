@@ -26,9 +26,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part A */}
       <div className={styles.featureItem}>
+      <div className={styles.featureHeadingContainer}>
         <div className={styles.featureIcon} style={{color: '#B40068'}}><FaUserAlt /></div>
-        <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part A: General Information</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Basic details like PAN, name, address, filing status, email, and mobile number.
           </p>
@@ -37,9 +39,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part B */}
       <div className={styles.featureItem}>
+      <div className={styles.featureHeadingContainer}>
         <div className={styles.featureIcon} style={{color: '#B40068'}}><MdOutlineAccountBalanceWallet /></div>
-        <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part B: Gross Total Income</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Includes income from salary/pension, house property, other sources, and presumptive business/profession income.
           </p>
@@ -48,9 +52,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part C */}
       <div className={styles.featureItem}>
+      <div className={styles.featureHeadingContainer}>
         <div className={styles.featureIcon} style={{color: '#B40068'}}><RiScissors2Fill /></div>
-        <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part C: Deductions & Total Taxable Income</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Declare deductions under Sections 80C to 80U to reduce your taxable income.
           </p>
@@ -59,9 +65,11 @@ const ITR2EligibilitySection: React.FC = () => {
 
       {/* 🔹 Part D */}
       <div className={styles.featureItem}>
+      <div className={styles.featureHeadingContainer}>
         <div className={styles.featureIcon} style={{color: '#B40068'}} ><FaCalculator /></div>
-        <div className={styles.featureTextContent}>
           <h3 className={styles.featureHeading}>Part D: Tax Computation & Tax Status</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Details of tax payable, Section 87A rebate, advance/self-assessment tax, interest (u/s 234B/234C), cess, and refund status.
           </p>

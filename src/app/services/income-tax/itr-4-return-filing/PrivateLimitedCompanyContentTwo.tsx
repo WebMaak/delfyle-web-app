@@ -23,13 +23,13 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
   return (
     <section ref={sectionRef} className={styles.container}>
     <div className={styles.topAnchorContainer}>
-      <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>ITR-3 Filing</a>
+      <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>ITR-4 Filing</a>
     </div>
     <div className={styles.mainContentWrapper}>
       <div ref={leftColumnRef} className={styles.leftColumn}>
         <div className={styles.leftTopContainer}>
           <h2 ref={mainHeadingRef} className={styles.mainHeading}>
-          Modes of ITR-3 Filing
+          Modes of ITR-4 Filing
           </h2>
         </div>
         <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>

@@ -35,9 +35,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </p>
     
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaFile /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaFile />
+              </div>
               <h3 className={styles.featureHeading}>Part A: Personal Details</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Includes PAN, Aadhaar number, name, address, and contact information of the taxpayer.
               </p>
@@ -45,9 +49,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBriefcase /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaBriefcase />
+              </div>
               <h3 className={styles.featureHeading}>Part B: Income Details</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Discloses income from salary, one house property, and income from other sources (like interest).
               </p>
@@ -55,9 +63,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaChartLine /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaChartLine />
+              </div>
               <h3 className={styles.featureHeading}>Part C: Deductions</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Captures deductions under Section 80C to 80U, including investments and eligible expenses.
               </p>
@@ -65,9 +77,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaCalculator /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaCalculator />
+              </div>
               <h3 className={styles.featureHeading}>Part D: Tax & Refund</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Contains total tax liability, refund computation, and bank account details for credit.
               </p>
@@ -75,9 +91,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMapMarker /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaMapMarker />
+              </div>
               <h3 className={styles.featureHeading}>Part E: Additional Disclosures</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Requires any other relevant disclosures not covered in the previous parts.
               </p>
@@ -85,9 +105,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaFolder /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaFolder />
+              </div>
               <h3 className={styles.featureHeading}>Schedule IT</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Records details of advance tax and self-assessment tax payments made during the year.
               </p>
@@ -95,9 +119,13 @@ const PrivateLimitedCompanyDisadvantages: React.FC = () => {
           </div>
     
           <div ref={el => { if (el) featureItemsRef.current[6] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaDownload /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaDownload />
+              </div>
               <h3 className={styles.featureHeading}>Schedule TDS/TCS</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Provides information on taxes deducted or collected at source by employers or institutions.
               </p>

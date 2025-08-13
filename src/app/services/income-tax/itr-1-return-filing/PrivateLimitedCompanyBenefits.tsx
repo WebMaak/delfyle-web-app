@@ -36,9 +36,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </p>
 
       <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaGlobe /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaGlobe />
+          </div>
           <h3 className={styles.featureHeading}>Are an NRI or RNOR</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Individuals who are Non-Resident Indians (NRIs) or Resident but Not Ordinarily Resident (RNOR) cannot use ITR-1 for filing their taxes.
           </p>
@@ -46,9 +50,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMoneyBill /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaMoneyBill />
+          </div>
           <h3 className={styles.featureHeading}>Have total income exceeding ₹50 lakhs</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             If your annual income exceeds ₹50 lakhs, you are required to file a different ITR form that can accommodate higher income disclosures.
           </p>
@@ -56,9 +64,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaChartLine /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaChartLine />
+          </div>
           <h3 className={styles.featureHeading}>Have capital gains</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Taxpayers earning short-term or long-term capital gains from selling assets like property, stocks, or mutual funds cannot file ITR-1.
           </p>
@@ -66,9 +78,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[3] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaBuilding />
+          </div>
           <h3 className={styles.featureHeading}>Own more than one house property</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             If you own multiple residential properties, ITR-1 is not suitable. Use other ITR forms that allow detailed property disclosures.
           </p>
@@ -76,9 +92,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[4] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBriefcase /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaBriefcase />
+          </div>
           <h3 className={styles.featureHeading}>Earn income from business or profession</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Business owners, freelancers, and professionals with non-salary income must file a different ITR form designed for such income types.
           </p>
@@ -86,9 +106,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[5] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaBuilding />
+          </div>
           <h3 className={styles.featureHeading}>Are a director in a company</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Individuals serving as directors in companies are required to report additional disclosures and cannot use ITR-1 for filing.
           </p>
@@ -96,9 +120,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[6] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaChartBar /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaChartBar />
+          </div>
           <h3 className={styles.featureHeading}>Have invested in unlisted shares</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             If you have held or traded unlisted equity shares during the financial year, ITR-1 is not applicable for your case.
           </p>
@@ -106,9 +134,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[7] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaDice /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaDice />
+          </div>
           <h3 className={styles.featureHeading}>Have income from lottery, gambling, racehorses</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Income from sources like lottery winnings, betting, or horse racing is not permitted under ITR-1 and requires alternate reporting.
           </p>
@@ -116,9 +148,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[8] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaCalendar /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaCalendar />
+          </div>
           <h3 className={styles.featureHeading}>Have deferred tax on ESOPs from start-ups</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Employees who have opted for deferred taxation on ESOPs from eligible start-ups are disqualified from using ITR-1.
           </p>
@@ -126,9 +162,13 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
       </div>
 
       <div ref={el => { if (el) featureItemsRef.current[9] = el }} className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-        <div className={styles.featureTextContent}>
+        <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaBuilding />
+          </div>
           <h3 className={styles.featureHeading}>Claim deduction under section 194N</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             If you are claiming deductions under section 194N related to cash withdrawals, ITR-1 is not the correct form to use.
           </p>

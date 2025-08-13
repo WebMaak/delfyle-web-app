@@ -24,9 +24,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Product Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiPackage /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiPackage /></div>
           <h3 className={styles.featureHeading}>Product Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
           This type of trademark is affixed to goods or products, aiding in identifying their origin and preserving a company's reputation. Trademark applications falling under classes 1-34 are typically classified as product marks as they pertain to tangible commodities.
           </p>
@@ -35,9 +37,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Service Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiTool /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiTool /></div>
           <h3 className={styles.featureHeading}>Service Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
           Similar to a product mark, a service mark is used to identify services rather than physical products. Service marks primarily help differentiate the providers of certain services from others. Trademark applications falling under classes 35-45 are often regarded as service marks related to service offerings.
 
@@ -47,9 +51,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Collective Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiUsers /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiUsers /></div>
           <h3 className={styles.featureHeading}>Collective Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
           A collective mark conveys specific characteristics of products or services associated with a particular group. It allows individuals or entities to protect and represent goods and services collectively. The trademark holder may be an association, a public institution, or a Section 8 corporation.
           </p>
@@ -58,9 +64,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Certification Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiAward /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiAward /></div>
           <h3 className={styles.featureHeading}>Certification Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
           The owner issues these marks to indicate information about a product's origin, composition, quality, or other pertinent data. Certification marks establish product standards and assure consumers that the product meets standardized quality benchmarks. They are commonly found in packaged goods, toys, and electronics.
           </p>
@@ -69,9 +77,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Shape Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiHexagon /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiHexagon /></div>
           <h3 className={styles.featureHeading}>Shape Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
           Shape marks are employed to secure the distinct shape of a product, making it easily recognizable to consumers as originating from a specific manufacturer. Registration is contingent on the shape being deemed distinctive.
           </p>
@@ -80,9 +90,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Pattern Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiGrid /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiGrid /></div>
           <h3 className={styles.featureHeading}>Pattern Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
           Pattern marks are used for products featuring unique, designed patterns that serve as distinguishing features. To qualify for registration, these patterns must stand out as distinctly recognizable.
           </p>
@@ -91,9 +103,11 @@ const PrivateLimitedCompanyBenefits: React.FC = () => {
 
       {/* Sound Mark */}
       <div className={styles.featureItem}>
-        <div className={styles.featureIcon} style={{ color: '#B40068' }}><FiMusic /></div>
-        <div className={styles.featureTextContent}>
+      <div className={styles.featureHeadingContainer}>
+          <div className={styles.featureIcon} style={{ color: "#B40068" }}><FiMusic /></div>
           <h3 className={styles.featureHeading}>Sound Mark</h3>
+        </div>
+        <div className={styles.featureTextContent}>
           <p className={styles.featureDescription}>
             Protects distinctive sounds or jingles, like the IPL tune, used in branding.Sound marks are distinctive sounds associated with products or services from suppliers. Sound logos, often known as audio mnemonics, are commonly heard at the beginning or end of commercials. An example in India is the IPL tune. These diverse categories of trademark registrations like logo trademark registration offer businesses and entities the flexibility to protect their brand identity following their unique offerings and market presence.
           </p>

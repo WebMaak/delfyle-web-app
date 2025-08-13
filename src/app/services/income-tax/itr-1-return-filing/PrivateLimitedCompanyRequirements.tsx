@@ -31,9 +31,13 @@ const PrivateLimitedCompanyRequirements: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaUsers /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaUsers />
+              </div>
               <h3 className={styles.featureHeading}>Directors & Members</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Minimum 2 directors (one must be an Indian resident), up to 200 members allowed. Directors must obtain DIN (Director Identification Number) from MCA.
               </p>
@@ -41,9 +45,13 @@ const PrivateLimitedCompanyRequirements: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaBuilding />
+              </div>
               <h3 className={styles.featureHeading}>Company Name Selection</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Must be unique and align with business objectives. Name must end with "Private Limited" and comply with MCA naming guidelines.
               </p>
@@ -51,9 +59,13 @@ const PrivateLimitedCompanyRequirements: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMapMarker /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaMapMarker />
+              </div>
               <h3 className={styles.featureHeading}>Registered Office Address</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Permanent registered office address required post-registration. Must be a physical address in India where official communications can be sent.
               </p>

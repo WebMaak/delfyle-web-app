@@ -31,9 +31,13 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </p>
 
           <div ref={el => { if (el) featureItemsRef.current[0] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaUser /></div>
-            <div className={styles.featureTextContent}>
+          <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+            <FaUser />
+              </div>
               <h3 className={styles.featureHeading}>Resident Individual</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 You must be a resident individual. HUFs and companies are not eligible to file ITR-1.
               </p>
@@ -41,9 +45,13 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[1] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaMoneyBill /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaMoneyBill />
+              </div>
               <h3 className={styles.featureHeading}>Income Up to ₹50 Lakhs</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Your total income must not exceed ₹50 lakhs from salary, one house property, family pension, or interest income.
               </p>
@@ -51,9 +59,13 @@ const PrivateLimitedCompanyTypes: React.FC = () => {
           </div>
 
           <div ref={el => { if (el) featureItemsRef.current[2] = el }} className={styles.featureItem}>
-            <div className={styles.featureIcon} style={{color: '#B40068'}}><FaBuilding /></div>
-            <div className={styles.featureTextContent}>
+            <div className={styles.featureHeadingContainer}>
+              <div className={styles.featureIcon} style={{ color: "#B40068" }}>
+                <FaBuilding />
+              </div>
               <h3 className={styles.featureHeading}>Other Conditions</h3>
+            </div>
+            <div className={styles.featureTextContent}>
               <p className={styles.featureDescription}>
                 Agricultural income should not exceed ₹5,000. Clubbing allowed only if the clubbed income also meets these criteria.
               </p>

@@ -17,19 +17,13 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import CallToAction from "./CallToAction";
-import ListComponentTwo from "./ListComponentTwo";
-import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
-import ColumnRowTable from "../../../Components/TrialComponent/ColumnRowTable/ColumnRowTable";
+import { FiPackage, FiTool, FiUsers, FiAward } from "react-icons/fi";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
