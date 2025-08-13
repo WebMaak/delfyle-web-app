@@ -23,35 +23,58 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
   return (
     <section ref={sectionRef} className={styles.container}>
       <div className={styles.topAnchorContainer}>
-        <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Trademark Registration</a>
+        <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Trademark Transfer</a>
       </div>
       <div className={styles.mainContentWrapper}>
         <div ref={leftColumnRef} className={styles.leftColumn}>
           <div className={styles.leftTopContainer}>
             <h2 ref={mainHeadingRef} className={styles.mainHeading}>
-            Choosing the Correct Trademark Class
+            Trademark Transfer Process with Delfyle
             </h2>
           </div>
 
           <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
+
+            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
+            What is a Trademark?
+            </h3>
             <p
             ref={(el) => {
               if (el) leftBottomContentRef.current[1] = el;
             }}
             className={styles.paragraphContent}
             >
-            Trademark classes are a critical aspect of the registration process, as they categorize goods and services into 45 distinct classes. To register a trademark, you should carefully select the appropriate class because it determines the validity of your trademark registration online concerning your business's products or services. If your company operates across various areas falling into different classes, it's crucial to ensure that you apply for a trademark under all the relevant classes.
+            Trademark Transfer, also known as Trademark Assignment, is a formal legal process where trademark rights are transferred from one party to another. This process is an essential component of intellectual property (IP) management, helping businesses secure and transfer valuable brand assets seamlessly.
+            At Delfyle, we specialize in protecting and managing intellectual property, particularly trademarks. Whether you're transferring trademark rights due to a business sale, inheritance, or internal restructuring, our experienced legal team ensures the assignment is executed with precision and compliance.
             </p>
-
+            
             <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
-            In India, some commonly chosen trademark classes to register a trademark include:
+            Legal Definition of Trademark Assignment
+            </h3>
+            <p
+            ref={(el) => {
+              if (el) leftBottomContentRef.current[1] = el;
+            }}
+            className={styles.paragraphContent}
+            >
+            As per Section 37 of the Trade Marks Act, 1999, trademark assignment refers to the transfer of ownership, title, and rights of a trademark from one entity (assignor) to another (assignee).
+            In simple terms, it enables a business or individual to legally sell or transfer their trademark rights.
+            </p>
+            
+            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
+            Common Scenarios for Trademark Assignment
             </h3>
             <div className={styles.productsGrid} style={{ display: 'flex', flexDirection: 'column' }}>
               <ul className={styles.productsList}>
-                <li><span className={styles.checkIcon}>Class 9:</span> Encompassing computer software and electronics</li>
-                <li><span className={styles.checkIcon}>Class 25:</span> Covering Clothing</li>
-                <li><span className={styles.checkIcon}>Class 35:</span> About business management and advertising</li>
-                <li><span className={styles.checkIcon}>Class 41:</span> Related to education and entertainment</li>
+                <li><span className={styles.checkIcon}>Inheritance:</span> Trademark transferred to legal heirs upon the death of the owner.</li>
+                <li><span className={styles.checkIcon}>Business Sale:</span> Trademarks are transferred as part of a business acquisition.</li>
+                <li><span className={styles.checkIcon}>Standalone Trademark Sale:</span>Transfer of trademark without selling the entire business.</li>
+                <li><span className={styles.checkIcon}>Corporate Restructuring:</span>Ownership changes due to business mergers, splits, or entity conversion.
+                </li>
+                <li><span className={styles.checkIcon}>Change of Name:</span> Updates in ownership following a legal name change.
+                </li>
+                <li><span className={styles.checkIcon}>Court Order:</span>  Mandated trademark assignment following legal disputes.
+                </li>
               </ul>
             </div>
           </div>
@@ -60,7 +83,7 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
         <div ref={rightColumnRef} className={styles.rightColumn}>
           <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
             <p className={styles.rightDescription}>
-            At Delfyle, we understand the paramount importance of brand name registration and ensuring the distinctiveness of your products and services in today's competitive market. That's why we offer expert assistance in filing for trademarks. Whether you're a dynamic startup, an established business, or an individual entrepreneur, our dedicated team is here to guide you through the intricate trademark registration online process. Let Delfyle be your trusted partner, securing your brand's identity and protecting your intellectual property.
+            Delfyle ensures a smooth trademark transfer process, ensuring your brand's identity and IP are protected.
             </p>
           </div>
           <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
@@ -73,7 +96,7 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
               className={styles.companyLogo}
             />
             <p className={styles.bottomQuote}>
-              "Let Delfyle be your trusted partner in securing your brand’s identity and protecting your intellectual property."
+              "Delfyle ensures a smooth trademark transfer process, ensuring your brand's identity and IP are protected."
             </p>
             <p className={styles.bottomAuthor}>Team Delfyle</p>
           </div>

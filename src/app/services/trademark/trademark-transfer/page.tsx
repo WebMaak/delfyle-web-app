@@ -24,8 +24,11 @@ import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "./CallToAction";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid } from "react-icons/fi";
+import { FiPackage, FiFileText, FiDollarSign, FiAward } from "react-icons/fi";
 import { TbFileTime } from "react-icons/tb";
+import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import ListComponent from "./ListComponent";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -146,99 +149,34 @@ const TrademarkTransfer: React.FC = () => {
   const registrationProcessData = [
     {
       id: 'step-1',
-      title: 'Examination of Trademark',
+      title: 'Experienced IP Attorneys:',
       content:
-        'Once the application is filed, it is examined by the Trade Marks Registry. During this examination, the registry will determine whether the trademark is eligible for registration and verify that it is not identical or deceptively similar to any existing trademark.',
+        'Specialized legal support for accurate filings.',
       stepNumber: 1
     },
     {
       id: 'step-2',
-      title: 'Publication of Trademark',
+      title: 'Custom Drafting: ',
       content:
-        'If the examination is successful, the trademark will be published in the trademark journal. This will allow any third parties who may have objections to the registration to file their objections.',
+        'Agreements tailored to your specific scenario.',
       stepNumber: 2
     },
     {
       id: 'step-3',
-      title: 'Response to Objections',
+      title: 'End-to-End Support: ',
       content:
-        'If any objections are raised, the applicant will have to respond to them. The applicant may also have to provide additional evidence in support of the application.',
+        'From agreement to registry updates.',
       stepNumber: 3
     },
     {
       id: 'step-4',
-      title: 'Grant of Trademark Registration',
+      title: 'Compliance Assurance: ',
       content:
-        'If the objections are addressed and the application is deemed eligible for registration, the Trade Marks Registry will grant and issue the trademark certificate. Once you are granted permission, your trademark is registered, and you can do the trademark certificate download India.',
+        'Legal formalities, timelines, and regulations handled with care.',
       stepNumber: 4
-    },
-    {
-      id: 'step-5',
-      title: 'Renewing a Trademark Registration Certificate',
-      content:
-        'Renewing a Trademark Registration Certificate Renewing a trademark registration certificate ensures that the protection of the brand or logo is maintained. Without the renewal of the trademark certificate, the brand or logo can become vulnerable to infringement and may result in a loss of exclusive rights and legal action. When the certificate is renewed, it extends the duration of the registered trademark and provides additional legal protection. This is especially important if the brand or logo is widely used and recognized by the public. Renewing a trademark registration certificate is an important step in preserving the brands or logo’s value and preventing any potential issues from arising.',
-      stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Determine the Renewal Period',
-      content:
-        'Trademark registration in India is valid for 10 years from the registration date. Trademark owners need to renew their registration before the expiration of the 10 years to continue enjoying the benefits of trademark registration.',
-      stepNumber: 6
-    },
-    {
-      id: 'step-7',
-      title: 'Prepare Renewal Application',
-      content:
-        'Trademark owners must file a renewal application before the expiration date of the 10 years. The renewal application must be filed with the Trademark Registrar or the Intellectual Property Office of India (IPO).',
-      stepNumber: 7
     },
   ];
   
-  const features = [
-    {
-      icon: <FiTool />,
-      title: 'Examination of Trademark',
-      description:
-        'Once the application is filed, it is examined by the Trade Marks Registry. During this examination, the registry will determine whether the trademark is eligible for registration and verify that it is not identical or deceptively similar to any existing trademark.',
-    },
-    {
-      icon: <FiUsers />,
-      title: 'Publication of Trademark',
-      description:
-        'If the examination is successful, the trademark will be published in the trademark journal. This will allow any third parties who may have objections to the registration to file their objections.',
-    },
-    {
-      icon: <FiAward />,
-      title: 'Response to Objections',
-      description:
-        'If any objections are raised, the applicant will have to respond to them. The applicant may also have to provide additional evidence in support of the application.',
-    },
-    {
-      icon: <FiHexagon />,
-      title: 'Grant of Trademark Registration',
-      description:
-        'If the objections are addressed and the application is deemed eligible for registration, the Trade Marks Registry will grant and issue the trademark certificate. Once you are granted permission, your trademark is registered, and you can do the trademark certificate download India.',
-    },
-    {
-      icon: <FiGrid />,
-      title: 'Renewing a Trademark Registration Certificate',
-      description:
-        'Renewing a Trademark Registration Certificate Renewing a trademark registration certificate ensures that the protection of the brand or logo is maintained. Without the renewal of the trademark certificate, the brand or logo can become vulnerable to infringement and may result in a loss of exclusive rights and legal action. When the certificate is renewed, it extends the duration of the registered trademark and provides additional legal protection. This is especially important if the brand or logo is widely used and recognized by the public. Renewing a trademark registration certificate is an important step in preserving the brands or logo’s value and preventing any potential issues from arising.',
-    },
-    {
-      icon: <TbFileTime />,
-      title: 'Determine the Renewal Period',
-      description:
-        'Trademark registration in India is valid for 10 years from the registration date. Trademark owners need to renew their registration before the expiration of the 10 years to continue enjoying the benefits of trademark registration.',
-    },
-    {
-      icon: <TbFileTime />,
-      title: 'Prepare Renewal Application',
-      description:
-        'Trademark owners must file a renewal application before the expiration date of the 10 years. The renewal application must be filed with the Trademark Registrar or the Intellectual Property Office of India (IPO).',
-    },
-  ];
   
  
   return (
@@ -317,80 +255,62 @@ const TrademarkTransfer: React.FC = () => {
             />
           </section>
 
-          <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContentTwo/>
 
-          <ListComponentTwo
-            title="Trademark Application"
-            description="The next step is to file an application with the Trade Marks Registry in India. The application must be filed online and should include the following:"
-            listItems={[
-              "The name and address of the applicant.",
-              "Details of the trademark.",
-              "The goods and/or services to which the trademark applies.",
-              "The class or classes of goods and/or services in which the trademark is to be registered.",
-            ]}
-          />
-
-          <TitleDescCanvas
-            features={features}
-            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
-            rightShape={{ x: 135 }} // Adjusts position
-            leftShape={{ x: 135 }} // Adjusts position
-            subHeading="Trademark Infringement Notice Part 3"
-            heading="Trademark Infringement Notice in India: Everything You Need to Know Part 3"
-            description=""
-          />
-
-          <ListComponentTwo
-            title="Submit Necessary Documents"
-            description="Trademark owners should submit the following documents along with the renewal application:"
-            listItems={[
-              "Copy of the existing registration certificate",
-              "Affidavit of use of the trademark",
-              "A power of attorney",
-              "Copy of the trademark certificate from the Trademark Office",
-              "Payment of the renewal fee",
-            ]}
-          />
+          <ListComponent/>
 
           <TitleDescCanvas
             features={[
               {
-                icon: <FiPackage />,
-                title: 'Receive Acknowledgement',
+                icon: <FiFileText />,
+                title: 'Drafting Agreement:',
                 description:
-                  'Upon receipt of the renewal application, the Trademark Registry will send an acknowledgement to the trademark owner.',
+                  ' Legal contract outlining the terms of transfer.',
+              },
+              {
+                icon: <FiFileText />,
+                title: 'Form TM-P Filing:',
+                description:
+                  ' Application submitted to the Registrar within 6 months of assignment.',
+              },
+              {
+                icon: <FiDollarSign />,
+                title: 'Fee Payment: ',
+                description:
+                  'Government fee varies based on timeliness and trademark type.',
+              },
+              {
+                icon: <TbFileTime />,
+                title: 'Advertisement: ',
+                description:
+                  'If directed by the Registrar, public notice must be issued.',
               },
               {
                 icon: <FiPackage />,
-                title: 'Review of the Renewal Application',
+                title: 'Review by Registrar: ',
                 description:
-                  'Following the renewal application submission, the Trademark Registry will review the application and check for any discrepancies.',
+                  'Verification and processing of assignment.',
               },
               {
-                icon: <FiPackage />,
-                title: 'Issue of Renewal Trademark Certificate',
+                icon: <FiAward />,
+                title: 'Recordal: ',
                 description:
-                  'After the Trademark Registry has approved the renewal application, a new registration certificate will be issued. The new registration certificate will have the updated expiration date and will be valid for 10 years from the renewal date.',
+                  'Registration of new ownership in the trademark registry.',
               },
-              {
-                icon: <FiPackage />,
-                title: 'Publication of Renewal Certificate',
-                description:
-                  'The renewed trademark certificate will also be published in the Trademarks Journal.',
-              },
-              {
-                icon: <FiPackage />,
-                title: 'How can Delfyle help you get a Trademark Registration Certificate?',
-                description:
-                  'Delfyle can help customers with trademark registration certificates by providing them with up-to-date information about the process and the necessary documents that need to be submitted. Our team of experts guide our customers through each step of the registration process and ensure they clearly understand what is required. Our experts can review documents, provide feedback on any potential issues, and help resolve any conflicts that may arise. Additionally, we can help customers to understand the implications of registering a trademark and the potential legal problems that may occur. We also provide comprehensive services to help ensure that customers have a successful trademark registration. Our team can help customers to create an effective trademark that meets all the criteria set by the Indian Trademark Office, and we can provide advice on how to protect their trademark from infringement. Once the application is complete, our team will ensure that the application is complete and accurate and will provide any necessary guidance to the customer. At Delfyle, we understand the importance of having a secure, reliable trademark registration and are committed to helping our customers to achieve this goal. We strive to provide the best customer service and guidance to ensure our customers can register their trademarks without hassle.',
-              }
             ]}
-            rightColumnTranslate={{ x: -30, y: -60 }} // Adjusts position
-            rightShape={{ x: 135 }} // Adjusts position
-            leftShape={{ x: 135 }} // Adjusts position
-            subHeading="Trademark Infringement Notice Part 4"
-            heading="Trademark Infringement Notice in India: Everything You Need to Know Part 4"
-            description=""
+            subHeading="Trademark Transfer"
+            heading="Trademark Assignment Process in India"
+            description="This section provides a comprehensive overview of the trademark assignment process in India, covering the key steps involved in transferring trademark ownership."
+          />
+
+          <CustomAccordion
+            subheading="Trademark Transfer Process"
+            title="Benefits of Partnering with Delfyle for Trademark Transfer"
+            description="Explore the advantages of working with Delfyle for a seamless trademark transfer experience."
+            items={registrationProcessData}
+            variant="numbered"
+            theme="light"
+            maxOpenItems={1}
           />
 
           <CallToAction/>
