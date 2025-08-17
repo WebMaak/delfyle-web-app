@@ -22,13 +22,14 @@ import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket,  FaCheckCircle } from "react-icons/fa";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
 import ListComponent from "./ListComponent";
 import { FiFileText, FiMusic, FiImage, FiFilm, FiMic, FiCode } from 'react-icons/fi';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import { FaGavel, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -322,7 +323,33 @@ const TrademarkObjection: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Copyright Objection Handling?"
+            subheading="We assist you in managing copyright objections efficiently, providing expert guidance, legal support, and fast resolution to protect your intellectual property."
+            cards={[
+              {
+                icon: <FaGavel className="text-2xl" />,
+                title: "Legal Expertise",
+                description: "Professional guidance to handle copyright disputes effectively.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary documentation for objection handling.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "IP Protection",
+                description: "Ensure your intellectual property rights remain secure and enforced.",
+              },
+            ]}
+            primaryBtnText="Resolve Copyright Objection"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

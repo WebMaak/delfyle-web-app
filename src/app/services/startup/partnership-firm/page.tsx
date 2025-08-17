@@ -25,7 +25,7 @@ import { useUser } from '../../../../hooks/useUser';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import Trial from "./trial";
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward} from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import ListComponentReusable from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
@@ -37,6 +37,8 @@ import {
   FaCheckCircle, 
   FaRegIdBadge 
 } from 'react-icons/fa';
+import { FaHandshake, FaFileContract, FaBalanceScale } from "react-icons/fa";
+
 
 
 
@@ -288,7 +290,33 @@ const TrademarkRectification: React.FC = () => {
 
           <Trial/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Partnership Firm Registration?"
+            subheading="We streamline partnership firm registration with expert guidance, quick documentation, and complete compliance support for smooth business setup."
+            cards={[
+              {
+                icon: <FaHandshake className="text-2xl" />,
+                title: "Flexible Structure",
+                description: "Best suited for small to medium businesses with shared control.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Drafting and filing partnership deed made hassle-free.",
+              },
+              {
+                icon: <FaBalanceScale className="text-2xl" />,
+                title: "Trusted Compliance",
+                description: "End-to-end assistance with registration and legal requirements.",
+              },
+            ]}
+            primaryBtnText="Register Your Partnership Firm"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

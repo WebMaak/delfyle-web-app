@@ -22,12 +22,12 @@ import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket,  FaCheckCircle } from "react-icons/fa";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
 import ListComponent from "./ListComponent";
-import { FaSearch, FaFileAlt, FaGavel, FaNewspaper, FaCertificate, FaRedo } from "react-icons/fa";
+import { FaGavel, FaDraftingCompass, FaShieldAlt } from 'react-icons/fa';
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -236,7 +236,33 @@ const TrademarkObjection: React.FC = () => {
 
           <ListComponent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Design Objection Handling?"
+            subheading="We help you manage design objections effectively, providing expert legal guidance, documentation support, and fast resolution to protect your designs."
+            cards={[
+              {
+                icon: <FaGavel className="text-2xl" />,
+                title: "Legal Expertise",
+                description: "Professional support to resolve design disputes efficiently.",
+              },
+              {
+                icon: <FaDraftingCompass className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary documents for objection handling.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Design Protection",
+                description: "Ensure your industrial or creative designs remain secure and enforced.",
+              },
+            ]}
+            primaryBtnText="Resolve Design Objection"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

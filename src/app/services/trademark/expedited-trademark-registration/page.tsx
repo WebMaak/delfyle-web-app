@@ -23,11 +23,13 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import ColumnRowTable from "@/app/Components/TrialComponent/ColumnRowTable/ColumnRowTable";
+import { FaRocket, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -331,7 +333,33 @@ const TrademarkObjection: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Expedited Trademark Registration?"
+            subheading="We make expedited trademark registration fast and hassle-free, providing expert guidance, quick documentation, and complete legal support to secure your brand."
+            cards={[
+              {
+                icon: <FaRocket className="text-2xl" />,
+                title: "Fast Registration",
+                description: "Quick processing to secure your trademark in minimal time.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined filing process for faster approval and registration.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark rights are fully protected under the law.",
+              },
+            ]}
+            primaryBtnText="Register Your Trademark Fast"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

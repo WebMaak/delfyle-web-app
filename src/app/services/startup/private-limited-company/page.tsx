@@ -28,6 +28,8 @@ import ToggleNav from '../../../Components/ToggleNav/toggleNav';
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "../../../Components/CallToAction/CallToAction";
+import { FaBuilding, FaFileInvoice, FaHandshake } from 'react-icons/fa';
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -411,6 +413,32 @@ const PrivateLimitedCompany: React.FC = () => {
           <PrivateLimitedCompanyDocs/>
 
           <PrivateLimitedPost/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Private Limited Company Registration?"
+            subheading="We simplify Private Limited Company registration with expert guidance, quick documentation, and complete compliance support to help your business grow smoothly."
+            cards={[
+              {
+                icon: <FaHandshake className="text-2xl" />,
+                title: "Limited Liability Protection",
+                description: "Shareholders enjoy limited liability, safeguarding personal assets.",
+              },
+              {
+                icon: <FaFileInvoice className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for incorporation and compliance filings.",
+              },
+              {
+                icon: <FaBuilding className="text-2xl" />,
+                title: "Professional Credibility",
+                description: "Enhances business reputation and opens doors to funding opportunities.",
+              },
+            ]}
+            primaryBtnText="Register Your Private Limited Company"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
         </div>
 
         {/* Footer */}

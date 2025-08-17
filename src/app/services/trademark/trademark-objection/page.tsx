@@ -23,9 +23,10 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
+import { FaGavel, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -297,7 +298,33 @@ const TrademarkObjection: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Objection Handling?"
+            subheading="We help you manage trademark objections efficiently, providing expert guidance, legal support, and fast resolution to protect your brand."
+            cards={[
+              {
+                icon: <FaGavel className="text-2xl" />,
+                title: "Legal Expertise",
+                description: "Professional guidance to handle trademark objections effectively.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary documentation for objection handling.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark rights remain secure and enforced.",
+              },
+            ]}
+            primaryBtnText="Resolve Trademark Objection"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

@@ -22,8 +22,10 @@ import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward } from "react-icons/fi";
+import { FaPen, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -284,7 +286,33 @@ const TrademarkRectification: React.FC = () => {
 
           <ListComponent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Rectification?"
+            subheading="We assist you in trademark rectification processes, providing expert guidance, documentation support, and legal strategies to correct or update trademark records."
+            cards={[
+              {
+                icon: <FaPen className="text-2xl" />,
+                title: "Correct & Update Records",
+                description: "Professional help to rectify errors or update trademark details accurately.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary documents for rectification efficiently.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark remains legally protected after rectification.",
+              },
+            ]}
+            primaryBtnText="Apply for Trademark Rectification"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

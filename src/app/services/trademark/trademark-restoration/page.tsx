@@ -21,9 +21,10 @@ import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid } from "react-icons/fi";
 import { TbFileTime } from "react-icons/tb";
+import { FaUndoAlt, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -317,7 +318,33 @@ const TrademarkInfringementNotice: React.FC = () => {
 
           <PrivateLimitedCompanyContent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Restoration?"
+            subheading="We assist in trademark restoration to revive expired or removed trademarks, providing expert guidance, documentation support, and legal strategies to protect your brand."
+            cards={[
+              {
+                icon: <FaUndoAlt className="text-2xl" />,
+                title: "Restore Your Trademark",
+                description: "Professional help to reinstate expired or cancelled trademarks efficiently.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary forms and legal documents for restoration.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your restored trademark remains legally recognized and protected.",
+              },
+            ]}
+            primaryBtnText="Restore Your Trademark"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

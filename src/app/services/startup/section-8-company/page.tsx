@@ -24,7 +24,7 @@ import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward} from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import ListComponentReusable from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
@@ -36,6 +36,8 @@ import {
   FaCheckCircle, 
   FaRegIdBadge 
 } from 'react-icons/fa';
+import { FaHandsHelping, FaFileContract, FaBalanceScale } from 'react-icons/fa';
+
 
 
 
@@ -285,7 +287,33 @@ const TrademarkRectification: React.FC = () => {
 
           <PrivateLimitedCompanyContentTwo/>
 
-          <CallToAction/>
+         <CallToAction
+          heading="Why Choose Delfyle for"
+          highlighted="Section 8 Company Registration?"
+          subheading="We make Section 8 Company registration seamless with expert guidance, quick documentation, and complete compliance support for your nonprofit or social enterprise."
+          cards={[
+            {
+              icon: <FaHandsHelping className="text-2xl" />,
+              title: "Nonprofit Focused",
+              description: "Ideal for organizations promoting social welfare, charity, or nonprofit objectives.",
+            },
+            {
+              icon: <FaFileContract className="text-2xl" />,
+              title: "Quick Documentation",
+              description: "Assistance in drafting Memorandum and Articles of Association efficiently.",
+            },
+            {
+              icon: <FaBalanceScale className="text-2xl" />,
+              title: "Trusted Compliance",
+              description: "Complete guidance on statutory approvals, licenses, and ongoing compliance.",
+            },
+          ]}
+          primaryBtnText="Register Your Section 8 Company"
+          primaryBtnLink="https://wa.me/917439587419"
+          secondaryBtnText="Get Free Consultation"
+          secondaryBtnLink="/contact"
+        />
+
           
         </div>
 

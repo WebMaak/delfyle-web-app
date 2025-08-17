@@ -21,7 +21,7 @@ import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiFileText, FiDollarSign, FiAward } from "react-icons/fi";
@@ -29,6 +29,8 @@ import { TbFileTime } from "react-icons/tb";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import ListComponent from "./ListComponent";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import { FaExchangeAlt, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -313,7 +315,33 @@ const TrademarkTransfer: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Transfer?"
+            subheading="We assist you in transferring trademarks smoothly, providing expert guidance, documentation support, and legal strategies to ensure ownership is correctly and securely updated."
+            cards={[
+              {
+                icon: <FaExchangeAlt className="text-2xl" />,
+                title: "Smooth Ownership Transfer",
+                description: "Professional assistance to transfer trademark rights accurately and efficiently.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary legal documents for the transfer process.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark rights remain fully protected during and after the transfer.",
+              },
+            ]}
+            primaryBtnText="Transfer Your Trademark"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

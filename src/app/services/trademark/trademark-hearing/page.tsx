@@ -21,10 +21,12 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaFileAlt, FaFileSignature, FaGavel } from "react-icons/fa";
+import { FaFileAlt, FaFileSignature } from "react-icons/fa";
+import { FaGavel, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -287,7 +289,33 @@ const TrademarkHearing: React.FC = () => {
 
           <ListComponent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Hearing?"
+            subheading="We assist you in trademark hearings with expert guidance, legal representation, and thorough documentation to defend and secure your brand rights."
+            cards={[
+              {
+                icon: <FaGavel className="text-2xl" />,
+                title: "Legal Representation",
+                description: "Professional support to handle hearings and disputes effectively.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary documents for the hearing process.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark rights are fully safeguarded during hearings.",
+              },
+            ]}
+            primaryBtnText="Attend Trademark Hearing"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

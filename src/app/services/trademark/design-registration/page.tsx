@@ -22,12 +22,13 @@ import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket,  FaCheckCircle } from "react-icons/fa";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
 import ListComponent from "./ListComponent";
 import { FaSearch, FaFileAlt, FaGavel, FaNewspaper, FaCertificate, FaRedo } from "react-icons/fa";
+import { FaDraftingCompass, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -328,7 +329,33 @@ const TrademarkObjection: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Design Registration?"
+            subheading="We simplify design registration with expert guidance, quick documentation, and complete legal support to protect your creative and industrial designs."
+            cards={[
+              {
+                icon: <FaDraftingCompass className="text-2xl" />,
+                title: "Secure Your Designs",
+                description: "Officially register your designs to safeguard intellectual property rights.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined filing and registration process for your creative works.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Trusted Legal Support",
+                description: "Expert assistance to ensure your designs are legally recognized and protected.",
+              },
+            ]}
+            primaryBtnText="Register Your Design"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

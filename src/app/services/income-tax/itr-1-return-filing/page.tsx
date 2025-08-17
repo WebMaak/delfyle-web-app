@@ -31,7 +31,9 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
+import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -409,7 +411,33 @@ const PrivateLimitedCompany: React.FC = () => {
             // maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="ITR 1 Return Filing?"
+            subheading="We simplify ITR 1 filing with expert guidance, accurate documentation, and complete compliance support to ensure hassle-free income tax return submission."
+            cards={[
+              {
+                icon: <FaFileInvoice className="text-2xl" />,
+                title: "Accurate Filing",
+                description: "Professional assistance to file your ITR correctly and on time.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process to prepare and submit all required tax documents.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Compliance Support",
+                description: "Ensure your ITR filing meets all legal requirements and avoids penalties.",
+              },
+            ]}
+            primaryBtnText="File Your ITR 1"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
 
         </div>
         {/* Footer */}

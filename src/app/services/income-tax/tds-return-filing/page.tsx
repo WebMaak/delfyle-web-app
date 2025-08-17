@@ -23,10 +23,12 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import ListComponentReusable from "./ListComponentReusable";
 import ColumnRowTable from "../../../Components/TrialComponent/ColumnRowTable/ColumnRowTable";
 import { FaBalanceScale, FaCheckCircle, FaFileAlt, FaFolderOpen } from "react-icons/fa";
+import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -496,7 +498,33 @@ const PrivateLimitedCompany: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+         <CallToAction
+          heading="Why Choose Delfyle for"
+          highlighted="TDS Return Filing?"
+          subheading="We simplify TDS return filing with expert guidance, accurate documentation, and complete compliance support to ensure timely submission and avoid penalties."
+          cards={[
+            {
+              icon: <FaFileInvoice className="text-2xl" />,
+              title: "Accurate Filing",
+              description: "Professional assistance to file TDS returns correctly and on time.",
+            },
+            {
+              icon: <FaFileContract className="text-2xl" />,
+              title: "Quick Documentation",
+              description: "Streamlined process for preparing and submitting all required TDS documents.",
+            },
+            {
+              icon: <FaShieldAlt className="text-2xl" />,
+              title: "Compliance Support",
+              description: "Ensure your TDS filings meet all legal requirements and avoid penalties.",
+            },
+          ]}
+          primaryBtnText="File Your TDS Return"
+          primaryBtnLink="https://wa.me/917439587419"
+          secondaryBtnText="Get Free Consultation"
+          secondaryBtnLink="/contact"
+        />
+
 
         </div>
 

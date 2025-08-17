@@ -22,9 +22,10 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid } from "react-icons/fi";
+import { FaExclamationTriangle, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 import { TbFileTime } from "react-icons/tb";
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -333,7 +334,33 @@ const TrademarkInfringementNotice: React.FC = () => {
 
           <ListComponent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Infringement Notice?"
+            subheading="We assist you in handling trademark infringement notices efficiently, providing legal guidance, documentation support, and strategies to protect your brand."
+            cards={[
+              {
+                icon: <FaExclamationTriangle className="text-2xl" />,
+                title: "Expert Legal Guidance",
+                description: "Professional support to respond to infringement notices appropriately.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary legal documents for the notice.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark rights remain secure and enforceable.",
+              },
+            ]}
+            primaryBtnText="Handle Infringement Notice"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

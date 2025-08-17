@@ -29,9 +29,11 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "./SingleList";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -429,7 +431,33 @@ const PrivateLimitedCompany: React.FC = () => {
             // maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="ITR 2 Return Filing?"
+            subheading="We provide expert guidance and complete support for ITR 2 filing, ensuring accurate documentation and compliance for individuals with multiple sources of income or complex tax situations."
+            cards={[
+              {
+                icon: <FaFileInvoice className="text-2xl" />,
+                title: "Accurate Filing",
+                description: "Professional assistance to file your ITR 2 correctly and on time.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for preparing and submitting all necessary tax documents.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Compliance Support",
+                description: "Ensure your ITR filing meets all legal requirements and avoids penalties.",
+              },
+            ]}
+            primaryBtnText="File Your ITR 2"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
 
         </div>
 

@@ -22,13 +22,14 @@ import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaCheckCircle } from "react-icons/fa";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
 import ListComponent from "./ListComponent";
 import { FiFileText, FiMusic, FiImage, FiFilm, FiMic, FiCode } from 'react-icons/fi';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import { FaFileAlt, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -320,7 +321,33 @@ const TrademarkObjection: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Copyright Registration?"
+            subheading="We simplify copyright registration with expert guidance, quick documentation, and complete legal support to protect your original work effectively."
+            cards={[
+              {
+                icon: <FaFileAlt className="text-2xl" />,
+                title: "Secure Ownership",
+                description: "Officially register your work to safeguard your intellectual property rights.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for filing and registering your creative works.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Trusted Legal Support",
+                description: "Expert assistance to ensure your copyright is legally recognized and protected.",
+              },
+            ]}
+            primaryBtnText="Register Your Copyright"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

@@ -23,10 +23,12 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import { FiPackage, FiTool, FiUsers, FiAward } from "react-icons/fi";
 import ColumnRowTable from "../../../Components/TrialComponent/ColumnRowTable/ColumnRowTable";
+import { FaBalanceScale, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -313,7 +315,33 @@ const TrademarkOpposition: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Opposition Handling?"
+            subheading="We guide you through trademark opposition proceedings, providing expert legal support, documentation assistance, and strategies to defend your brand."
+            cards={[
+              {
+                icon: <FaBalanceScale className="text-2xl" />,
+                title: "Legal Representation",
+                description: "Professional support to handle opposition proceedings effectively.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Prepare and submit all necessary documents for opposition cases.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your trademark rights remain secure and enforceable during opposition.",
+              },
+            ]}
+            primaryBtnText="Handle Trademark Opposition"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

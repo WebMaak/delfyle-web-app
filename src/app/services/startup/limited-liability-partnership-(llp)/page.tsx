@@ -23,7 +23,7 @@ import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward} from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import ListComponentReusable from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
@@ -37,6 +37,7 @@ import {
   FaCertificate, 
   FaFileInvoiceDollar 
 } from "react-icons/fa";
+import { FaBalanceScale, FaFileSignature, FaRocket } from "react-icons/fa";
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -335,7 +336,33 @@ const TrademarkRectification: React.FC = () => {
 
             <ListComponentTwo/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="LLP (Limited Liability Partnership) Registration?"
+            subheading="We simplify LLP registration with expert guidance, hassle-free compliance, and transparent processes tailored for entrepreneurs and professionals."
+            cards={[
+              {
+                icon: <FaBalanceScale className="text-2xl" />,
+                title: "Limited Liability Protection",
+                description: "Safeguard personal assets while enjoying business flexibility.",
+              },
+              {
+                icon: <FaFileSignature className="text-2xl" />,
+                title: "Seamless Compliance",
+                description: "We handle agreements, filings, and MCA documentation end-to-end.",
+              },
+              {
+                icon: <FaRocket className="text-2xl" />,
+                title: "Quick & Affordable",
+                description: "Fast registration at competitive pricing with no hidden charges.",
+              },
+            ]}
+            primaryBtnText="Start Your LLP Registration"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

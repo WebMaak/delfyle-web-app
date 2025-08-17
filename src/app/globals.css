@@ -256,3 +256,22 @@ nav {
 select{
   appearance: none;
 }
+
+:root {
+  --background: #ffffff;       /* page background */
+  --foreground: #1a1a1a;       /* text color */
+  --primary-color: #ff4db8;    /* from your theme */
+  --secondary-color: #c471ed;  /* from your theme */
+}
+
+/* optional dark mode if you want */
+.dark {
+  --background: #121212;
+  --foreground: #f5f5f5;
+  --primary-color: #ff4db8;
+  --secondary-color: #c471ed;
+}
+
+#smooth-content {
+  background-color: white
+}

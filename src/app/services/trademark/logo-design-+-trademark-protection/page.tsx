@@ -22,10 +22,11 @@ import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket, FaCheckCircle } from "react-icons/fa";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
+import { FaPenNib, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 
 
@@ -339,7 +340,33 @@ const TrademarkObjection: React.FC = () => {
             ]}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Logo Design & Trademark Registration?"
+            subheading="We offer comprehensive logo design and trademark registration services, combining creative expertise with legal protection to secure your brand identity."
+            cards={[
+              {
+                icon: <FaPenNib className="text-2xl" />,
+                title: "Creative Logo Design",
+                description: "Professional and unique logos that represent your brand effectively.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Trademark Registration",
+                description: "Streamlined filing process to legally protect your logo and brand.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your logo and brand are fully safeguarded under trademark laws.",
+              },
+            ]}
+            primaryBtnText="Design & Register Your Logo"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

@@ -24,7 +24,7 @@ import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward} from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import ListComponentReusable from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
@@ -39,6 +39,8 @@ import {
   FaCheckCircle,
   FaFileInvoiceDollar 
 } from "react-icons/fa";
+import { FaUserShield, FaFileSignature, FaLightbulb } from "react-icons/fa";
+
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -307,7 +309,33 @@ const TrademarkRectification: React.FC = () => {
 
           <PrivateLimitedCompanyContentTwo/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="One Person Company (OPC) Registration?"
+            subheading="We make OPC registration effortless with expert assistance, compliance management, and a transparent process designed for solo entrepreneurs."
+            cards={[
+              {
+                icon: <FaUserShield className="text-2xl" />,
+                title: "Limited Liability",
+                description: "Protects personal assets with separate legal identity.",
+              },
+              {
+                icon: <FaFileSignature className="text-2xl" />,
+                title: "Simplified Compliance",
+                description: "Easy registration and fewer compliance requirements.",
+              },
+              {
+                icon: <FaLightbulb className="text-2xl" />,
+                title: "Best for Solo Founders",
+                description: "Ideal business structure for individual entrepreneurs.",
+              },
+            ]}
+            primaryBtnText="Start Your OPC Registration"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

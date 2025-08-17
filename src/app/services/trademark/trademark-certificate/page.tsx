@@ -21,11 +21,13 @@ import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid } from "react-icons/fi";
 import { TbFileTime } from "react-icons/tb";
+import { FaCertificate, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -388,7 +390,33 @@ const TrademarkCertificate: React.FC = () => {
             description=""
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Certification?"
+            subheading="We help you obtain trademark certification efficiently, providing expert guidance, quick documentation, and complete legal support to validate and protect your brand."
+            cards={[
+              {
+                icon: <FaCertificate className="text-2xl" />,
+                title: "Official Certification",
+                description: "Receive legally recognized certification for your trademark.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for filing and obtaining trademark certification.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Ensure your brand rights are fully safeguarded under the law.",
+              },
+            ]}
+            primaryBtnText="Get Your Trademark Certified"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

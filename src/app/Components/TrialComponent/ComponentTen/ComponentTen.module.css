@@ -1,7 +1,6 @@
 .container {
   width: 100%;
   min-height: 120vh;
-  background-color: #f0f4f7; /* Light background color from the image */
   display: flex;
   justify-content: center;
   align-items: center;

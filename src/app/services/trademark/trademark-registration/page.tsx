@@ -22,11 +22,12 @@ import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import ListComponentTwo from "./ListComponentTwo";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid, FiMusic } from "react-icons/fi";
+import { FaFileAlt, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -315,7 +316,33 @@ const TrademarkRegistration: React.FC = () => {
 
           <ListComponent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Registration?"
+            subheading="We simplify trademark registration with expert guidance, quick documentation, and complete legal support to secure your brand identity effectively."
+            cards={[
+              {
+                icon: <FaFileAlt className="text-2xl" />,
+                title: "Secure Your Brand",
+                description: "Officially register your trademark to protect your brand legally.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined filing process for faster approval and registration.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Trusted Legal Support",
+                description: "Expert assistance to ensure your trademark is legally recognized and protected.",
+              },
+            ]}
+            primaryBtnText="Register Your Trademark"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
 
         </div>
 

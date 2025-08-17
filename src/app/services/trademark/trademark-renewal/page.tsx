@@ -21,9 +21,11 @@ import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid } from "react-icons/fi";
 import { TbFileTime } from "react-icons/tb";
+import { FaSyncAlt, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -317,7 +319,33 @@ const TrademarkInfringementNotice: React.FC = () => {
 
           <PrivateLimitedCompanyContent/>
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Trademark Renewal?"
+            subheading="We make trademark renewal simple and timely, providing expert guidance, quick documentation, and legal support to ensure your brand protection continues without interruption."
+            cards={[
+              {
+                icon: <FaSyncAlt className="text-2xl" />,
+                title: "Timely Renewal",
+                description: "Ensure your trademark remains valid and legally protected by renewing on time.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for preparing and submitting renewal applications.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Brand Protection",
+                description: "Maintain uninterrupted legal protection for your registered trademark.",
+              },
+            ]}
+            primaryBtnText="Renew Your Trademark"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
           
         </div>
 

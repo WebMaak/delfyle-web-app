@@ -29,8 +29,10 @@ import IconTextList from "./IconTextList";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "./CallToAction";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "../../../Components/TrialComponent/SingleList/SingleList";
+import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -461,7 +463,33 @@ const PrivateLimitedCompany: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction/>
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="ITR 5 Return Filing?"
+            subheading="We provide expert guidance for ITR 5 filing, assisting firms, LLPs, and other entities to file accurately and stay compliant with all tax regulations."
+            cards={[
+              {
+                icon: <FaFileInvoice className="text-2xl" />,
+                title: "Accurate Filing",
+                description: "Professional assistance to file your ITR 5 correctly and on time.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for preparing and submitting all required tax documents.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Compliance Support",
+                description: "Ensure your ITR filing meets legal requirements and avoids penalties.",
+              },
+            ]}
+            primaryBtnText="File Your ITR 5"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
 
         </div>
 
