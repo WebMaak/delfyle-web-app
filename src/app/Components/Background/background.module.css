@@ -27,3 +27,76 @@
         clip-path: polygon(0 0, 100% 0, 100% 40%, 0 55%);
     }
 }
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.blobBlue {
+  width: 400px;
+  height: 450px;
+  top: -50px;
+  left: -100px;
+  background: rgba(147, 197, 253, 0.5);
+  animation: moveBlue 20s infinite alternate;
+}
+
+.blobPurple {
+  width: 500px;
+  height: 550px;
+  bottom: -200px;
+  right: -150px;
+  background: rgba(196, 181, 253, 0.5);
+  animation: movePurple 22s infinite alternate;
+}
+
+.blobPink {
+  width: 350px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(225, 6, 128, 0.4);
+  animation: movePink 25s infinite alternate;
+}
+
+@keyframes moveBlue {
+  from {
+    transform: translate(-100px, -50px) rotate(-90deg);
+  }
+  to {
+    transform: translate(100px, 100px) rotate(90deg);
+  }
+}
+
+@keyframes movePurple {
+  from {
+    transform: translate(50px, 100px) rotate(45deg);
+  }
+  to {
+    transform: translate(-150px, -50px) rotate(-45deg);
+  }
+}
+
+@keyframes movePink {
+  from {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  to {
+    transform: translate(calc(-50% + 50px), calc(-50% - 100px)) scale(1.2)
+      rotate(180deg);
+  }
+}

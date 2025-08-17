@@ -31,7 +31,7 @@ import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/
 import { FaUserTie, FaFileAlt, FaBolt } from "react-icons/fa";
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import Background from "@/app/Components/Background/Background";
-import BackgroundBalls from "../../../Components/BackgroundBalls";
+
 
 
 
@@ -247,7 +247,6 @@ const TrademarkRectification: React.FC = () => {
 
       {/* Main Content */}
       <main id="smooth-content" className="relative min-h-screen bg-background text-foreground">
-      {/* <BackgroundBalls /> */}
         <div>
           <StartupHero 
           heading={
