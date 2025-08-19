@@ -29,7 +29,7 @@ const StartupHero: React.FC<StartupHeroProps> = ({
   const services = [
     'Bussiness registration',
     'Trademark',
-    'Registration',
+    'License',
     'Goods & Services Tax',
     'MCA',
     'Compliance',
