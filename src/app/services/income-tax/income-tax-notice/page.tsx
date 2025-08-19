@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -20,20 +13,32 @@ import {
   ModernNavItems, 
   ModernNavbarLogo, 
   ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ListComponent from "./ListComponent";
+import ListComponentTwo from "./ListComponentTwo";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "../../../Components/CallToAction/CallToAction";
+import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import PrivateLimitedCompanyContentThree from "./PrivateLimitedCompanyContentThree";
+import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
+import { Building2, BarChart3, FileSpreadsheet, Layers, LineChart, Calculator } from "lucide-react";
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const PrivateLimitedCompany: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -142,45 +147,10 @@ const PrivateLimitedCompany: React.FC = () => {
     "/CompanyLogos/30.png",
   ];
 
-  // Company registration process data
-  const registrationProcessData = [
-    {
-      id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
-      stepNumber: 1
-    },
-    {
-      id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
-      stepNumber: 2
-    },
-    {
-      id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
-      stepNumber: 3
-    },
-    {
-      id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
-      stepNumber: 4
-    },
-    {
-      id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
-      stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
-      stepNumber: 6
-    }
-  ];
+  
+ 
+  
+  
 
   return (
     <>
@@ -189,127 +159,6 @@ const PrivateLimitedCompany: React.FC = () => {
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
           mainOptions={navItems.map(item => item.name)}
-          subMenus={[
-            // Startup
-            [
-              "Private Limited Company",
-              "Limited Liability Partnership (LLP)",
-              "One Person Company (OPC)",
-              "Section 8 Company",
-              "Partnership Firm",
-              "Trust Registration",
-              "Public Company",
-              "Producer Company",
-              "Nidhi Company"
-            ],
-            // Trademark
-            [
-              "Trademark Registration",
-              "Trademark Objection",
-              "Trademark Certificate",
-              "Trademark Opposition",
-              "Trademark Hearing",
-              "Trademark Rectification",
-              "Trademark Infringement Notice",
-              "Trademark Renewal",
-              "Trademark Restoration",
-              "Trademark Transfer",
-              "Expedited Trademark Registration",
-              "Logo Design + Trademark Protection",
-              "Design Registration",
-              "Design Objection",
-              "Copyright Registration",
-              "Copyright Objections"
-            ],
-            // Registrations
-            [
-              "StartUp Registration",
-              "Trade License",
-              "FSSAI Registration",
-              "FSSAI License",
-              "Halal Certification",
-              "ICEGATE Registration",
-              "ISO Registration",
-              "PF Registration",
-              "ESI Registration",
-              "Professional Tax Registration",
-              "RCMC Registration",
-              "WB RERA Registration",
-              "12A and 80G Registration",
-              "12A Registration",
-              "80G Registration",
-              "Darpan Registration",
-              "Udyam Registration",
-              "Digital Signature",
-              "Shop and Establishment Act Registration",
-              "Drug License",
-              "FCRA Registration",
-              "Fire License",
-              "EPR Certficate"
-            ],
-            // GST
-            [
-              "GST Registration",
-              "GST Return Filing",
-              "GST Annual Return Filing (GSTR - 9)",
-              "GST LUT Form",
-              "GST Tax Notice",
-              "GST Amendment",
-              "GST Revocation",
-              "GSTR-10"
-            ],
-            // MCA (already set previously)
-            [
-              "Company Compliance",
-              "LLP Compliance",
-              "OPC Compliance",
-              "Name Change - Company",
-              "Company Registered Office Change",
-              "DIN eKYC Filing",
-              "DIN Reactivation",
-              "Director Change",
-              "Remove Director",
-              "Appointment of Auditor",
-              "DPT-3 Filing",
-              "LLP Form 11 Filing",
-              "Dormant Status Filing",
-              "MOA Amendment",
-              "AOA Amendment",
-              "Authorized Capital Increase",
-              "Share Transfer",
-              "Demat of Shares",
-              "Winding Up - LLP",
-              "Winding Up - Company"
-            ],
-            // Compliance
-            [
-              "FSSAI Renewal",
-              "FSSAI Return Filing",
-              "HR & Payroll Services",
-              "PF Return Filing",
-              "ESI Return Filing",
-              "Professional Tax Return Filing",
-              "Partnership Compliance",
-              "Proprietorship Compliance",
-              "Book-keeping"
-            ],
-            // Income Tax
-            [
-              "ITR-1 Return Filing",
-              "ITR-2 Return Filing",
-              "ITR-3 Return Filing",
-              "ITR-4 Return Filing",
-              "ITR-5 Return Filing",
-              "ITR-6 Return Filing",
-              "ITR-7 Return Filing",
-              "TDS Return Filing",
-              "Income Tax Notice",
-              "TAN Registration",
-              "15CA & 15CB Filing"
-            ],
-            // About Us (default)
-            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
-          ]}
         />
       </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -339,52 +188,44 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+            <div className="modernNavActions">
+              <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
-              <ModernNavbarButton href="/contact" className="w-full mt-4">
-                Contact us
-              </ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
         </ModernNavbar>
       </div>
+
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
-          <StartupHero 
-          heading={<><span>Income Tax Notice</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-          description="Ensure timely income tax returns with Delfyle's expert assistance. We handle all compliance requirements, including income tax registration, return filing, and compliance monitoring."
-          buttonText="Get Income Tax Notice Help"
-          />
+         <StartupHero 
+          heading={
+            <>
+              <span className={styles.coloredplc}>Expert Income Tax Notice </span><br />
+              <span className={styles.coloredreg}>Response Services Online</span> 
+              <span style={{letterSpacing: 'normal'}}> for Individuals & Businesses <br /> with</span> 
+              <span className={styles.colored}>Delfyle</span>
+            </>
+          }
+          description="Handle your Income Tax notices efficiently with Delfyle. Our experts provide end-to-end support from analyzing the notice to submitting accurate responses, ensuring full compliance and peace of mind."
+        />
+
+
+
           
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
@@ -397,30 +238,100 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
+          <ListComponent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <PrivateLimitedCompanyContentTwo/>
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <ListComponentTwo/>
 
-          <PrivateLimitedCompanyRequirements/> */}
+          <StartupHero 
+          heading={
+            <>
+              <span className={styles.coloredplc}>Expert Income Tax Notice </span><br />
+              <span className={styles.coloredreg}>Response Services</span><br />
+              <span className={styles.colored}>with Delfyle</span>
+            </>
+          }
+          description="Efficiently handle your Income Tax notices with Delfyle. Get expert analysis, document support, and accurate responses—all in one place."
+        />
 
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
-            items={registrationProcessData}
+
+          <PrivateLimitedCompanyContentThree/>
+
+
+          {/* ITR-3 Filing Process Accordion */}
+          <CustomAccordion
+            subheading="Income Tax Notices with Delfyle"
+            title="How Delfyle Helps with Income Tax Notices?"
+            description="At Delfyle, we simplify the process of handling income tax notices for individuals and businesses. Our experts ensure timely, accurate, and compliant responses. Here’s how we assist you:"
+            items={[
+              {
+                id: 'step-1',
+                title: 'Expert Consultation',
+                content: 'Guidance from experienced tax professionals to understand your notice and its implications.',
+                stepNumber: 1
+              },
+              {
+                id: 'step-2',
+                title: 'Notice Analysis',
+                content: 'Identify the reason behind the notice and the potential impact on your taxes or refund.',
+                stepNumber: 2
+              },
+              {
+                id: 'step-3',
+                title: 'Document Assistance',
+                content: 'Help in preparing, organizing, and verifying all supporting proofs required for the response.',
+                stepNumber: 3
+              },
+              {
+                id: 'step-4',
+                title: 'Response Preparation',
+                content: 'Draft accurate replies within the stipulated deadlines to ensure compliance and avoid penalties.',
+                stepNumber: 4
+              },
+              {
+                id: 'step-5',
+                title: 'Compliance Assurance',
+                content: 'Ensuring your submission is complete, lawful, and protects your refund from unnecessary adjustments.',
+                stepNumber: 5
+              }
+            ]}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
 
-          <PrivateLimitedPost/> */}
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="Income Tax Notices?"
+            subheading="We provide expert assistance in handling Income Tax notices, helping individuals and businesses respond accurately and stay fully compliant with tax laws."
+            cards={[
+              {
+                icon: <FaFileInvoice className="text-2xl" />,
+                title: "Notice Analysis",
+                description: "Identify the type and reason for the notice, ensuring you understand its implications.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Document Assistance",
+                description: "Organize and prepare all supporting documents needed for your response.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Compliance Support",
+                description: "Ensure your replies are timely, accurate, and fully compliant to avoid penalties.",
+              },
+            ]}
+            primaryBtnText="Get Help with Notices"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
+
         </div>
 
         {/* Footer */}
