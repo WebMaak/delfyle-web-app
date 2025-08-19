@@ -33,7 +33,14 @@ import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection";
+import { FileWarning, Share2, Home, Briefcase, Building2, Ticket, User,
+  Wallet,
+  Percent,
+  Calculator,
+  FileText,
+  Receipt,
+  TicketPercent, } from "lucide-react";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -198,127 +205,6 @@ const PrivateLimitedCompany: React.FC = () => {
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
           mainOptions={navItems.map(item => item.name)}
-          subMenus={[
-            // Startup
-            [
-              "Private Limited Company",
-              "Limited Liability Partnership (LLP)",
-              "One Person Company (OPC)",
-              "Section 8 Company",
-              "Partnership Firm",
-              "Trust Registration",
-              "Public Company",
-              "Producer Company",
-              "Nidhi Company"
-            ],
-            // Trademark
-            [
-              "Trademark Registration",
-              "Trademark Objection",
-              "Trademark Certificate",
-              "Trademark Opposition",
-              "Trademark Hearing",
-              "Trademark Rectification",
-              "Trademark Infringement Notice",
-              "Trademark Renewal",
-              "Trademark Restoration",
-              "Trademark Transfer",
-              "Expedited Trademark Registration",
-              "Logo Design + Trademark Protection",
-              "Design Registration",
-              "Design Objection",
-              "Copyright Registration",
-              "Copyright Objections"
-            ],
-            // Registrations
-            [
-              "StartUp Registration",
-              "Trade License",
-              "FSSAI Registration",
-              "FSSAI License",
-              "Halal Certification",
-              "ICEGATE Registration",
-              "ISO Registration",
-              "PF Registration",
-              "ESI Registration",
-              "Professional Tax Registration",
-              "RCMC Registration",
-              "WB RERA Registration",
-              "12A and 80G Registration",
-              "12A Registration",
-              "80G Registration",
-              "Darpan Registration",
-              "Udyam Registration",
-              "Digital Signature",
-              "Shop and Establishment Act Registration",
-              "Drug License",
-              "FCRA Registration",
-              "Fire License",
-              "EPR Certficate"
-            ],
-            // GST
-            [
-              "GST Registration",
-              "GST Return Filing",
-              "GST Annual Return Filing (GSTR - 9)",
-              "GST LUT Form",
-              "GST Tax Notice",
-              "GST Amendment",
-              "GST Revocation",
-              "GSTR-10"
-            ],
-            // MCA (already set previously)
-            [
-              "Company Compliance",
-              "LLP Compliance",
-              "OPC Compliance",
-              "Name Change - Company",
-              "Company Registered Office Change",
-              "DIN eKYC Filing",
-              "DIN Reactivation",
-              "Director Change",
-              "Remove Director",
-              "Appointment of Auditor",
-              "DPT-3 Filing",
-              "LLP Form 11 Filing",
-              "Dormant Status Filing",
-              "MOA Amendment",
-              "AOA Amendment",
-              "Authorized Capital Increase",
-              "Share Transfer",
-              "Demat of Shares",
-              "Winding Up - LLP",
-              "Winding Up - Company"
-            ],
-            // Compliance
-            [
-              "FSSAI Renewal",
-              "FSSAI Return Filing",
-              "HR & Payroll Services",
-              "PF Return Filing",
-              "ESI Return Filing",
-              "Professional Tax Return Filing",
-              "Partnership Compliance",
-              "Proprietorship Compliance",
-              "Book-keeping"
-            ],
-            // Income Tax
-            [
-              "ITR-1 Return Filing",
-              "ITR-2 Return Filing",
-              "ITR-3 Return Filing",
-              "ITR-4 Return Filing",
-              "ITR-5 Return Filing",
-              "ITR-6 Return Filing",
-              "ITR-7 Return Filing",
-              "TDS Return Filing",
-              "Income Tax Notice",
-              "TAN Registration",
-              "15CA & 15CB Filing"
-            ],
-            // About Us (default)
-            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
-          ]}
         />
       </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -392,10 +278,107 @@ const PrivateLimitedCompany: React.FC = () => {
 
           <ComponentSevenTop/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ServiceFeatureSection
+            title="Who Cannot File ITR-1?"
+            description="You are not eligible to file ITR-1 under the following conditions:"
+            items={[
+              {
+                icon: FileWarning,
+                title: "Non-Residents (NRI/RNOR)",
+                description: "ITR-1 cannot be filed if your residential status is NRI or RNOR.",
+              },
+              {
+                icon: FileWarning,
+                title: "Income above ₹50 lakhs",
+                description: "Individuals earning more than ₹50 lakhs are not eligible.",
+              },
+              {
+                icon: Share2,
+                title: "Capital Gains",
+                description: "If you have income from capital gains, ITR-1 does not apply.",
+              },
+              {
+                icon: Home,
+                title: "Multiple House Properties",
+                description: "Owning more than one house property disqualifies you.",
+              },
+              {
+                icon: Briefcase,
+                title: "Business or Profession Income",
+                description: "If you earn from business or profession, you must use another ITR form.",
+              },
+              {
+                icon: Building2,
+                title: "Company Directorship",
+                description: "Directors in companies cannot file ITR-1.",
+              },
+              {
+                icon: Share2,
+                title: "Unlisted Shares",
+                description: "Holding or investing in unlisted shares disqualifies you.",
+              },
+              {
+                icon: Ticket,
+                title: "Lottery, Gambling, Racehorses",
+                description: "Income from these activities is not allowed under ITR-1.",
+              },
+              {
+                icon: Briefcase,
+                title: "Deferred Tax on ESOPs",
+                description: "Employees with ESOP-related deferred tax from start-ups cannot file ITR-1.",
+              },
+              {
+                icon: FileWarning,
+                title: "Section 194N Deduction",
+                description: "If you claim deduction under section 194N, you cannot file ITR-1.",
+              },
+            ]}
+            subHeading="ITR-1 Due Date for FY 2024-25"
+            subDescription="The standard due date to file ITR-1 for Assessment Year 2025-26 is July 31, 2025. File early to avoid late fees and interest charges."
+          />
 
-          <PrivateLimitedCompanyDisadvantages/>
-          
+          <ServiceFeatureSection
+          title="Structure of the ITR-1 Form"
+          description="The ITR-1 Form is organized into five parts and two schedules:"
+          items={[
+            {
+              icon: User, 
+              title: "Part A: Personal details",
+              description: "Includes PAN, Aadhaar, and address information.",
+            },
+            {
+              icon: Wallet, 
+              title: "Part B: Income details",
+              description: "Covers income from Salary, House Property, and Other Sources.",
+            },
+            {
+              icon: Percent,
+              title: "Part C: Deductions",
+              description: "Deductions under Section 80C to 80U.",
+            },
+            {
+              icon: Calculator, 
+              title: "Part D: Tax computation",
+              description: "Details of tax computation, refund, and bank account information.",
+            },
+            {
+              icon: FileText, 
+              title: "Part E: Additional disclosures",
+              description: "Any extra disclosures required by the taxpayer.",
+            },
+            {
+              icon: Receipt, 
+              title: "Schedule IT",
+              description: "Details of advance tax and self-assessment tax payments.",
+            },
+            {
+              icon: TicketPercent,
+              title: "Schedule TDS/TCS",
+              description: "Tax deducted at source and tax collected at source information.",
+            },
+          ]}
+        />
+
           <ListComponent/>
 
           <ComponentEight/>
