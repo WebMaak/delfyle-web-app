@@ -32,8 +32,15 @@ import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "../../../Components/TrialComponent/SingleList/SingleList";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
+import {
+  Info,
+  ClipboardList,
+  BarChart3,
+  FileSpreadsheet,
+  LineChart,
+  Calculator,
+} from "lucide-react";
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -431,7 +438,49 @@ const PrivateLimitedCompany: React.FC = () => {
 
           <ListComponent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ServiceFeatureSection
+            title="ITR-5 Form Structure"
+            description="The ITR-5 form is structured to capture detailed financial and tax data for firms, LLPs, AOPs, BOIs, and other eligible entities—ensuring complete and compliant reporting."
+            items={[
+              {
+                icon: Info,
+                title: "Part A: General Information",
+                description:
+                  "Includes PAN, firm name, contact details, constitution status, and filing status of the entity.",
+              },
+              {
+                icon: ClipboardList,
+                title: "Part A-BS: Balance Sheet",
+                description:
+                  "Reports assets, liabilities, capital, and other balance sheet information as of year-end.",
+              },
+              {
+                icon: BarChart3,
+                title: "Part A: Manufacturing, Trading & Profit and Loss",
+                description:
+                  "Covers manufacturing, trading details, and the profit and loss statement for the financial year.",
+              },
+              {
+                icon: FileSpreadsheet,
+                title: "Part A-OI & Part A-QD",
+                description:
+                  "Captures other financial data and quantitative business details including inventory.",
+              },
+              {
+                icon: LineChart,
+                title: "Part B-TI: Total Income",
+                description:
+                  "Summarizes total taxable income computed from all income heads including business, capital gains, etc.",
+              },
+              {
+                icon: Calculator,
+                title: "Part B-TTI: Tax Liability",
+                description:
+                  "Final tax payable including surcharge, rebate, interest (234B/234C), and eligible refund.",
+              },
+            ]}
+          />
+
 
           <SingleList
             title="Additional Schedules (if applicable)"

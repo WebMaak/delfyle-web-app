@@ -33,7 +33,15 @@ import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "../../../Components/TrialComponent/SingleList/SingleList";
 import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
+import {
+  Building2,
+  BarChart3,
+  FileSpreadsheet,
+  LineChart,
+  Calculator,
+  Layers,
+} from "lucide-react";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -449,7 +457,49 @@ const PrivateLimitedCompany: React.FC = () => {
           showTitle={true}
           showDescription={true}
           />
-          <PrivateLimitedCompanyBenefits/>
+          
+          <ServiceFeatureSection
+            title="ITR-6 Form Structure"
+            description="The ITR-6 form is comprehensive—designed to ensure accurate filing by companies, covering everything from basic identification to detailed financials and final tax computation."
+            items={[
+              {
+                icon: Building2,
+                title: "Part A: Entity Details & Financials",
+                description:
+                  "Contains general information such as Name, PAN, CIN, incorporation details, and contact info. Includes financial reports like Balance Sheet, Profit & Loss Account, and Manufacturing Account.",
+              },
+              {
+                icon: BarChart3,
+                title: "Balance Sheet",
+                description:
+                  "Reports assets, liabilities, share capital, reserves, and other figures as of the financial year-end.",
+              },
+              {
+                icon: FileSpreadsheet,
+                title: "Trading & Profit and Loss Account",
+                description:
+                  "Reflects income, expenditures, and resulting profit or loss during the year.",
+              },
+              {
+                icon: Layers,
+                title: "Manufacturing Account",
+                description:
+                  "Includes data related to inventory, production cost, and movement of raw materials and finished goods.",
+              },
+              {
+                icon: LineChart,
+                title: "Part B-TI: Total Income",
+                description:
+                  "Calculates total taxable income from various heads of income.",
+              },
+              {
+                icon: Calculator,
+                title: "Part B-TTI: Tax Liability",
+                description:
+                  "Determines total tax payable after adjustments for surcharge, rebate, interest, and eligible refunds.",
+              },
+            ]}
+          />
 
           <IconTextList/>
 

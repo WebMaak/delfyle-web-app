@@ -33,7 +33,22 @@ import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "./SingleList";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
+import {
+  Briefcase,
+  Home,
+  TrendingUp,
+  Globe,
+  Ticket,
+  Building2,
+  Leaf,
+  UserCheck,
+  ListOrdered,
+  FileX2,
+  CircleDot,
+  ShieldAlert,
+  History,
+} from "lucide-react";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -410,13 +425,107 @@ const PrivateLimitedCompany: React.FC = () => {
 
           <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ServiceFeatureSection
+            title="Who Can & Cannot File ITR-2?"
+            description="ITR-2 is meant for individuals and HUFs who do not have income from business or profession. It's used when income comes from salary, house property (more than one), capital gains, foreign assets, or other specific sources. However, not everyone qualifies to use this form."
+            items={[
+              {
+                icon: Briefcase,
+                title: "Have income from salary or pension",
+                description:
+                  "Individuals receiving income through employment or pension can use ITR-2, provided they meet the other eligibility criteria.",
+              },
+              {
+                icon: Home,
+                title: "Own more than one house property",
+                description:
+                  "If you own multiple properties, ITR-2 allows detailed reporting of income from house property.",
+              },
+              {
+                icon: TrendingUp,
+                title: "Earn capital gains",
+                description:
+                  "Those who have earned capital gains from shares, mutual funds, or sale of property must file ITR-2.",
+              },
+              {
+                icon: Globe,
+                title: "Have foreign assets or foreign income",
+                description:
+                  "If you hold foreign assets or earned income outside India, ITR-2 is the correct form for you.",
+              },
+              {
+                icon: Ticket,
+                title: "Have income from lotteries or racehorses",
+                description:
+                  "Winnings from legal gambling, lotteries, or horse racing must be reported using ITR-2.",
+              },
+              {
+                icon: Building2,
+                title: "Are a director in a company",
+                description:
+                  "Directors in listed or unlisted companies must use ITR-2 for additional disclosure compliance.",
+              },
+              {
+                icon: Leaf,
+                title: "Have agricultural income over ₹5,000",
+                description:
+                  "If your agricultural income exceeds ₹5,000, ITR-2 is mandatory for tax filing.",
+              },
+              {
+                icon: UserCheck,
+                title: "Are RNOR or NRI",
+                description:
+                  "Non-Resident Indians (NRIs) and Resident but Not Ordinarily Residents (RNORs) are required to file ITR-2.",
+              },
+            ]}
+          />
 
           <ListComponent/>
 
           <SingleList/>
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <ServiceFeatureSection
+            title="Instructions for Filling ITR-2 Form"
+            description="Follow these key instructions carefully to ensure your ITR-2 filing is accurate and compliant:"
+            items={[
+              {
+                icon: ListOrdered,
+                title: "Fill sections in order",
+                description:
+                  "Complete the form sequentially: Part A → Schedules → Part B-TI → Part B-TTI → Verification.",
+              },
+              {
+                icon: FileX2,
+                title: "Use ‘NA’ where applicable",
+                description:
+                  "Mention ‘NA’ (Not Applicable) clearly in fields that do not apply to your situation.",
+              },
+              {
+                icon: CircleDot,
+                title: "Rounding off values",
+                description:
+                  "Round off figures to the nearest rupee. Round total income and tax liability to the nearest ₹10.",
+              },
+              {
+                icon: Briefcase,
+                title: "Select employer type accurately",
+                description:
+                  "Government employees must select “Government” or “PSU” appropriately under the employer type.",
+              },
+              {
+                icon: ShieldAlert,
+                title: "Restriction for Double Taxation Relief",
+                description:
+                  "If claiming relief under Double Taxation Avoidance Agreement (DTAA), avoid using ITR-2. Use ITR forms applicable to such cases.",
+              },
+              {
+                icon: History,
+                title: "Filing previous years’ returns",
+                description:
+                  "You can file returns for the past 2 years only under conditions defined in Section 139(4) or 139(5).",
+              },
+            ]}
+          />
           
           <PrivateLimitedCompanyContentTwo/>
 

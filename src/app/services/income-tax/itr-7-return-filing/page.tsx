@@ -26,7 +26,7 @@ import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);

@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -20,20 +13,28 @@ import {
   ModernNavItems, 
   ModernNavbarLogo, 
   ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import ListComponent from "./ListComponent";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import CallToAction from "../../../Components/CallToAction/CallToAction";
+import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const PrivateLimitedCompany: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -142,45 +143,10 @@ const PrivateLimitedCompany: React.FC = () => {
     "/CompanyLogos/30.png",
   ];
 
-  // Company registration process data
-  const registrationProcessData = [
-    {
-      id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
-      stepNumber: 1
-    },
-    {
-      id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
-      stepNumber: 2
-    },
-    {
-      id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
-      stepNumber: 3
-    },
-    {
-      id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
-      stepNumber: 4
-    },
-    {
-      id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
-      stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
-      stepNumber: 6
-    }
-  ];
+  
+ 
+  
+  
 
   return (
     <>
@@ -189,127 +155,6 @@ const PrivateLimitedCompany: React.FC = () => {
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
           mainOptions={navItems.map(item => item.name)}
-          subMenus={[
-            // Startup
-            [
-              "Private Limited Company",
-              "Limited Liability Partnership (LLP)",
-              "One Person Company (OPC)",
-              "Section 8 Company",
-              "Partnership Firm",
-              "Trust Registration",
-              "Public Company",
-              "Producer Company",
-              "Nidhi Company"
-            ],
-            // Trademark
-            [
-              "Trademark Registration",
-              "Trademark Objection",
-              "Trademark Certificate",
-              "Trademark Opposition",
-              "Trademark Hearing",
-              "Trademark Rectification",
-              "Trademark Infringement Notice",
-              "Trademark Renewal",
-              "Trademark Restoration",
-              "Trademark Transfer",
-              "Expedited Trademark Registration",
-              "Logo Design + Trademark Protection",
-              "Design Registration",
-              "Design Objection",
-              "Copyright Registration",
-              "Copyright Objections"
-            ],
-            // Registrations
-            [
-              "StartUp Registration",
-              "Trade License",
-              "FSSAI Registration",
-              "FSSAI License",
-              "Halal Certification",
-              "ICEGATE Registration",
-              "ISO Registration",
-              "PF Registration",
-              "ESI Registration",
-              "Professional Tax Registration",
-              "RCMC Registration",
-              "WB RERA Registration",
-              "12A and 80G Registration",
-              "12A Registration",
-              "80G Registration",
-              "Darpan Registration",
-              "Udyam Registration",
-              "Digital Signature",
-              "Shop and Establishment Act Registration",
-              "Drug License",
-              "FCRA Registration",
-              "Fire License",
-              "EPR Certficate"
-            ],
-            // GST
-            [
-              "GST Registration",
-              "GST Return Filing",
-              "GST Annual Return Filing (GSTR - 9)",
-              "GST LUT Form",
-              "GST Tax Notice",
-              "GST Amendment",
-              "GST Revocation",
-              "GSTR-10"
-            ],
-            // MCA (already set previously)
-            [
-              "Company Compliance",
-              "LLP Compliance",
-              "OPC Compliance",
-              "Name Change - Company",
-              "Company Registered Office Change",
-              "DIN eKYC Filing",
-              "DIN Reactivation",
-              "Director Change",
-              "Remove Director",
-              "Appointment of Auditor",
-              "DPT-3 Filing",
-              "LLP Form 11 Filing",
-              "Dormant Status Filing",
-              "MOA Amendment",
-              "AOA Amendment",
-              "Authorized Capital Increase",
-              "Share Transfer",
-              "Demat of Shares",
-              "Winding Up - LLP",
-              "Winding Up - Company"
-            ],
-            // Compliance
-            [
-              "FSSAI Renewal",
-              "FSSAI Return Filing",
-              "HR & Payroll Services",
-              "PF Return Filing",
-              "ESI Return Filing",
-              "Professional Tax Return Filing",
-              "Partnership Compliance",
-              "Proprietorship Compliance",
-              "Book-keeping"
-            ],
-            // Income Tax
-            [
-              "ITR-1 Return Filing",
-              "ITR-2 Return Filing",
-              "ITR-3 Return Filing",
-              "ITR-4 Return Filing",
-              "ITR-5 Return Filing",
-              "ITR-6 Return Filing",
-              "ITR-7 Return Filing",
-              "TDS Return Filing",
-              "Income Tax Notice",
-              "TAN Registration",
-              "15CA & 15CB Filing"
-            ],
-            // About Us (default)
-            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
-          ]}
         />
       </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -339,52 +184,43 @@ const PrivateLimitedCompany: React.FC = () => {
 
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+            <div className="modernNavActions">
+              <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
           </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
-              <ModernNavbarButton href="/contact" className="w-full mt-4">
-                Contact us
-              </ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
         </ModernNavbar>
       </div>
+
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>TAN Registration</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-          description="Ensure timely TAN returns with Delfyle's expert assistance. We handle all compliance requirements, including TAN registration, return filing, and compliance monitoring."
-          buttonText="Get TAN Registration Help"
+            heading={
+              <>
+                <span className={styles.coloredplc}>Expert TAN Registration </span><br />
+                <span className={styles.coloredreg}>Services Online</span> 
+                <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+                <span className={styles.colored}>Delfyle</span>
+              </>
+            }
+            description="Obtain your TAN quickly and accurately with Delfyle. We handle all documentation, form filing, and compliance guidance, ensuring your business or organization meets all tax deduction obligations."
           />
+
+
           
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
@@ -397,30 +233,90 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
+          <ListComponent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <PrivateLimitedCompanyContentTwo/>
 
-          <PrivateLimitedCompanyDisadvantages/>
-
-          <PrivateLimitedCompanyRequirements/> */}
-
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
-            items={registrationProcessData}
+          {/* ITR-3 Filing Process Accordion */}
+          <CustomAccordion
+            subheading="TAN with Delfyle"
+            title="Why Choose Delfyle for TAN Registration?"
+            description="At Delfyle, we provide end-to-end assistance in TAN registration online. Our experts handle documentation, form filing, and submission, ensuring zero errors and fast approval. Here’s how we help you:"
+            items={[
+              {
+                id: 'step-1',
+                title: 'Error-free Application Filing',
+                content:
+                  'Our team ensures accurate documentation and form submission so your application is never rejected due to errors.',
+                stepNumber: 1
+              },
+              {
+                id: 'step-2',
+                title: 'Quick Processing & TAN Allotment',
+                content:
+                  'We streamline the application process to ensure faster approval and issuance of your TAN number.',
+                stepNumber: 2
+              },
+              {
+                id: 'step-3',
+                title: 'Expert Assistance & Compliance Guidance',
+                content:
+                  'Our tax experts provide guidance on TAN usage, TDS compliance, and ongoing support for hassle-free tax management.',
+                stepNumber: 3
+              },
+              {
+                id: 'step-4',
+                title: 'Completely Online Process',
+                content:
+                  'From application filing to TAN allotment, the entire process is handled digitally for your convenience.',
+                stepNumber: 4
+              },
+              {
+                id: 'step-5',
+                title: 'End-to-End Support',
+                content:
+                  'Beyond just registration, Delfyle assists with TDS return filing, compliance updates, and long-term support.',
+                stepNumber: 5
+              }
+            ]}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
 
-          <PrivateLimitedPost/> */}
+          <CallToAction
+            heading="Why Choose Delfyle for"
+            highlighted="TAN Registration?"
+            subheading="We provide expert assistance for TAN registration, helping businesses, proprietors, and non-profits stay fully compliant with Income Tax regulations."
+            cards={[
+              {
+                icon: <FaFileInvoice className="text-2xl" />,
+                title: "Accurate Registration",
+                description: "Professional guidance to register your TAN correctly and avoid errors.",
+              },
+              {
+                icon: <FaFileContract className="text-2xl" />,
+                title: "Quick Documentation",
+                description: "Streamlined process for preparing and submitting all required TAN documents.",
+              },
+              {
+                icon: <FaShieldAlt className="text-2xl" />,
+                title: "Compliance Support",
+                description: "Ensure your TAN is properly applied and ready for TDS/TCS obligations.",
+              },
+            ]}
+            primaryBtnText="Register Your TAN"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
+
+
+
+
         </div>
 
         {/* Footer */}

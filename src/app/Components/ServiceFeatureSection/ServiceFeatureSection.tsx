@@ -25,7 +25,7 @@ const FeatureSection: FC<FeatureSectionProps> = ({
   return (
     <section className="relative py-10 px-6 lg:px-20 bg-white text-gray-900">
       {/* Top Heading & Desc */}
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div className="max-w-5xl mx-auto text-center mb-16">
         <h2 className="text-[3.5rem] font-bold mb-4 bg-clip-text text-[#1a1a1a]">
           {title}
         </h2>

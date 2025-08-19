@@ -32,7 +32,13 @@ import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "./SingleList";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
+import {
+    Info,
+  LineChart,
+  Scissors,
+  Calculator,
+} from "lucide-react";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -416,7 +422,36 @@ const PrivateLimitedCompany: React.FC = () => {
 
           <ListComponent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ServiceFeatureSection
+            title="ITR-4 Form Structure"
+            description="The ITR-4 form is structured to capture general info, declared income, deductions, and tax liability for taxpayers under the presumptive taxation scheme."
+            items={[
+              {
+                icon: Info,
+                title: "Part A: General Information",
+                description:
+                  "Basic details like PAN, name, address, filing status, email, and mobile number.",
+              },
+              {
+                icon: LineChart,
+                title: "Part B: Gross Total Income",
+                description:
+                  "Includes income from salary/pension, house property, other sources, and presumptive business/profession income.",
+              },
+              {
+                icon: Scissors,
+                title: "Part C: Deductions & Total Taxable Income",
+                description:
+                  "Declare deductions under Sections 80C to 80U to reduce your taxable income.",
+              },
+              {
+                icon: Calculator,
+                title: "Part D: Tax Computation & Tax Status",
+                description:
+                  "Details of tax payable, Section 87A rebate, advance/self-assessment tax, interest (u/s 234B/234C), cess, and refund status.",
+              },
+            ]}
+          />
 
           <SingleList
             title="Additional Schedules (if applicable)"

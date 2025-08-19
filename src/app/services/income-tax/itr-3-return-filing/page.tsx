@@ -33,7 +33,20 @@ import CallToAction from "../../../Components/CallToAction/CallToAction";
 import SingleList from "./SingleList";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-
+import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
+import {
+  Briefcase,
+  Building2,
+  Globe,
+  Layers,
+  Home,
+  IdCard,
+  Banknote,
+  FileText,
+  TrendingUp,
+  FolderOpen,
+  Receipt,
+} from "lucide-react";
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -416,13 +429,103 @@ const PrivateLimitedCompany: React.FC = () => {
 
           <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ServiceFeatureSection
+            title="What is ITR-3 Form?"
+            description="The ITR-3 Form is applicable to a specific group of taxpayers whose income sources are more complex or diverse. This includes those running businesses, offering professional services, or having other financial interests that require disclosure under Indian tax law. Below are the categories of taxpayers who are eligible or required to file using the ITR-3 form:"
+            items={[
+              {
+                icon: Briefcase,
+                title: "Individuals and HUFs who earn income from business or profession",
+                description:
+                  "For those earning from freelancing, consulting, or any self-owned business not registered as a company.",
+              },
+              {
+                icon: Building2,
+                title: "Directors of companies",
+                description:
+                  "Mandatory for company directors, even if they don’t have business income.",
+              },
+              {
+                icon: Globe,
+                title: "Individuals with foreign assets or income",
+                description:
+                  "Required if you hold foreign bank accounts, assets, or earn income from abroad.",
+              },
+              {
+                icon: Layers,
+                title: "Persons holding unlisted equity shares",
+                description:
+                  "Applicable if you own shares in private (unlisted) companies.",
+              },
+              {
+                icon: Home,
+                title:
+                  "Taxpayers with capital gains, house property income, salary, and other income sources",
+                description:
+                  "When you earn from multiple sources along with business or profession.",
+              },
+            ]}
+            subHeading="This form is crucial for comprehensive tax disclosure for professionals and business owners."
+          />
 
           <ListComponent/>
 
           <SingleList/>
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <ServiceFeatureSection
+            title="Documents Required for ITR-3 Filing"
+            description="Before starting the ITR-3 form filing process, make sure you have the following documents ready:"
+            items={[
+              {
+                icon: IdCard,
+                title: "PAN & Aadhaar Card",
+                description:
+                  "Ensure your PAN and Aadhaar are linked and up to date for verification.",
+              },
+              {
+                icon: Banknote,
+                title: "Bank Account Details",
+                description:
+                  "Keep your bank account number and IFSC code ready for refund or payment purposes.",
+              },
+              {
+                icon: FileText,
+                title: "Form 16 (if salaried)",
+                description:
+                  "Required to report income from salary and tax deducted at source.",
+              },
+              {
+                icon: TrendingUp,
+                title: "Capital Gains Statements",
+                description:
+                  "Include reports from brokers or mutual fund statements for capital gains.",
+              },
+              {
+                icon: Briefcase,
+                title: "Business Income Details",
+                description:
+                  "Include profit & loss statements and books of accounts if applicable.",
+              },
+              {
+                icon: Globe,
+                title: "Foreign Asset Details",
+                description:
+                  "Report any foreign income or assets if applicable under disclosure rules.",
+              },
+              {
+                icon: FolderOpen,
+                title: "Investment & Deduction Proofs",
+                description:
+                  "Submit documents for Section 80C, 80D, and other deductions claimed.",
+              },
+              {
+                icon: Receipt,
+                title: "TDS/TCS Details",
+                description:
+                  "Verify Form 26AS, AIS, and TIS for taxes deducted or collected.",
+              },
+            ]}
+          />
           
           <PrivateLimitedCompanyContentTwo/>
 

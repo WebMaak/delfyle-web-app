@@ -61,7 +61,13 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
               </ul>
             </div>
 
-            <h3 className={styles.subContentHeading}>Audit Report Submission (if applicable):</h3>
+            
+          </div>
+        </div>
+
+        <div ref={rightColumnRef} className={styles.rightColumn}>
+          <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
+          <h3 className={styles.subContentHeading}>Audit Report Submission (if applicable):</h3>
             <p className={styles.paragraphContent}>
             If your entity is liable for audit under Section 44AB, details of the audit report, including Form 10B and date of furnishing, must be mentioned under Audit Information in the ITR-7 form.
             </p>
@@ -83,30 +89,7 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
                 <li><span className={styles.checkIcon}>ⓘ</span> Negative figures should be prefixed with “-”</li>
               </ul>
             </div>
-          </div>
-        </div>
-
-        <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
-            <p className={styles.rightDescription}>
-              Delfyle simplifies ITR-7 filing with professional assistance tailored for NGOs, trusts, and political or research institutions.
-              Our expert-led process ensures accurate verification, audit reporting, and timely filing.
-            </p>
-          </div>
-          <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
-            <Image 
-              src="/delfyle-logo/delfyle-logo.png" 
-              alt="Delfyle Logo" 
-              width={180} 
-              height={50} 
-              objectFit="contain"
-              className={styles.companyLogo}
-            />
-            <p className={styles.bottomQuote}>
-              "Delfyle ensures accurate, compliant, and stress-free ITR-7 filing for your institution—every step handled with care."
-            </p>
-            <p className={styles.bottomAuthor}>Team Delfyle</p>
-          </div>
+            </div>
         </div>
       </div>
     </section>
