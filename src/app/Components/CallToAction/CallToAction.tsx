@@ -90,9 +90,9 @@ const CallToAction: React.FC<CallToActionProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="relative flex justify-center items-center gap-2 text-gray-700 mt-4"
+        className="relative flex justify-center md:items-center items-start md:gap-4 gap-0 text-gray-700 mt-4"
       >
-        <FaPhone className="text-[#E50078] text-lg scale-x-[-1]" />
+        <FaPhone className="text-[#E50078] text-lg scale-x-[-1] md:ml-0 md:mt-0 ml-1 mt-1" />
         <p className="text-md md:text-lg">
           For instant assistance,{" "}
           <a href="tel:+917439587419" className="text-[#E50078] font-semibold">
