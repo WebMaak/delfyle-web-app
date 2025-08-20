@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import StartupHero from "../StartupHero";
-import styles from "../StartupHero.module.css";
-import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-import ModernFooter from "../../../Components/Footer/ModernFooter";
-import ToggleNav from "../../../Components/ToggleNav/toggleNav";
-import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { useUser } from '../../../../hooks/useUser';
+import { FiFileText, FiMusic, FiImage, FiFilm, FiMic, FiCode } from 'react-icons/fi';
+import { FaGavel, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 import { 
   ModernNavbar, 
   ModernNavBody, 
@@ -14,22 +13,20 @@ import {
   ModernNavbarLogo, 
   ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
+import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
+import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
+import ModernFooter from "../../../Components/Footer/ModernFooter";
+import ToggleNav from "../../../Components/ToggleNav/toggleNav";
+import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
-import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
-import { FaPhone, FaEnvelope, FaUsers, FaCalendar, FaPaintBrush, FaRocket,  FaCheckCircle } from "react-icons/fa";
-import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
-import ListComponent from "./ListComponent";
-import { FiFileText, FiMusic, FiImage, FiFilm, FiMic, FiCode } from 'react-icons/fi';
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
-import { FaGavel, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 
 
 // Register ScrollTrigger and ScrollSmoother plugins

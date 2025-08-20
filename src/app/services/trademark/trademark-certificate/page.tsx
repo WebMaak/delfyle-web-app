@@ -1,12 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import StartupHero from "../StartupHero";
-import styles from "../StartupHero.module.css";
-import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-import ModernFooter from "../../../Components/Footer/ModernFooter";
-import ToggleNav from "../../../Components/ToggleNav/toggleNav";
-import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
 import { 
   ModernNavbar, 
   ModernNavBody, 
@@ -14,19 +8,25 @@ import {
   ModernNavbarLogo, 
   ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
-import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import Button from "../../../Components/Button/Button";
-import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
-import CallToAction from "../../../Components/CallToAction/CallToAction";
-import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
-import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiTool, FiUsers, FiAward, FiHexagon, FiGrid } from "react-icons/fi";
 import { TbFileTime } from "react-icons/tb";
 import { FaCertificate, FaFileContract, FaShieldAlt } from 'react-icons/fa';
+import gsap from 'gsap';
+import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
+import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
+import ModernFooter from "../../../Components/Footer/ModernFooter";
+import ToggleNav from "../../../Components/ToggleNav/toggleNav";
+import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
+import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
+import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 
 
 // Register ScrollTrigger and ScrollSmoother plugins

@@ -17,12 +17,10 @@ import {
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
-import ListComponentTwo from "../../../Components/TrialComponent/ListComponent/ListComponentTwo";
 import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
 import { FiPackage, FiFileText, FiDollarSign, FiAward } from "react-icons/fi";
 import { TbFileTime } from "react-icons/tb";

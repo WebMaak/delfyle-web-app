@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import styles from "../ComponentEleven/ComponentEleven.module.css";
 
 interface FeatureItem {
-  icon: React.ReactNode; // You can pass any react-icon from props
+  icon: React.ReactNode;
   title: string;
   description: string;
 }
@@ -22,32 +22,53 @@ const TrademarkRegistration: React.FC<TrademarkRegistrationProps> = ({
   description = "In India, various trademark registrations cater to different needs and purposes, enabling consumers to recognize products and services associated with specific providers.",
   features,
 }) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const leftColumnRef = useRef<HTMLDivElement>(null);
-  const rightColumnRef = useRef<HTMLDivElement>(null);
+  const half = Math.ceil(features.length / 2);
+  const leftFeatures = features.slice(0, half);
+  const rightFeatures = features.slice(half);
 
   return (
-    <section ref={sectionRef} className={styles.container}>
-      <div className={styles.contentWrapper}>
-        {/* Left Column */}
-        <div ref={leftColumnRef} className={styles.leftColumn}>
-          <p className={styles.subHeading}>{subHeading}</p>
-          <h2 className={styles.mainHeading}>{heading}</h2>
-          <p className={styles.description}>{description}</p>
+    <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-[#b40068] font-semibold mb-2">{subHeading}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-4">{heading}</h2>
+          <p className="text-gray-600 max-w-3xl mx-auto">{description}</p>
+        </div>
 
-          {features.map((item, idx) => (
-            <div key={idx} className={styles.featureItem}>
-              <div className={styles.featureHeadingContainer}>
-                <div className={styles.featureIcon} style={{ color: "#B40068" }}>
-                  {item.icon}
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Left Column (Right-aligned text) */}
+          <div className="flex flex-col gap-10">
+            {leftFeatures.map((feature, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-end max-w-xl ml-auto bg-white p-6 rounded-xl shadow-lg border border-[#b44593]/50 hover:scale-[1.02] hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 justify-end mb-2">
+                  <h3 className="font-semibold text-lg text-right">{feature.title}</h3>
+                  <div className="text-[#B40068] text-2xl">{feature.icon}</div>
                 </div>
-                <h3 className={styles.featureHeading}>{item.title}</h3>
+                <p className="text-gray-600 text-base text-right">{feature.description}</p>
               </div>
-              <div className={styles.featureTextContent}>
-                <p className={styles.featureDescription}>{item.description}</p>
+            ))}
+          </div>
+
+          {/* Right Column (Left-aligned text) */}
+          <div className="flex flex-col gap-10">
+            {rightFeatures.map((feature, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-start max-w-xl bg-white p-6 rounded-xl shadow-lg border border-[#b44593]/50 hover:scale-[1.02] hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="text-[#B40068] text-2xl">{feature.icon}</div>
+                  <h3 className="font-semibold text-lg">{feature.title}</h3>
+                </div>
+                <p className="text-gray-600 text-base">{feature.description}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
