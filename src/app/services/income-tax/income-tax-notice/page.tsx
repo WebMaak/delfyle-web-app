@@ -257,9 +257,7 @@ const PrivateLimitedCompany: React.FC = () => {
           description="Efficiently handle your Income Tax notices with Delfyle. Get expert analysis, document support, and accurate responses—all in one place."
         />
 
-
           <PrivateLimitedCompanyContentThree/>
-
 
           {/* ITR-3 Filing Process Accordion */}
           <CustomAccordion
