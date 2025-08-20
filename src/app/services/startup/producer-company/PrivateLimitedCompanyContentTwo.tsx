@@ -71,11 +71,50 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
         </div>
 
         <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-            <h3 className={styles.subContentHeading}>Start Your Public Limited Company with Ease through Delfyle!</h3>
-            <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
-              Starting your public limited company registration is straightforward and efficient with Delfyle. With a proven track record of expert guidance and a commitment to smooth, compliant service, we streamline the entire registration process. From handling all necessary documentation, including DSC, DIN, MOA, and AOA, to ensuring your company complies with all legal requirements, our team is equipped to support you at every step.
+          <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
+            <p className={styles.rightDescription}>
+              Delfyle provides end-to-end guidance for Section 8 Company registration, ensuring all legal formalities are met. Our team assists with documentation, filing, approvals, and compliance, helping organizations establish themselves as credible, non-profit entities efficiently.
             </p>
+          </div>
+
+          <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
+            <Image 
+              src="/delfyle-logo/delfyle-logo.png" 
+              alt="Delfyle Logo" 
+              width={180} 
+              height={50} 
+              objectFit="contain"
+              className={styles.companyLogo}
+            />
+            <p className={styles.bottomQuote}>
+              "Delfyle ensures smooth, expert-assisted Section 8 Company registration and compliance."
+            </p>
+            <p className={styles.bottomAuthor}>Team Delfyle</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section ref={sectionRef} className={styles.container}>
+      <div className={styles.topAnchorContainer}>
+    <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Trust Registration</a>
+  </div>
+
+  <div className={styles.mainContentWrapper}>
+    <div ref={leftColumnRef} className={styles.leftColumn}>
+      <div className={styles.leftTopContainer}>
+        <h2 ref={mainHeadingRef} className={styles.mainHeading}>
+          Start Your Public Limited Company with Ease through Delfyle!
+        </h2>
+        <p
+          ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }}
+          className={styles.paragraphContent}
+          style={{marginBottom: '0'}}
+        >
+          Starting your public limited company registration is straightforward and efficient with Delfyle. With a proven track record of expert guidance and a commitment to smooth, compliant service, we streamline the entire registration process. From handling all necessary documentation, including DSC, DIN, MOA, and AOA, to ensuring your company complies with all legal requirements, our team is equipped to support you at every step.
+        </p>
+      </div>
+          <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
             <h3 className={styles.subContentHeading}>Advantages of Public Limited Company Registration</h3>
             <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
               Registering as a public limited company brings several key benefits:
@@ -90,9 +129,31 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
             </ul>
           </div>
         </div>
+
+        <div ref={rightColumnRef} className={styles.rightColumn}>
+          <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
+            <p className={styles.rightDescription}>
+              These benefits make public limited companies attractive for businesses looking to expand and attract investment.
+            </p>
+          </div>
+
+          <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
+            <Image 
+              src="/delfyle-logo/delfyle-logo.png" 
+              alt="Delfyle Logo" 
+              width={180} 
+              height={50} 
+              objectFit="contain"
+              className={styles.companyLogo}
+            />
+            <p className={styles.bottomQuote}>
+              "Delfyle ensures smooth, expert-assisted Section 8 Company registration and compliance."
+            </p>
+            <p className={styles.bottomAuthor}>Team Delfyle</p>
+          </div>
+        </div>
       </div>
     </section>
-
     </>
   );
 };
