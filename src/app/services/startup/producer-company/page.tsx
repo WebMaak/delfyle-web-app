@@ -362,17 +362,17 @@ const TrademarkRectification: React.FC = () => {
       <main id="smooth-content" className="relative min-h-screen bg-background text-foreground">
         <div>
           <StartupHero 
-          heading={
-            <>
-              <span className={styles.coloredplc}>Private Limited Company </span>
-              <br />
-              <span className={styles.coloredreg}>Registration Services</span> 
-              <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
-              <span className={styles.colored}>Delfyle</span>
-            </>
-          }
-          description="Register your Private Limited Company online with Delfyle’s expert assistance. From drafting the incorporation documents to compliance and approvals, we make the process simple and hassle-free."
+            heading={
+              <>
+                <span className={styles.coloredplc}>Producer Company </span>
+                <span className={styles.coloredreg}>Registration Services</span> 
+                <span style={{letterSpacing: 'normal'}}> with</span> 
+                <span className={styles.colored}>Delfyle</span>
+              </>
+            }
+            description="Register your Producer Company online with Delfyle’s expert guidance. From documentation and approvals to post-incorporation compliance, we ensure a smooth and hassle-free process."
           />
+
 
           {/* Big Company Logo Marquee Section */}
           <section>        
@@ -385,34 +385,36 @@ const TrademarkRectification: React.FC = () => {
 
           <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyContentTwo/>
+          <ListComponent/>
 
-          <CallToAction
-            heading="How Can Delfyle Help in Securing"
-            highlighted="Private Limited Company Registration?"
-            subheading="From name approval to MCA filing, Delfyle ensures a seamless, compliant, and hassle-free company registration process."
-            cards={[
-              {
-                icon: <FaUserTie className="text-2xl" />,
-                title: "Expert Guidance",
-                description: "Handled by professionals with MCA expertise.",
-              },
-              {
-                icon: <FaFileAlt className="text-2xl" />,
-                title: "End-to-End Support",
-                description: "From documentation to compliance, we cover it all.",
-              },
-              {
-                icon: <FaBolt className="text-2xl" />,
-                title: "Fast & Transparent",
-                description: "Quick turnaround with clear pricing, no hidden costs.",
-              },
-            ]}
-            primaryBtnText="Start Your Pvt Ltd Registration"
-            primaryBtnLink="https://wa.me/917439587419"
-            secondaryBtnText="Get Free Consultation"
-            secondaryBtnLink="/contact"
-          />
+
+         <CallToAction
+          heading="How Can Delfyle Help in Securing"
+          highlighted="Producer Company Registration?"
+          subheading="From DSC & DIN to ROC filing and compliance, Delfyle ensures a smooth and hassle-free Producer Company registration process."
+          cards={[
+            {
+              icon: <FaUserTie className="text-2xl" />,
+              title: "Specialized Expertise",
+              description: "Guidance from professionals experienced in Producer Company laws.",
+            },
+            {
+              icon: <FaFileAlt className="text-2xl" />,
+              title: "Complete Assistance",
+              description: "From drafting MoA & AoA to incorporation and compliance, we handle everything.",
+            },
+            {
+              icon: <FaBolt className="text-2xl" />,
+              title: "Quick & Transparent",
+              description: "Fast process with upfront pricing and no hidden charges.",
+            },
+          ]}
+          primaryBtnText="Start Your Producer Company Registration"
+          primaryBtnLink="https://wa.me/917439587419"
+          secondaryBtnText="Get Free Consultation"
+          secondaryBtnLink="/contact"
+        />
+
           
         </div>
 

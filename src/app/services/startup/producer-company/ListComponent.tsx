@@ -10,27 +10,50 @@ const ListComponent = () => {
 <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
   <div className="max-w-5xl mx-auto">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-      Trust Registration in India
+      Producer Company in India
     </h2>
     <p className="text-center text-base md:text-lg mb-10 text-gray-600">
-      Types of Trusts | Regulatory Authority & Laws | Reasons | Benefits
+      Advantages | Registration Process | Compliance
     </p>
 
     <div className="grid gap-6 md:grid-cols-2">
-      {/* 1) Types of Trusts — heading + desc + list */}
+      {/* 1) Advantages of a Producer Company */}
       <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-        <h3 className="text-lg font-semibold text-[#1a1a1a]">Types of Trusts</h3>
+        <h3 className="text-lg font-semibold text-[#1a1a1a]">Advantages of a Producer Company</h3>
+        <ul className="space-y-4">
+          {[
+            "Hybrid Structure: Combines the professional management of a Private Limited Company with the mutual benefits of a Cooperative Society.",
+            "Ownership by Primary Producers: Membership is exclusively held by 'primary producers' or 'Producer Institutions,' ensuring focus on benefiting those involved in primary production.",
+            "Professional Framework: Operates under the Producer Company Act (Sections 581-A to 581-ZL), providing a structured approach for primary producers.",
+            "Limited Liability: Members’ liability is limited to their share contribution, protecting personal assets.",
+            "Minimum Capital Requirement: Minimum paid-up capital of Rs. 1 Lakh and authorized capital of Rs. 5 Lakhs, making mobilization feasible.",
+            "Flexible Membership: Requires a minimum of 10 producers, with no maximum limit.",
+            "No Government or Private Equity Stake: Ensures autonomy and independence in functioning.",
+            "National Scope: Can operate across India, offering wider business opportunities."
+          ].map((item, idx) => (
+            <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
+              <FaCheckCircle className="text-[#790046] m-1 text-lg" />
+              <span className="w-[90%]">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* 2) How to Register a Farmer Producer Company */}
+      <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
+        <h3 className="text-lg font-semibold text-[#1a1a1a]">How to Register a Farmer Producer Company?</h3>
         <p className="text-left text-base md:text-lg mb-6 text-gray-600">
-          Trusts can be classified into various categories based on the activities they undertake. Here are the different types of trusts:
+          Registering a Producer Company is a structured process similar to incorporating a Private Limited Company in India. Steps include:
         </p>
         <ul className="space-y-4">
           {[
-            "Public Trust",
-            "Private Trust",
-            "Public Cum-Private Trust",
-            "Private Limited Trusts: Established to carry out activities for specific individuals, families, or close associates. These trusts are governed by The Trusts Act of 1882.",
-            "Public Limited Trusts: Created to benefit the general public for charitable, educational, and religious purposes.",
-            "Public Cum-Private Trust: Serves both public and private purposes."
+            "Obtain a Digital Signature Certificate (DSC) for all proposed directors.",
+            "Obtain Director Identification Number (DIN) for directors.",
+            "Reserve a unique company name ending with 'Producer Company'.",
+            "Prepare documents: Memorandum of Association (MoA), Articles of Association (AoA), registered office proof, affidavits, and other compliance papers.",
+            "File SPICe+ form with Registrar of Companies (ROC).",
+            "ROC verification and issue of Certificate of Incorporation.",
+            "Post-incorporation steps: Apply for PAN, TAN, and open a company bank account."
           ].map((item, idx) => (
             <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
               <FaCheckCircle className="text-[#790046] m-1 text-lg" />
@@ -40,58 +63,19 @@ const ListComponent = () => {
         </ul>
       </div>
 
-      {/* 2) Regulatory Authority and Laws — heading + desc (2 paras) + list */}
-      <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-        <h3 className="text-lg font-semibold text-[#1a1a1a]">Regulatory Authority and Laws for Trust Registration</h3>
-        <p className="text-left text-base md:text-lg mb-0 text-gray-600">
-          The Registrar of Trusts is the primary regulatory authority responsible for the registration of trust in India. The registration process for private trusts is governed by the Trusts Act of 1882. Public trusts in India must be registered with the relevant state authority as required by the applicable state act.
-        </p>
-        <p className="text-left text-base md:text-lg text-gray-600">
-          Several laws play a significant role in the regulation of trusts in India, including:
-        </p>
+      {/* 3) Compliance for Producer Companies */}
+      <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300 md:col-span-2">
+        <h3 className="text-lg font-semibold text-[#1a1a1a]">Compliance for Producer Companies</h3>
         <ul className="space-y-4">
           {[
-            "Trusts Act of 1882",
-            "Income Tax Act of 1961",
-            "Societies Registration Act of 1860"
-          ].map((item, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
-              <FaCheckCircle className="text-[#790046] m-1 text-lg" />
-              <span className="w-[90%]">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* 3) Reasons for Trust Registration — heading + list */}
-      <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-        <h3 className="text-lg font-semibold text-[#1a1a1a]">Reasons for Trust Registration</h3>
-        <ul className="space-y-4">
-          {[
-            "Ensures compliance with laws and regulations.",
-            "Promotes non-commercial activities in areas like arts, science, education, and the environment.",
-            "Grants income tax benefits under sections 12A and 80G.",
-            "Allows trusts to operate legally and contribute to various social sectors."
-          ].map((item, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
-              <FaCheckCircle className="text-[#790046] m-1 text-lg" />
-              <span className="w-[90%]">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* 4) Benefits of Trust Registration — heading + list */}
-      <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-        <h3 className="text-lg font-semibold text-[#1a1a1a]">Benefits of Trust Registration</h3>
-        <ul className="space-y-4">
-          {[
-            "Charitable Involvement: Enables individuals to support charitable causes.",
-            "Tax Exemptions: Grants tax relaxations to registered trusts.",
-            "Financial Support: Facilitates financial assistance to the underprivileged.",
-            "Legal Protection: Ensures legal standing under the Indian Trusts Act of 1882.",
-            "Family Wealth Protection: Helps in preserving and managing family wealth.",
-            "Probate Avoidance: Enables easy transfer of assets to heirs."
+            "Annual financial audits and AGM reports must be filed with ROC.",
+            "Existing cooperative societies can convert into Producer Companies under the Companies Act 2013.",
+            "Corporate taxation applies, though agricultural tax benefits may be available.",
+            "Leadership and decision-making are managed by a member-elected board.",
+            "Dividends can be distributed up to 20% of annual profits.",
+            "At least four board meetings must be held annually.",
+            "NABARD registration enables financial and technical support.",
+            "Annual return filing with ROC detailing operations, membership, and finances."
           ].map((item, idx) => (
             <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
               <FaCheckCircle className="text-[#790046] m-1 text-lg" />
@@ -101,32 +85,9 @@ const ListComponent = () => {
         </ul>
       </div>
     </div>
-
-    {/* The original full-width list block is intentionally commented out to preserve structure with 4 equal blocks.
-    <div className="mt-10 bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-      <h3 className="text-lg font-semibold text-[#1a1a1a] mt-6">Documents Required for Incorporation</h3>
-      <ul className="space-y-4">
-        {[
-          "Articles of Association (AOA) and Memorandum of Association (MOA)",
-          "Declaration by the first director(s) and subscriber(s)",
-          "Proof of office address (utility bills, rent agreement, etc.)",
-          "Certificate of incorporation (if applicable)",
-          "Resolution passed by the promoter company",
-          "Consent of Nominee (INC-3)",
-          "Identity and residential proof of nominees and subscribers",
-          "Digital Signature Certificate (DSC)",
-          "Declaration of unregistered companies"
-        ].map((item, idx) => (
-          <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a]">
-            <FaCheckCircle className="text-[#790046] m-1 text-lg" />
-            <span className="w-[90%]">{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-    */}
   </div>
 </section>
+
 
 
 

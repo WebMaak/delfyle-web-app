@@ -23,83 +23,117 @@ const PrivateLimitedCompanyContent: React.FC = () => {
   return (
     <section ref={sectionRef} className={styles.container}>
 
-      <div className={styles.topAnchorContainer}>
-        <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Public Limited Company</a>
+  <div className={styles.topAnchorContainer}>
+    <a href="#" ref={topAnchorRef} className={styles.topAnchorLink}>Producer Company</a>
+  </div>
+
+  <div className={styles.mainContentWrapper}>
+    {/* Left Column */}
+    <div ref={leftColumnRef} className={styles.leftColumn}>
+      <div className={styles.leftTopContainer}>
+        <h2 ref={mainHeadingRef} className={styles.mainHeading} >
+          Producer Company Registration with Delfyle
+        </h2>
+        <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
+          A Producer Company is an officially established group of farmers or agriculturists aimed at improving 
+          their quality of life, financial support, and income. This type of company combines elements of both 
+          private limited companies and cooperatives. Its primary goal is to encourage cooperative businesses 
+          to operate as companies and to facilitate the transition of existing cooperatives into company structures.
+        </p>
+        <p className={styles.paragraphContent}>
+          Complete your Producer Company registration with Delfyle's expert guidance. Our team simplifies the 
+          registration process of farmer producer organizations, ensuring full compliance under the Companies 
+          Act 2013. Contact Delfyle today and take the first step towards empowering your agricultural venture.
+        </p>
       </div>
 
-      <div className={styles.mainContentWrapper}>
-        {/* Left Column */}
-        <div ref={leftColumnRef} className={styles.leftColumn}>
-          <div className={styles.leftTopContainer}>
-            <h2 ref={mainHeadingRef} className={styles.mainHeading} style={{marginBottom: '0'}}>
-              Start your public limited company registration today with Delfyle!
-            </h2>
-            {/* <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent} style={{marginBottom: '0'}}>
-              
-            </p> */}
-          </div>
+      <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
+        <h3 className={styles.subContentHeading}>What is a Producer Company?</h3>
+        <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
+          A Producer Company, also referred to as a Farmer Producer Company, is a legally recognized farmer 
+          producer organization composed of farmers or agriculturists. Its primary goal is to enhance the 
+          livelihoods of its members and ensure the long-term sustainability of their resources, incomes, 
+          and profitability.
+        </p>
+        <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
+          Functioning as a hybrid between private limited companies and cooperative societies, a Producer 
+          Company is registered under the Companies Act 2013. Farmer producer organizations operate based 
+          on democratic governance principles, ensuring that each member has an equal say in decision-making, 
+          regardless of the number of shares they hold.
+        </p>
 
-          <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-            <h3 ref={el => { if (el) leftBottomContentRef.current[0] = el }} className={styles.subContentHeading}>
-              Public Limited Company Registration
-            </h3>
-            <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent} style={{marginBottom: '0'}}>
-              In India, a Public Limited Company (PLC) is a business structure suited for large-scale operations. Entrepreneurs who are planning for large-scale business operations can start a Public Limited Company registration in India. Unlike private companies, PLCs can raise funds from the general public by offering shares on stock exchanges. This allows them to access a wider pool of capital for growth. A Public Limited Company in India enjoys all the privileges of a corporate entity together with the features of Limited Liability.
-            </p>
-            <p ref={(el) => { if (el) leftBottomContentRef.current[1] = el; }} className={styles.paragraphContent}>
-              Delfyle can help you start your public limited company in India with ease and efficiency. Our comprehensive services cover everything from company registration to compliance management, ensuring a smooth and hassle-free setup process for your business.
-            </p>
+        <h3 className={styles.subContentHeading}>Objective of Producer Company</h3>
+        <p className={styles.paragraphContent}>
+          A Producer Company's objective is to advance its members' interests by facilitating activities 
+          related to the production, marketing, sale, and export of their primary products. Additionally, 
+          the Producer Company incorporation is empowered to import goods or services essential for the 
+          welfare of its members.
+        </p>
 
-            <h3 className={styles.subContentHeading}>What is a Public Limited Company?</h3>
-            <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
-              A public limited company is a form of corporate entity that permits the general public to hold ownership stakes through publicly traded shares. These shares are commonly exchanged on established stock markets, enabling a diverse group of brokers, investors, and traders to buy and sell equity. This structure allows individuals from various backgrounds to invest and hold shares in the company.
-            </p>
-            <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
-              Unlike private companies, public limited companies are governed by stricter regulatory and reporting standards. In India, the law governing public limited companies is primarily outlined in the Companies Act of 2013. The minimum number of members in a public company is seven, and there is no limit on the maximum number of members/shareholders for starting a Public Limited Company.
-            </p>
-            <p className={styles.paragraphContent}>
-              The day-to-day operations are managed by an executive team, but the broader ownership lies with the many shareholders who invest in the company's stock. These shareholders typically have voting rights that include the ability to vote on the election of the board of directors. The board then selects the executive team tasked with managing the company's ongoing business affairs.
-            </p>
-          </div>
-        </div>
+        <h3 className={styles.subContentHeading}>Why Register a Producer Company?</h3>
+        <p className={styles.paragraphContent}>
+          Registering a Producer Company provides farmers with a formal legal structure that enhances credibility, 
+          access to finance, and better market opportunities. It safeguards members’ rights, ensures transparency 
+          in operations, and helps small farmers collectively scale their businesses. By functioning under the 
+          Companies Act 2013, Producer Companies also enjoy limited liability protection while retaining the spirit 
+          of cooperative growth.
+        </p>
 
-        {/* Right Column */}
-        <div ref={rightColumnRef} className={styles.rightColumn}>
-          <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
-            <p className={styles.rightDescription}>
-              Delfyle provides professional trust registration services, managing documentation, approvals, and legal compliance, so you can focus on your mission.
-            </p>
-          </div>
-          <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
-            <Image 
-              src="/delfyle-logo/delfyle-logo.png" 
-              alt="Delfyle Logo" 
-              width={180} 
-              height={50} 
-              objectFit="contain"
-              className={styles.companyLogo}
-            />
-            <p className={styles.bottomQuote}>
-              "Establish your trust seamlessly with expert guidance from Delfyle."
-            </p>
-            <p className={styles.bottomAuthor}>Team Delfyle</p>
-          </div>
-          {/* Balanced Content from Left Column */}
-          <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-            <h3 className={styles.subContentHeading}>Key Characteristics of a Public Limited Company</h3>
-            <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
-              Below are the fundamental characteristics of a public limited company:
-            </p>
-            <ul className={styles.productsList}>
-              <li><span className={styles.checkIcon}>✔</span> Board of Directors: According to the Companies Act, a public limited company must appoint at least three directors, with no upper limit on the number. The board of directors plays a crucial role in governing the company's management and strategic decision-making.</li>
-              <li><span className={styles.checkIcon}>✔</span> Company Name: It is a legal requirement for all public limited companies to include the word "Limited" in their company name. This designation indicates that the company is legally a public entity, capable of trading shares on the stock market and open to investment by the public.</li>
-              <li><span className={styles.checkIcon}>✔</span> The Company's Prospectus: Public limited companies are required to prepare and issue a prospectus. This document offers a detailed look at the company's operational activities and financial health, providing essential information to potential investors and aiding their decision-making process.</li>
-              <li><span className={styles.checkIcon}>✔</span>Paid-Up Capital: While the Companies Act stipulates various regulations for public limited companies, it does not impose a minimum initial share capital requirement for registration. This absence of a specified minimum allows companies the flexibility to set their capital structure according to their specific needs and strategic objectives.</li>
-            </ul>
-          </div>
-        </div>
       </div>
-    </section>
+    </div>
+
+    {/* Right Column */}
+    <div ref={rightColumnRef} className={styles.rightColumn}>
+      <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
+        <p className={styles.rightDescription}>
+          Delfyle provides expert assistance to farmers and agriculturists in registering Producer Companies 
+          under the Companies Act 2013. From documentation to compliance, our team ensures a seamless process 
+          so you can focus on strengthening your agricultural venture.
+        </p>
+      </div>
+
+      <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
+        <Image 
+          src="/delfyle-logo/delfyle-logo.png" 
+          alt="Delfyle Logo" 
+          width={180} 
+          height={50} 
+          objectFit="contain"
+          className={styles.companyLogo}
+        />
+        <p className={styles.bottomQuote}>
+          "Empowering farmers with seamless Producer Company registration and compliance."
+        </p>
+        <p className={styles.bottomAuthor}>Team Delfyle</p>
+      </div>
+
+      {/* Balanced Content: Activities moved here */}
+      <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
+        <h3 className={styles.subContentHeading}>Activities of a Producer Company</h3>
+        <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
+          Farmer Producer Organizations are established with diverse objectives aimed at enhancing their 
+          members' welfare and economic status.
+        </p>
+        <ul className={styles.productsList}>
+          <li><span className={styles.checkIcon}>✔</span> Agricultural Support – production, marketing, export, and import of essential goods/services.</li>
+          <li><span className={styles.checkIcon}>✔</span> Processing & Preservation – value addition through drying, canning, packaging, etc.</li>
+          <li><span className={styles.checkIcon}>✔</span> Equipment Supply – providing machinery, tools, and consumables to members.</li>
+          <li><span className={styles.checkIcon}>✔</span> Education & Training – skill development and awareness programs.</li>
+          <li><span className={styles.checkIcon}>✔</span> Technical Services – consultancy, R&D, and capacity-building support.</li>
+          <li><span className={styles.checkIcon}>✔</span> Energy & Resources – power generation and sustainable land/water use.</li>
+          <li><span className={styles.checkIcon}>✔</span> Insurance – protection for farmers and their produce.</li>
+          <li><span className={styles.checkIcon}>✔</span> Mutual Cooperation – promoting unity and collective growth.</li>
+          <li><span className={styles.checkIcon}>✔</span> Member Welfare – welfare schemes and facilities for farmers.</li>
+          <li><span className={styles.checkIcon}>✔</span> Ancillary Activities – any supporting activities that promote members’ interests.</li>
+          <li><span className={styles.checkIcon}>✔</span> Financial Support – credit, loans, and funding for farming activities.</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
   );
 };
 
