@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { useUser } from '../../../../hooks/useUser';
+import gsap from 'gsap';
 import StartupHero from "../StartupHero";
 import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
@@ -14,19 +18,13 @@ import {
   ModernNavbarLogo, 
   ModernNavbarButton,
 } from "../../../Components/ui/modern-navbar";
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
-import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
-import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
 import { 
   FaFileAlt,    // For "Accurate Documentation"
   FaBolt,       // For "Fast Approvals"
@@ -149,11 +147,6 @@ const PrivateLimitedCompany: React.FC = () => {
     "/CompanyLogos/30.png",
   ];
 
-  
- 
-  
-  
-
   return (
     <>
     <TopMarquee />
@@ -226,7 +219,6 @@ const PrivateLimitedCompany: React.FC = () => {
             description="Ensure smooth compliance for foreign remittances with Delfyle. Our experts handle Form 15CA & 15CB filing, CA certification, and submission to the Income Tax portal efficiently and accurately."
           />
 
-          
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
             overflow: 'hidden'
@@ -291,8 +283,6 @@ const PrivateLimitedCompany: React.FC = () => {
             maxOpenItems={1}
           />
 
-
-
           <CallToAction
             heading="Why Choose Delfyle for"
             highlighted="15CA–15CB Filing?"
@@ -319,8 +309,6 @@ const PrivateLimitedCompany: React.FC = () => {
             secondaryBtnText="Get Free Consultation"
             secondaryBtnLink="/contact"
           />
-
-
 
         </div>
 

@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useUser } from '../../../../hooks/useUser';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import gsap from 'gsap';
 import StartupHero from "../StartupHero";
 import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
@@ -14,22 +18,16 @@ import {
   ModernNavbarLogo, 
   ModernNavbarButton,
 } from "../../../Components/ui/modern-navbar";
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ListComponent from "./ListComponent";
 import ListComponentTwo from "./ListComponentTwo";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
-import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
 import PrivateLimitedCompanyContentThree from "./PrivateLimitedCompanyContentThree";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
-import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection"
-import { Building2, BarChart3, FileSpreadsheet, Layers, LineChart, Calculator } from "lucide-react";
 
 
 // Register ScrollTrigger and ScrollSmoother plugins
@@ -147,11 +145,6 @@ const PrivateLimitedCompany: React.FC = () => {
     "/CompanyLogos/30.png",
   ];
 
-  
- 
-  
-  
-
   return (
     <>
     <TopMarquee />
@@ -215,18 +208,15 @@ const PrivateLimitedCompany: React.FC = () => {
          <StartupHero 
           heading={
             <>
-              <span className={styles.coloredplc}>Expert Income Tax Notice </span><br />
-              <span className={styles.coloredreg}>Response Services Online</span> 
-              <span style={{letterSpacing: 'normal'}}> for Individuals & Businesses <br /> with</span> 
+              <span className={styles.coloredplc}>Expert Income Tax Notice </span>
+              <span className={styles.coloredreg}>In</span> 
+              <span style={{letterSpacing: 'normal'}}> India with</span> 
               <span className={styles.colored}>Delfyle</span>
             </>
           }
           description="Handle your Income Tax notices efficiently with Delfyle. Our experts provide end-to-end support from analyzing the notice to submitting accurate responses, ensuring full compliance and peace of mind."
         />
 
-
-
-          
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
             overflow: 'hidden'
@@ -301,7 +291,6 @@ const PrivateLimitedCompany: React.FC = () => {
             maxOpenItems={1}
           />
 
-
           <CallToAction
             heading="Why Choose Delfyle for"
             highlighted="Income Tax Notices?"
@@ -328,7 +317,6 @@ const PrivateLimitedCompany: React.FC = () => {
             secondaryBtnText="Get Free Consultation"
             secondaryBtnLink="/contact"
           />
-
 
         </div>
 

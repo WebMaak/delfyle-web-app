@@ -22,8 +22,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";

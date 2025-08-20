@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useUser } from '../../../../hooks/useUser';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import gsap from 'gsap';
 import StartupHero from "../StartupHero";
 import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
@@ -13,24 +17,14 @@ import {
   ModernNavItems, 
   ModernNavbarLogo, 
   ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
 } from "../../../Components/ui/modern-navbar";
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
 import ComponentEight from "./ComponentEight";
 import ComponentSevenTop from "./ComponentSevenTop";
 import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
-import { useUser } from '../../../../hooks/useUser';
 import CallToAction from "../../../Components/CallToAction/CallToAction";
 import { FaFileInvoice, FaFileContract, FaShieldAlt } from 'react-icons/fa';
 import ServiceFeatureSection from "../../../Components/ServiceFeatureSection/ServiceFeatureSection";
