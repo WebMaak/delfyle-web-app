@@ -328,7 +328,7 @@ const TrademarkObjection: React.FC = () => {
                 <span className={styles.colored}>Delfyle</span>
               </>
             }
-            description="Copyright protects your original creations, giving you exclusive rights over their use and distribution. Delfyle simplifies the registration process, ensuring your intellectual property is legally secured."
+            description="Protect your original works with copyright registration and secure legal ownership. Delfyle streamlines the process, from application filing to certificate issuance, ensuring your intellectual property is fully safeguarded."
           />
 
           {/* Big Company Logo Marquee Section */}
@@ -346,112 +346,26 @@ const TrademarkObjection: React.FC = () => {
           
           <PrivateLimitedCompanyContentTwo/>
 
-          <TitleDescCanvas
-            features={[
-              {
-                icon: <FiFileText />,
-                title: 'Literary Works',
-                description: 'Books, articles, essays, poems, and other written materials (excluding computer programs).',
-              },
-              {
-                icon: <FiMusic />,
-                title: 'Musical Works',
-                description: 'Musical compositions, song lyrics, and sheet music.',
-              },
-              {
-                icon: <FiImage />,
-                title: 'Artistic Works',
-                description: 'Paintings, sculptures, drawings, photographs, and other visual art forms.',
-              },
-              {
-                icon: <FiFilm />,
-                title: 'Cinematographic Films',
-                description: 'Films, documentaries, and other audiovisual works.',
-              },
-              {
-                icon: <FiMic />,
-                title: 'Sound Recordings',
-                description: 'Audio recordings including music, spoken word, and other sound-based content.',
-              },
-              {
-                icon: <FiCode />,
-                title: 'Computer Programs, Tables & Compilations',
-                description: 'Software, databases, and other digital content.',
-              },
-            ]}
-            subHeading="Copyright Protection"
-            heading="What Works Can You Copyright in India?"
-            description="Copyright protection in India covers a wide variety of creative works. Filing for copyright grants you exclusive rights over your creations and a certificate of registration."
-          />
-
-          <PrivateLimitedCompanyContentTwo/>
-
-          {/* Copyright Registration Process Accordion */}
-          <CustomAccordion
-            subheading="Copyright Registration"
-            title="How to Register Your Copyright Online in India"
-            description="Follow these steps to secure legal protection for your creative work quickly and efficiently:"
-            items={[
-              {
-                id: 'step-1',
-                title: 'Application Submission',
-                content:
-                  'Draft an application in the required format (Form XIV) with all necessary details. Each individual work requires a separate application, signed by both the applicant and an advocate or authorized representative.',
-                stepNumber: 1
-              },
-              {
-                id: 'step-2',
-                title: 'Diary Number Assignment',
-                content:
-                  'After submission, the Registrar assigns a Diary Number to your application, officially starting the registration process.',
-                stepNumber: 2
-              },
-              {
-                id: 'step-3',
-                title: 'Objection Handling',
-                content:
-                  'If objections are raised within 30 days, a hearing is scheduled. If no objections arise, the application proceeds to the next step automatically.',
-                stepNumber: 3
-              },
-              {
-                id: 'step-4',
-                title: 'Final Scrutiny and Certificate Issuance',
-                content:
-                  'After the hearing or in the absence of objections, the application is scrutinized for approval. Upon successful approval, a Copyright Registration Certificate is issued.',
-                stepNumber: 4
-              },
-              {
-                id: 'step-5',
-                title: 'Timeline',
-                content:
-                  'The entire copyright registration process typically takes 2 to 3 months, depending on the type of work and any objections raised during the review.',
-                stepNumber: 5
-              }
-            ]}
-            variant="numbered"
-            theme="light"
-            maxOpenItems={1}
-          />
 
           <CallToAction
             heading="Why Choose Delfyle for"
             highlighted="Copyright Objection Handling?"
-            subheading="We assist you in managing copyright objections efficiently, providing expert guidance, legal support, and fast resolution to protect your intellectual property."
+            subheading="Our specialists manage copyright objections efficiently, offering expert legal guidance, documentation support, and timely resolution to protect your creative works."
             cards={[
               {
                 icon: <FaGavel className="text-2xl" />,
-                title: "Legal Expertise",
-                description: "Professional guidance to handle copyright disputes effectively.",
+                title: "Expert Legal Support",
+                description: "Handle copyright disputes effectively with professional advice and representation.",
               },
               {
                 icon: <FaFileContract className="text-2xl" />,
-                title: "Quick Documentation",
-                description: "Prepare and submit all necessary documentation for objection handling.",
+                title: "Efficient Documentation",
+                description: "Prepare and submit all required documents to resolve objections swiftly.",
               },
               {
                 icon: <FaShieldAlt className="text-2xl" />,
-                title: "IP Protection",
-                description: "Ensure your intellectual property rights remain secure and enforced.",
+                title: "Complete IP Protection",
+                description: "Safeguard your intellectual property rights throughout the objection process.",
               },
             ]}
             primaryBtnText="Resolve Copyright Objection"

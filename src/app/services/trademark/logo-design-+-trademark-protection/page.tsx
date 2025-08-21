@@ -399,8 +399,16 @@ const TrademarkObjection: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Logo Design + Trademark Protection </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
-          description="Delfyle offers comprehensive logo design and trademark protection services, ensuring your brand’s identity is secure and unique."
+            heading={
+              <>
+                <span className={styles.coloredplc}>Logo Design + Trademark Protection </span>
+                <br />
+                <span className={styles.coloredreg}>Services Online</span> 
+                <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+                <span className={styles.colored}>Delfyle</span>
+              </>
+            }
+            description="Create a unique logo and secure it legally with Delfyle. Our experts provide professional logo design coupled with trademark registration to protect your brand identity."
           />
           
           {/* Big Company Logo Marquee Section */}
@@ -455,18 +463,18 @@ const TrademarkObjection: React.FC = () => {
 
           <CallToAction
             heading="Why Choose Delfyle for"
-            highlighted="Logo Design & Trademark Registration?"
-            subheading="We offer comprehensive logo design and trademark registration services, combining creative expertise with legal protection to secure your brand identity."
+            highlighted="Logo Design & Trademark Protection?"
+            subheading="We combine creative expertise with legal protection, offering logo design and trademark registration services to secure your brand effectively."
             cards={[
               {
                 icon: <FaPenNib className="text-2xl" />,
                 title: "Creative Logo Design",
-                description: "Professional and unique logos that represent your brand effectively.",
+                description: "Unique, professional logos that capture and represent your brand identity.",
               },
               {
                 icon: <FaFileContract className="text-2xl" />,
-                title: "Quick Trademark Registration",
-                description: "Streamlined filing process to legally protect your logo and brand.",
+                title: "Trademark Registration",
+                description: "Efficient filing process to legally protect your logo and brand.",
               },
               {
                 icon: <FaShieldAlt className="text-2xl" />,

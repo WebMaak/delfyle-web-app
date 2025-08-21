@@ -376,9 +376,17 @@ const TrademarkHearing: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Trademark Opposition </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
-          description="Ensure timely trademark opposition with Delfyle's expert assistance. We handle all compliance requirements, including trademark registration, trademark objection, trademark certificate, trademark opposition, trademark hearing, trademark rectification, trademark infringement notice, trademark renewal, trademark restoration, trademark transfer, expedited trademark registration, logo design + trademark protection, design registration, design objection, copyright registration, copyright objections."
-          />
+          heading={
+            <>
+              <span className={styles.coloredplc}>Trademark Hearing </span>
+              <br />
+              <span className={styles.coloredreg}>Services Online</span> 
+              <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+              <span className={styles.colored}>Delfyle</span>
+            </>
+          }
+          description="Attend trademark hearings confidently with Delfyle. Our experts provide legal guidance, documentation support, and representation to safeguard your brand rights."
+        />
           
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
@@ -405,17 +413,17 @@ const TrademarkHearing: React.FC = () => {
           <CallToAction
             heading="Why Choose Delfyle for"
             highlighted="Trademark Hearing?"
-            subheading="We assist you in trademark hearings with expert guidance, legal representation, and thorough documentation to defend and secure your brand rights."
+            subheading="We guide you through the hearing process, handle all documentation, and provide legal representation to protect your trademark effectively."
             cards={[
               {
                 icon: <FaGavel className="text-2xl" />,
                 title: "Legal Representation",
-                description: "Professional support to handle hearings and disputes effectively.",
+                description: "Professional support to handle hearings and disputes efficiently.",
               },
               {
                 icon: <FaFileContract className="text-2xl" />,
-                title: "Quick Documentation",
-                description: "Prepare and submit all necessary documents for the hearing process.",
+                title: "Efficient Documentation",
+                description: "Prepare and submit all necessary documents accurately and on time.",
               },
               {
                 icon: <FaShieldAlt className="text-2xl" />,
