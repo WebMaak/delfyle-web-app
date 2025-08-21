@@ -324,16 +324,16 @@ const TrademarkRectification: React.FC = () => {
       <main id="smooth-content" className="relative min-h-screen bg-background text-foreground">
         <div>
          <StartupHero
-            heading={
-              <>
-                <span className={styles.coloredplc}>GST Tax Notice</span>
-                <span className={styles.coloredreg}> Response & Advisory Services</span>
-                <span style={{ letterSpacing: 'normal' }}> from </span>
-                <span className={styles.colored}>Delfyle</span>
-              </>
-            }
-            description="Received a GST tax notice? Don't panic. Our experts at Delfyle provide comprehensive services to help you analyze, draft a precise response, and ensure seamless compliance to resolve the issue quickly."
-          />
+          heading={
+            <>
+              <span className={styles.coloredplc}>GST Amendment</span>
+              <span className={styles.coloredreg}> Filing & Advisory</span>
+              <span style={{ letterSpacing: 'normal' }}> with </span>
+              <span className={styles.colored}>Delfyle</span>
+            </>
+          }
+          description="Need to amend your GST returns? Delfyle’s experts handle corrections swiftly and accurately, ensuring compliance and peace of mind."
+        />
 
 
           {/* Big Company Logo Marquee Section */}
@@ -352,24 +352,24 @@ const TrademarkRectification: React.FC = () => {
           <PrivateLimitedCompanyContentTwo/>
 
           <CallToAction
-            heading="Received a GST Tax Notice?"
-            highlighted="Respond with Confidence"
-            subheading="Our expert team provides end-to-end assistance, from analyzing the notice to drafting and filing the official response, ensuring a clear and compliant resolution."
+            heading="Need to Amend GST Returns?"
+            highlighted="File Corrections Confidently"
+            subheading="Our team assists with identifying errors, making amendments, and filing revised returns, keeping you fully compliant."
             cards={[
               {
                 icon: <FaUserTie className="text-2xl" />,
-                title: "Expert Analysis",
-                description: "Our professionals thoroughly review your notice to understand the specific query and its implications.",
+                title: "Error Analysis",
+                description: "We identify discrepancies in your filed returns and advise on necessary corrections.",
               },
               {
                 icon: <FaFileAlt className="text-2xl" />,
-                title: "Drafting & Filing",
-                description: "We prepare and file a comprehensive, compliant response on your behalf, backed by proper documentation.",
+                title: "Amendment Filing",
+                description: "Our experts prepare and submit revised returns accurately on your behalf.",
               },
               {
                 icon: <FaBolt className="text-2xl" />,
-                title: "Hearing Support",
-                description: "If needed, our experts will represent you and provide full support during official hearings to ensure a favorable outcome.",
+                title: "Compliance Assurance",
+                description: "We ensure your amendments meet all GST regulations, minimizing risks and penalties.",
               },
             ]}
             primaryBtnText="Get Expert Help"

@@ -365,12 +365,12 @@ const TrademarkRectification: React.FC = () => {
             heading={
               <>
                 <span className={styles.coloredplc}>GST </span>
-                <span className={styles.coloredreg}>Registration Services</span> 
+                <span className={styles.coloredreg}>Return Filing Services</span> 
                 <span style={{letterSpacing: 'normal'}}> in India with</span> 
                 <span className={styles.colored}>Delfyle</span>
               </>
             }
-            description="Register your business for GST online with Delfyle’s expert assistance. From preparing documents to filing and getting GSTIN approval, we make the process simple and hassle-free."
+            description="File your GST returns online accurately and on time with Delfyle. Our experts handle preparation, filing, and compliance so you can focus on your business."
           />
 
 
@@ -423,27 +423,27 @@ const TrademarkRectification: React.FC = () => {
           />
 
           <CallToAction
-            heading="How Can Delfyle Help in Securing"
-            highlighted="GST Registration?"
-            subheading="From application filing to GSTIN approval, Delfyle ensures a seamless, compliant, and hassle-free GST registration process."
+            heading="Need Help with GST Returns?"
+            highlighted="File Accurately & On Time"
+            subheading="Delfyle’s professionals manage your GST return filing end-to-end, ensuring compliance, accuracy, and timely submission."
             cards={[
               {
                 icon: <FaUserTie className="text-2xl" />,
-                title: "Expert Guidance",
-                description: "Handled by professionals with GST expertise.",
+                title: "Expert Filing",
+                description: "Our GST specialists prepare and file returns accurately.",
               },
               {
                 icon: <FaFileAlt className="text-2xl" />,
                 title: "End-to-End Support",
-                description: "From documentation to compliance, we cover it all.",
+                description: "From reconciliation to filing, we handle every step.",
               },
               {
                 icon: <FaBolt className="text-2xl" />,
-                title: "Fast & Transparent",
-                description: "Quick turnaround with clear pricing, no hidden costs.",
+                title: "Timely Submission",
+                description: "Avoid penalties with on-time GST return filing and alerts.",
               },
             ]}
-            primaryBtnText="Start Your GST Registration"
+            primaryBtnText="Start GST Filing"
             primaryBtnLink="https://wa.me/917439587419"
             secondaryBtnText="Get Free Consultation"
             secondaryBtnLink="/contact"

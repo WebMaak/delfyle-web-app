@@ -324,16 +324,16 @@ const TrademarkRectification: React.FC = () => {
       <main id="smooth-content" className="relative min-h-screen bg-background text-foreground">
         <div>
          <StartupHero
-            heading={
-              <>
-                <span className={styles.coloredplc}>GST LUT </span>
-                <span className={styles.coloredreg}>Filing for Exporters</span>
-                <span style={{ letterSpacing: 'normal' }}> with </span>
-                <span className={styles.colored}>Delfyle</span>
-              </>
-            }
-            description="File your Letter of Undertaking (LUT) online with Delfyle's expert assistance. Avoid upfront IGST on your exports and streamline your compliance process with our hassle-free service."
-          />
+          heading={
+            <>
+              <span className={styles.coloredplc}>GST LUT</span>
+              <span className={styles.coloredreg}> Filing for Exporters</span>
+              <span style={{ letterSpacing: 'normal' }}> with </span>
+              <span className={styles.colored}>Delfyle</span>
+            </>
+          }
+          description="File your GST Letter of Undertaking (LUT) online effortlessly. Delfyle ensures compliance, avoids upfront IGST, and streamlines your export process."
+        />
 
 
           {/* Big Company Logo Marquee Section */}
@@ -391,24 +391,24 @@ const TrademarkRectification: React.FC = () => {
           />
 
           <CallToAction
-            heading="Streamline Your Exports"
+            heading="Simplify Your Export Compliance"
             highlighted="with LUT Filing"
-            subheading="Avoid upfront IGST payments and improve your cash flow with Delfyle’s expert-managed GST LUT filing services."
+            subheading="Delfyle’s experts manage your LUT application, helping you save time, avoid IGST upfront, and maintain smooth export operations."
             cards={[
               {
                 icon: <FaUserTie className="text-2xl" />,
                 title: "Expert Assistance",
-                description: "Get end-to-end support from GST professionals.",
+                description: "Get complete support from experienced GST professionals.",
               },
               {
                 icon: <FaFileAlt className="text-2xl" />,
-                title: "Simplified Process",
-                description: "We handle documentation and online filing for you.",
+                title: "Hassle-Free Filing",
+                description: "We handle all documentation and online submission for you.",
               },
               {
                 icon: <FaBolt className="text-2xl" />,
-                title: "Timely Renewals",
-                description: "Get reminders to ensure your LUT is always valid.",
+                title: "Renewal Alerts",
+                description: "Receive reminders so your LUT stays valid without delays.",
               },
             ]}
             primaryBtnText="Start LUT Filing"
