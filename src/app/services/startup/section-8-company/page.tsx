@@ -372,14 +372,14 @@ const TrademarkRectification: React.FC = () => {
           <StartupHero 
             heading={
               <>
-                <span className={styles.coloredplc}>OPC Registration </span>
+                <span className={styles.coloredplc}>Section 8 Company </span>
                 <br />
-                <span className={styles.coloredreg}>Services Online</span> 
+                <span className={styles.coloredreg}>Registration Services</span> 
                 <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
                 <span className={styles.colored}>Delfyle</span>
               </>
             }
-            description="Register your One Person Company (OPC) seamlessly with Delfyle's expert assistance. We handle all compliance requirements, including DIN & DSC registration, name approval, incorporation documents, PAN & TAN registration, ongoing compliance, and legal guidance for smooth business operations."
+            description="Register your Section 8 Company online with Delfyle. We manage all documentation, approvals, and compliance for nonprofits and social enterprises efficiently and hassle-free."
           />
 
           
@@ -400,25 +400,25 @@ const TrademarkRectification: React.FC = () => {
 
           <PrivateLimitedCompanyContentTwo/>
 
-         <CallToAction
+        <CallToAction
           heading="Why Choose Delfyle for"
           highlighted="Section 8 Company Registration?"
-          subheading="We make Section 8 Company registration seamless with expert guidance, quick documentation, and complete compliance support for your nonprofit or social enterprise."
+          subheading="Our experts ensure smooth registration with guidance on documentation, approvals, and statutory compliance for nonprofit and social welfare organizations."
           cards={[
             {
               icon: <FaHandsHelping className="text-2xl" />,
               title: "Nonprofit Focused",
-              description: "Ideal for organizations promoting social welfare, charity, or nonprofit objectives.",
+              description: "Perfect for organizations promoting social welfare, charity, or nonprofit objectives.",
             },
             {
               icon: <FaFileContract className="text-2xl" />,
               title: "Quick Documentation",
-              description: "Assistance in drafting Memorandum and Articles of Association efficiently.",
+              description: "Efficient drafting of Memorandum and Articles of Association with expert assistance.",
             },
             {
               icon: <FaBalanceScale className="text-2xl" />,
-              title: "Trusted Compliance",
-              description: "Complete guidance on statutory approvals, licenses, and ongoing compliance.",
+              title: "Reliable Compliance",
+              description: "Guidance on statutory approvals, licenses, and ongoing compliance requirements.",
             },
           ]}
           primaryBtnText="Register Your Section 8 Company"

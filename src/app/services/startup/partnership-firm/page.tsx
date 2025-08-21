@@ -373,14 +373,14 @@ const TrademarkRectification: React.FC = () => {
           <StartupHero 
             heading={
               <>
-                <span className={styles.coloredplc}>OPC Registration </span>
+                <span className={styles.coloredplc}>Partnership Firm </span>
                 <br />
-                <span className={styles.coloredreg}>Services Online</span> 
+                <span className={styles.coloredreg}>Registration Services</span> 
                 <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
                 <span className={styles.colored}>Delfyle</span>
               </>
             }
-            description="Register your One Person Company (OPC) seamlessly with Delfyle's expert assistance. We handle all compliance requirements, including DIN & DSC registration, name approval, incorporation documents, PAN & TAN registration, ongoing compliance, and legal guidance for smooth business operations."
+            description="Register your partnership firm smoothly with Delfyle. We manage drafting and filing of the partnership deed, compliance documentation, and all legal requirements for hassle-free setup."
           />
 
           
@@ -406,22 +406,22 @@ const TrademarkRectification: React.FC = () => {
           <CallToAction
             heading="Why Choose Delfyle for"
             highlighted="Partnership Firm Registration?"
-            subheading="We streamline partnership firm registration with expert guidance, quick documentation, and complete compliance support for smooth business setup."
+            subheading="Our experts simplify registration, ensure complete compliance, and provide quick documentation support for small and medium businesses."
             cards={[
               {
                 icon: <FaHandshake className="text-2xl" />,
                 title: "Flexible Structure",
-                description: "Best suited for small to medium businesses with shared control.",
+                description: "Ideal for businesses with shared ownership and control.",
               },
               {
                 icon: <FaFileContract className="text-2xl" />,
                 title: "Quick Documentation",
-                description: "Drafting and filing partnership deed made hassle-free.",
+                description: "We handle drafting and filing of partnership deeds seamlessly.",
               },
               {
                 icon: <FaBalanceScale className="text-2xl" />,
-                title: "Trusted Compliance",
-                description: "End-to-end assistance with registration and legal requirements.",
+                title: "Reliable Compliance",
+                description: "Complete support for registration and legal requirements.",
               },
             ]}
             primaryBtnText="Register Your Partnership Firm"

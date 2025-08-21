@@ -369,9 +369,16 @@ const TrademarkRectification: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Trademark Rectification </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
-          description="Ensure timely trademark rectification with Delfyle's expert assistance. We handle all compliance requirements, including trademark registration, trademark objection, trademark certificate, trademark opposition, trademark hearing, trademark rectification, trademark infringement notice, trademark renewal, trademark restoration, trademark transfer, expedited trademark registration, logo design + trademark protection, design registration, design objection, copyright registration, copyright objections."
-          />
+          heading={
+            <>
+              <span className={styles.coloredplc}>LLP (Limited Liability Partnership) </span><br />
+              <span className={styles.coloredreg}>Registration Services</span> 
+              <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+              <span className={styles.colored}>Delfyle</span>
+            </>
+          }
+          description="Register your LLP online with Delfyle’s expert guidance. We simplify compliance, prepare agreements, file with the MCA, and ensure a smooth, hassle-free registration process."
+        />
           
           {/* Big Company Logo Marquee Section */}
           <section style={{ 
@@ -451,13 +458,13 @@ const TrademarkRectification: React.FC = () => {
 
           <CallToAction
             heading="Why Choose Delfyle for"
-            highlighted="LLP (Limited Liability Partnership) Registration?"
-            subheading="We simplify LLP registration with expert guidance, hassle-free compliance, and transparent processes tailored for entrepreneurs and professionals."
+            highlighted="LLP Registration?"
+            subheading="Our team ensures a smooth, compliant, and transparent registration process tailored for entrepreneurs and professionals."
             cards={[
               {
                 icon: <FaBalanceScale className="text-2xl" />,
                 title: "Limited Liability Protection",
-                description: "Safeguard personal assets while enjoying business flexibility.",
+                description: "Safeguard personal assets while enjoying flexible business operations.",
               },
               {
                 icon: <FaFileSignature className="text-2xl" />,
@@ -466,8 +473,8 @@ const TrademarkRectification: React.FC = () => {
               },
               {
                 icon: <FaRocket className="text-2xl" />,
-                title: "Quick & Affordable",
-                description: "Fast registration at competitive pricing with no hidden charges.",
+                title: "Fast & Affordable",
+                description: "Quick registration at competitive pricing with no hidden charges.",
               },
             ]}
             primaryBtnText="Start Your LLP Registration"

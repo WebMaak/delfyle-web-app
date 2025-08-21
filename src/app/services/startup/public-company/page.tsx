@@ -362,15 +362,15 @@ const TrademarkRectification: React.FC = () => {
       <main id="smooth-content" className="relative min-h-screen bg-background text-foreground">
         <div>
           <StartupHero 
-          heading={
-            <>
-              <span className={styles.coloredplc}>Private Limited Company </span>
-              <span className={styles.coloredreg}>Registration Services</span> 
-              <span style={{letterSpacing: 'normal'}}> in India with</span> 
-              <span className={styles.colored}>Delfyle</span>
-            </>
-          }
-          description="Register your Private Limited Company online with Delfyle’s expert assistance. From drafting the incorporation documents to compliance and approvals, we make the process simple and hassle-free."
+            heading={
+              <>
+                <span className={styles.coloredplc}>Public Limited Company </span>
+                <span className={styles.coloredreg}> Registration Services</span> 
+                <span style={{letterSpacing: 'normal'}}> in India with</span> 
+                <span className={styles.colored}>Delfyle</span>
+              </>
+            }
+            description="Register your Public Limited Company online with Delfyle. We handle incorporation, documentation, approvals, and compliance for a smooth, hassle-free process."
           />
 
           {/* Big Company Logo Marquee Section */}
@@ -387,27 +387,27 @@ const TrademarkRectification: React.FC = () => {
           <PrivateLimitedCompanyContentTwo/>
 
           <CallToAction
-            heading="How Can Delfyle Help in Securing"
-            highlighted="Private Limited Company Registration?"
-            subheading="From name approval to MCA filing, Delfyle ensures a seamless, compliant, and hassle-free company registration process."
+            heading="Why Choose Delfyle for"
+            highlighted="Public Limited Company Registration?"
+            subheading="From name approval to MCA filing and compliance, Delfyle ensures a seamless and professional registration process."
             cards={[
               {
                 icon: <FaUserTie className="text-2xl" />,
                 title: "Expert Guidance",
-                description: "Handled by professionals with MCA expertise.",
+                description: "Assistance from professionals with MCA and company law expertise.",
               },
               {
                 icon: <FaFileAlt className="text-2xl" />,
-                title: "End-to-End Support",
-                description: "From documentation to compliance, we cover it all.",
+                title: "Complete Support",
+                description: "We manage all documentation, filings, and legal requirements end-to-end.",
               },
               {
                 icon: <FaBolt className="text-2xl" />,
                 title: "Fast & Transparent",
-                description: "Quick turnaround with clear pricing, no hidden costs.",
+                description: "Quick registration with clear pricing and no hidden charges.",
               },
             ]}
-            primaryBtnText="Start Your Pvt Ltd Registration"
+            primaryBtnText="Start Public Ltd Registration"
             primaryBtnLink="https://wa.me/917439587419"
             secondaryBtnText="Get Free Consultation"
             secondaryBtnLink="/contact"

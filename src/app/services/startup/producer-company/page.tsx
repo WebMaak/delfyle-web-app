@@ -365,12 +365,12 @@ const TrademarkRectification: React.FC = () => {
             heading={
               <>
                 <span className={styles.coloredplc}>Producer Company </span>
-                <span className={styles.coloredreg}>Registration Services</span> 
+                <span className={styles.coloredreg}> Registration Services</span> 
                 <span style={{letterSpacing: 'normal'}}> with</span> 
                 <span className={styles.colored}>Delfyle</span>
               </>
             }
-            description="Register your Producer Company online with Delfyle’s expert guidance. From documentation and approvals to post-incorporation compliance, we ensure a smooth and hassle-free process."
+            description="Register your Producer Company online with Delfyle. We handle documentation, approvals, and post-incorporation compliance for a seamless, hassle-free process."
           />
 
 
@@ -389,27 +389,27 @@ const TrademarkRectification: React.FC = () => {
 
 
          <CallToAction
-          heading="How Can Delfyle Help in Securing"
+          heading="Why Choose Delfyle for"
           highlighted="Producer Company Registration?"
-          subheading="From DSC & DIN to ROC filing and compliance, Delfyle ensures a smooth and hassle-free Producer Company registration process."
+          subheading="Our experts manage everything from DSC & DIN to ROC filing and compliance, ensuring a smooth and efficient registration process."
           cards={[
             {
               icon: <FaUserTie className="text-2xl" />,
               title: "Specialized Expertise",
-              description: "Guidance from professionals experienced in Producer Company laws.",
+              description: "Get guidance from professionals experienced in Producer Company laws.",
             },
             {
               icon: <FaFileAlt className="text-2xl" />,
               title: "Complete Assistance",
-              description: "From drafting MoA & AoA to incorporation and compliance, we handle everything.",
+              description: "We handle MoA & AoA drafting, incorporation, and ongoing compliance.",
             },
             {
               icon: <FaBolt className="text-2xl" />,
-              title: "Quick & Transparent",
-              description: "Fast process with upfront pricing and no hidden charges.",
+              title: "Fast & Transparent",
+              description: "Quick registration with clear pricing and no hidden charges.",
             },
           ]}
-          primaryBtnText="Start Your Producer Company Registration"
+          primaryBtnText="Start Producer Company Registration"
           primaryBtnLink="https://wa.me/917439587419"
           secondaryBtnText="Get Free Consultation"
           secondaryBtnLink="/contact"
