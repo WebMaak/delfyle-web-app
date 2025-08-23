@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import StartupHero from "../StartupHero";
+import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
-// import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-// import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
-// import PrivateLimitedCompanyTypes from "./PrivateLimitedCompanyTypes";
-// import PrivateLimitedCompanyBenefits from "./PrivateLimitedCompanyBenefits";
-// import PrivateLimitedCompanyDisadvantages from "./PrivateLimitedCompanyDisadvantages";
-// import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequirements";
-// import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
-// import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
 import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
@@ -19,21 +12,37 @@ import {
   ModernNavBody, 
   ModernNavItems, 
   ModernNavbarLogo, 
-  ModernNavbarButton,
-  ModernMobileNav,
-  ModernMobileNavHeader,
-  ModernMobileNavMenu,
-  ModernMobileNavToggle
+  ModernNavbarButton
 } from "../../../Components/ui/modern-navbar";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import ListComponent from "./ListComponent";
+import ListComponentTwo from "./ListComponentTwo";
+import Button from "../../../Components/Button/Button";
+import AuthManager from "../../../Components/admin/AuthManager";
+import { useUser } from '../../../../hooks/useUser';
+import PrivateLimitedCompanyContentTwo from "./PrivateLimitedCompanyContentTwo";
+import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
+import { FiPackage, FiTool, FiUsers, FiAward} from "react-icons/fi";
+import { FaClipboard, FaTimesCircle } from "react-icons/fa";
+import ListComponentReusable from "../../../Components/TrialComponent/ListComponent/ListComponentReusable";
+import TitleDescCanvas from "../../../Components/TrialComponent/TitleDescCanvas/TitleDescCanvas";
+import { FaUserTie, FaFileAlt, FaBolt } from "react-icons/fa";
+import CallToAction from "../../../Components/CallToAction/CallToAction";
+import Background from "@/app/Components/Background/Background";
+import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
+import IconTextList from "./IconTextList"
+import { FaCircleCheck } from "react-icons/fa6";
+
 
 // Register ScrollTrigger and ScrollSmoother plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const PrivateLimitedCompany: React.FC = () => {
+const TrademarkRectification: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [panelType, setPanelType] = useState<'auth' | 'profile' | null>(null);
+  const { user, loading, setUser } = useUser();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const smootherRef = useRef<ScrollSmoother | null>(null);
 
@@ -141,47 +150,6 @@ const PrivateLimitedCompany: React.FC = () => {
     "/CompanyLogos/29.png",
     "/CompanyLogos/30.png",
   ];
-
-  // Company registration process data
-  const registrationProcessData = [
-    {
-      id: 'step-1',
-      title: 'Acquire a Digital Signature Certificate (DSC)',
-      content: 'All directors and shareholders must obtain a DSC for online document signing.',
-      stepNumber: 1
-    },
-    {
-      id: 'step-2',
-      title: 'Obtain a Director Identification Number (DIN)',
-      content: 'Essential for company directors, DIN is obtained through the MCA portal.',
-      stepNumber: 2
-    },
-    {
-      id: 'step-3',
-      title: 'Name Reservation (SPICe+ Part A)',
-      content: 'Choose a unique business name and submit for approval. Specify business activities and industrial classification.',
-      stepNumber: 3
-    },
-    {
-      id: 'step-4',
-      title: 'Submit Company Details (SPICe+ Part B)',
-      content: 'Provide company capital details, registered office address, and director information. Apply for PAN and TAN simultaneously.',
-      stepNumber: 4
-    },
-    {
-      id: 'step-5',
-      title: 'Draft & Submit Incorporation Documents',
-      content: 'Memorandum of Association (MOA) & Articles of Association (AOA) digitally signed and submitted. File AGILE-PRO-S form for GST, EPFO, ESIC, and bank account registration.',
-      stepNumber: 5
-    },
-    {
-      id: 'step-6',
-      title: 'Receive Certificate of Incorporation',
-      content: 'Upon approval, MCA issues a Certificate of Incorporation (COI) with CIN, PAN, and TAN.',
-      stepNumber: 6
-    }
-  ];
-
   return (
     <>
     <TopMarquee />
@@ -189,127 +157,119 @@ const PrivateLimitedCompany: React.FC = () => {
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
           mainOptions={navItems.map(item => item.name)}
-          subMenus={[
-            // Startup
-            [
-              "Private Limited Company",
-              "Limited Liability Partnership (LLP)",
-              "One Person Company (OPC)",
-              "Section 8 Company",
-              "Partnership Firm",
-              "Trust Registration",
-              "Public Company",
-              "Producer Company",
-              "Nidhi Company"
-            ],
-            // Trademark
-            [
-              "Trademark Registration",
-              "Trademark Objection",
-              "Trademark Certificate",
-              "Trademark Opposition",
-              "Trademark Hearing",
-              "Trademark Rectification",
-              "Trademark Infringement Notice",
-              "Trademark Renewal",
-              "Trademark Restoration",
-              "Trademark Transfer",
-              "Expedited Trademark Registration",
-              "Logo Design + Trademark Protection",
-              "Design Registration",
-              "Design Objection",
-              "Copyright Registration",
-              "Copyright Objections"
-            ],
-            // Registrations
-            [
-              "StartUp Registration",
-              "Trade License",
-              "FSSAI Registration",
-              "FSSAI License",
-              "Halal Certification",
-              "ICEGATE Registration",
-              "ISO Registration",
-              "PF Registration",
-              "ESI Registration",
-              "Professional Tax Registration",
-              "RCMC Registration",
-              "WB RERA Registration",
-              "12A and 80G Registration",
-              "12A Registration",
-              "80G Registration",
-              "Darpan Registration",
-              "Udyam Registration",
-              "Digital Signature",
-              "Shop and Establishment Act Registration",
-              "Drug License",
-              "FCRA Registration",
-              "Fire License",
-              "EPR Certficate"
-            ],
-            // GST
-            [
-              "GST Registration",
-              "GST Return Filing",
-              "GST Annual Return Filing (GSTR - 9)",
-              "GST LUT Form",
-              "GST Tax Notice",
-              "GST Amendment",
-              "GST Revocation",
-              "GSTR-10"
-            ],
-            // MCA (already set previously)
-            [
-              "Company Compliance",
-              "LLP Compliance",
-              "OPC Compliance",
-              "Name Change - Company",
-              "Company Registered Office Change",
-              "DIN eKYC Filing",
-              "DIN Reactivation",
-              "Director Change",
-              "Remove Director",
-              "Appointment of Auditor",
-              "DPT-3 Filing",
-              "LLP Form 11 Filing",
-              "Dormant Status Filing",
-              "MOA Amendment",
-              "AOA Amendment",
-              "Authorized Capital Increase",
-              "Share Transfer",
-              "Demat of Shares",
-              "Winding Up - LLP",
-              "Winding Up - Company"
-            ],
-            // Compliance
-            [
-              "FSSAI Renewal",
-              "FSSAI Return Filing",
-              "HR & Payroll Services",
-              "PF Return Filing",
-              "ESI Return Filing",
-              "Professional Tax Return Filing",
-              "Partnership Compliance",
-              "Proprietorship Compliance",
-              "Book-keeping"
-            ],
-            // Income Tax
-            [
-              "ITR-1 Return Filing",
-              "ITR-2 Return Filing",
-              "ITR-3 Return Filing",
-              "ITR-4 Return Filing",
-              "ITR-5 Return Filing",
-              "ITR-6 Return Filing",
-              "ITR-7 Return Filing",
-              "TDS Return Filing",
-              "Income Tax Notice",
-              "TAN Registration",
-              "15CA & 15CB Filing"
-            ],
-            // About Us (default)
-            Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
-          ]}
+            subMenus={[
+              [
+                "Private Limited Company",
+                "Limited Liability Partnership (LLP)",
+                "One Person Company (OPC)",
+                "Section 8 Company",
+                "Partnership Firm",
+                "Trust Registration",
+                "Public Company",
+                "Producer Company",
+                "Nidhi Company"
+              ],
+              [
+                "Trademark Registration",
+                "Trademark Objection",
+                "Trademark Certificate",
+                "Trademark Opposition",
+                "Trademark Hearing",
+                "Trademark Rectification",
+                "Trademark Infringement Notice",
+                "Trademark Renewal",
+                "Trademark Restoration",
+                "Trademark Transfer",
+                "Expedited Trademark Registration",
+                "Logo Design + Trademark Protection",
+                "Design Registration",
+                "Design Objection",
+                "Copyright Registration",
+                "Copyright Objections"
+              ],
+              [
+                "StartUp Registration",
+                "Trade License",
+                "FSSAI Registration",
+                "FSSAI License",
+                "Halal Certification",
+                "ICEGATE Registration",
+                "ISO Registration",
+                "PF Registration",
+                "ESI Registration",
+                "Professional Tax Registration",
+                "RCMC Registration",
+                "WB RERA Registration",
+                "12A and 80G Registration",
+                "12A Registration",
+                "80G Registration",
+                "Darpan Registration",
+                "Udyam Registration",
+                "Digital Signature",
+                "Shop and Establishment Act Registration",
+                "Drug License",
+                "FCRA Registration",
+                "Fire License",
+                "EPR Certficate"
+              ],
+              [
+                "GST Registration",
+                "GST Return Filing",
+                "GST Annual Return Filing (GSTR - 9)",
+                "GST LUT Form",
+                "GST Tax Notice",
+                "GST Amendment",
+                "GST Revocation",
+                "GSTR-10"
+              ],
+              [
+                "Company Compliance",
+                "LLP Compliance",
+                "OPC Compliance",
+                "Name Change - Company",
+                "Company Registered Office Change",
+                "DIN eKYC Filing",
+                "DIN Reactivation",
+                "Director Change",
+                "Remove Director",
+                "Appointment of Auditor",
+                "DPT-3 Filing",
+                "LLP Form 11 Filing",
+                "Dormant Status Filing",
+                "MOA Amendment",
+                "AOA Amendment",
+                "Authorized Capital Increase",
+                "Share Transfer",
+                "Demat of Shares",
+                "Winding Up - LLP",
+                "Winding Up - Company"
+              ],
+              [
+                "FSSAI Renewal",
+                "FSSAI Return Filing",
+                "HR & Payroll Services",
+                "PF Return Filing",
+                "ESI Return Filing",
+                "Professional Tax Return Filing",
+                "Partnership Compliance",
+                "Proprietorship Compliance",
+                "Book-keeping"
+              ],
+              [
+                "ITR-1 Return Filing",
+                "ITR-2 Return Filing",
+                "ITR-3 Return Filing",
+                "ITR-4 Return Filing",
+                "ITR-5 Return Filing",
+                "ITR-6 Return Filing",
+                "ITR-7 Return Filing",
+                "TDS Return Filing",
+                "Income Tax Notice",
+                "TAN Registration",
+                "15CA & 15CB Filing"
+              ],
+              Array.from({ length: 18 }, (_, i) => `Sub Option ${i + 1}`)
+            ]}
         />
       </div>
     <div id="smooth-wrapper" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -336,58 +296,46 @@ const PrivateLimitedCompany: React.FC = () => {
           }}
         />
       </div>
-
       {/* Modern Navbar */}
       <div className="fixed inset-x-0 top-0 z-50">
-        <ModernNavbar>
-          <ModernNavBody>
+        <ModernNavbar user={user}>
+          <ModernNavBody user={user} onProfileClick={() => setPanelType('profile')}>
             <ModernNavbarLogo />
             <ModernNavItems items={navItems} />
-            <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-          </ModernNavBody>
-
-          <ModernMobileNav>
-            <ModernMobileNavHeader>
-              <ModernNavbarLogo />
-              <ModernMobileNavToggle 
-                isOpen={isMobileMenuOpen} 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              />
-            </ModernMobileNavHeader>
-            <ModernMobileNavMenu 
-              isOpen={isMobileMenuOpen} 
-              onClose={() => setIsMobileMenuOpen(false)}
-            >
-              {navItems.map((item, index) => (
-                <div key={index} className="w-full">
-                  <a
-                    href={item.link}
-                    className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </div>
-              ))}
+            <div className="modernNavActions">
               <ModernNavbarButton href="/contact">Contact us</ModernNavbarButton>
-            </ModernMobileNavMenu>
-          </ModernMobileNav>
+              {loading ? null : !user && (
+                <Button text="Sign In" type="whiteButtonNoBackground" onClick={() => setPanelType('auth')} />
+              )}
+            </div>
+          </ModernNavBody>
         </ModernNavbar>
       </div>
+      <AuthManager 
+        isOpen={!!panelType} 
+        onClose={() => setPanelType(null)} 
+        onUserChange={setUser} 
+        panelType={panelType} 
+      />
 
       {/* Main Content */}
-      <main id="smooth-content" className="min-h-screen">
-        <div >
-          <StartupHero 
-          heading={<><span>Fire License</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
-          description="Ensure timely fire license with Delfyle's expert assistance. We handle all compliance requirements, including fire license, return filing, and compliance monitoring."
-          buttonText="Get Fire License Help"
-          />
-          
+      <main id="smooth-content" className="relative min-h-screen bg-background text-foreground">
+        <div>
+        <StartupHero
+          heading={
+            <>
+              <span className={styles.coloredplc}>Fire</span>
+              <span className={styles.coloredreg}> License & Compliance</span>
+              <span style={{ letterSpacing: 'normal' }}> with </span>
+              <span className={styles.colored}>Delfyle</span>
+            </>
+          }
+          description="Simplify your Fire License application with Delfyle. We guide you through the entire process, from documentation to inspection, ensuring your building is legally compliant and safe."
+        />
+
+
           {/* Big Company Logo Marquee Section */}
-          <section style={{ 
-            overflow: 'hidden'
-          }}>        
+          <section>      
             <BigLogoMarquee 
               logos={companyLogos}
               direction="left"
@@ -395,30 +343,87 @@ const PrivateLimitedCompany: React.FC = () => {
             />
           </section>
 
-          {/* <PrivateLimitedCompanyContent/>
+          <PrivateLimitedCompanyContent/>
 
-          <PrivateLimitedCompanyTypes/>
+          <ListComponent/>
 
-          <PrivateLimitedCompanyBenefits/>
+          <ListComponentTwo/>
 
-          <PrivateLimitedCompanyDisadvantages/>
+          <PrivateLimitedCompanyContentTwo/>
 
-          <PrivateLimitedCompanyRequirements/> */}
-
-          {/* Company Registration Process Accordion */}
-          {/* <CustomAccordion
-            subheading="Requirements for registering"
-            title="Company Registration Process – How to Register a Company in India with Delfyle?"
-            description="Follow these 6 simple steps to register your private limited company in India. Our expert team will guide you through each step of the process."
-            items={registrationProcessData}
+          <CustomAccordion
+            subheading="Why Choose Delfyle for Fire License"
+            title="Get Expert Help from Delfyle"
+            description="Whether you are setting up a new business, constructing a high-rise building, or renewing an existing license, Delfyle provides dedicated support tailored to West Bengal’s fire safety regulations."
+            items={[
+              {
+                id: 'fire-service-1',
+                title: 'Fire License Application & Renewal',
+                content: 'We handle the entire application process, from form submission to follow-up, ensuring a smooth and timely approval or renewal of your Fire License.',
+                stepNumber: 1
+              },
+              {
+                id: 'fire-service-2',
+                title: 'Technical Compliance Review',
+                content: 'Our experts review your building plans and existing fire systems to ensure they meet all technical requirements and codes.',
+                stepNumber: 2
+              },
+              {
+                id: 'fire-service-3',
+                title: 'Liaison with Fire Safety Officials',
+                content: 'We act as a professional liaison between your business and the Fire and Emergency Services Department to streamline communication and inspections.',
+                stepNumber: 3
+              },
+              {
+                id: 'fire-service-4',
+                title: 'Document Preparation & Audit Support',
+                content: 'We assist you in preparing and organizing all necessary documents, including plans and certificates, for a successful application or audit.',
+                stepNumber: 4
+              },
+              {
+                id: 'fire-service-5',
+                title: 'Fire Safety Training & Advisory',
+                content: 'We provide expert advice and training to help you establish and maintain robust fire safety protocols within your premises.',
+                stepNumber: 5
+              },
+              {
+                id: 'fire-service-6',
+                title: 'Seamless Business Operations',
+                content: 'With a valid Fire License, you can operate your business without the risk of legal penalties or interruptions from non-compliance issues.',
+                stepNumber: 6
+              }
+            ]}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
-          /> */}
+          />
 
-          {/* <PrivateLimitedCompanyDocs/>
-
-          <PrivateLimitedPost/> */}
+          <CallToAction
+            heading="Get Your Fire Safety Certificate"
+            highlighted="Ensure Your Building is Compliant & Safe"
+            subheading="Our team provides end-to-end assistance, from preparing documents to coordinating inspections, ensuring a smooth and hassle-free Fire License application process."
+            cards={[
+              {
+                icon: <FaFileAlt className="text-2xl" />,
+                title: "Documentation & Plan Review",
+                description: "We help you compile all required documents and review your building plan for compliance.",
+              },
+              {
+                icon: <FaClipboard className="text-2xl" />,
+                title: "On-site Inspection Coordination",
+                description: "Our team coordinates with fire officials to ensure a smooth and efficient site inspection.",
+              },
+              {
+                icon: <FaCircleCheck className="text-2xl" />,
+                title: "Certificate Issuance",
+                description: "We track your application until your Fire Safety Certificate is officially issued and delivered.",
+              },
+            ]}
+            primaryBtnText="Get Expert Help"
+            primaryBtnLink="https://wa.me/917439587419"
+            secondaryBtnText="Get Free Consultation"
+            secondaryBtnLink="/contact"
+          />
         </div>
 
         {/* Footer */}
@@ -429,4 +434,4 @@ const PrivateLimitedCompany: React.FC = () => {
   );
 };
 
-export default PrivateLimitedCompany; 
+export default TrademarkRectification; 
