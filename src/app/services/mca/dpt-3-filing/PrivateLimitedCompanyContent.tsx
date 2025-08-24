@@ -100,8 +100,6 @@ const PrivateLimitedCompanyContent: React.FC = () => {
           <li><span className={styles.checkIcon}>✔</span> From Subsidiary Company</li>
           <li><span className={styles.checkIcon}>✔</span> From Associate Company</li>
         </ul>
-
-        
       </div>
     </div>
   </div>

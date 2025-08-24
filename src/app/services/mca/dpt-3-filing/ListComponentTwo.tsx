@@ -41,10 +41,10 @@ const ListComponentTwo = () => {
       <div className="bg-white rounded-lg p-6 shadow-md border border-[#b44593]/50 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
         <h3 className="text-xl font-semibold text-[#1a1a1a]">Step 2: Access DPT-3 Webform</h3>
         <p className="mt-2 text-sm md:text-base text-gray-700">
+        </p>
           <ul className="list-disc list-inside">
             <li>Navigate to: MCA Services → Deposit Related Filings → <span className="font-bold">Form DPT-3</span></li>
           </ul>
-        </p>
       </div>
     </div>
     <div className="absolute left-3 md:static w-6 h-6 rounded-full bg-[#790046] flex items-center justify-center text-white text-sm font-bold flex-shrink-0 z-10 md:mx-4">
