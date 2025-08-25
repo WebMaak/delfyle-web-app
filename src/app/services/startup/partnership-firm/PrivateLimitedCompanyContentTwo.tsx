@@ -52,6 +52,19 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
           For partnership deed registration to take place, two or more individuals must come together as partners, agree on a firm name, and create a deed to register the partnership deed. Get expert help from Delfyle to easily register your firm with an affordable partnership firm registration cost!
         </p>
 
+        
+      </div>
+    </div>
+
+    {/* Right Column */}
+    <div ref={rightColumnRef} className={styles.rightColumn}>
+      <div ref={(el) => { if (el) rightColumnContentRef.current[0] = el; }} className={styles.rightTopContainer}>
+        <p className={styles.rightDescription}>
+          Delfyle provides comprehensive support for partnership deed and firm registration. Our team guides you through drafting the deed, filing documents with the Registrar of Firms, and ensuring compliance with all legal requirements, making the registration process hassle-free and efficient.
+        </p>
+      </div>
+
+      <div ref={(el) => { if (el) rightColumnContentRef.current[1] = el; }} className={styles.leftBottomContainer}>
         <h3 ref={(el) => { if (el) leftBottomContentRef.current[5] = el; }} className={styles.subContentHeading}>
           Who Can Be a Partner in India's Partnership Firms?
         </h3>
@@ -65,30 +78,6 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
           <li><span className={styles.checkIcon}>•</span> Companies as Partners: Companies, considered legal entities, can also be partners if their objectives permit it.</li>
           <li><span className={styles.checkIcon}>•</span> Trustees of Specific Trusts: Trustees of private religious, family, or Hindu trusts can partner unless their rules explicitly prohibit it.</li>
         </ul>
-      </div>
-    </div>
-
-    {/* Right Column */}
-    <div ref={rightColumnRef} className={styles.rightColumn}>
-      <div ref={(el) => { if (el) rightColumnContentRef.current[0] = el; }} className={styles.rightTopContainer}>
-        <p className={styles.rightDescription}>
-          Delfyle provides comprehensive support for partnership deed and firm registration. Our team guides you through drafting the deed, filing documents with the Registrar of Firms, and ensuring compliance with all legal requirements, making the registration process hassle-free and efficient.
-        </p>
-      </div>
-
-      <div ref={(el) => { if (el) rightColumnContentRef.current[1] = el; }} className={styles.rightBottomContainer}>
-        <Image
-          src="/delfyle-logo/delfyle-logo.png"
-          alt="Delfyle Logo"
-          width={180}
-          height={50}
-          objectFit="contain"
-          className={styles.companyLogo}
-        />
-        <p className={styles.bottomQuote}>
-          "With Delfyle, your partnership firm registration and deed are accurate, legal, and hassle-free."
-        </p>
-        <p className={styles.bottomAuthor}>Team Delfyle</p>
       </div>
     </div>
   </div>

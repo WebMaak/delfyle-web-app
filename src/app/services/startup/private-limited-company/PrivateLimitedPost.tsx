@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from 'react';
 import styles from './PrivateLimitedPost.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaIdCard, FaPassport, FaHome } from 'react-icons/fa';
+import { MdDocumentScanner } from 'react-icons/md';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,22 +35,23 @@ const defaultProps = {
   showDescription: true,
   features: [
     {
-      icon: undefined,
+      icon: <FaIdCard />,
       title: "For Indian Nationals",
       description: "PAN card, Aadhaar, passport-size photo, proof of identity, and address proof."
     },
     {
-      icon: undefined,
+      icon: <FaPassport />,
       title: "For Foreign Nationals",
       description: "Notarized and apostilled passport, photo, and address proof."
     },
     {
-      icon: undefined,
+      icon: <MdDocumentScanner />,
       title: "Registered Office Documents",
       description: "Rental agreement, utility bill, and NOC from property owner."
     }
   ]
 };
+
 
 const PrivateLimitedPost: React.FC<PrivateLimitedPostProps> = ({
   tagline = defaultProps.tagline,
@@ -67,7 +71,7 @@ const PrivateLimitedPost: React.FC<PrivateLimitedPostProps> = ({
   return (
     <section ref={sectionRef} className={styles.container}>
       <div ref={headerRef} className={styles.header}>
-        {showTagline && <p className={styles.tagline}>{tagline}</p>}
+        {showTagline && <p className={styles.tagline} style={{ color: '#d81d62ff'}}>{tagline}</p>}
         {showTitle && <h2 className={styles.mainHeading}>{title}</h2>}
         {showDescription && <p className={styles.mainDescription}>{description}</p>}
       </div>
@@ -78,9 +82,10 @@ const PrivateLimitedPost: React.FC<PrivateLimitedPostProps> = ({
             className={styles.featureCard}
             ref={el => { if (el) cardsRef.current[index] = el; }}
           >
-            <div className={styles.icon}>
-              {feature.icon && <img src={feature.icon} alt={feature.title} />}
+            <div className={styles.icon} style={{ width: '40px', height: '40px', color: '#d81d62ff', marginBottom: '10px' }}>
+              {feature.icon && feature.icon}
             </div>
+
             <h3 className={styles.featureHeading}>{feature.title}</h3>
             <p className={styles.featureDescription}>{feature.description}</p>
           </div>

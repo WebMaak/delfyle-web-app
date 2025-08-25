@@ -87,21 +87,6 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
             </p>
           </div>
 
-          <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
-            <Image 
-              src="/delfyle-logo/delfyle-logo.png" 
-              alt="Delfyle Logo" 
-              width={180} 
-              height={50} 
-              objectFit="contain"
-              className={styles.companyLogo}
-            />
-            <p className={styles.bottomQuote}>
-              "Delfyle ensures smooth, expert-assisted Section 8 Company registration and compliance."
-            </p>
-            <p className={styles.bottomAuthor}>Team Delfyle</p>
-          </div>
-
           {/* Moved last list block here */}
           <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
             <h3 className={styles.subContentHeading}>Process for Registration of Trust</h3>

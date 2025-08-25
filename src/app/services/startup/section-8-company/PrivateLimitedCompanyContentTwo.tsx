@@ -42,6 +42,23 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
         <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
           Specific eligibility criteria and legal requirements must be met before incorporation. An Indian national or Hindu Undivided Family (HUF) can incorporate a Section 8 company. At least one director is required, and objectives must relate to art, science, sports, charitable activities, education, or providing financial assistance to individuals from lower-income groups. Private limited companies require at least two directors, and public limited companies require three. Membership limits, capital requirements, and non-profit objectives must comply with MoA and AoA provisions.
         </p>
+        <h3 className={styles.subContentHeading}>Donations & Funding</h3>
+        <ul className={styles.productsList}>
+          <li><span className={styles.checkIcon}>•</span> Foreign Contributions: Requires FCRA registration if accepting foreign donations</li>
+          <li><span className={styles.checkIcon}>•</span> Equity Funding: Can issue new equity shares at a premium</li>
+          <li><span className={styles.checkIcon}>•</span> Domestic Donations: Accept donations with compliance to anti-money laundering regulations</li>
+        </ul>
+      </div>
+
+
+      
+    </div>
+
+    <div ref={rightColumnRef} className={styles.rightColumn}>
+      <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
+        <p className={styles.rightDescription}>
+          Delfyle provides end-to-end guidance for Section 8 Company registration, ensuring all legal formalities are met. Our team assists with documentation, filing, approvals, and compliance, helping organizations establish themselves as credible, non-profit entities efficiently.
+        </p>
       </div>
 
       <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
@@ -54,38 +71,8 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
           <li><span className={styles.checkIcon}>•</span> Apply for Section 8 license (Form INC-12)</li>
           <li><span className={styles.checkIcon}>•</span> Obtain Certificate of Incorporation (Form INC-16) from ROC</li>
         </ul>
-      </div>
-
-      <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
-        <h3 className={styles.subContentHeading}>Donations & Funding</h3>
-        <ul className={styles.productsList}>
-          <li><span className={styles.checkIcon}>•</span> Foreign Contributions: Requires FCRA registration if accepting foreign donations</li>
-          <li><span className={styles.checkIcon}>•</span> Equity Funding: Can issue new equity shares at a premium</li>
-          <li><span className={styles.checkIcon}>•</span> Domestic Donations: Accept donations with compliance to anti-money laundering regulations</li>
-        </ul>
-      </div>
-    </div>
-
-    <div ref={rightColumnRef} className={styles.rightColumn}>
-      <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
-        <p className={styles.rightDescription}>
-          Delfyle provides end-to-end guidance for Section 8 Company registration, ensuring all legal formalities are met. Our team assists with documentation, filing, approvals, and compliance, helping organizations establish themselves as credible, non-profit entities efficiently.
-        </p>
-      </div>
-
-      <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
-        <Image 
-          src="/delfyle-logo/delfyle-logo.png" 
-          alt="Delfyle Logo" 
-          width={180} 
-          height={50} 
-          objectFit="contain"
-          className={styles.companyLogo}
-        />
-        <p className={styles.bottomQuote}>
-          "Delfyle ensures smooth, expert-assisted Section 8 Company registration and compliance."
-        </p>
-        <p className={styles.bottomAuthor}>Team Delfyle</p>
+        
+        
       </div>
     </div>
   </div>

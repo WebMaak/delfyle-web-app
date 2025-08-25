@@ -45,6 +45,14 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
           OPC registration in India was introduced under the Companies Act, 2013, allowing a single individual to establish a limited liability company. The main aim is to encourage entrepreneurship and formalize MSMEs. According to Section 2(62) of the Act, an OPC can be formed with just one director and one member, which can be the same person.
         </p>
       </div>
+    </div>
+
+    <div ref={rightColumnRef} className={styles.rightColumn}>
+      <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
+        <p className={styles.rightDescription}>
+          Delfyle guides you through the complete OPC registration process, ensuring compliance with legal requirements, assisting with document submission, and providing ongoing support post-incorporation.
+        </p>
+      </div>
 
       <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
         <h3 className={styles.subContentHeading}>Steps for OPC Registration</h3>
@@ -57,29 +65,7 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
           <li><span className={styles.checkIcon}>•</span> Obtain Certificate of Incorporation from ROC</li>
         </ul>
       </div>
-    </div>
-
-    <div ref={rightColumnRef} className={styles.rightColumn}>
-      <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
-        <p className={styles.rightDescription}>
-          Delfyle guides you through the complete OPC registration process, ensuring compliance with legal requirements, assisting with document submission, and providing ongoing support post-incorporation.
-        </p>
-      </div>
-
-      <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
-        <Image 
-          src="/delfyle-logo/delfyle-logo.png" 
-          alt="Delfyle Logo" 
-          width={180} 
-          height={50} 
-          objectFit="contain"
-          className={styles.companyLogo}
-        />
-        <p className={styles.bottomQuote}>
-          "Delfyle ensures smooth, expert-assisted OPC registration and post-incorporation compliance."
-        </p>
-        <p className={styles.bottomAuthor}>Team Delfyle</p>
-      </div>
+      
     </div>
   </div>
 </section>
