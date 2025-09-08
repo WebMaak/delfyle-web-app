@@ -4,7 +4,7 @@
   font-family: 'Inter', sans-serif !important;
   display: flex;
   flex-direction: column;
-  padding: 8rem 1rem 0rem;
+  padding: 4rem 1rem 0rem;
   max-width: 1400px;
   margin: 0 auto 5rem;
   position: relative;
@@ -203,7 +203,7 @@
 @media (min-width: 768px) and (max-width: 1024px) {
     .stickyFeatureSection {
         flex-direction: column;
-        padding: 6rem 2rem 0;
+        padding: 3rem 2rem 0;
     }
 
     .leftCol {
@@ -256,7 +256,7 @@
 /* Mobile devices (phones) */
 @media (max-width: 767px) {
     .stickyFeatureSection {
-        padding: 2rem 2rem 0;
+        padding: 1rem 2rem 0;
         flex-direction: column;
     }
 

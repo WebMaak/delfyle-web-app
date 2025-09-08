@@ -1,9 +1,191 @@
+// "use client";
+
+// import React, { useRef } from "react";
+// import { motion, useScroll, useTransform } from "framer-motion";
+// import { useInView } from "react-intersection-observer";
+// import styles from "./WhoWeWorkWith.module.css";
+// import {
+//   FaLightbulb,
+//   FaChartLine,
+//   FaIndustry,
+//   FaHandsHelping,
+//   FaLandmark,
+// } from "react-icons/fa";
+
+// const WhoWeWorkWith = () => {
+//   const headerRef = useRef<HTMLDivElement>(null);
+//   const sectionRef = useRef<HTMLElement>(null);
+
+//   // Progress line scroll settings
+//   const { scrollYProgress: headerProgress } = useScroll({
+//     target: sectionRef,
+//     offset: ["start end", "center start"],
+//   });
+
+//   const lineWidth = useTransform(headerProgress, [0, 1], ["2%", "50%"]);
+
+//   const categories = [
+//     {
+//       title: "Startups",
+//       subtitle: "Idea to Series A",
+//       description:
+//         "Supporting innovative ideas from conception to growth stage",
+//       icon: <FaLightbulb />, // Symbolizes ideas & innovation
+//     },
+//     {
+//       title: "SMEs & MSMEs",
+//       subtitle: "",
+//       description:
+//         "Empowering small and medium enterprises to scale efficiently",
+//       icon: <FaChartLine />, // Represents growth & scaling
+//     },
+//     {
+//       title: "Corporates & Enterprises",
+//       subtitle: "",
+//       description: "Streamlining operations for established businesses",
+//       icon: <FaIndustry />, // Industrial/corporate look
+//     },
+//     {
+//       title: "NGOs & Trusts",
+//       subtitle: "",
+//       description:
+//         "Enabling social impact organizations to focus on their mission",
+//       icon: <FaHandsHelping />, // Represents helping & social causes
+//     },
+//     {
+//       title: "Government Bodies & PSUs",
+//       subtitle: "",
+//       description:
+//         "Modernizing public sector operations with efficient solutions",
+//       icon: <FaLandmark />, // Represents government & institutions
+//     },
+//   ];
+
+//   const cardVariants = {
+//     hidden: {
+//       opacity: 0,
+//       y: 100,
+//       scale: 0.8,
+//     },
+//     visible: (index: number) => ({
+//       opacity: 1,
+//       y: 0,
+//       scale: 1,
+//       transition: {
+//         duration: 0.6,
+//         delay: index < 2 ? index * 0.1 : index * 0.1,
+//         ease: "easeInOut",
+//       } as any,
+//     }),
+//   };
+
+//   const bottomTextVariants = {
+//     hidden: {
+//       opacity: 0,
+//       y: 100,
+//       scale: 0.8,
+//     },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       scale: 1,
+//       transition: {
+//         duration: 0.6,
+//         delay: 0.3,
+//         ease: "easeInOut",
+//       } as any,
+//     },
+//   };
+
+//   return (
+//     <section ref={sectionRef} className={styles.section}>
+//       <div className={styles.container}>
+//         <motion.div
+//           ref={headerRef}
+//           className={styles.header}
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ duration: 0.6 }}
+//         >
+//           <h2 className={styles.heading}>
+//             Who We Work With
+//             <motion.div
+//               className={styles.progressLine}
+//               style={{ width: lineWidth }}
+//             />
+//           </h2>
+//           <motion.div
+//           className={styles.bottomText}
+//           variants={bottomTextVariants}
+//           initial="visible"
+//           whileInView="visible"
+//           viewport={{ once: true, margin: "-20%" }}
+//         >
+//           Whether you're launching, scaling, pivoting, or winding down, Delfyle
+//           is built to help you move faster—without the paperwork drag.
+//         </motion.div>
+//         </motion.div>
+
+//         <div className={styles.categoriesContainer}>
+//           {categories.map((category, index) => {
+//             const [ref, inView] = useInView({
+//               triggerOnce: false,
+//               threshold: index < 2 ? 0.05 : 0.1,
+//               rootMargin: "15% 0px",
+//             });
+
+//             return (
+//               <div
+//                 key={category.title}
+//                 className={styles.categoryCardAnimationWrapper}
+//               >
+//                 <motion.div
+//                   ref={ref}
+//                   className={styles.categoryCard}
+//                   variants={cardVariants}
+//                   initial="hidden"
+//                   animate={inView ? "visible" : "hidden"}
+//                   custom={index}
+//                 >
+//                   <div className={styles.categoryContent}>
+//                     <div className={styles.titleWrapper}>
+//                       <div className={styles.categoryIcon}>{category.icon}</div>
+//                       <div className={styles.titleGroup}>
+//                         <h3 className={styles.categoryTitle}>
+//                           {category.title}
+//                           {category.subtitle && (
+//                             <span className={styles.subtitle}>
+//                               {" "}
+//                               {category.subtitle}
+//                             </span>
+//                           )}
+//                         </h3>
+//                       </div>
+//                     </div>
+//                     <p className={styles.categoryDescription}>
+//                       {category.description}
+//                     </p>
+//                   </div>
+//                 </motion.div>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default WhoWeWorkWith;
+
+
+
+
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import styles from "./WhoWeWorkWith.module.css";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FaLightbulb,
   FaChartLine,
@@ -11,165 +193,128 @@ import {
   FaHandsHelping,
   FaLandmark,
 } from "react-icons/fa";
+import styles from "./WhoWeWorkWith.module.css";
+
+// register plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const WhoWeWorkWith = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Progress line scroll settings
-  const { scrollYProgress: headerProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "center start"],
-  });
-
-  const lineWidth = useTransform(headerProgress, [0, 1], ["2%", "50%"]);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const headingRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     {
       title: "Startups",
       subtitle: "Idea to Series A",
-      description:
-        "Supporting innovative ideas from conception to growth stage",
-      icon: <FaLightbulb />, // Symbolizes ideas & innovation
+      description: "Supporting innovative ideas from conception to growth stage",
+      icon: <FaLightbulb />,
     },
     {
       title: "SMEs & MSMEs",
       subtitle: "",
-      description:
-        "Empowering small and medium enterprises to scale efficiently",
-      icon: <FaChartLine />, // Represents growth & scaling
+      description: "Empowering small and medium enterprises to scale efficiently",
+      icon: <FaChartLine />,
     },
     {
       title: "Corporates & Enterprises",
       subtitle: "",
       description: "Streamlining operations for established businesses",
-      icon: <FaIndustry />, // Industrial/corporate look
+      icon: <FaIndustry />,
     },
     {
       title: "NGOs & Trusts",
       subtitle: "",
-      description:
-        "Enabling social impact organizations to focus on their mission",
-      icon: <FaHandsHelping />, // Represents helping & social causes
+      description: "Enabling social impact organizations to focus on their mission",
+      icon: <FaHandsHelping />,
     },
     {
       title: "Government Bodies & PSUs",
       subtitle: "",
-      description:
-        "Modernizing public sector operations with efficient solutions",
-      icon: <FaLandmark />, // Represents government & institutions
+      description: "Modernizing public sector operations with efficient solutions",
+      icon: <FaLandmark />,
     },
   ];
 
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-      scale: 0.8,
-    },
-    visible: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        delay: index < 2 ? index * 0.1 : index * 0.1,
-        ease: "easeInOut",
-      } as any,
-    }),
-  };
+  useEffect(() => {
+    if (headingRef.current) {
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 80%", // trigger when heading enters viewport
+          },
+        }
+      );
+    }
 
-  const bottomTextVariants = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-      scale: 0.8,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        delay: 0.3,
-        ease: "easeInOut",
-      } as any,
-    },
-  };
+    if (cardsRef.current.length) {
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: cardsRef.current[0].parentElement, // container
+            start: "top 80%", // adjust as needed
+          },
+        }
+      );
+    }
+  }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section}>
+    <section className={styles.section}>
       <div className={styles.container}>
-        <motion.div
-          ref={headerRef}
-          className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className={styles.heading}>
-            Who We Work With
-            <motion.div
-              className={styles.progressLine}
-              style={{ width: lineWidth }}
-            />
-          </h2>
-          <motion.div
-          className={styles.bottomText}
-          variants={bottomTextVariants}
-          initial="visible"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-20%" }}
-        >
-          Whether you're launching, scaling, pivoting, or winding down, Delfyle
-          is built to help you move faster—without the paperwork drag.
-        </motion.div>
-        </motion.div>
+        {/* Heading */}
+        <div ref={headingRef} className={styles.header}>
+          <h2 className={styles.heading}>Who We Work With</h2>
+          <p className={styles.bottomText}>
+            Whether you're launching, scaling, pivoting, or winding down,
+            Delfyle is built to help you move faster—without the paperwork drag.
+          </p>
+        </div>
 
+        {/* Categories */}
         <div className={styles.categoriesContainer}>
-          {categories.map((category, index) => {
-            const [ref, inView] = useInView({
-              triggerOnce: false,
-              threshold: index < 2 ? 0.05 : 0.1,
-              rootMargin: "15% 0px",
-            });
-
-            return (
-              <div
-                key={category.title}
-                className={styles.categoryCardAnimationWrapper}
-              >
-                <motion.div
-                  ref={ref}
-                  className={styles.categoryCard}
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate={inView ? "visible" : "hidden"}
-                  custom={index}
-                >
-                  <div className={styles.categoryContent}>
-                    <div className={styles.titleWrapper}>
-                      <div className={styles.categoryIcon}>{category.icon}</div>
-                      <div className={styles.titleGroup}>
-                        <h3 className={styles.categoryTitle}>
-                          {category.title}
-                          {category.subtitle && (
-                            <span className={styles.subtitle}>
-                              {" "}
-                              {category.subtitle}
-                            </span>
-                          )}
-                        </h3>
-                      </div>
-                    </div>
-                    <p className={styles.categoryDescription}>
-                      {category.description}
-                    </p>
+          {categories.map((category, index) => (
+            <div
+              key={category.title}
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
+              className={styles.categoryCard}
+            >
+              <div className={styles.categoryContent}>
+                <div className={styles.titleWrapper}>
+                  <div className={styles.categoryIcon}>{category.icon}</div>
+                  <div className={styles.titleGroup}>
+                    <h3 className={styles.categoryTitle}>
+                      {category.title}
+                      {category.subtitle && (
+                        <span className={styles.subtitle}>
+                          {" "}
+                          {category.subtitle}
+                        </span>
+                      )}
+                    </h3>
                   </div>
-                </motion.div>
+                </div>
+                <p className={styles.categoryDescription}>
+                  {category.description}
+                </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
