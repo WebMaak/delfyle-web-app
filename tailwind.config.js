@@ -30,44 +30,64 @@ module.exports = {
           "sans-serif",
         ],
       },
-      animation: {
-        blob: "blob 7s infinite",
-        'border-top': 'border-top 1.5s ease-in-out forwards',
-        'border-right': 'border-right 1.5s ease-in-out forwards',
-        'border-bottom': 'border-bottom 1.5s ease-in-out forwards',
-        'border-left': 'border-left 1.5s ease-in-out forwards',
-      },
       keyframes: {
         blob: {
-          "0%": {
-            transform: "translate(0px, 0px) scale(1)",
-          },
-          "33%": {
-            transform: "translate(30px, -50px) scale(1.1)",
-          },
-          "66%": {
-            transform: "translate(-20px, 20px) scale(0.9)",
-          },
-          "100%": {
-            transform: "translate(0px, 0px) scale(1)",
-          },
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
         },
-        'border-top': {
-          '0%': { width: '0%' },
-          '100%': { width: '100%' }
+        "border-top": {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
         },
-        'border-right': {
-          '0%': { height: '0%' },
-          '100%': { height: '100%' }
+        "border-right": {
+          "0%": { height: "0%" },
+          "100%": { height: "100%" },
         },
-        'border-bottom': {
-          '0%': { width: '0%' },
-          '100%': { width: '100%' }
+        "border-bottom": {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
         },
-        'border-left': {
-          '0%': { height: '0%' },
-          '100%': { height: '100%' }
-        }
+        "border-left": {
+          "0%": { height: "0%" },
+          "100%": { height: "100%" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        marqueeReverse: {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        blob: "blob 7s infinite",
+        "border-top": "border-top 1.5s ease-in-out forwards",
+        "border-right": "border-right 1.5s ease-in-out forwards",
+        "border-bottom": "border-bottom 1.5s ease-in-out forwards",
+        "border-left": "border-left 1.5s ease-in-out forwards",
+
+        // ✅ New Marquee Animations
+        marquee: "marquee 20s linear infinite",
+        "marquee-reverse": "marqueeReverse 20s linear infinite",
+
+        // Speed Variations
+        marqueeFast: "marquee 18s linear infinite", // ~10% faster
+        "marquee-reverse-fast": "marqueeReverse 18s linear infinite",
+        marqueeSlow: "marquee 25s linear infinite",
+        "marquee-reverse-slow": "marqueeReverse 25s linear infinite",
+      },
+      transitionProperty: {
+        "transform-opacity": "transform, opacity",
+      },
+      grayscale: {
+        50: "50%",
+        70: "70%",
+      },
+      scale: {
+        110: "1.10", // +10% zoom for hover logos
       },
     },
   },

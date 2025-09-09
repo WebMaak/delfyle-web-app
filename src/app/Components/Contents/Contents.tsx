@@ -39,3 +39,60 @@ const Contents = () => {
 };
 
 export default Contents;
+
+
+// "use client";
+
+// import React from "react";
+// import Image from "next/image";
+// import { motion, Transition } from "framer-motion";
+// import styles from "./contents.module.css";
+// import HeroImage from "../../../../public/images/hero-image-2.png";
+// import Button from "../Button/Button";
+
+// const Contents: React.FC = () => {
+//   // Type-safe floating animation
+//   const floatingAnimation: { y: number[]; transition: Transition } = {
+//     y: [0, -10, 0],
+//     transition: {
+//       duration: 3,
+//       repeat: Infinity,
+//       repeatType: "loop",
+//       ease: "easeInOut",
+//     },
+//   };
+
+//   return (
+//     <div className={styles.contents}>
+//       {/* Text & Button */}
+//       <div className={styles.description}>
+//         <p className={styles.p}>
+//           From registration to regulation, Delfyle is your trusted partner for seamless business setup, accounting, legal compliance, HR, and more.
+//         </p>
+//         <div className={styles.buttons}>
+//           <Button
+//             text="Chat with our expert"
+//             type="smallWhatWeDoButton"
+//             href="https://wa.me/917439587419"
+//           />
+//         </div>
+//       </div>
+
+//       {/* Hero Image with floating animation */}
+//       <motion.div
+//         animate={floatingAnimation}
+//         className={styles.heroImage}
+//       >
+//         <Image
+//           alt="hero image"
+//           src={HeroImage}
+//           width={10000}
+//           height={5000}
+//           priority
+//         />
+//       </motion.div>
+//     </div>
+//   );
+// };
+
+// export default Contents;

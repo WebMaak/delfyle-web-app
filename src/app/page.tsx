@@ -29,6 +29,7 @@ import ToggleNav from "./Components/ToggleNav/toggleNav";
 import TopMarquee from "./Components/TopMarquee/TopMarquee";
 import Button from "./Components/Button/Button";
 import AuthManager from "./Components/admin/AuthManager";
+import LogoCarousel from "./Components/LogoCarousel/LogoCarousel";
 import Cookies from 'js-cookie';
 import { useUser } from '../hooks/useUser';
 import CookiePopupStyles from "./Components/CookiePopup.module.css";
@@ -135,7 +136,7 @@ export default function Home() {
     <>
       <CookiePopup />
       <TopMarquee />
-      <main>
+      
         {/* ToggleNav for tablet and mobile only - moved above progress bar */}
         <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
           <ToggleNav 
@@ -297,38 +298,6 @@ export default function Home() {
                 )}
               </div>
             </ModernNavBody>
-
-            <ModernMobileNav>
-              <ModernMobileNavHeader>
-                <ModernNavbarLogo />
-                <ModernMobileNavToggle 
-                  isOpen={isMobileMenuOpen} 
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-                />
-              </ModernMobileNavHeader>
-              <ModernMobileNavMenu 
-                isOpen={isMobileMenuOpen} 
-                onClose={() => setIsMobileMenuOpen(false)}
-              >
-                {navItems.map((item, index) => (
-                  <div key={index} className="w-full">
-                    <a
-                      href={item.link}
-                      className="block w-full py-2 text-neutral-600 dark:text-neutral-300"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                  </div>
-                ))}
-                <ModernNavbarButton href="/contact" className="w-full mt-4">
-                  Contact Us
-                </ModernNavbarButton>
-                <ModernNavbarButton href="/signin" className="w-full mt-2" variant="secondary">
-                  Sign In
-                </ModernNavbarButton>
-              </ModernMobileNavMenu>
-            </ModernMobileNav>
           </ModernNavbar>
           {/* ToggleNav for tablet and mobile only */}
           <div className="block lg:hidden">
@@ -341,11 +310,11 @@ export default function Home() {
           onUserChange={setUser} 
           panelType={panelType} 
         />
+        <main>
         <div id="smooth-content">
           <Hero />
-          <BigLogoMarquee logos={[
-            "/CompanyLogos/1.png", "/CompanyLogos/2.png", "/CompanyLogos/3.png", "/CompanyLogos/4.png", "/CompanyLogos/5.png", "/CompanyLogos/6.png", "/CompanyLogos/7.png", "/CompanyLogos/8.png", "/CompanyLogos/9.png", "/CompanyLogos/10.png", "/CompanyLogos/11.png", "/CompanyLogos/12.png", "/CompanyLogos/13.png", "/CompanyLogos/14.png", "/CompanyLogos/15.png", "/CompanyLogos/16.png", "/CompanyLogos/17.png", "/CompanyLogos/18.png", "/CompanyLogos/19.png", "/CompanyLogos/20.png", "/CompanyLogos/21.png", "/CompanyLogos/22.png", "/CompanyLogos/23.png", "/CompanyLogos/24.png", "/CompanyLogos/25.png", "/CompanyLogos/26.png", "/CompanyLogos/27.png", "/CompanyLogos/28.png", "/CompanyLogos/29.png", "/CompanyLogos/30.png"
-          ]} speed="100s" direction="left" />
+          {/* <LogoCarousel/> */}
+          <BigLogoMarquee />
           <div className="bg-white">
             <NewWhatWeDo />
             <FeaturesSection />

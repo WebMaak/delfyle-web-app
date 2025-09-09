@@ -324,23 +324,17 @@ const TrademarkRectification: React.FC = () => {
           heading={
             <>
               <span className={styles.coloredplc}>FSSAI</span>
-              <span className={styles.coloredreg}> License & Registration</span>
-              <span style={{ letterSpacing: 'normal' }}> with </span>
+              <span className={styles.coloredreg}> License</span>
+              <span style={{ letterSpacing: 'normal' }}> made easy with </span>
               <span className={styles.colored}>Delfyle</span>
             </>
           }
-          description="Secure your FSSAI license effortlessly with Delfyle. Our dedicated team assists with eligibility checks, documentation, online application filing, and renewals—ensuring your food business operates legally, avoids penalties, and builds lasting consumer trust."
+          description="Obtain your FSSAI license quickly and confidently. Delfyle handles eligibility checks, documentation, online filing, and renewals—helping your food business stay compliant, avoid penalties, and gain customer trust."
         />
 
 
           {/* Big Company Logo Marquee Section */}
-          <section>        
-            <BigLogoMarquee 
-              logos={companyLogos}
-              direction="left"
-              speed="100s"
-            />
-          </section>
+          <BigLogoMarquee />
 
           <PrivateLimitedCompanyContent/>
 
@@ -393,34 +387,32 @@ const TrademarkRectification: React.FC = () => {
             maxOpenItems={1}
           />
 
-          <CallToAction
-            heading="Get Your FSSAI Registration"
-            highlighted="Fast, Simple & Hassle-Free"
-            subheading="Delfyle helps you secure your FSSAI license quickly with expert support at every step."
-            cards={[
-              {
-                icon: <FaUserTie className="text-2xl" />,
-                title: "Consultation & Docs",
-                description: "We guide you on the right license and required paperwork.",
-              },
-              {
-                icon: <FaFileAlt className="text-2xl" />,
-                title: "Quick Filing",
-                description: "Accurate online filing for faster approvals.",
-              },
-              {
-                icon: <FaBolt className="text-2xl" />,
-                title: "License & Renewal",
-                description: "Get your FSSAI license on time with renewal reminders.",
-              },
-            ]}
-            primaryBtnText="Get Expert Help"
-            primaryBtnLink="https://wa.me/917439587419"
-            secondaryBtnText="Free Consultation"
-            secondaryBtnLink="/contact"
-          />
-
-          
+         <CallToAction
+          heading="Secure Your FSSAI License"
+          highlighted="Fast, Simple & Worry-Free"
+          subheading="Delfyle supports you at every step to ensure hassle-free FSSAI licensing."
+          cards={[
+            {
+              icon: <FaUserTie className="text-2xl" />,
+              title: "Expert Guidance",
+              description: "We advise on the right license type and assist with all documentation.",
+            },
+            {
+              icon: <FaFileAlt className="text-2xl" />,
+              title: "Smooth Online Filing",
+              description: "Accurate submissions to speed up approval times.",
+            },
+            {
+              icon: <FaBolt className="text-2xl" />,
+              title: "Timely License & Renewal",
+              description: "Receive your FSSAI license on time with automated renewal alerts.",
+            },
+          ]}
+          primaryBtnText="Get Expert Help"
+          primaryBtnLink="https://wa.me/917439587419"
+          secondaryBtnText="Free Consultation"
+          secondaryBtnLink="/contact"
+        />
         </div>
 
         {/* Footer */}
