@@ -289,11 +289,9 @@
   }
   .right {
     margin-top: 2rem;
-    margin-left: 0px;
-    margin-right: 0px;
     padding-top: 40px;
     min-width: unset;
-    padding: 2rem 1rem 2rem;
+    padding: 2rem 0 2rem;
   }
   .cardStack {
     width: 100vw;
