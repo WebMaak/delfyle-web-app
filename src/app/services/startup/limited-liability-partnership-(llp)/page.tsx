@@ -339,9 +339,9 @@ const TrademarkRectification: React.FC = () => {
           <StartupHero 
           heading={
             <>
-              <span className={styles.coloredplc}>LLP (Limited Liability Partnership) </span><br />
+              <span className={styles.coloredplc}>LLP (Limited Liability Partnership) </span>
               <span className={styles.coloredreg}>Registration Services</span> 
-              <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+              <span style={{letterSpacing: 'normal'}}> in India with</span> 
               <span className={styles.colored}>Delfyle</span>
             </>
           }
