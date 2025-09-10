@@ -296,7 +296,7 @@ const TrademarkRectification: React.FC = () => {
               <>
                 <span className={styles.coloredplc}>GSTR-9 </span>
                 <span className={styles.coloredreg}>Annual Return Filing</span>
-                <span style={{ letterSpacing: 'normal' }}>in India with </span><br/>
+                <span style={{ letterSpacing: 'normal' }}>in India with </span>
                 <span className={styles.colored}>Delfyle</span>
               </>
             }

@@ -349,7 +349,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>Book Keeping</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
+          heading={<><span>Book Keeping</span>with <span style={{color:'#FFD580'}}>Delfyle</span></>}
           description="Get professional bookkeeping services to manage your finances effectively. Delfyle ensures accurate record-keeping and compliance with tax laws."
           buttonText="Get Book Keeping Help"
           />

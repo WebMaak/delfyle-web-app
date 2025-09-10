@@ -349,7 +349,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>FSSAI Renewal</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
+          heading={<><span>FSSAI Renewal</span>with <span style={{color:'#FFD580'}}>Delfyle</span></>}
           description="Ensure your FSSAI license remains valid with Delfyle's expert assistance. We handle all compliance requirements, including FSSAI registration, renewal, and compliance monitoring."
           buttonText="Get FSSAI Renewal Help"
           />

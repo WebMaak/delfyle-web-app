@@ -291,9 +291,9 @@ const PrivateLimitedCompany: React.FC = () => {
           <StartupHero 
             heading={
               <>
-                <span className={styles.coloredplc}>15CA–15CB Filing </span><br />
+                <span className={styles.coloredplc}>15CA–15CB Filing </span>
                 <span className={styles.coloredreg}>Services Online</span> 
-                <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+                <span style={{letterSpacing: 'normal'}}> in India with</span> 
                 <span className={styles.colored}>Delfyle</span>
               </>
             }

@@ -347,9 +347,8 @@ const TrademarkHearing: React.FC = () => {
           heading={
             <>
               <span className={styles.coloredplc}>Trademark Hearing </span>
-              <br />
               <span className={styles.coloredreg}>Services Online</span> 
-              <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> 
+              <span style={{letterSpacing: 'normal'}}> in India with</span> 
               <span className={styles.colored}>Delfyle</span>
             </>
           }

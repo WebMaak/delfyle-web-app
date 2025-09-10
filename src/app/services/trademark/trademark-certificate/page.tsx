@@ -385,7 +385,7 @@ const TrademarkCertificate: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Trademark Certificate </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>Trademark Certificate </span><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India with</span> <span className={styles.colored}>Delfyle</span></>}
           description="Delfyle offers comprehensive support for obtaining a Trademark Certificate. Our experts guide you through the entire process, ensuring compliance with all requirements, including trademark registration, trademark objection, trademark certificate issuance, trademark opposition, trademark hearing, trademark rectification, trademark infringement notice, trademark renewal, trademark restoration, trademark transfer, expedited trademark registration, logo design + trademark protection, design registration, design objection, copyright registration, and copyright objections."
           />
           

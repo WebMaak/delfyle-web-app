@@ -349,7 +349,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero
-          heading={<><span>Professional Tax Return Filing</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
+          heading={<><span>Professional Tax Return Filing</span>with <span style={{color:'#FFD580'}}>Delfyle</span></>}
           description="Ensure timely professional tax returns with Delfyle's expert assistance. We handle all compliance requirements, including professional tax registration, return filing, and compliance monitoring."
           buttonText="Get Professional Tax Return Filing Help"
           />

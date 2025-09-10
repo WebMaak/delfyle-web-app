@@ -313,17 +313,6 @@ const PrivateLimitedCompany: React.FC = () => {
 
           <ListComponentTwo/>
 
-          <StartupHero 
-          heading={
-            <>
-              <span className={styles.coloredplc}>Expert Income Tax Notice </span><br />
-              <span className={styles.coloredreg}>Response Services</span><br />
-              <span className={styles.colored}>with Delfyle</span>
-            </>
-          }
-          description="Efficiently handle your Income Tax notices with Delfyle. Get expert analysis, document support, and accurate responses—all in one place."
-        />
-
           <PrivateLimitedCompanyContentThree/>
 
           {/* ITR-3 Filing Process Accordion */}

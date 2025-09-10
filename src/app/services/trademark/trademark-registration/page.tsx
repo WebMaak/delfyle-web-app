@@ -367,7 +367,7 @@ const TrademarkRegistration: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Trademark Registration </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>Trademark Registration </span><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India with</span> <span className={styles.colored}>Delfyle</span></>}
           description="Ensure timely trademark registration with Delfyle's expert assistance. We handle all compliance requirements, including trademark registration, trademark objection, trademark certificate, trademark opposition, trademark hearing, trademark rectification, trademark infringement notice, trademark renewal, trademark restoration, trademark transfer, expedited trademark registration, logo design + trademark protection, design registration, design objection, copyright registration, copyright objections."
           />
           

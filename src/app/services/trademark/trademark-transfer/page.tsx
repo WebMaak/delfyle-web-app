@@ -321,7 +321,7 @@ const TrademarkTransfer: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Trademark Transfer </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>Trademark Transfer </span><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India  with</span> <span className={styles.colored}>Delfyle</span></>}
           description="Delfyle provides comprehensive support for trademark transfer, ensuring a smooth process from start to finish. Our experts will guide you through all the necessary steps, including trademark registration, objection, certificate issuance, opposition, hearing, rectification, infringement notice, renewal, restoration, transfer, expedited registration, logo design, trademark protection, design registration, design objection, copyright registration, and copyright objections."
           />
           

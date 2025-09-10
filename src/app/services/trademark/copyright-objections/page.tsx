@@ -290,7 +290,6 @@ const TrademarkObjection: React.FC = () => {
             heading={
               <>
                 <span className={styles.coloredplc}>Copyright Registration</span>
-                <br />
                 <span className={styles.coloredreg}>Protect Your Creative Works</span>
                 <span style={{ letterSpacing: 'normal' }}> in India with</span>
                 <span className={styles.colored}>Delfyle</span>

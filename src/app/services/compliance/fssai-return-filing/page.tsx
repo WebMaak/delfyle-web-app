@@ -349,7 +349,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span>FSSAI Return Filing</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
+          heading={<><span>FSSAI Return Filing</span>with <span style={{color:'#FFD580'}}>Delfyle</span></>}
           description="Ensure timely FSSAI returns with Delfyle's expert assistance. We handle all compliance requirements, including FSSAI registration, return filing, and compliance monitoring."
           buttonText="Get FSSAI Return Filing Help"
           />

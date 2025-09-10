@@ -337,7 +337,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Expert TDS Return Filing </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>Expert TDS Return Filing </span><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India with</span> <span className={styles.colored}>Delfyle</span></>}
           description="Ensure timely TDS return filing with Delfyle's expert assistance. We handle all compliance requirements, including TDS return filing, return filing, and compliance monitoring."
           />
           

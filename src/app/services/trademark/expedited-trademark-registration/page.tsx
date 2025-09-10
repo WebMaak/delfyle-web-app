@@ -360,7 +360,7 @@ const TrademarkObjection: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Expedited Trademark Registration </span><br /><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India <br /> with</span> <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>Expedited Trademark Registration </span><span className={styles.coloredreg}>Services Online</span> <span style={{letterSpacing: 'normal'}}> in India with</span> <span className={styles.colored}>Delfyle</span></>}
           description="Streamline your trademark registration process with Delfyle's expedited services. Our experts ensure a smooth and timely registration, handling all necessary steps, including application preparation, submission, and follow-up, to secure your brand's identity in India."
           />
           

@@ -334,7 +334,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>ITR 1 Return Filing</span><br /><span className={styles.coloredreg}>Return Filing</span> in India <br /> with <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>ITR 1 Return Filing</span><span className={styles.coloredreg}>Return Filing</span> in India with <span className={styles.colored}>Delfyle</span></>}
           description="Ensure timely ITR 1 return filing with Delfyle's expert assistance. We handle all compliance requirements, including ITR 1 return filing, return filing, and compliance monitoring."
           />
           

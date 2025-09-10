@@ -349,7 +349,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div >
           <StartupHero 
-            heading={<><span>Compliance</span><br />with <span style={{color:'#FFD580'}}>Delfyle</span></>}
+            heading={<><span>Compliance</span>with <span style={{color:'#FFD580'}}>Delfyle</span></>}
             description="Stay compliant with all business regulations in India. Delfyle helps you manage filings, returns, and statutory requirements with ease."
             buttonText="Get Compliance Help"
           />
