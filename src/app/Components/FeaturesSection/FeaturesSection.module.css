@@ -318,120 +318,99 @@
 /* Mobile devices (phones) */
 @media (max-width: 767px) {
   .featuresSection {
-    padding-top: 3rem;
+    padding-top: 2rem;
     padding-bottom: 3rem;
     min-height: auto;
+    margin-bottom: 1rem;
   }
-
   .featureDescription {
    line-height: 1.2;
   }
-  
   .content {
     max-width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
   .headerSection {
     margin-bottom: 4rem;
     padding: 0 1rem;
   }
-
   .featureLogo span {
     width: 2rem !important;
     height: 2rem !important;
   }
-  
   .headingWrapper {
     margin-bottom: 1.5rem;
   }
-  
   .mainHeading {
     font-size: 2rem;
+    line-height: normal;
+    letter-spacing: 0px;
   }
-  
+  .subHeading {
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0px;
+  }
   .mainHeading::first-letter {
     font-size: 3rem;
   }
-  
   .progressLine {
     height: 2px;
     bottom: -8px;
   }
-  
-  .subHeading {
-    font-size: 1rem;
-    max-width: 100%;
-    line-height: 1.6;
-    padding: 0 0.5rem;
-  }
-  
   .grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
   .card {
     padding: 1.25rem;
     border-radius: 0.75rem;
     transform: translate(0px, 0px) !important;
   }
-  
   .cardTitle {
     font-size: 1rem;
     margin-bottom: 0.5rem;
   }
-  
   .cardDesc {
     font-size: 0.9rem;
     line-height: 1.5;
   }
-  
   .icon {
     margin-bottom: 0.75rem;
   }
-  
   .icon svg {
     width: 1.5rem;
     height: 1.5rem;
   }
-  
   .blob {
     width: 12rem;
     height: 12rem;
     filter: blur(32px);
   }
-  
   .blobBlue {
     top: 2rem;
     left: -2rem;
   }
-  
   .blobPurple {
     top: 4rem;
     right: -2rem;
   }
-  
   .blobPink {
     bottom: 1rem;
     left: 30%;
   }
-  
   /* Disable hover effects on mobile for better performance */
   .card:hover {
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
     transform: none;
   }
-  
   .card:hover .icon {
-    color: #2563eb;
+    color: #9d0047;
   }
-  
   .card:hover .cardTitle {
-    color: #111827;
+    color: #9d0047;
   }
-  
   .card:hover .cardDesc {
     color: #4b5563;
   }

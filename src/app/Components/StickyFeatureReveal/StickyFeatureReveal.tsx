@@ -92,10 +92,11 @@ const StickyFeatureReveal = () => {
           >
             <div className={styles.featureInner}>
               <div className={styles.featureLogo}>
-                {React.cloneElement(feature.icon, { style: { fontSize: '2.5rem', color: '#BE0061', } })}
+                {React.cloneElement(feature.icon)}
+                <h3 className={`${styles.featureTitle} block md:hidden`} >{feature.title}</h3>
               </div>
               <div className={styles.featureContent}>
-                <h3 className={styles.featureTitle}>{feature.title}</h3>
+                <h3 className={`${styles.featureTitle} hidden md:block`} >{feature.title}</h3>
                 <p className={styles.featureDesc}>{feature.desc}</p>
               </div>
             </div>

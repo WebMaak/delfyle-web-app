@@ -59,7 +59,7 @@
   /* Marquee Variables */
   --size: clamp(2.2rem, 0.55rem + 11vmin, 7.7rem);
   --gap: calc(var(--size) / 7);
-  --duration: 60s;
+  --duration: 20s;
   --scroll-start: 0;
   --scroll-end: calc(-100% - var(--gap));
 }

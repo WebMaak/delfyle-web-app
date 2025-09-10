@@ -83,28 +83,29 @@ export default function BigLogoMarquee() {
   const repeatedLogos = [...companyLogos, ...companyLogos]; // duplicate for seamless loop
 
   return (
-    <div className="py-10 pb-0 relative w-full overflow-hidden">
+    <div className="py-0 md:py-10 pb-0 relative w-full overflow-hidden">
       {/* Fade gradients */}
       <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-white to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-white to-transparent" />
 
       {/* Track */}
-      <div className="flex animate-marquee">
+      <div className="flex animate-marqueeSlow w-max">
         {repeatedLogos.map((logo, i) => (
           <div
             key={i}
-            className="mx-8 flex-shrink-0 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300"
+            className=" mx-5 md:mx-8 flex-shrink-0 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition duration-300"
           >
             <Image
               src={logo}
               alt={`Logo ${i + 1}`}
-              width={132} // 10% bigger than before
+              width={132}
               height={66}
-              className="object-contain"
+              className="object-contain w-[100px] md:w-[132px] md:h-[66px]"
             />
           </div>
         ))}
       </div>
+
     </div>
   );
 }

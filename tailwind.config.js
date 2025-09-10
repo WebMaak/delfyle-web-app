@@ -70,14 +70,11 @@ module.exports = {
         "border-left": "border-left 1.5s ease-in-out forwards",
 
         // ✅ New Marquee Animations
-        marquee: "marquee 20s linear infinite",
-        "marquee-reverse": "marqueeReverse 20s linear infinite",
+        marquee: "marquee 30s linear infinite",
+        "marquee-reverse": "marqueeReverse 30s linear infinite",
 
-        // Speed Variations
-        marqueeFast: "marquee 18s linear infinite", // ~10% faster
-        "marquee-reverse-fast": "marqueeReverse 18s linear infinite",
-        marqueeSlow: "marquee 25s linear infinite",
-        "marquee-reverse-slow": "marqueeReverse 25s linear infinite",
+        marqueeFast: "marquee 15s linear infinite", // very fast
+        marqueeSlow: "marquee 70s linear infinite", // very slow
       },
       transitionProperty: {
         "transform-opacity": "transform, opacity",

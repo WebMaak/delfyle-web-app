@@ -220,79 +220,41 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Laptop and larger devices */
+@media (min-width: 1025px) {
   .section {
-    padding: 1rem 0;
+    padding: 3rem 0;
   }
-
   .heading {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 4rem;
   }
-
+  .categoriesContainer {
+    gap: 2rem;
+  }
   .categoryCard {
-    padding: 1.5rem;
+    padding: 2rem;
   }
-
-  .titleWrapper {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-
-  .titleGroup {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
   .categoryTitle {
-    font-size: 1.25rem;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .categoryIcon {
-    margin: 0 auto;
+    font-size: 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section {
+    padding: 2rem 0;
+  }
   .heading {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
-
+  .categoriesContainer {
+    gap: 1.5rem;
+  }
   .categoryCard {
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
-
-  .categoryIcon {
-    min-width: 40px;
-    height: 40px;
-    font-size: 1.25rem;
-  }
-
-  .titleWrapper {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .categoryTitle {
-    font-size: 1.1rem;
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-  }
-
-  .categoryDescription {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -301,8 +263,10 @@
   .section {
     padding: 1rem 0 0;
   }
-  .heading {
+  .hading {
     font-size: 2rem;
+    line-height: normal;
+    letter-spacing: 0px;
   }
   .heading::first-letter {
     font-size: 3rem;
@@ -331,40 +295,41 @@
   }
 }
 
-/* Tablet devices */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .section {
-    padding: 2rem 0;
-  }
-  .heading {
-    font-size: 2.5rem;
-  }
-  .categoriesContainer {
-    gap: 1.5rem;
-  }
-  .categoryCard {
-    padding: 1.5rem;
-  }
-  .categoryTitle {
-    font-size: 1.3rem;
-  }
-}
 
-/* Laptop and larger devices */
-@media (min-width: 1025px) {
-  .section {
-    padding: 3rem 0;
-  }
+@media (max-width: 480px) {
   .heading {
-    font-size: 4rem;
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: 0px;
   }
-  .categoriesContainer {
-    gap: 2rem;
+  .bottomText {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+    letter-spacing: 0px;
+  }
+  .header {
+    margin-bottom: 3rem;
   }
   .categoryCard {
-    padding: 2rem;
+    padding: 1.25rem;
+  }
+  .categoryIcon {
+    min-width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  .titleWrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0;
   }
   .categoryTitle {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .categoryDescription {
+    font-size: 0.9rem;
   }
 }

@@ -12,7 +12,7 @@
 }
 
 
-.companyLogosVideo{
+.companyLogosVideo {
   border: 10px solid #111827;
   border-radius: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -142,30 +142,6 @@
   justify-content: center;
 }
 
-/* Mobile devices (phones) */
-@media (max-width: 767px) {
-  .mainHeading {
-    font-size: 2rem;
-  }
-
-  .headingWrapper {
-    margin-bottom: 3rem;
-  }
-
-  .mainHeading::first-letter {
-    font-size: 3rem;
-  }
-
-  .logosGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .logoItem {
-    width: 100px;
-    height: 50px;
-  }
-}
-
 /* Tablet devices */
 @media (min-width: 768px) and (max-width: 1024px) {
   .mainHeading {
@@ -193,5 +169,40 @@
   .logoItem {
     width: 180px;
     height: 90px;
+  }
+}
+
+
+/* Mobile devices (phones) */
+@media (max-width: 767px) {
+  .companyLogosSection{
+    padding: 1rem 0 2rem;
+  }
+  .mainHeading {
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: 0px;
+  }
+
+  .headingWrapper {
+    margin-bottom: 3rem;
+  }
+
+  .mainHeading::first-letter {
+    font-size: 3rem;
+  }
+
+  .logosGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .logoItem {
+    width: 100px;
+    height: 50px;
+  }
+  .companyLogosVideo {
+    border: 2.4px solid #111827;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.15) 0px 13px 27px -5px, rgba(0, 0, 0, 0.2) 0px 8px 16px -8px;
   }
 }

@@ -68,9 +68,9 @@
 
 .textContent {
   display: flex;
+  min-height: 490px;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 500px;
   max-height: fit-content;
   padding: 2rem 0;
 }
@@ -184,10 +184,6 @@
     height: 400px;
   }
 
-  .textContent {
-    height: 400px;
-  }
-
   .name {
     font-size: 1.75rem;
   }
@@ -199,35 +195,6 @@
   .card {
     padding: 2rem 1rem;
     max-width: 98vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .imageContainer {
-    height: 300px;
-  }
-
-  .textContent {
-    height: auto;
-    text-align: center;
-  }
-
-  .navigation {
-    justify-content: center;
-  }
-
-  .title {
-    font-size: 2.5rem;
-  }
-
-  .card {
-    padding: 1rem 0.5rem;
-    border-radius: 1.2rem;
   }
 }
 
@@ -290,13 +257,75 @@
   }
 }
 
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .title {
+    font-size: 2rem;
+  }
+  .content {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .imageContainer {
+    height: 200px;
+    width: 400px;
+  }
+  .textContent {
+    height: auto;
+    min-height: 360px;
+    padding: 1.5rem 0;
+  }
+  .card {
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+  }
+  .content {
+    grid-template-columns: 1fr;
+  }
+  .imageSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .designation{
+    justify-content: center;
+  }
+}
+
+/* Laptop and larger devices */
+@media (min-width: 1025px) {
+  .title {
+    font-size: 4rem;
+  }
+  .content {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .imageContainer {
+    height: 400px;
+  }
+  .textContent {
+    max-height: fit-content;
+    padding: 2rem 0;
+  }
+  .card {
+    padding: 3.5rem 4rem !important;
+    border-radius: 2rem;
+  }
+}
+
+
 /* Mobile devices (phones) */
 @media (max-width: 767px) {
   .container {
     padding-top: 3rem;
+    padding-bottom: 2rem;
+    overflow: visible;
   }
   .mainHeading {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: 0px;
   }
   .mainHeading::first-letter {
     font-size: 3rem;
@@ -314,85 +343,41 @@
     justify-items: center;
   }
   .imageContainer {
-    height: 180px;
+    height: 150px;
     width: 100%;
+    overflow: visible;
   }
   .textContent {
-    height: auto;
+    min-height: 320px;
     padding: 1rem 0;
     text-align: center;
   }
   .card {
-    padding: 1rem 1rem !important;
+    padding: 1.5rem 1rem !important;
     border-radius: 0.8rem;
+    overflow: visible;
   }
-
   .quote {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.2;
   }
-
   .designation {
     font-size: 0.8rem;
     margin-bottom: .7rem;
   }
-
   .name {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.2;
   }
-
   .imageSection{
     width: 220px;
   }
-
   .testimonialText a {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-}
-
-/* Tablet devices */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .title {
-    font-size: 2rem;
-  }
-  .content {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  .imageContainer {
-    height: 250px;
-  }
-  .textContent {
-    height: auto;
-    padding: 1.5rem 0;
-  }
-  .card {
-    padding: 1rem 0.5rem;
-    border-radius: 1rem;
-  }
-}
-
-/* Laptop and larger devices */
-@media (min-width: 1025px) {
-  .title {
-    font-size: 4rem;
-  }
-  .content {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
-  .imageContainer {
-    height: 400px;
-  }
-  .textContent {
-    min-height: 500px;
-  max-height: fit-content;
-    padding: 2rem 0;
-  }
-  .card {
-    padding: 3.5rem 4rem !important;
-    border-radius: 2rem;
+  .navigation {
+    justify-content: center;
   }
 }

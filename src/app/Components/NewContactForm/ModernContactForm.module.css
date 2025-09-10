@@ -389,37 +389,7 @@ textarea.input::-webkit-scrollbar {
   color: #111827;
 }
 
-/* Mobile devices (phones) */
-@media (max-width: 767px) {
-  .wrapper {
-    padding-top: 2rem;
-  }
-  .cardRow {
-    flex-direction: column;
-    align-items: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
 
-  }
-  .formCard {
-    min-width: 85vw;
-    max-width: 89vw;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .thankCard {
-    display: none !important;
-  }
-  .buttonRow, .nextRow {
-    right: 0.5rem;
-    width: calc(100% - 1rem);
-    padding-right: 1rem;
-  }
-
-  .bgLeft, .bgRight, .bgCenter {
-    display: none !important;
-  }
-}
 
 /* Tablet devices */
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -477,5 +447,38 @@ textarea.input::-webkit-scrollbar {
   .wrapper {
     padding-top: 100px;
     padding-bottom: 100px;
+  }
+}
+
+/* Mobile devices (phones) */
+@media (max-width: 767px) {
+  .wrapper {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .cardRow {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+  }
+  .formCard {
+    min-width: 85vw;
+    max-width: 89vw;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .thankCard {
+    display: none !important;
+  }
+  .buttonRow, .nextRow {
+    right: 0.5rem;
+    width: calc(100% - 1rem);
+    padding-right: 1rem;
+  }
+
+  .bgLeft, .bgRight, .bgCenter {
+    display: none !important;
   }
 }

@@ -93,6 +93,10 @@ const Testimonial: React.FC = () => {
     },
   ];
 
+const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+
+
+
   useEffect(() => {
     setExpanded(false); // collapse quote when testimonial changes
   }, [active]);
@@ -213,11 +217,10 @@ const Testimonial: React.FC = () => {
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
-                          width="18"
-                          height="18"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                           style={{ marginRight: i !== 4 ? "2px" : 0 }}
+                          className="w-[14px] h-[14px] md:w-[18px] md:h-[18px] lg:w-[18px] lg:h-[18px]"
                         >
                           <path d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.955L10 0l2.951 5.955 6.561.955-4.756 4.635 1.122 6.545z" />
                         </svg>
@@ -289,7 +292,6 @@ const Testimonial: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.02 * 20 }}
         className={styles.readMore}
-        style={{ cursor: "pointer", color: "#eee", fontWeight: 500 }}
       >
         ... Read more
       </motion.span>

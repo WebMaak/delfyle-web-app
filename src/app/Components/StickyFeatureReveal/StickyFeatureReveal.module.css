@@ -40,7 +40,8 @@
 }
 
 .featureLogo {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  color: #BE0061;
   margin-bottom: 0.5rem;
   align-self: flex-start;
 }
@@ -59,11 +60,11 @@
   margin-bottom: 0.5rem;
   text-align: left;
   background-clip: text;
-  color: #111827;
+  color: #BE0061;
   transition: color 0.3s ease-in-out;
 }
 .featureBlock:hover .featureTitle {
-  color: transparent;
+  color: #BE0061;
   background: linear-gradient(90deg, rgba(107, 0, 62, 0.8) 0%, rgba(180, 0, 104, 0.8) 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -79,7 +80,7 @@
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   background: #000;
-  color: #fff;
+  color: #BE0061;
   border-radius: 0.5rem;
   border: none;
   font-size: 1rem;
@@ -88,7 +89,7 @@
   transition: background 0.2s;
 }
 .featureBtn:hover {
-  background: #1f2937; /* gray-800 */
+  color: #BE0061;
 }
 
 .rightCol {
@@ -258,8 +259,17 @@
     .stickyFeatureSection {
         padding: 1rem 2rem 0;
         flex-direction: column;
+        margin-bottom: 0;
     }
-
+    .mainHeading {
+      font-size: 2rem;
+      line-height: normal;
+      letter-spacing: 0px;
+    }
+    .subHeading {
+      line-height: 1.5;
+      letter-spacing: 0px;
+    }
     .leftCol {
         max-width: 100%;
         flex-basis: 100%;
@@ -267,43 +277,38 @@
         gap: 1rem;
         padding-top: 0;
         align-items: flex-start;
-    }
-    
+    }  
     .rightCol {
         display: none;
     }
-
     .featureBlock {
         width: 100%;
         height: auto;
         padding-bottom: 2rem;
     }
-
     .featureLogo {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
         margin-bottom:0;
+        display: flex;
+        gap: 0.5rem;
     }
-
     .featureTitle {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
-
     .featureDesc {
         font-size: 0.9rem;
+        line-height: 1.6;
     }
 
     .headerSection {
         padding-top: 3rem;
     }
-
     .mainHeading {
         font-size: 2rem;
     }
-
     .mainHeading::first-letter {
         font-size: 3rem;
     }
-
     .subHeading {
         font-size: 1rem;
         padding: 0 2rem;
