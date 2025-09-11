@@ -182,57 +182,42 @@
     padding: 2rem 1rem 2rem;
   }
 }
-
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   .mainContentWrapper {
     flex-direction: column;
     gap: 2rem;
   }
-
-  .leftColumn, .rightColumn {
+  .leftColumn,
+  .rightColumn {
     flex: 1;
     padding-right: 0; /* Remove padding for smaller screens */
   }
-
-  .mainHeading {
-    font-size: 2.5rem;
+  .container {
+    padding: 2rem 1rem;
   }
-
+  .featureHeading{
+    font-size: 0.9rem;
+  }
+  .mainHeading {
+    font-size: 1.75rem; /* unified duplicate values */
+    margin-bottom: 0;
+  }
+  .subContentHeading {
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  .paragraphContent,
+  .rightDescription,
+  .bottomQuote {
+    font-size: 0.9rem;
+  }
   .productsGrid {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 576px) {
-  .container {
-    padding: 4rem 1rem;
-  }
-
-  .mainHeading {
-    font-size: 2rem;
-  }
-
-  .subContentHeading {
-    font-size: 1.35rem;
-  }
-
-  .paragraphContent {
-    font-size: 1rem;
-  }
-
-  .rightDescription {
-    font-size: 1rem;
-  }
-
   .rightTopContainer {
     padding: 1.5rem;
   }
-
   .rightBottomContainer {
     padding: 2.5rem 1.5rem;
   }
-
-  .bottomQuote {
-    font-size: 1rem;
-  }
-} 
+}

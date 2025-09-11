@@ -35,17 +35,17 @@ const ListComponentReusable: React.FC<ListComponentReusableProps> = ({
   ],
 }) => {
   return (
-    <section className="w-full py-10 px-4 sm:px-8 md:px-16 lg:px-24 text-gray-800">
+    <section className="w-full py-[2rem] md:py-10 px-4 sm:px-8 md:px-16 lg:px-24 text-gray-800">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+        <h2 className="text-[1.75rem] md:text-4xl font-bold text-center md:mb-6 mb-[0.5rem] text-[#1a1a1a]">
           {title}
         </h2>
 
-        <p className="text-center text-base md:text-lg mb-10 text-gray-600">
+        <p className="text-center text-[1rem] leading-[1.4] md:text-lg md:mb-10 mb-6 text-gray-600">
           {description}
         </p>
 
-        <div className="grid md:grid-cols-2 gap-10 w-full max-w-6xl">
+        <div className="grid md:grid-cols-2 md:gap-10 gap-4 w-full max-w-6xl">
           {listBlocks.map((block, blockIndex) => {
             const Icon = block.icon || FaCheckCircle;
             const iconColor = block.iconColor || "#22c55e";
@@ -56,23 +56,24 @@ const ListComponentReusable: React.FC<ListComponentReusableProps> = ({
             return (
               <React.Fragment key={blockIndex}>
                 {/* Left Column - right aligned */}
-                <div className="flex flex-col gap-6 items-end">
+                <div className="flex flex-col md:gap-6 gap-4 items-end">
                   {leftItems.map((item, idx) => (
                     <div
                       key={idx}
                       className="flex items-start gap-3 text-sm md:text-base text-[#1a1a1a] justify-end"
                     >
-                      <span className="text-right">{item}</span>
+                      <span className="text-right hidden md:block">{item}</span>
                       <Icon
                         className="m-1 text-lg shrink-0"
                         style={{ color: iconColor }}
                       />
+                      <span className=" block md:hidden">{item}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Right Column - left aligned */}
-                <div className="flex flex-col gap-6 items-start">
+                <div className="flex flex-col md:gap-6 gap-2 items-start">
                   {rightItems.map((item, idx) => (
                     <div
                       key={idx}

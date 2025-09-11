@@ -342,7 +342,7 @@ const PrivateLimitedCompany: React.FC = () => {
       <main id="smooth-content" className="min-h-screen">
         <div className="bg-white">
           <StartupHero 
-          heading={<><span className={styles.coloredplc}>Private Limited Company</span><span className={styles.coloredreg}>Registration</span> in India with <span className={styles.colored}>Delfyle</span></>}
+          heading={<><span className={styles.coloredplc}>Private Limited Company </span><span className={styles.coloredreg}>Registration</span> in India with <span className={styles.colored}>Delfyle</span></>}
           description="Setting up a business in India often involves choosing a private limited company as a preferred option. This structure offers shareholders limited liability protection while placing specific ownership constraints. In contrast, in the case of an LLP, partners oversee the management. Private limited company registration allows for a clear distinction between directors and shareholders."
           />
           

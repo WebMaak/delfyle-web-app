@@ -7,20 +7,20 @@ import { FaInfoCircle } from "react-icons/fa";
 
 const ListComponent = () => {
   return (
-   <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
+   <section className="w-full py-8 md:py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
   <div className="max-w-5xl mx-auto">
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+    <h2 className="text-[1.75rem] md:text-4xl font-bold text-center md:mb-6 mb-2 text-[#1a1a1a]">
       LLP Registration in India
     </h2>
-    <p className="text-center text-base md:text-lg mb-10 text-gray-600">
+    <p className="text-center text-[0.9rem] md:text-lg md:mb-10 mb-[1.75rem] leading-[1.4] md:leading-[1.6] text-gray-600">
       LLP Registration Process | Prerequisites & Eligibility | Key Features & Advantages | Why Choose Delfyle
     </p>
 
     <div className="grid gap-6 md:grid-cols-2">
       {/* Left - LLP Registration Process & Prerequisites */}
       <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-        <h3 className="text-lg font-semibold text-[#1a1a1a]">LLP Registration Prerequisites & Eligibility</h3>
-        <p className="text-left text-base md:text-lg mb-10 text-gray-600">
+        <h3 className="text-[1rem] md:text-lg font-semibold text-[#1a1a1a]">LLP Registration Prerequisites & Eligibility</h3>
+        <p className="text-left text-[0.9rem] leading-[1.4] md:leading-[1.6] md:text-lg mb-10 text-gray-600">
           To register an LLP in India, the following conditions must be met:
         </p>
         <ul className="space-y-4">
@@ -41,7 +41,7 @@ const ListComponent = () => {
 
       {/* Right - Key Features */}
       <div className="bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-6 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-        <h3 className="text-lg font-semibold text-[#1a1a1a]">Key Features of LLP</h3>
+        <h3 className="text-[1rem] md:text-lg font-semibold text-[#1a1a1a]">Key Features of LLP</h3>
         <ul className="space-y-4">
           {[
             "Limited Liability Protection: Partners' personal assets remain secure.",
@@ -62,7 +62,7 @@ const ListComponent = () => {
 
     {/* Full-width - Advantages */}
     <div className="mt-10 bg-white p-6 rounded-xl shadow-md border border-[#b44593]/50 space-y-4 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
-      <h3 className="text-lg font-semibold text-[#1a1a1a] mt-6">Advantages of LLP Registration</h3>
+      <h3 className="text-[1rem] md:text-lg font-semibold text-[#1a1a1a]">Advantages of LLP Registration</h3>
       <ul className="space-y-4">
         {[
           "Limited Liability: Partners are not personally liable for LLP debts.",
