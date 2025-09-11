@@ -291,98 +291,47 @@ const TrademarkRectification: React.FC = () => {
         <StartupHero
           heading={
             <>
-              <span className={styles.coloredplc}>FSSAI</span>
-              <span className={styles.coloredreg}> Registration & Compliance</span>
-              <span style={{ letterSpacing: 'normal' }}> with </span>
+              <span className={styles.coloredplc}>Shop & Establishment</span>
+              <span className={styles.coloredreg}> Registration</span>
+              <span style={{ letterSpacing: 'normal' }}> made simple with </span>
               <span className={styles.colored}>Delfyle</span>
             </>
           }
-          description="Secure your FSSAI registration effortlessly with Delfyle. Our experts guide you through eligibility checks, document preparation, application submission, and certificate issuance, ensuring your food business complies with all regulations while avoiding penalties and gaining consumer trust."
+          description="Get your Shop and Establishment Act registration done smoothly with Delfyle. Our experts assist with eligibility checks, documentation, application filing, and timely approvals, ensuring your business operates legally while avoiding penalties."
         />
 
+        {/* Big Company Logo Marquee Section */}
+        <section>        
+          <BigLogoMarquee />
+        </section>
 
-          {/* Big Company Logo Marquee Section */}
-          <section>        
-            <BigLogoMarquee />
-          </section>
+        <CallToAction
+          heading="Need Shop & Establishment Registration for Your Business?"
+          highlighted="Operate Legally & Protect Your Business"
+          subheading="We provide end-to-end support for your Shop and Establishment Act registration—so you can focus on running your business while we handle the compliance."
+          cards={[
+            {
+              icon: <FaUserTie className="text-2xl" />,
+              title: "Eligibility & Documentation",
+              description: "Guidance on eligibility and preparation of all necessary documents required under the Shop and Establishment Act.",
+            },
+            {
+              icon: <FaFileAlt className="text-2xl" />,
+              title: "Application Filing",
+              description: "We prepare and file your registration application accurately with the local municipal or labour authority.",
+            },
+            {
+              icon: <FaBolt className="text-2xl" />,
+              title: "Approval & Renewals",
+              description: "End-to-end assistance until registration approval is received, along with timely support for renewals to maintain compliance.",
+            },
+          ]}
+          primaryBtnText="Get Expert Help"
+          primaryBtnLink="https://wa.me/917439587419"
+          secondaryBtnText="Get Free Consultation"
+          secondaryBtnLink="/contact"
+        />
 
-          <PrivateLimitedCompanyContent/>
-
-          <ListComponent/>
-
-          <IconTextList/>
-
-          <ListComponentTwo/>
-
-          <PrivateLimitedCompanyContentTwo/>
-
-          <CustomAccordion
-            subheading="Trade License Registration Process"
-            title="Step-by-Step Guide to Obtain a Trade License in India"
-            description="Follow these systematic steps to apply for a trade license, ensuring legal compliance and smooth business operations:"
-            items={[
-              {
-                id: 'tl-step-1',
-                title: 'Fill Out the Application Form',
-                content: 'Obtain the trade license application form from the local municipal authority office or online portal. Fill it accurately with all requested business and personal details.',
-                stepNumber: 1
-              },
-              {
-                id: 'tl-step-2',
-                title: 'Submit the Application',
-                content: 'Submit the completed application form along with all required documents to the municipal authority, either online or in person. Pay the application fee based on business type, size, and location.',
-                stepNumber: 2
-              },
-              {
-                id: 'tl-step-3',
-                title: 'Municipal Inspection',
-                content: 'A municipal inspector may visit your business location to verify details and ensure compliance with local health, safety, and environmental standards.',
-                stepNumber: 3
-              },
-              {
-                id: 'tl-step-4',
-                title: 'Obtain the Trade License',
-                content: 'Once approved, you will receive your trade license. Depending on the municipal process, it can be collected in person, by mail, or online. Approval timelines vary by municipality.',
-                stepNumber: 4
-              },
-              {
-                id: 'tl-step-5',
-                title: 'Renewal of Trade License',
-                content: 'Trade licenses are typically valid for one year. Submit a renewal application and the required fee before expiration to avoid penalties.',
-                stepNumber: 5
-              }
-            ]}
-            variant="numbered"
-            theme="light"
-            maxOpenItems={1}
-          />
-
-          <CallToAction
-            heading="Need FSSAI Registration for Your Food Business?"
-            highlighted="Operate Legally & Build Customer Trust"
-            subheading="Our team provides complete end-to-end assistance, from checking eligibility to obtaining your FSSAI registration, ensuring a smooth and hassle-free process."
-            cards={[
-              {
-                icon: <FaUserTie className="text-2xl" />,
-                title: "Eligibility & Documentation",
-                description: "We guide you through eligibility criteria and help gather all required documents for FSSAI registration.",
-              },
-              {
-                icon: <FaFileAlt className="text-2xl" />,
-                title: "Application Submission",
-                description: "Our team prepares and submits your FSSAI application to the relevant authorities accurately, online or offline.",
-              },
-              {
-                icon: <FaBolt className="text-2xl" />,
-                title: "Certificate Issuance & Renewal",
-                description: "We track your application until you receive the FSSAI certificate and assist in timely renewals to remain fully compliant.",
-              },
-            ]}
-            primaryBtnText="Get Expert Help"
-            primaryBtnLink="https://wa.me/917439587419"
-            secondaryBtnText="Get Free Consultation"
-            secondaryBtnLink="/contact"
-          />
           
         </div>
 

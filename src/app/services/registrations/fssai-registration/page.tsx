@@ -317,45 +317,58 @@ const TrademarkRectification: React.FC = () => {
           <PrivateLimitedCompanyContentTwo/>
 
           <CustomAccordion
-            subheading="Trade License Registration Process"
-            title="Step-by-Step Guide to Obtain a Trade License in India"
-            description="Follow these systematic steps to apply for a trade license, ensuring legal compliance and smooth business operations:"
+            subheading="Benefits of FSSAI Registration"
+            title="Why FSSAI Registration is Important for Your Food Business"
+            description="Discover the key advantages of obtaining FSSAI registration and how it helps your food business grow while ensuring compliance:"
             items={[
               {
-                id: 'tl-step-1',
-                title: 'Fill Out the Application Form',
-                content: 'Obtain the trade license application form from the local municipal authority office or online portal. Fill it accurately with all requested business and personal details.',
+                id: 'fssai-benefit-1',
+                title: 'Legal Authorization',
+                content: 'Operate legally under FSSAI regulations, ensuring your food business complies with national food safety standards.',
                 stepNumber: 1
               },
               {
-                id: 'tl-step-2',
-                title: 'Submit the Application',
-                content: 'Submit the completed application form along with all required documents to the municipal authority, either online or in person. Pay the application fee based on business type, size, and location.',
+                id: 'fssai-benefit-2',
+                title: 'Consumer Confidence',
+                content: 'Boosts customer trust by assuring that your products meet quality and safety benchmarks.',
                 stepNumber: 2
               },
               {
-                id: 'tl-step-3',
-                title: 'Municipal Inspection',
-                content: 'A municipal inspector may visit your business location to verify details and ensure compliance with local health, safety, and environmental standards.',
+                id: 'fssai-benefit-3',
+                title: 'Business Growth',
+                content: 'Facilitates partnerships with retailers and distributors, helping you expand market reach.',
                 stepNumber: 3
               },
               {
-                id: 'tl-step-4',
-                title: 'Obtain the Trade License',
-                content: 'Once approved, you will receive your trade license. Depending on the municipal process, it can be collected in person, by mail, or online. Approval timelines vary by municipality.',
+                id: 'fssai-benefit-4',
+                title: 'International Trade',
+                content: 'Mandatory for exporting and importing food products, ensuring global compliance.',
                 stepNumber: 4
               },
               {
-                id: 'tl-step-5',
-                title: 'Renewal of Trade License',
-                content: 'Trade licenses are typically valid for one year. Submit a renewal application and the required fee before expiration to avoid penalties.',
+                id: 'fssai-benefit-5',
+                title: 'Avoids Legal Penalties',
+                content: 'Reduces the risk of fines, penalties, or business shutdown due to non-compliance.',
                 stepNumber: 5
+              },
+              {
+                id: 'fssai-benefit-6',
+                title: 'Reputation Boost',
+                content: 'Highlights your commitment to food safety, improving your brand image.',
+                stepNumber: 6
+              },
+              {
+                id: 'fssai-benefit-7',
+                title: 'Access to Government Support',
+                content: 'Enables participation in FSSAI-led workshops, training, and resources for business development.',
+                stepNumber: 7
               }
             ]}
             variant="numbered"
             theme="light"
             maxOpenItems={1}
           />
+
 
           <CallToAction
             heading="Need FSSAI Registration for Your Food Business?"

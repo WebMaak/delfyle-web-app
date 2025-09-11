@@ -23,13 +23,11 @@ const ListComponentTwo = () => {
         <div className="md:w-1/2 md:text-right md: align-self-center ml-14 md:ml-0">
           <div className="bg-white rounded-lg p-6 shadow-md border border-[#b44593]/50 hover:scale-[1.02] hover:shadow-lg transition-all duration-300">
             <h3 className="text-xl font-semibold text-[#1a1a1a]"> Board Meeting & Resolution</h3>
-            <p className="mt-2 text-sm md:text-base text-gray-700">
               <ul className="list-disc list-inside">
                 <li>Convene a Board Meeting to propose the name change.</li>
                 <li>Authorize a Director or Company Secretary to apply for name availability.</li>
                 <li>Schedule an Extraordinary General Meeting (EGM) for shareholder approval.</li>
               </ul>
-            </p>
           </div>
         </div>
         <div className="absolute left-3 md:static w-6 h-6 rounded-full bg-[#790046] flex items-center justify-center text-white text-sm font-bold flex-shrink-0 z-10 md:mx-4">

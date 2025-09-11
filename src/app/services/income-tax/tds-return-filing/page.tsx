@@ -19,7 +19,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import PrivateLimitedCompanyContent from "./PrivateLimitedCompanyContent";
 import CustomAccordion from "../../../Components/CustomAccordion/CustomAccordion";
-import ListComponent from "./ListComponent";
 import Button from "../../../Components/Button/Button";
 import AuthManager from "../../../Components/admin/AuthManager";
 import { useUser } from '../../../../hooks/useUser';
@@ -349,8 +348,6 @@ const PrivateLimitedCompany: React.FC = () => {
           </section>
 
           <PrivateLimitedCompanyContent/>
-
-          <ListComponent/>
 
           <ColumnRowTable
             title="TDS Deposit & Due Dates"

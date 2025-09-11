@@ -39,17 +39,24 @@ const CustomAccordion: React.FC<CustomAccordionProps> = ({
 
   const toggleItem = (itemId: string) => {
     setOpenItems(prev => {
-      const newOpenItems = maxOpenItems === 1
-        ? prev.includes(itemId) ? [] : [itemId]
-        : prev.includes(itemId)
+      let newOpenItems: string[];
+
+      if (maxOpenItems === 1) {
+        // If same item clicked, close it; otherwise open only the new one
+        newOpenItems = prev.includes(itemId) ? [] : [itemId];
+      } else {
+        newOpenItems = prev.includes(itemId)
           ? prev.filter(id => id !== itemId)
           : prev.length >= maxOpenItems
             ? [...prev.slice(1), itemId]
             : [...prev, itemId];
+      }
 
-      // Animate content after state update
+      // Animate newly opened item
       setTimeout(() => {
-        animateContent(itemId, newOpenItems.includes(itemId));
+        items.forEach(item => {
+          animateContent(item.id, newOpenItems.includes(item.id));
+        });
       }, 0);
 
       return newOpenItems;

@@ -50,6 +50,14 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
               <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
                 If there are changes to the business structure, such as the addition, deletion, or retirement of partners or directors, you must file an amendment application within 15 days of the event.
               </p>
+              
+              
+            </div>
+          </div>
+
+          <div ref={rightColumnRef} className={styles.rightColumn}>
+            
+            <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
               <h3 className={styles.subContentHeading}>Mobile Number and Email ID Updates</h3>
               <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
                 Changes to your mobile number or email ID can be made directly on the GST portal without filing an amendment application. After completing the online verification, these changes will be automatically updated.
@@ -58,25 +66,6 @@ const PrivateLimitedCompanyContentTwo: React.FC = () => {
               <p className={styles.paragraphContent} style={{marginBottom: '0'}}>
                 A change in PAN cannot be handled through a GST amendment. Instead, a new GST registration application must be filed if there is a change in PAN or business structure.
               </p>
-            </div>
-          </div>
-
-          <div ref={rightColumnRef} className={styles.rightColumn}>
-            <div className={styles.rightTopContainer}>
-              <p className={styles.rightDescription}>
-                At Delfyle, our experts are here to guide you through the GST registration amendment process. We offer comprehensive support to ensure your amendments are filed correctly and efficiently, allowing your business to stay compliant with evolving regulations.
-              </p>
-            </div>
-
-            <div className={styles.rightBottomContainer}>
-              <Image src="/delfyle-logo/delfyle-logo.png" alt="Delfyle Logo" width={180} height={50} objectFit="contain" className={styles.companyLogo} />
-              <p className={styles.bottomQuote}>
-                "At Delfyle, we ensure your GST registration remains accurate, reflecting any changes in your business to maintain full compliance."
-              </p>
-              <p className={styles.bottomAuthor}>Team Delfyle</p>
-            </div>
-            
-            <div ref={leftBottomContainerRef} className={styles.leftBottomContainer}>
               <h3 className={styles.subContentHeading}>Time Limits for GST Amendments</h3>
               <ul className={styles.productsList}>
                 <li><span className={styles.checkIcon}>•</span> Notification Deadline: Businesses must inform the GST portal of amendments within 15 days of the change.</li>

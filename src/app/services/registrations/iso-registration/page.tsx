@@ -291,14 +291,15 @@ const TrademarkRectification: React.FC = () => {
         <StartupHero
           heading={
             <>
-              <span className={styles.coloredplc}>ICEGATE</span>
+              <span className={styles.coloredplc}>ISO</span>
               <span className={styles.coloredreg}> Registration</span>
               <span style={{ letterSpacing: 'normal' }}> made easy with </span>
               <span className={styles.colored}>Delfyle</span>
             </>
           }
-          description="Register on ICEGATE efficiently and compliantly. Delfyle handles eligibility checks, documentation, application filing, and post-registration support—helping your business manage customs clearance and international trade smoothly."
+          description="Get your ISO certification hassle-free. Delfyle manages eligibility checks, documentation, application filing, audits, and post-certification support—helping your business ensure compliance, quality assurance, and global credibility."
         />
+
 
         {/* Big Company Logo Marquee Section */}
         <BigLogoMarquee />

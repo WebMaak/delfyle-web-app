@@ -294,8 +294,8 @@ const TrademarkRectification: React.FC = () => {
               <>
                 <span className={styles.coloredplc}>Company Winding Up</span>
                 <span className={styles.coloredreg}> &</span>
-                <span style={{ letterSpacing: 'normal' }}> </span>
-                <span className={styles.colored}>Liquidation Services</span>
+                <span style={{ letterSpacing: 'normal' }}> Liquidation Services with</span>
+                <span className={styles.colored}>Delfyle</span>
               </>
             }
             description="A formal legal process to close a company's operations, liquidate assets, and pay off liabilities. From filing resolutions to final dissolution, our experts provide end-to-end support for a seamless and compliant closure."

@@ -314,24 +314,24 @@ const TrademarkRectification: React.FC = () => {
           <ListComponentTwo/>
 
           <CallToAction
-            heading="Get Your Company Compliant"
-            highlighted="Avoid Penalties & Stay Legally Protected"
-            subheading="Our expert team provides end-to-end assistance, from annual ROC filings to event-based compliances, ensuring your company remains in good standing."
+            heading="Stay Ahead with Company Compliance"
+            highlighted="Protect Your Business & Avoid Penalties"
+            subheading="Delfyle ensures your company meets all compliance requirements—annual RoC filings, event-based compliances, and secretarial support—so you can focus on growth while we handle the legalities."
             cards={[
               {
                 icon: <FaFileAlt className="text-2xl" />,
                 title: "Annual Filings & Audits",
-                description: "We handle all mandatory yearly filings with the Registrar of Companies (RoC) to ensure your company is compliant.",
+                description: "We take care of all yearly RoC filings, financial statements, and audits, keeping your company fully compliant with corporate laws.",
               },
               {
                 icon: <FaHandshake className="text-2xl" />,
                 title: "Event-Based Compliance",
-                description: "We manage all filings for changes in directors, share capital, and other key corporate events.",
+                description: "From director changes to share capital modifications, we handle event-based filings with precision and on time.",
               },
               {
                 icon: <FaChartLine className="text-2xl" />,
-                title: "Secretarial & Advisory",
-                description: "Our team provides comprehensive support for board meetings, statutory records, and general compliance advice.",
+                title: "Secretarial & Advisory Support",
+                description: "Expert guidance for board meetings, maintaining statutory registers, and offering proactive compliance advice.",
               },
             ]}
             primaryBtnText="Get Expert Help"
@@ -339,6 +339,7 @@ const TrademarkRectification: React.FC = () => {
             secondaryBtnText="Get Free Consultation"
             secondaryBtnLink="/contact"
           />
+
         </div>
 
         {/* Footer */}
