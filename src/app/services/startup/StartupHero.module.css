@@ -178,45 +178,56 @@
   z-index: 1;
 }
 
-/* Laptop and larger devices */
-@media (min-width: 1025px) {
+/* Scaled desktops / large screens (1366px, 1920px with scaling) */
+@media (max-width: 1600px) and (min-width: 1025px) {
+  .heroSection {
+    min-height: fit-content;
+  }
   .container {
-    flex-direction: row;
-    padding: 4rem 2rem;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+  }
+  .left,
+  .right {
+    flex: unset;
+    min-width: unset;
+    width: 100%;
   }
   .left {
-    flex: 1;
-    min-width: 400px;
+    margin-left: 2rem;
   }
   .right {
-    flex: 1;
-    min-width: 400px;
-    padding-top: 100px;
-    margin-top: 0;
+    justify-content: center;
+    padding-top: 40px;
+    margin-top: 2rem;
   }
   .cardStack {
-    width: 370px;
-    height: 420px;
+    width: 100%;
+    max-width: 370px;
+    height: auto;
   }
   .cardWrapper {
-    width: 320px;
-    height: 200px;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
   }
-  .heading, .coloredreg {
-    font-size: 4rem;
+  .heading,
+  .coloredreg {
+    font-size: 2.5rem;
   }
   .colored {
-    font-size: 6rem;
+    font-size: 3.5rem;
   }
   .description {
-    font-size: 1.25rem;
-    max-width: 900px;
+    font-size: 1rem;
+    max-width: 95%;
   }
   .leftContentWrapper {
-    min-width: 800px;
-    padding-right: 20px;
+    min-width: unset;
+    padding-right: 0;
   }
 }
+
 
 /* Tablet devices */
 @media (min-width: 768px) and (max-width: 1024px) {
