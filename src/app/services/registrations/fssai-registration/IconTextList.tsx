@@ -41,12 +41,14 @@ const FSSAIRegistrationTypes = () => {
   return (
     <section className="py-10 px-6 md:px-20 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-5xl font-semibold mb-6">
-          Don't risk penalties or customer distrust — secure your FSSAI Registration with Delfyle today!
-        </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Types of FSSAI Registration and License
-        </p>
+        <h2 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-6">
+  Don't risk penalties or customer distrust — secure your FSSAI Registration with Delfyle today!
+</h2>
+
+<p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-base sm:text-lg md:text-xl">
+  Types of FSSAI Registration and License
+</p>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="flex flex-col gap-8">

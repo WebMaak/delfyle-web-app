@@ -42,12 +42,13 @@ const FSSAIRegistrationTypes = () => {
   return (
     <section className="py-10 px-6 md:px-20 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-5xl font-semibold mb-6">
-         Key Benefits of RERA Registration 
-        </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          RERA registration offers numerous advantages for real estate agents, enhancing their credibility, legal standing, and business opportunities in the competitive property market.
-        </p>
+       <h2 className="text-center text-3xl md:text-4xl font-semibold mb-6">
+  Key Benefits of RERA Registration
+</h2>
+<p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-base md:text-lg">
+  RERA registration offers numerous advantages for real estate agents, enhancing their credibility, legal standing, and business opportunities in the competitive property market.
+</p>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="flex flex-col gap-8">
