@@ -28,7 +28,7 @@ const PrivateLimitedCompanyContent: React.FC = () => {
     <div className={styles.mainContentWrapper}>
       <div ref={leftColumnRef} className={styles.leftColumn}>
         <div className={styles.leftTopContainer}>
-          <h2 ref={mainHeadingRef} className={styles.mainHeading} style={{marginBottom: '0px'}}>
+          <h2 ref={mainHeadingRef}  className={`${styles.mainHeading} lg:mb-0 mb-6`}>
           Unlock Your Brand's Identity with Delfyle
           </h2>
         </div>

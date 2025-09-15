@@ -56,28 +56,6 @@ const PrivateLimitedCompanyContent: React.FC = () => {
           </p>
         </div>
       </div>
-  
-      <div ref={rightColumnRef} className={styles.rightColumn}>
-        <div ref={el => { if (el) rightColumnContentRef.current[0] = el }} className={styles.rightTopContainer}>
-          <p className={styles.rightDescription}>
-          Delfyle offers expert-assisted trademark opposition services, ensuring smooth, successful registration. Our team handles all compliance requirements, from objection response to final registration.
-          </p>
-        </div>
-        <div ref={el => { if (el) rightColumnContentRef.current[1] = el }} className={styles.rightBottomContainer}>
-          <Image 
-            src="/delfyle-logo/delfyle-logo.png" 
-            alt="Delfyle Logo" 
-            width={180} 
-            height={50} 
-            objectFit="contain"
-            className={styles.companyLogo}
-          />
-          <p className={styles.bottomQuote}>
-          "Delfyle ensures smooth, successful trademark registration with expert assistance."
-          </p>
-          <p className={styles.bottomAuthor}>Team Delfyle</p>
-        </div>
-      </div>
     </div>
   </section>
 

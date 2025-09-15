@@ -5,13 +5,14 @@ const ListComponentTwo = () => {
   return (
     <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
       <div className="max-w-5xl mx-auto flex flex-col items-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-          Who can Apply for Trademark Registration Online?
-        </h2>
+        <h2 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+  Who can Apply for Trademark Registration Online?
+</h2>
 
-        <p className="text-center text-base md:text-lg mb-10 text-gray-600">
-        Trademark registration online in India is open to a wide range of entities and individuals, including:
-        </p>
+<p className="text-center text-sm sm:text-base md:text-lg mb-10 text-gray-600 max-w-3xl mx-auto">
+  Trademark registration online in India is open to a wide range of entities and individuals, including:
+</p>
+
 
         <div className="grid gap-6 w-full md:w-[50%]">
           {/* List */}

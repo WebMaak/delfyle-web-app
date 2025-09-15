@@ -8,9 +8,10 @@ const ListComponent = () => {
   return (
     <section className="w-full py-10 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-        Trademark Search
-        </h2>
+        <h2 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+  Trademark Search
+</h2>
+
 
         <p className="text-center text-base md:text-lg mb-10 text-gray-600">
         

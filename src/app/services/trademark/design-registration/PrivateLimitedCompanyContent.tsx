@@ -34,9 +34,7 @@ const PrivateLimitedCompanyContent: React.FC = () => {
       <div className={styles.leftTopContainer}>
         <h2
           ref={mainHeadingRef}
-          className={styles.mainHeading}
-          style={{ marginBottom: "0px" }}
-        >
+           className={`${styles.mainHeading} lg:mb-0 mb-6`}>
           Secure Your Unique Designs with Legal Backing
         </h2>
       </div>

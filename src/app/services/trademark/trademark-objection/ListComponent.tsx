@@ -8,9 +8,10 @@ const ListComponent = () => {
   return (
     <section className="w-full py-10 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-        Common Reasons for Objection
-        </h2>
+        <h2 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+  Common Reasons for Objection
+</h2>
+
         <p className="text-center text-base md:text-lg mb-10 text-gray-600">
         </p>
         <div className="grid gap-6 md:grid-cols-2">
@@ -51,9 +52,10 @@ const ListComponent = () => {
         </div>
         </div>
         
-        <h2 className="text-3xl mt-10 md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-          How to Respond to a Trademark Objection?
-        </h2>
+        <h2 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl mt-10 font-bold text-center mb-6 text-[#1a1a1a]">
+  How to Respond to a Trademark Objection?
+</h2>
+
         <p className="text-center text-base md:text-lg mb-10 text-gray-600">
         A detailed Trademark Objection Reply must be filed within 30 days of the objection notice. The reply should clearly address each issue raised and include valid justifications.
         </p>
