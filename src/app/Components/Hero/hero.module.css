@@ -33,6 +33,9 @@
     padding: 0 1.5rem;
     padding-top: 5rem;
   }
+  .heroSection{
+    min-height: fit-content;
+  }
 }
 
 /* Mobile */

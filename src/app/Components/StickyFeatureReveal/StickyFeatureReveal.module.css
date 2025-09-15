@@ -205,20 +205,20 @@
     .stickyFeatureSection {
         flex-direction: column;
         padding: 3rem 2rem 0;
+        margin-bottom: 1rem;
     }
 
     .leftCol {
         max-width: 100%;
         flex-basis: 100%;
         padding-right: 0;
+        padding-top: 0;
         gap: 4rem;
         align-items: flex-start;
     }
 
     .rightCol {
-        width: 100%;
-        max-width: 100%;
-        padding-top: 4rem;
+        display: none;
     }
 
     .featureBlock {

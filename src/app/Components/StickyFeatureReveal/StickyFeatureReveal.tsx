@@ -36,17 +36,21 @@ const StickyFeatureReveal = () => {
   const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   useEffect(() => {
+  if (window.innerWidth >= 1024) {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: 'top 270px',
-        end: 'bottom 650px',
+        start: "top 270px",
+        end: "bottom 650px",
         pin: pinRef.current,
         pinSpacing: false,
       });
     }, sectionRef);
+
     return () => ctx.revert();
-  }, []);
+  }
+}, []);
+
 
   // Set up ScrollTriggers for each feature block to update activeIndex
   useEffect(() => {
@@ -105,7 +109,7 @@ const StickyFeatureReveal = () => {
       </div>
 
       {/* Right: Pinned Block (with GSAP) */}
-      <div className={styles.rightCol} ref={pinRef}>
+      <div className={`${styles.rightCol} lg:block hidden`} ref={pinRef}>
         <div className={styles.pinnedBlock}>
           <Player
             autoplay

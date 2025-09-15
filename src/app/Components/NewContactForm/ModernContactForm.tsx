@@ -343,7 +343,7 @@ const ModernContactForm = () => {
             <hr className={styles.hr} />
             <div className={styles.thankSub} style={{ marginBottom: '8px' }}>Want to keep an eye on your service status? Create your account now using the same email and phone number – it’s quick, easy, and keeps you in control.</div>
             <button 
-              className={styles.signinBtn} 
+              className={`${styles.signinBtn} w-1/2 md:w-3/5 lg:w-1/2`}
               onClick={() => setIsSignUpOpen(true)}
               style={{
                 marginTop: '12px',
@@ -356,7 +356,6 @@ const ModernContactForm = () => {
                 fontWeight: '500',
                 cursor: 'pointer',
                 transition: 'transform 0.3s ease',
-                width: '50%',
                 textTransform: 'capitalize',
                 letterSpacing: '0.5px'
               }}

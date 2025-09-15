@@ -800,7 +800,7 @@
   /* Tablet devices */
   @media (min-width: 768px) and (max-width: 1024px) {
     .whatWeDo {
-      padding: 4rem 0 4rem;
+      padding: 4rem 0 2rem;
     }
     
     .container {
@@ -809,27 +809,27 @@
     }
     
     .headerSection {
-      margin-bottom: 4rem;
+      margin-bottom: 0;
     }
     
     .mainHeading {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
     }
     
     .mainHeading::first-letter {
-      font-size: 4.5rem;
+      font-size: 4rem;
     }
     
     .subHeading {
       font-size: 1.1rem;
-      max-width: 800px;
+      max-width: 700px;
       line-height: 1.7;
     }
     
     .categoryCardsContainer {
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
-      margin: 2.5rem 0;
+      margin: 0;
     }
     
     .categoryCard {
@@ -861,7 +861,6 @@
     
     .buttonContainer {
       gap: 0.75rem;
-      margin-top: 2.5rem;
     }
   }
 

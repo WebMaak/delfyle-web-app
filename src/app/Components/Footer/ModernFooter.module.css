@@ -294,6 +294,16 @@
     }
 }
 
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .footer::before {
+        bottom: -25%;
+        right: -55%;
+        width: 100%;
+        height: 60%;
+    }
+}
+
 @media (max-width: 992px) {
     .linksSection {
         grid-template-columns: repeat(4, 1fr);

@@ -17,7 +17,7 @@
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
     .canvas {
-        clip-path: polygon(0 0, 100% 0, 100% 30%, 0 45%);
+        clip-path: polygon(0 0, 100% 0, 100% 50%, 0 70%);
     }
 }
 

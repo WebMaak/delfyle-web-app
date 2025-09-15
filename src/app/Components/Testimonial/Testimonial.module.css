@@ -257,41 +257,6 @@
   }
 }
 
-/* Tablet devices */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .title {
-    font-size: 2rem;
-  }
-  .content {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  .imageContainer {
-    height: 200px;
-    width: 400px;
-  }
-  .textContent {
-    height: auto;
-    min-height: 360px;
-    padding: 1.5rem 0;
-  }
-  .card {
-    padding: 1rem 0.5rem;
-    border-radius: 1rem;
-  }
-  .content {
-    grid-template-columns: 1fr;
-  }
-  .imageSection{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .designation{
-    justify-content: center;
-  }
-}
-
 /* Laptop and larger devices */
 @media (min-width: 1025px) {
   .title {
@@ -314,11 +279,80 @@
   }
 }
 
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container{
+    padding-top: 0;
+  }
+  .headerSection{
+    margin-bottom: 2rem;
+  }
+  .mainHeading {
+    font-size: 2.8rem;
+  }
+  .mainHeading::first-letter {
+    font-size: 4rem;
+  }
+  .subHeading {
+    font-size: 1.1rem;
+    max-width: 700px;
+    line-height: 1.7;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    align-content: center;
+    justify-items: center;
+  }
+  .imageContainer {
+    height: 230px;
+    width: 100%;
+    overflow: visible;
+  }
+  .textContent {
+    min-height: 260px;
+    padding: 1rem 0;
+    text-align: center;
+  }
+  .card {
+    padding: 1.5rem 1rem !important;
+    border-radius: 0.8rem;
+    overflow: visible;
+  }
+  .quote {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+  .designation {
+    font-size: 0.8rem;
+    margin-bottom: .7rem;
+  }
+  .name {
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+  .imageSection{
+    width: 300px;
+  }
+  .testimonialText a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navigation {
+    justify-content: center;
+  }
+}
+
+
 
 /* Mobile devices (phones) */
 @media (max-width: 767px) {
   .container {
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
     overflow: visible;
   }
