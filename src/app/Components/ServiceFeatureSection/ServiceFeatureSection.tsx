@@ -25,12 +25,15 @@ const FeatureSection: FC<FeatureSectionProps> = ({
   return (
     <section className="relative py-10 px-6 lg:px-20 bg-white text-gray-900">
       {/* Top Heading & Desc */}
-      <div className="max-w-5xl mx-auto text-center mb-16">
-        <h2 className="text-[3.5rem] font-bold mb-4 bg-clip-text text-[#1a1a1a]">
-          {title}
-        </h2>
-        <p className="text-lg text-gray-600 leading-relaxed">{description}</p>
-      </div>
+      <div className="max-w-5xl mx-auto text-center mb-16 px-4">
+  <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-[#1a1a1a]">
+    {title}
+  </h2>
+  <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+    {description}
+  </p>
+</div>
+
 
       {/* Grid of Items */}
       <div className="columns-1 md:columns-2 gap-10 max-w-7xl mx-auto mb-16 space-y-10">
