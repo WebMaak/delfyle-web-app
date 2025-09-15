@@ -152,6 +152,47 @@
   font-weight: bold;
 } 
 
+/* Tablet view (768px–1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding: 2.5rem 2rem;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;   /* Center horizontally */
+    text-align: center;    /* Center text */
+  }
+  .content {
+    margin-right: 0;
+    max-width: 90%;        /* Keep content narrower for balance */
+  }
+  .titleContainer {
+    min-width: 100%;
+  }
+  .title {
+    font-size: 2.25rem;     /* ~36px */
+    line-height: 1.4;
+    margin-bottom: 1.25rem;
+  }
+  .description {
+    min-width: 100%;
+    font-size: 1.1rem;
+  }
+  .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  .features {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;   /* Center feature items */
+  }
+  .featureItem {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+
 
 /* Mobile view (below 767px) */
 @media (max-width: 767px) {

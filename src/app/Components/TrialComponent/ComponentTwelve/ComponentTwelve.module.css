@@ -182,6 +182,44 @@
     padding: 2rem 1rem 2rem;
   }
 }
+
+/* ✅ Tablet only (768px–1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .topAnchorContainer{
+    margin: 0;
+    margin-left: 1rem;
+  }
+  .mainContentWrapper {
+    flex-direction: column;
+    gap: 0; /* tighter than desktop */
+  }
+  .leftColumn,
+  .rightColumn {
+    flex: 1;
+    padding: 1rem; /* reduce padding */
+  }
+  .leftColumn{
+    gap:0;
+  }
+  .container {
+    padding: 2rem 1.5rem; /* balance spacing */
+  }
+  .mainHeading {
+    font-size: 2rem; /* smaller than desktop */
+  }
+  .subContentHeading {
+    font-size: 1.1rem;
+  }
+  .paragraphContent,
+  .rightDescription,
+  .bottomQuote {
+    font-size: 1rem;
+  }
+  .rightTopContainer {
+    padding: 2rem 1rem 2rem;
+  }
+}
+
 @media (max-width: 767px) {
   .mainContentWrapper {
     flex-direction: column;

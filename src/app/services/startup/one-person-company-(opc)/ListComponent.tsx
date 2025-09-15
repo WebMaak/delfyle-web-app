@@ -9,12 +9,13 @@ const ListComponent = () => {
   return (
   <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
   <div className="max-w-5xl mx-auto">
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-      One Person Company (OPC) Registration in India
-    </h2>
-    <p className="text-center text-base md:text-lg mb-10 text-gray-600">
-      OPC Registration Process | Eligibility Criteria | Advantages & Disadvantages | Why Choose Delfyle
-    </p>
+    <h2 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
+  One Person Company (OPC) Registration in India
+</h2>
+<p className="text-center text-sm sm:text-base md:text-lg mb-10 text-gray-600">
+  OPC Registration Process | Eligibility Criteria | Advantages & Disadvantages | Why Choose Delfyle
+</p>
+
 
     <div className="grid gap-6 md:grid-cols-2">
       {/* Left - Eligibility Criteria */}

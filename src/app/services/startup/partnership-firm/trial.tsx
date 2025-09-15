@@ -15,29 +15,33 @@ const PartnershipRegistration: React.FC = () => {
       <div className="max-w-5xl mx-auto">
         {/* Button */}
         <div className="flex justify-center mb-10">
-          <a
-            href="https://wa.me/917439587419"
-            style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)' }}
-            className="text-white px-8 py-4 rounded-lg shadow-md transition transform hover:-translate-y-1 hover:shadow-lg"
-            >
-            Start Your Section 8 Company Registration Now
-          </a>
-        </div>
+  <a
+    href="https://wa.me/917439587419"
+    style={{ background: 'linear-gradient(90deg, #790046 0%, #E50078 100%)' }}
+    className="text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-md text-sm sm:text-base font-medium transition transform hover:-translate-y-1 hover:shadow-lg"
+  >
+    Start Your Section 8 Company Registration Now
+  </a>
+</div>
 
-        {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[#1a1a1a]">
-          Partnership Firm Registration Process
-        </h2>
+{/* Heading */}
+<h2 className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl font-bold md:text-left text-center mb-6 text-[#1a1a1a]">
+  Partnership Firm Registration Process
+</h2>
 
-        {/* Steps */}
-        <ul className="space-y-4 mb-10">
-          {steps.map((step, idx) => (
-            <li key={idx} className=" flex items-center gap-3 text-base md:text-lg text-[#1a1a1a]">
-              <span className="text-[#790046] font-bold">{idx + 1}.</span>
-              <span>{step}</span>
-            </li>
-          ))}
-        </ul>
+{/* Steps */}
+<ul className="space-y-4 mb-10 max-w-2xl mx-auto">
+  {steps.map((step, idx) => (
+    <li
+      key={idx}
+      className="flex items-start gap-3 text-sm sm:text-base md:text-lg text-[#1a1a1a]"
+    >
+      <span className="text-[#790046] font-bold">{idx + 1}.</span>
+      <span>{step}</span>
+    </li>
+  ))}
+</ul>
+
 
         {/* Description */}
         <p className="text-gray-600 text-base md:text-lg mb-6">

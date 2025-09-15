@@ -3,7 +3,7 @@ import React from "react";
 
 const ListComponentTwo = () => {
   return (
-    <section className="w-full py-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
+    <section className="w-full md:py-16 py-4 pb-16 px-4 sm:px-8 md:px-16 lg:px-24 bg-white text-gray-800">
   <div className="max-w-5xl mx-auto">
 
     {/* Section Heading */}
