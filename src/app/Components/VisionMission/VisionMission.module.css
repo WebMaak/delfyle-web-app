@@ -156,6 +156,24 @@
   }
 }
 
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .contentContainer{
+    flex-direction: column;
+  }
+  .leftColumn{
+    display: none;
+  }
+  .rightColumn{
+    gap: 0;
+  }
+  .visionMissionSection{
+    min-height: fit-content;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+}
+
 /* Laptop and larger devices */
 @media (min-width: 1025px) {
   .visionMissionSection {

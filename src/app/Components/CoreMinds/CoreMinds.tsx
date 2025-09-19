@@ -107,7 +107,14 @@ const CoreMinds: React.FC = () => {
 
       // Detect mobile device
       const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-      const startValue = isMobile ? "top -40%" : "top 6%";
+      const isTablet = typeof window !== "undefined" && window.innerWidth >= 768 && window.innerWidth < 1024;
+      let startValue = "top 6%"; 
+      if (isMobile) {
+        startValue = "top -40%"; 
+      } else if (isTablet) {
+        startValue = "top 0%"; 
+      }
+
 
       // Initial states
       items.forEach((item, index) => {

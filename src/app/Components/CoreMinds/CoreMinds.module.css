@@ -482,6 +482,11 @@
   .card {
     height: 350px;
   }
+  .image_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* Laptop and larger devices */

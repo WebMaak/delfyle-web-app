@@ -506,6 +506,84 @@
   margin-top: -1rem;
 }
 
+
+/* Laptop and larger devices */
+@media  (min-width: 1025px) {
+  .mainHeading {
+    font-size: 4.5rem;
+  }
+  .heroSection {
+    padding: 10rem 2rem 4rem;
+  }
+  .contentContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* Target Full HD scaled devices from 1280px to 1536px */
+@media (min-width: 1025px) and (max-width: 1536px) {
+  .brandName {
+    font-size: 7rem;
+  }
+  .headingLine{
+    font-size: 3rem;
+  }
+
+}
+
+
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mainHeading {
+    font-size: 1.5rem;
+  }
+  .textColumn {
+    min-height: fit-content !important;
+  }
+  .textColumn:first-child::after {
+    display: none !important;
+  }
+  .heroSection {
+    padding: 4rem 1rem 2rem;
+  }
+  .contentContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .textContentContainer {
+    padding: 0rem;
+    padding-top: 4vh !important;
+  }
+  .brandContainer{
+    overflow: visible;
+  }
+  .brandName {
+    font-size: 12rem;
+    padding-bottom: 1rem;
+    max-width: 100%;
+    line-height: 1.1;
+  }
+  .taglineContainer {
+    max-width: 100%;
+  }
+  .headingLine {
+    font-size: 6rem;
+    max-width: 100%;
+  }
+  .cardsContainer,
+  .imageColumn {
+    display: none !important;
+  }
+  .stopText {
+    margin-top: -1px;
+    font-size: 14rem;
+  }
+  .thereText {
+    margin-top: .1rem;
+    font-size: 14rem;
+  }
+}
 /* Mobile devices (phones) */
 @media (max-width: 767px) {
   .mainHeading {
@@ -555,33 +633,5 @@
   .thereText {
     margin-top: .1rem;
     font-size: 5rem;
-  }
-}
-
-/* Tablet devices */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .mainHeading {
-    font-size: 2.5rem;
-  }
-  .heroSection {
-    padding: 6rem 1.5rem 3rem;
-  }
-  .contentContainer {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-}
-
-/* Laptop and larger devices */
-@media (min-width: 1025px) {
-  .mainHeading {
-    font-size: 4.5rem;
-  }
-  .heroSection {
-    padding: 10rem 2rem 4rem;
-  }
-  .contentContainer {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
   }
 }
