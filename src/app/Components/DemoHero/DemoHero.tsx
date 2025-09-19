@@ -45,6 +45,8 @@ const DemoHero: React.FC = () => {
       const card2Pos = card2.getBoundingClientRect();
       const card3Pos = card3.getBoundingClientRect();
       const card4Pos = card4.getBoundingClientRect();
+      const isScaled = window.matchMedia("(max-width: 1536px)").matches;
+
 
       // Calculate swap positions with adjustments
       const card1ToCard4 = {
@@ -72,7 +74,7 @@ const DemoHero: React.FC = () => {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "bottom bottom",
+          end: isScaled ? "+=600" : "bottom bottom",
           scrub: 0.5,
           pin: false,
           markers: false,

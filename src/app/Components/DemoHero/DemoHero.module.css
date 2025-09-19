@@ -529,7 +529,23 @@
   .headingLine{
     font-size: 3rem;
   }
-
+  .stopText {
+    margin-top: -1px;
+    font-size: 7rem;
+  }
+  .thereText {
+    margin-top: .1rem;
+    font-size: 7rem;
+  }
+  .contentContainer{
+    gap: 0;
+  }
+  .heroSection{
+    padding-top: 4rem;
+  }
+  .rightColumn{
+    gap: 0;
+  }
 }
 
 

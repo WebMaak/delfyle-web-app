@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useState } from "react";
 import styles from "./CoreMinds.module.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -62,11 +63,11 @@ const teamMembers = [
     bulletPoints: [
       "Income Tax planning and advisory",
       "GST compliance and return filing",
-      "Tax audit support and representation",
       "Corporate taxation for private and public companies",
       "Handling notices, scrutiny, and appeals before tax authorities",
       "Structuring tax-efficient business models",
       "TDS management and e-filing services",
+      "Tax audit support and representation",
     ],
     color: "#FF6B6B",
     image: "/images/team-members/avinash.png"
@@ -77,9 +78,9 @@ const teamMembers = [
     quote:
       "Debangshu Auddy is a Compliance Executive at Delfyle with over 3 years of experience in managing ROC compliances and legal documentation for both private and public companies. He specializes in end-to-end corporate compliance, ensuring seamless filings with the Ministry of Corporate Affairs (MCA) under the Companies Act, 2013.",
     bulletPoints: [
-      "Filing of ROC forms (AOC-4, MGT-7, DIR-3 KYC, etc.)",
       "Handling company incorporation, changes in directorship, shareholding, and registered office",
       "Drafting of Board Resolutions, Shareholder Agreements, NDAs, MOA/AOA, and compliance documents",
+      "Filing of ROC forms (AOC-4, MGT-7, DIR-3 KYC, etc.)",
       "Legal vetting and contract management",
     ],
     color: "#FF6B6B",
@@ -175,6 +176,18 @@ const CoreMinds: React.FC = () => {
     }
   }, []);
 
+  const wordLimit = 25;
+  const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({});
+  const toggleExpand = (index: number) => {
+    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
+  };
+  const truncate = (text: string, limit: number) => {
+    const words = text.split(" ");
+    if (words.length <= limit) return text;
+    return words.slice(0, limit).join(" ") + "...";
+  };
+
+
   return (
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.background_container} />
@@ -201,11 +214,32 @@ const CoreMinds: React.FC = () => {
                 <div className={styles.item_content}>
                   <div className={styles.member_info}>
                     <h3 className={styles.member_name}>{member.name}</h3>
-                    <h4 className={styles.member_position}>
-                      {member.position}
-                    </h4>
+                    <h4 className={styles.member_position}>{member.position}</h4>
                   </div>
-                  <p className={styles.member_quote}>{member.quote}</p>
+
+                  {member.quote && (
+                    <p className={styles.member_quote}>
+                      {member.bulletPoints ? (
+                        <>
+                          {expanded[index]
+                            ? member.quote
+                            : truncate(member.quote, wordLimit)}
+                          {member.quote.split(" ").length > wordLimit && (
+                            <button
+                              onClick={() => toggleExpand(index)}
+                              className={styles.read_more}
+                            >
+                              {expanded[index] ? " Read Less" : " Read More"}
+                            </button>
+                          )}
+                        </>
+                      ) : (
+                        member.quote
+                      )}
+                    </p>
+
+                  )}
+
                   {member.bulletPoints && (
                     <ul className={styles.bullet_points}>
                       {member.bulletPoints.map((point, idx) => (
@@ -214,14 +248,15 @@ const CoreMinds: React.FC = () => {
                     </ul>
                   )}
                 </div>
+
                 <div className={styles.item_media}>
                   <div className={styles.image_wrapper}>
                     <Image
-                    width={1000}
-                    height={1000}
+                      width={1000}
+                      height={1000}
                       src={member.image}
                       alt={member.name}
-                      style={{ objectFit: "cover", width: 'auto', height: 'auto' }}
+                      style={{ objectFit: "cover", width: "auto", height: "auto" }}
                       className={styles.member_image}
                     />
                   </div>
