@@ -21,6 +21,7 @@ import TopMarquee from "../Components/TopMarquee/TopMarquee";
 import Button from "../Components/Button/Button";
 import AuthManager from "../Components/admin/AuthManager";
 import { useUser } from '../../hooks/useUser';
+import StackedCards from "../Components/StackedCards"
 
 const AboutPage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -264,6 +265,7 @@ const AboutPage = () => {
 
       <div id="smooth-content" style={{ minHeight: '120vh' }}>
         <DemoHero />
+        {/* <StackedCards/> */}
         <VisionMission />
         <CoreMinds />
         <SocialLinks />

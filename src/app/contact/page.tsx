@@ -28,6 +28,7 @@ import { SocialIcon } from 'react-social-icons';
 import Button from "../Components/Button/Button";
 import AuthManager from "../Components/admin/AuthManager";
 import { useUser } from '../../hooks/useUser';
+import ContactFormPage from "../Components/ContactPageForm"
 
 // Define the gradient as a constant
 const contactIconGradient = 'linear-gradient(135deg, #b40068 0%, #ff0080 60%, #6b003e 100%)';
@@ -286,11 +287,12 @@ export default function ContactPage() {
             </div>
           </div>
           {/* Contact Form */}
-          <div className="flex flex-col items-center justify-center px-2">
+          <ContactFormPage/>
+          {/* <div className="flex flex-col items-center justify-center px-2">
             <div className="w-full">
               <ModernContactForm />
             </div>
-          </div>
+          </div> */}
           {/* Contact Info Section - moved after form, bg white, cards light blue */}
           <section className={`contact-info-section ${ContactHeroStyles.contactInfoSection}`} style={{ padding: '60px 0' }}>
             <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 40, alignItems: 'flex-start', justifyContent: 'center' }}>
