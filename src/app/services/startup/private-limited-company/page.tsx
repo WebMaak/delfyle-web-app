@@ -13,7 +13,6 @@ import PrivateLimitedCompanyRequirements from "./PrivateLimitedCompanyRequiremen
 import PrivateLimitedCompanyDocs from "./PrivateLimitedCompanyDocs";
 import PrivateLimitedPost from "./PrivateLimitedPost";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
-import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
 import { 
   ModernNavbar, 
   ModernNavBody, 
@@ -168,7 +167,7 @@ const PrivateLimitedCompany: React.FC = () => {
 
   return (
     <>
-      <TopMarquee />
+      
       {/* ToggleNav for mobile */}
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 

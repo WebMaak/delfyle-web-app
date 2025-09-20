@@ -10,7 +10,6 @@ import styles from "../StartupHero.module.css";
 import BigLogoMarquee from "../../../Components/BigLogoMarquee/BigLogoMarquee";
 import ModernFooter from "../../../Components/Footer/ModernFooter";
 import ToggleNav from "../../../Components/ToggleNav/toggleNav";
-import TopMarquee from "../../../Components/TopMarquee/TopMarquee";
 import { 
   ModernNavbar, 
   ModernNavBody, 
@@ -115,7 +114,7 @@ const PrivateLimitedCompany: React.FC = () => {
 
   return (
     <>
-    <TopMarquee />
+    
       {/* ToggleNav for tablet and mobile only - moved above progress bar */}
       <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">
         <ToggleNav 
