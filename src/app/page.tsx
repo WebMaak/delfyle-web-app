@@ -26,7 +26,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import BigLogoMarquee from "./Components/BigLogoMarquee/BigLogoMarquee";
 import ToggleNav from "./Components/ToggleNav/toggleNav";
-import TopMarquee from "./Components/TopMarquee/TopMarquee";
+// import TopMarquee from "./Components/TopMarquee/TopMarquee";
 import Button from "./Components/Button/Button";
 import AuthManager from "./Components/admin/AuthManager";
 import LogoCarousel from "./Components/LogoCarousel/LogoCarousel";
@@ -135,7 +135,7 @@ export default function Home() {
   return (
     <>
       <CookiePopup />
-      <TopMarquee />
+      {/* <TopMarquee /> */}
       
         {/* ToggleNav for tablet and mobile only - moved above progress bar */}
         <div className="block lg:hidden fixed inset-x-0 top-0 z-[1100]">

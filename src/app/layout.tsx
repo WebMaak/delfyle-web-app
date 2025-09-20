@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Preloader from './Components/Preloader';
 import ClientLayoutWrapper from './Components/ClientLayoutWrapper';
+import TopMarqueeWrapper from './Components/TopMarquee/TopMarqueeWrapper';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Preloader />
+        <TopMarqueeWrapper/>
         <ClientLayoutWrapper>
           {children}
         </ClientLayoutWrapper>
