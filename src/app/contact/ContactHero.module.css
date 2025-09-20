@@ -115,6 +115,40 @@
   margin-top: 1.5rem;
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-7px); }
+  50% { transform: translateY(7px); }
+  75% { transform: translateY(-7px); }
+}
+
+/* Apply float animation with different speeds */
+.socialIcon1 {
+  animation: float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.socialIcon2 {
+  animation: float 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.socialIcon6 {
+  animation: float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.socialIcon4 {
+  animation: float 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.socialIcon5 {
+  animation: float 4.7s ease-in-out infinite;
+  will-change: transform;
+}
+
+
 @media (max-width: 1800px) {
   .heroContent h1 {
     font-size: 4rem;

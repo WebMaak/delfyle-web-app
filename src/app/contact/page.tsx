@@ -28,7 +28,6 @@ import { SocialIcon } from 'react-social-icons';
 import Button from "../Components/Button/Button";
 import AuthManager from "../Components/admin/AuthManager";
 import { useUser } from '../../hooks/useUser';
-import ContactFormPage from "../Components/ContactPageForm"
 
 // Define the gradient as a constant
 const contactIconGradient = 'linear-gradient(135deg, #b40068 0%, #ff0080 60%, #6b003e 100%)';
@@ -99,7 +98,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <TopMarquee />
+      {/* <TopMarquee /> */}
       {/* Progress Bar */}
       <div 
         style={{
@@ -249,50 +248,71 @@ export default function ContactPage() {
               <p>Let's start something great together. Get in touch with most of the team below!</p>
             </div>
             <div className={ContactHeroStyles.heroSocialIcons}>
-              <motion.span className={ContactHeroStyles.socialIcon1}
-                animate={{ y: [0, -12, 0, 12, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <SocialIcon network="facebook" url="https://www.facebook.com/DelfyleSolutons?mibextid=2JQ9oc"
-                  bgColor="transparent" fgColor="#b40068" style={{ width: 80, height: 80 }} className="contact-gradient-icon" />
-              </motion.span>
-              <motion.span className={ContactHeroStyles.socialIcon2}
-                animate={{ y: [0, 10, 0, -10, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <SocialIcon network="instagram" url="https://www.instagram.com/delfyle_legal?igsh=MzU4ZW4xcjIxMWxw&utm_source=qr"
-                  bgColor="transparent" fgColor="#b40068" style={{ width: 80, height: 80 }} className="contact-gradient-icon" />
-              </motion.span>
-              <motion.span className={ContactHeroStyles.socialIcon6}
-                animate={{ y: [0, -8, 0, 8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <SocialIcon network="linkedin" url="https://www.linkedin.com/company/delfyle/"
-                  bgColor="transparent" fgColor="#b40068" style={{ width: 80, height: 80 }} className="contact-gradient-icon" />
-              </motion.span>
-              <motion.span className={ContactHeroStyles.socialIcon4 + ' ' + ContactHeroStyles.mirroredIcon}
-                animate={{ y: [0, 12, 0, -12, 0] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <SocialIcon network="x" url="https://x.com/delfyle_co?s=21"
-                  bgColor="transparent" fgColor="#b40068" style={{ width: 80, height: 80 }} className="contact-gradient-icon" />
-              </motion.span>
-              <motion.span className={ContactHeroStyles.socialIcon5 + ' ' + ContactHeroStyles.mirroredIcon}
-                animate={{ y: [0, -10, 0, 10, 0] }}
-                transition={{ duration: 4.7, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <SocialIcon network="youtube" url="https://youtube.com/@Delfyle_legalservices?si=Z0GGMeIPguqcVZkK"
-                  bgColor="transparent" fgColor="#b40068" style={{ width: 80, height: 80 }} className="contact-gradient-icon" />
-              </motion.span>
+              <div className={ContactHeroStyles.heroSocialIcons}>
+                <span className={ContactHeroStyles.socialIcon1}>
+                  <SocialIcon
+                    network="facebook"
+                    url="https://www.facebook.com/DelfyleSolutons?mibextid=2JQ9oc"
+                    bgColor="transparent"
+                    fgColor="#b40068"
+                    style={{ width: 80, height: 80 }}
+                    className="contact-gradient-icon"
+                  />
+                </span>
+
+                <span className={ContactHeroStyles.socialIcon2}>
+                  <SocialIcon
+                    network="instagram"
+                    url="https://www.instagram.com/delfyle_legal?igsh=MzU4ZW4xcjIxMWxw&utm_source=qr"
+                    bgColor="transparent"
+                    fgColor="#b40068"
+                    style={{ width: 80, height: 80 }}
+                    className="contact-gradient-icon"
+                  />
+                </span>
+
+                <span className={ContactHeroStyles.socialIcon6}>
+                  <SocialIcon
+                    network="linkedin"
+                    url="https://www.linkedin.com/company/delfyle/"
+                    bgColor="transparent"
+                    fgColor="#b40068"
+                    style={{ width: 80, height: 80 }}
+                    className="contact-gradient-icon"
+                  />
+                </span>
+
+                <span className={`${ContactHeroStyles.socialIcon4} ${ContactHeroStyles.mirroredIcon}`}>
+                  <SocialIcon
+                    network="x"
+                    url="https://x.com/delfyle_co?s=21"
+                    bgColor="transparent"
+                    fgColor="#b40068"
+                    style={{ width: 80, height: 80 }}
+                    className="contact-gradient-icon"
+                  />
+                </span>
+
+                <span className={`${ContactHeroStyles.socialIcon5} ${ContactHeroStyles.mirroredIcon}`}>
+                  <SocialIcon
+                    network="youtube"
+                    url="https://youtube.com/@Delfyle_legalservices?si=Z0GGMeIPguqcVZkK"
+                    bgColor="transparent"
+                    fgColor="#b40068"
+                    style={{ width: 80, height: 80 }}
+                    className="contact-gradient-icon"
+                  />
+                </span>
+              </div>
+
             </div>
           </div>
           {/* Contact Form */}
-          <ContactFormPage/>
-          {/* <div className="flex flex-col items-center justify-center px-2">
+          <div className="flex flex-col items-center justify-center px-2">
             <div className="w-full">
               <ModernContactForm />
             </div>
-          </div> */}
+          </div>
           {/* Contact Info Section - moved after form, bg white, cards light blue */}
           <section className={`contact-info-section ${ContactHeroStyles.contactInfoSection}`} style={{ padding: '60px 0' }}>
             <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 40, alignItems: 'flex-start', justifyContent: 'center' }}>
